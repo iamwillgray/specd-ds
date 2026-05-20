@@ -1,0 +1,88 @@
+/* Admiral DS — Colour Tokens
+ * Brand palette, semantic colours, intent colours, tiers.
+ * All values are --kebab-case custom properties on :root.
+ */
+:root {
+  /* Primitives */
+  --black: #000000;  --white: #ffffff;
+  --brand: #b8ff57;  --navy:  #0C1750;
+  --pulse: linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+
+  /* Blue scale */
+  --blue-10:  #f5f8ff;  --blue-15:  #eef3fb;
+  --blue-20:  #dbeafe;  --blue-30:  #b9d2f9;
+  --blue-40:  #6b9ae8;  --blue-50:  #1d4ed8;
+  --blue-60:  #4a6080;  --blue-70:  #2d4566;
+  --blue-80:  #1e3f6b;  --blue-90:  #162d56;
+  --blue-100: #0c1f3f;
+
+  /* Green scale */
+  --green-10: #ebffe0;  --green-50: #22c55e;  --green-100: #008531;
+
+  /* Red scale */
+  --red-10: #fee2e2;  --red-50: #f00013;  --red-100: #cd1d1d;
+
+  /* Orange scale */
+  --orange-10: #FEF3C7;  --orange-50: #ff912b;  --orange-100: #92400e;
+
+  /* White alpha */
+  --white-80: rgba(255,255,255,0.8);  --white-60: rgba(255,255,255,0.6);
+  --white-40: rgba(255,255,255,0.4);  --white-20: rgba(255,255,255,0.2);
+
+  /* Semantic state aliases */
+  --negative-light:  var(--red-10);    --negative-dark:   var(--red-100);
+  --negative-accent: var(--red-50);    --positive-light:  var(--green-10);
+  --positive-dark:   var(--green-100); --positive-accent: var(--green-50);
+  --warning-light:   var(--orange-10); --warning-dark:    var(--orange-100);
+  --warning-accent:  var(--orange-50); --neutral-light:   var(--blue-20);
+  --neutral-dark:    var(--blue-50);   --neutral-accent:  var(--blue-50);
+
+  /* Brand extended */
+  --navy-800: #162d56;
+  --navy-light: rgba(12,31,63,0.06);
+
+  /* Surfaces */
+  --bg:            var(--blue-10);
+  --surface:       var(--white);
+  --surface-alt:   var(--blue-15);
+  --surface-shade: var(--blue-15);
+  --surface-hover: var(--blue-15);
+  --card-bg:       var(--white);
+
+  /* Borders */
+  --border:         var(--blue-15);   --border-blue:   var(--blue-20);
+  --border-light:   var(--blue-10);   --border-strong: var(--blue-30);
+  --border-primary: var(--blue-60);
+
+  /* Text */
+  --text:           var(--blue-100);  --text-secondary: var(--blue-60);
+  --text-inverse:   var(--white);     --text-muted:     #6B7280;
+  --text-subtle:    #9CA3AF;
+
+  /* Icons */
+  --icon-primary:   var(--blue-100);  --icon-secondary: var(--blue-60);
+  --icon-muted:     var(--blue-40);   --icon-inverse:   var(--white);
+
+  /* Button tokens */
+  --btn-primary-bg: var(--blue-100);
+  --btn-primary-fg: var(--white);
+
+  /* Radii */
+  --radius-sm: 6px;  --radius-md: 10px;
+  --radius-lg: 14px; --radius-xl: 20px;  --radius-pill: 100px;
+
+  /* Spacing */
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px;
+  --space-4: 16px; --space-5: 20px;  --space-6: 24px;  --space-8: 32px;
+
+  /* Shadows (navy-tinted) */
+  --shadow-sm: 0 1px 3px rgba(12,31,63,0.08), 0 1px 2px rgba(12,31,63,0.04);
+  --shadow-md: 0 4px 12px rgba(12,31,63,0.10), 0 2px 4px rgba(12,31,63,0.06);
+  --shadow-lg: 0 12px 32px rgba(12,31,63,0.14), 0 4px 8px rgba(12,31,63,0.06);
+
+  /* Typography */
+  --font:         'Inter', -apple-system, sans-serif;
+  --font-body:    'Inter', -apple-system, sans-serif; /* alias for --font */
+  --font-heading: 'Bricolage Grotesque', 'Inter', -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+}
