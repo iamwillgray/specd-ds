@@ -12,11 +12,7 @@
  * // <admiral-button variant="primary">Scan now</admiral-button>
  */
 
-// Components — exported as side-effects (registers custom elements) and named exports
-// export * from './components/Button';
-// export * from './components/Chip';
-// export * from './components/Input';
-// (uncomment as components are added)
+// Components — importing registers custom elements as a side-effect
+export * from './components/Button/index.js';
 
-// Types — re-export all prop interfaces for TS consumers
-// export type * from './components/Button/AdmiralButton.types';
+// Add new components here as they are built:

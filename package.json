@@ -17,7 +17,9 @@
     "./components.css": "./dist/components.css"
   },
   "types": "./dist/web-components/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "npm run build:wc && npm run build:react && npm run build:css",
@@ -40,8 +42,12 @@
     "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
-    "react": { "optional": true },
-    "react-dom": { "optional": true }
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.10.0",
@@ -52,6 +58,7 @@
     "@storybook/web-components-vite": "^8.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "happy-dom": "^20.9.0",
     "typescript": "^5.4.0",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.0.0",

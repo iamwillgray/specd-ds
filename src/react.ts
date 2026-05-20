@@ -11,6 +11,20 @@
  * <AdmiralButton variant="primary" onClick={handleClick}>Scan now</AdmiralButton>
  */
 
-// React wrappers — uncomment as Web Components are added
-// export { AdmiralButton } from './components/Button/AdmiralButton.react';
-// export { AdmiralChip }   from './components/Chip/AdmiralChip.react';
+import React from 'react';
+import { createComponent } from '@lit/react';
+import { AdmiralButton } from './components/Button/AdmiralButton.js';
+
+/** Auto-generated React wrapper for <admiral-button>. Do not hand-edit. */
+export const Button = createComponent({
+  react: React,
+  tagName: 'admiral-button',
+  elementClass: AdmiralButton,
+  events: {
+    onClick:   'click',
+    onFocus:   'focus',
+    onBlur:    'blur',
+  },
+});
+
+// Add wrappers here as new Web Components are built:
