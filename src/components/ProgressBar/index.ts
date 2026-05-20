@@ -1,2 +1,2 @@
-export { AdmiralProgress } from './AdmiralProgress.js';
-export type { ProgressBarProps, ProgressIntent } from './AdmiralProgress.types.js';
+export { SpecdProgress } from './SpecdProgress.js';
+export type { ProgressBarProps, ProgressIntent } from './SpecdProgress.types.js';

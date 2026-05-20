@@ -1,87 +1,87 @@
 /**
- * Admiral DS — React wrappers entry point
+ * Specd DS — React wrappers entry point
  *
  * Auto-generated React components via @lit/react.
  * These are thin wrappers around the Web Components — never hand-edit.
  *
  * @example
- * import { AdmiralButton } from '@specd/admiral-ds/react';
- * import '@specd/admiral-ds/tokens.css';
+ * import { SpecdButton } from '@specd/specd-ds/react';
+ * import '@specd/specd-ds/tokens.css';
  *
- * <AdmiralButton variant="primary" onClick={handleClick}>Scan now</AdmiralButton>
+ * <SpecdButton variant="primary" onClick={handleClick}>Scan now</SpecdButton>
  */
 
 import React from 'react';
 import { createComponent } from '@lit/react';
-import { AdmiralButton }   from './components/Button/AdmiralButton.js';
-import { AdmiralChip }     from './components/Chip/AdmiralChip.js';
-import { AdmiralBadge }    from './components/Badge/AdmiralBadge.js';
-import { AdmiralInput }    from './components/Input/AdmiralInput.js';
-import { AdmiralToggle }   from './components/Toggle/AdmiralToggle.js';
-import { AdmiralCard }     from './components/Card/AdmiralCard.js';
-import { AdmiralProgress } from './components/ProgressBar/AdmiralProgress.js';
-import { AdmiralAvatar }   from './components/Avatar/AdmiralAvatar.js';
+import { SpecdButton }   from './components/Button/SpecdButton.js';
+import { SpecdChip }     from './components/Chip/SpecdChip.js';
+import { SpecdBadge }    from './components/Badge/SpecdBadge.js';
+import { SpecdInput }    from './components/Input/SpecdInput.js';
+import { SpecdToggle }   from './components/Toggle/SpecdToggle.js';
+import { SpecdCard }     from './components/Card/SpecdCard.js';
+import { SpecdProgress } from './components/ProgressBar/SpecdProgress.js';
+import { SpecdAvatar }   from './components/Avatar/SpecdAvatar.js';
 
-/** Auto-generated React wrapper for <admiral-button>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-button>. Do not hand-edit. */
 export const Button = createComponent({
   react: React,
-  tagName: 'admiral-button',
-  elementClass: AdmiralButton,
+  tagName: 'specd-button',
+  elementClass: SpecdButton,
   events: { onClick: 'click', onFocus: 'focus', onBlur: 'blur' },
 });
 
-/** Auto-generated React wrapper for <admiral-chip>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-chip>. Do not hand-edit. */
 export const Chip = createComponent({
   react: React,
-  tagName: 'admiral-chip',
-  elementClass: AdmiralChip,
+  tagName: 'specd-chip',
+  elementClass: SpecdChip,
   events: { onClick: 'click' },
 });
 
-/** Auto-generated React wrapper for <admiral-badge>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-badge>. Do not hand-edit. */
 export const Badge = createComponent({
   react: React,
-  tagName: 'admiral-badge',
-  elementClass: AdmiralBadge,
+  tagName: 'specd-badge',
+  elementClass: SpecdBadge,
   events: {},
 });
 
-/** Auto-generated React wrapper for <admiral-input>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-input>. Do not hand-edit. */
 export const Input = createComponent({
   react: React,
-  tagName: 'admiral-input',
-  elementClass: AdmiralInput,
+  tagName: 'specd-input',
+  elementClass: SpecdInput,
   events: { onInput: 'input', onChange: 'change', onFocus: 'focus', onBlur: 'blur' },
 });
 
-/** Auto-generated React wrapper for <admiral-toggle>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-toggle>. Do not hand-edit. */
 export const Toggle = createComponent({
   react: React,
-  tagName: 'admiral-toggle',
-  elementClass: AdmiralToggle,
+  tagName: 'specd-toggle',
+  elementClass: SpecdToggle,
   events: { onChange: 'change' },
 });
 
-/** Auto-generated React wrapper for <admiral-card>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-card>. Do not hand-edit. */
 export const Card = createComponent({
   react: React,
-  tagName: 'admiral-card',
-  elementClass: AdmiralCard,
+  tagName: 'specd-card',
+  elementClass: SpecdCard,
   events: {},
 });
 
-/** Auto-generated React wrapper for <admiral-progress>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-progress>. Do not hand-edit. */
 export const Progress = createComponent({
   react: React,
-  tagName: 'admiral-progress',
-  elementClass: AdmiralProgress,
+  tagName: 'specd-progress',
+  elementClass: SpecdProgress,
   events: {},
 });
 
-/** Auto-generated React wrapper for <admiral-avatar>. Do not hand-edit. */
+/** Auto-generated React wrapper for <specd-avatar>. Do not hand-edit. */
 export const Avatar = createComponent({
   react: React,
-  tagName: 'admiral-avatar',
-  elementClass: AdmiralAvatar,
+  tagName: 'specd-avatar',
+  elementClass: SpecdAvatar,
   events: {},
 });

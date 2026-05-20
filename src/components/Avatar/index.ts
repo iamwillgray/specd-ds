@@ -1,2 +1,2 @@
-export { AdmiralAvatar } from './AdmiralAvatar.js';
-export type { AvatarProps, AvatarSize } from './AdmiralAvatar.types.js';
+export { SpecdAvatar } from './SpecdAvatar.js';
+export type { AvatarProps, AvatarSize } from './SpecdAvatar.types.js';

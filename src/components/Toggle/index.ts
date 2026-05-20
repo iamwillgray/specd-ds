@@ -1,2 +1,2 @@
-export { AdmiralToggle } from './AdmiralToggle.js';
-export type { ToggleProps } from './AdmiralToggle.types.js';
+export { SpecdToggle } from './SpecdToggle.js';
+export type { ToggleProps } from './SpecdToggle.types.js';

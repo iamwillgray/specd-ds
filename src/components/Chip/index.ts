@@ -1,2 +1,2 @@
-export { AdmiralChip } from './AdmiralChip.js';
-export type { ChipProps, ChipSeverity } from './AdmiralChip.types.js';
+export { SpecdChip } from './SpecdChip.js';
+export type { ChipProps, ChipSeverity } from './SpecdChip.types.js';

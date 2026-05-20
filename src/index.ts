@@ -1,15 +1,15 @@
 /**
- * Admiral DS — Web Components entry point
+ * Specd DS — Web Components entry point
  *
- * Import this file to register all <admiral-*> custom elements.
+ * Import this file to register all <specd-*> custom elements.
  * Works in any environment with a DOM: Figma plugins, browsers, any framework.
  *
  * @example
  * // Figma plugin or vanilla web
- * import '@specd/admiral-ds';
+ * import '@specd/specd-ds';
  *
  * // Then in HTML:
- * // <admiral-button variant="primary">Scan now</admiral-button>
+ * // <specd-button variant="primary">Scan now</specd-button>
  */
 
 // Components — importing registers custom elements as a side-effect

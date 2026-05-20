@@ -1,2 +1,2 @@
-export { AdmiralCard } from './AdmiralCard.js';
-export type { CardProps, CardElevation } from './AdmiralCard.types.js';
+export { SpecdCard } from './SpecdCard.js';
+export type { CardProps, CardElevation } from './SpecdCard.types.js';

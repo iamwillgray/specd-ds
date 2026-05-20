@@ -1,7 +1,7 @@
 {
-  "name": "@specd/admiral-ds",
+  "name": "@specd/specd-ds",
   "version": "0.1.0",
-  "description": "Specd Admiral Design System — framework-agnostic Web Component library with auto-generated React wrappers",
+  "description": "Specd DS — framework-agnostic Web Component library with auto-generated React wrappers",
   "type": "module",
   "main": "./dist/web-components/index.cjs.js",
   "module": "./dist/web-components/index.esm.js",

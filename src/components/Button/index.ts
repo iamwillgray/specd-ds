@@ -1,2 +1,2 @@
-export { AdmiralButton } from './AdmiralButton.js';
-export type { ButtonProps, ButtonVariant, ButtonSize, ButtonType } from './AdmiralButton.types.js';
+export { SpecdButton } from './SpecdButton.js';
+export type { ButtonProps, ButtonVariant, ButtonSize, ButtonType } from './SpecdButton.types.js';
