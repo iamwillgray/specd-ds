@@ -63,9 +63,12 @@ export { SpecdAiGradientBtn }   from './components/AiGradientBtn/SpecdAiGradient
 export { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
 export { SpecdQfReplaceRow }    from './components/QfReplaceRow/SpecdQfReplaceRow.js';
 export { SpecdIssueRowActions } from './components/IssueRowActions/SpecdIssueRowActions.js';
-export { SpecdIssueRow, IssueRowState, IssueRowSeverity } from './components/IssueRow/SpecdIssueRow.js';
+export { SpecdIssueRow } from './components/IssueRow/SpecdIssueRow.js';
+export type { IssueRowState, IssueRowSeverity } from './components/IssueRow/SpecdIssueRow.js';
 export { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';
 export { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.js';
 export { SpecdPropFixCreate }   from './components/PropFixRow/SpecdPropFixCreate.js';
-export { SpecdVariablePicker, VariableOption } from './components/VariablePicker/SpecdVariablePicker.js';
-export { SpecdDataTable, DataTableColumn }     from './components/DataTable/SpecdDataTable.js';
+export { SpecdVariablePicker } from './components/VariablePicker/SpecdVariablePicker.js';
+export type { VariableOption } from './components/VariablePicker/SpecdVariablePicker.js';
+export { SpecdDataTable } from './components/DataTable/SpecdDataTable.js';
+export type { DataTableColumn } from './components/DataTable/SpecdDataTable.js';
