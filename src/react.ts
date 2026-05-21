@@ -54,6 +54,20 @@ import { SpecdCheckboxGroup } from './components/CheckboxGroup/SpecdCheckboxGrou
 import { SpecdIssueCard }     from './components/IssueCard/SpecdIssueCard.js';
 import { SpecdChoiceCard }    from './components/ChoiceCard/SpecdChoiceCard.js';
 import { SpecdSparkline }     from './components/Sparkline/SpecdSparkline.js';
+import { SpecdIcon }            from './components/Icon/SpecdIcon.js';
+import { SpecdColorSwatch }     from './components/ColorSwatch/SpecdColorSwatch.js';
+import { SpecdFieldMessage }    from './components/FieldMessage/SpecdFieldMessage.js';
+import { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.js';
+import { SpecdAiGradientBtn }   from './components/AiGradientBtn/SpecdAiGradientBtn.js';
+import { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
+import { SpecdQfReplaceRow }    from './components/QfReplaceRow/SpecdQfReplaceRow.js';
+import { SpecdIssueRowActions } from './components/IssueRowActions/SpecdIssueRowActions.js';
+import { SpecdIssueRow }        from './components/IssueRow/SpecdIssueRow.js';
+import { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';
+import { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.js';
+import { SpecdPropFixCreate }   from './components/PropFixRow/SpecdPropFixCreate.js';
+import { SpecdVariablePicker }  from './components/VariablePicker/SpecdVariablePicker.js';
+import { SpecdDataTable }       from './components/DataTable/SpecdDataTable.js';
 
 /** Auto-generated React wrapper for <specd-button>. Do not hand-edit. */
 export const Button = createComponent({
@@ -380,5 +394,117 @@ export const Sparkline = createComponent({
   react: React,
   tagName: 'specd-sparkline',
   elementClass: SpecdSparkline,
+  events: {},
+});
+
+/** Auto-generated React wrapper for <specd-icon>. Do not hand-edit. */
+export const Icon = createComponent({
+  react: React,
+  tagName: 'specd-icon',
+  elementClass: SpecdIcon,
+  events: {},
+});
+
+/** Auto-generated React wrapper for <specd-color-swatch>. Do not hand-edit. */
+export const ColorSwatch = createComponent({
+  react: React,
+  tagName: 'specd-color-swatch',
+  elementClass: SpecdColorSwatch,
+  events: {},
+});
+
+/** Auto-generated React wrapper for <specd-field-message>. Do not hand-edit. */
+export const FieldMessage = createComponent({
+  react: React,
+  tagName: 'specd-field-message',
+  elementClass: SpecdFieldMessage,
+  events: {},
+});
+
+/** Auto-generated React wrapper for <specd-info-trigger>. Do not hand-edit. */
+export const InfoTrigger = createComponent({
+  react: React,
+  tagName: 'specd-info-trigger',
+  elementClass: SpecdInfoTrigger,
+  events: { onSpecdInfo: 'specd-info' },
+});
+
+/** Auto-generated React wrapper for <specd-ai-gradient-btn>. Do not hand-edit. */
+export const AiGradientBtn = createComponent({
+  react: React,
+  tagName: 'specd-ai-gradient-btn',
+  elementClass: SpecdAiGradientBtn,
+  events: {},
+});
+
+/** Auto-generated React wrapper for <specd-ignore-footer>. Do not hand-edit. */
+export const IgnoreFooter = createComponent({
+  react: React,
+  tagName: 'specd-ignore-footer',
+  elementClass: SpecdIgnoreFooter,
+  events: { onSpecdIgnoreAll: 'specd-ignore-all', onSpecdIgnoreSelected: 'specd-ignore-selected', onSpecdIgnoreCancel: 'specd-ignore-cancel' },
+});
+
+/** Auto-generated React wrapper for <specd-qf-replace-row>. Do not hand-edit. */
+export const QfReplaceRow = createComponent({
+  react: React,
+  tagName: 'specd-qf-replace-row',
+  elementClass: SpecdQfReplaceRow,
+  events: { onSpecdChange: 'specd-change' },
+});
+
+/** Auto-generated React wrapper for <specd-issue-row-actions>. Do not hand-edit. */
+export const IssueRowActions = createComponent({
+  react: React,
+  tagName: 'specd-issue-row-actions',
+  elementClass: SpecdIssueRowActions,
+  events: { onSpecdJump: 'specd-jump', onSpecdFixes: 'specd-fixes', onSpecdIgnore: 'specd-ignore' },
+});
+
+/** Auto-generated React wrapper for <specd-issue-row>. Do not hand-edit. */
+export const IssueRow = createComponent({
+  react: React,
+  tagName: 'specd-issue-row',
+  elementClass: SpecdIssueRow,
+  events: { onSpecdJump: 'specd-jump', onSpecdFixes: 'specd-fixes', onSpecdIgnoreAll: 'specd-ignore-all', onSpecdIgnoreCancel: 'specd-ignore-cancel' },
+});
+
+/** Auto-generated React wrapper for <specd-prop-fix-row>. Do not hand-edit. */
+export const PropFixRow = createComponent({
+  react: React,
+  tagName: 'specd-prop-fix-row',
+  elementClass: SpecdPropFixRow,
+  events: {},
+});
+
+/** Auto-generated React wrapper for <specd-prop-fix-slot>. Do not hand-edit. */
+export const PropFixSlot = createComponent({
+  react: React,
+  tagName: 'specd-prop-fix-slot',
+  elementClass: SpecdPropFixSlot,
+  events: { onSpecdApply: 'specd-apply' },
+});
+
+/** Auto-generated React wrapper for <specd-prop-fix-create>. Do not hand-edit. */
+export const PropFixCreate = createComponent({
+  react: React,
+  tagName: 'specd-prop-fix-create',
+  elementClass: SpecdPropFixCreate,
+  events: { onSpecdCreate: 'specd-create' },
+});
+
+/** Auto-generated React wrapper for <specd-variable-picker>. Do not hand-edit. */
+export const VariablePicker = createComponent({
+  react: React,
+  tagName: 'specd-variable-picker',
+  elementClass: SpecdVariablePicker,
+  events: { onSpecdPick: 'specd-pick', onSpecdClose: 'specd-close' },
+});
+
+/** Auto-generated React wrapper for <specd-data-table>. Do not hand-edit. */
+export const DataTable = createComponent({
+  react: React,
+  tagName: 'specd-data-table',
+  elementClass: SpecdDataTable,
   events: {},
 });
