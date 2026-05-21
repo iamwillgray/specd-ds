@@ -30,10 +30,12 @@ export class SpecdScoreRing extends LitElement {
       '--score-percentage': String(this.score),
       '--w': `${this.size}px`,
     };
+    const numSize = Math.round(42 * (this.size / 104));
+    const denomSize = Math.round(12 * (this.size / 104));
     return html`
       <div class="score-circle tier-${this.tier}" style=${styleMap(styles)}>
-        <span class="score-number-lg">${this.score}</span>
-        <span class="score-denom-new">/100</span>
+        <span class="score-number-lg" style=${styleMap({ fontSize: `${numSize}px` })}>${this.score}</span>
+        <span class="score-denom-new" style=${styleMap({ fontSize: `${denomSize}px` })}>/100</span>
       </div>
     `;
   }

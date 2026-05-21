@@ -63,4 +63,12 @@ describe('SpecdScoreRing', () => {
     const circle = el.querySelector<HTMLElement>('.score-circle');
     expect(circle?.style.getPropertyValue('--w')).toBe('140px');
   });
+
+  it('applies scaled font size for small rings', async () => {
+    const el = await makeElement({ size: '52', value: '80' });
+    const numEl = el.querySelector('.score-number-lg') as HTMLElement;
+    expect(numEl).not.toBeNull();
+    // 42 * (52/104) = 21px
+    expect(numEl.style.fontSize).toBe('21px');
+  });
 });
