@@ -2,6 +2,7 @@
  * Import this file to get all CSS custom properties.
  * Custom properties pierce Shadow DOM, so they work in any rendering context.
  */
+@import './fonts.css';
 @import './colors.css';
 @import './typography.css';
 @import './spacing.css';
