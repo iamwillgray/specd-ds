@@ -75,4 +75,10 @@ describe('SpecdInput', () => {
     const el = await makeElement({ cls: 'extra-class' });
     expect(getInner(el)?.className).toContain('extra-class');
   });
+
+  it('wraps password input in .input-group with reveal button', async () => {
+    const el = await makeElement({ type: 'password' });
+    expect(el.querySelector('.input-group')).not.toBeNull();
+    expect(el.querySelector('.input-reveal')).not.toBeNull();
+  });
 });

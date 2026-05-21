@@ -1,11 +1,15 @@
 import { LitElement, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import type { InputProps, InputType } from './SpecdInput.types.js';
+import { customElement, property, state } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import type { InputType } from './SpecdInput.types.js';
+
+const EYE_OFF = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+const EYE_ON  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
 
 /**
  * Specd DS — Input
  *
- * A text input wrapper with optional search styling. Renders into light DOM.
+ * Text input with optional search styling and password reveal toggle.
  *
  * @element specd-input
  *
@@ -19,9 +23,6 @@ import type { InputProps, InputType } from './SpecdInput.types.js';
  *
  * @fires input  - Forwarded from the inner <input>
  * @fires change - Forwarded from the inner <input>
- *
- * @example
- * <specd-input placeholder="Search…" search></specd-input>
  */
 @customElement('specd-input')
 export class SpecdInput extends LitElement {
@@ -34,31 +35,45 @@ export class SpecdInput extends LitElement {
   @property({ type: Boolean }) disabled: boolean = false;
   @property({ type: Boolean }) search: boolean = false;
   @property({ type: String }) cls: string = '';
+  @state() private _revealed: boolean = false;
 
-  private _classes(): string {
-    return [
-      'input',
-      this.search ? 'table-search' : '',
-      this.cls,
-    ].filter(Boolean).join(' ');
+  private _inputClasses(): string {
+    return ['input', this.search ? 'table-search' : '', this.cls].filter(Boolean).join(' ');
   }
 
+  private _toggleReveal() { this._revealed = !this._revealed; }
+
   override render() {
-    return html`
+    const effectiveType = this.type === 'password' && this._revealed ? 'text' : this.type;
+    const inputEl = html`
       <input
-        class=${this._classes()}
-        type=${this.type}
+        class=${this._inputClasses()}
+        type=${effectiveType}
         id=${this.id || nothing}
         placeholder=${this.placeholder || nothing}
         .value=${this.value}
         ?disabled=${this.disabled}
+        @input=${() => this.dispatchEvent(new Event('input', { bubbles: true }))}
+        @change=${() => this.dispatchEvent(new Event('change', { bubbles: true }))}
       />
+    `;
+
+    if (this.type !== 'password') return inputEl;
+
+    return html`
+      <div class="input-group">
+        ${inputEl}
+        <button
+          type="button"
+          class="input-reveal"
+          aria-label=${this._revealed ? 'Hide password' : 'Show password'}
+          @click=${this._toggleReveal}
+        >${unsafeHTML(this._revealed ? EYE_OFF : EYE_ON)}</button>
+      </div>
     `;
   }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'specd-input': SpecdInput;
-  }
+  interface HTMLElementTagNameMap { 'specd-input': SpecdInput; }
 }
