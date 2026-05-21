@@ -1,11 +1,12 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { ChoiceCardVariant } from './SpecdChoiceCard.types.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import type { ChoiceCardVariant, ChoiceCardIconVariant, ChoiceCardPillColor } from './SpecdChoiceCard.types.js';
 
 /**
  * Specd DS — ChoiceCard
  *
- * A selectable card for presenting options, supporting default and gradient variants.
+ * Selectable card for presenting options.
  *
  * @element specd-choice-card
  *
@@ -13,6 +14,9 @@ import type { ChoiceCardVariant } from './SpecdChoiceCard.types.js';
  * @attr {string} description - Optional description text
  * @attr {string} variant     - Visual variant: default | gradient
  * @attr {string} pill        - Optional pill label text
+ * @attr {string} pillcolor   - Pill colour: mint | blue (default mint)
+ * @attr {string} icon        - Optional SVG string for the card icon
+ * @attr {string} iconvariant - Icon variant: default | gradient
  */
 @customElement('specd-choice-card')
 export class SpecdChoiceCard extends LitElement {
@@ -22,13 +26,27 @@ export class SpecdChoiceCard extends LitElement {
   @property({ type: String }) description?: string;
   @property({ type: String }) variant: ChoiceCardVariant = 'default';
   @property({ type: String }) pill?: string;
+  @property({ type: String }) pillcolor: ChoiceCardPillColor = 'mint';
+  @property({ type: String }) icon?: string;
+  @property({ type: String }) iconvariant: ChoiceCardIconVariant = 'default';
 
   override render() {
+    const iconClass = [
+      'choice-card-icon',
+      this.iconvariant === 'gradient' ? 'gradient' : '',
+    ].filter(Boolean).join(' ');
+
+    const pillClass = [
+      'choice-card-pill',
+      this.pillcolor === 'blue' ? 'blue' : 'mint',
+    ].filter(Boolean).join(' ');
+
     return html`
       <div class="choice-card ${this.variant === 'gradient' ? 'gradient' : ''}">
+        ${this.icon ? html`<div class=${iconClass}>${unsafeHTML(this.icon)}</div>` : nothing}
         <div class="choice-card-title">${this.title}</div>
         ${this.description ? html`<div class="choice-card-desc">${this.description}</div>` : nothing}
-        ${this.pill ? html`<div class="choice-card-pill"><span class="chip-v2">${this.pill}</span></div>` : nothing}
+        ${this.pill ? html`<div class=${pillClass}>${this.pill}</div>` : nothing}
         <slot></slot>
       </div>
     `;

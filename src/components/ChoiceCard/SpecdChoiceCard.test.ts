@@ -42,8 +42,28 @@ describe('SpecdChoiceCard', () => {
     expect(el.querySelector('.choice-card')?.className).toContain('gradient');
   });
 
-  it('renders pill span when pill attr set', async () => {
+  it('renders pill when pill attr set', async () => {
     const el = await makeElement({ title: 'X', pill: 'Popular' });
-    expect(el.querySelector('.chip-v2')?.textContent?.trim()).toBe('Popular');
+    expect(el.querySelector('.choice-card-pill')?.textContent?.trim()).toBe('Popular');
+  });
+
+  it('renders .choice-card-icon when icon prop is set', async () => {
+    const el = await makeElement({ icon: '<svg></svg>' });
+    expect(el.querySelector('.choice-card-icon')).not.toBeNull();
+  });
+
+  it('adds gradient class to icon when iconvariant=gradient', async () => {
+    const el = await makeElement({ icon: '<svg></svg>', iconvariant: 'gradient' });
+    expect(el.querySelector('.choice-card-icon')?.className).toContain('gradient');
+  });
+
+  it('renders pill with mint class by default', async () => {
+    const el = await makeElement({ pill: 'New' });
+    expect(el.querySelector('.choice-card-pill')?.className).toContain('mint');
+  });
+
+  it('renders pill with blue class when pillcolor=blue', async () => {
+    const el = await makeElement({ pill: 'Pro', pillcolor: 'blue' });
+    expect(el.querySelector('.choice-card-pill')?.className).toContain('blue');
   });
 });
