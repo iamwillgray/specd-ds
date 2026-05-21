@@ -3,6 +3,40 @@
  * Requires the token files to be loaded first (tokens/index.css).
  * These styles work in light DOM (no Shadow DOM encapsulation).
  */
+
+/* ── GLOBAL BASE ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  font-family: var(--font);
+  font-size: 12px;
+  line-height: var(--leading-normal);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure all custom elements inherit the base font */
+[class], specd-button, specd-chip, specd-input, specd-checkbox,
+specd-radio-group, specd-toggle, specd-segmented,
+specd-section-label, specd-form-row, specd-card,
+specd-badge, specd-avatar, specd-progress, specd-skeleton,
+specd-score-ring, specd-stat-tile-lg, specd-stat-tile-sm,
+specd-sparkline, specd-score-trend, specd-cov-row,
+specd-issue-card, specd-issue-row, specd-issue-row-actions,
+specd-ignore-footer, specd-prop-fix-row, specd-prop-fix-slot, specd-prop-fix-create,
+specd-qf-replace-row, specd-variable-picker, specd-data-table,
+specd-color-swatch, specd-field-message, specd-info-trigger,
+specd-ai-gradient-btn, specd-choice-card, specd-app-header,
+specd-alert, specd-toast, specd-modal, specd-drawer,
+specd-tab-bar, specd-breadcrumb, specd-pagination,
+specd-empty-state, specd-tooltip, specd-popover, specd-divider,
+specd-ai-pill, specd-health-badge, specd-code-block,
+specd-key-value, specd-severity-header, specd-icon {
+  font-family: var(--font);
+  font-size: 12px;
+}
+
 /* ── ANIMATIONS ──────────────────────────────────────────── */
 @keyframes ad-shimmer { to { background-position: 200% center; } }
 @keyframes ad-fade-in { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
@@ -264,7 +298,7 @@ select.input {
   font-family: var(--font-mono); font-size: 10px; font-weight: 600;
   color: var(--text); text-transform: uppercase; letter-spacing: 0.06em;
 }
-.form-hint { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+.form-hint { font-family: var(--font); font-size: 11px; color: var(--text-muted); line-height: 1.5; }
 
 /* ── COVERAGE ────────────────────────────────────────────── */
 
