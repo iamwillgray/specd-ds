@@ -51,14 +51,14 @@ describe('SpecdChip', () => {
     expect(badge?.textContent?.trim()).toBe('5');
   });
 
-  it('applies is-crit class on count when severity=crit', async () => {
+  it('applies chip-crit class on count when severity=crit', async () => {
     const el = await makeElement({ label: 'Crit', count: '2', severity: 'crit' });
-    expect(el.querySelector('.chip-count')?.className).toContain('is-crit');
+    expect(el.querySelector('.chip-count')?.className).toContain('chip-crit');
   });
 
-  it('applies is-warn class on count when severity=warn', async () => {
+  it('applies chip-warn class on count when severity=warn', async () => {
     const el = await makeElement({ label: 'Warn', count: '1', severity: 'warn' });
-    expect(el.querySelector('.chip-count')?.className).toContain('is-warn');
+    expect(el.querySelector('.chip-count')?.className).toContain('chip-warn');
   });
 
   it('forwards data-filter attribute', async () => {
@@ -70,5 +70,22 @@ describe('SpecdChip', () => {
   it('applies extra cls to root span', async () => {
     const el = await makeElement({ label: 'Extra', cls: 'my-class' });
     expect(el.querySelector('span')?.className).toContain('my-class');
+  });
+
+  it('applies positive intent class', async () => {
+    const el = await makeElement({ label: 'OK', intent: 'positive' });
+    expect(el.querySelector('span')?.className).toContain('positive');
+  });
+  it('applies negative intent class', async () => {
+    const el = await makeElement({ label: 'Bad', intent: 'negative' });
+    expect(el.querySelector('span')?.className).toContain('negative');
+  });
+  it('applies chip-crit class to count badge', async () => {
+    const el = await makeElement({ label: 'A', count: '3', severity: 'crit' });
+    expect(el.querySelector('.chip-count')?.className).toContain('chip-crit');
+  });
+  it('applies chip-warn class to count badge', async () => {
+    const el = await makeElement({ label: 'B', count: '2', severity: 'warn' });
+    expect(el.querySelector('.chip-count')?.className).toContain('chip-warn');
   });
 });
