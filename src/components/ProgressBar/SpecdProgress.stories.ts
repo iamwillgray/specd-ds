@@ -8,8 +8,8 @@ const meta: Meta = {
   tags: ['autodocs'],
   render: (args) => html`
     <specd-progress
-      value=${args.value ?? nothing}
-      intent=${args.intent ?? nothing}
+      .value=${args.value}
+      intent=${args.intent ?? ''}
       height=${args.height ?? 8}
       aria-label=${args.ariaLabel ?? ''}
     ></specd-progress>
@@ -23,9 +23,6 @@ const meta: Meta = {
 };
 export default meta;
 type Story = StoryObj;
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const nothing = undefined as any;
 
 export const Default: Story      = { args: { value: 65 } };
 export const Positive: Story     = { args: { value: 80, intent: 'positive' } };
