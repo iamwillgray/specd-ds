@@ -66,7 +66,7 @@ export class SpecdDataTable extends LitElement {
     const rows = this._filtered();
 
     return html`
-      <div class="comp-table">
+      <div class="comp-table-container">
         <div class="comp-toolbar">
           <specd-input
             search
@@ -76,7 +76,7 @@ export class SpecdDataTable extends LitElement {
           ></specd-input>
         </div>
         <div class="comp-table-wrap">
-          <table>
+          <table class="comp-table">
             <thead>
               <tr>
                 ${cols.map(col => html`

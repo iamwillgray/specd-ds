@@ -53,6 +53,6 @@ describe('SpecdIssuePreviewCard', () => {
   it('renders expand slot area when expanded prop set', async () => {
     el.setAttribute('expanded', '');
     await (el as any).updateComplete;
-    expect(el.querySelector('.issue-card-fixes')).toBeTruthy();
+    expect(el.querySelector('.issue-fixes-panel')).toBeTruthy();
   });
 });

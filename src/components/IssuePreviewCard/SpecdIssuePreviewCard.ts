@@ -60,26 +60,28 @@ export class SpecdIssuePreviewCard extends LitElement {
     return html`
       <div class="issue-card">
 
-        <!-- Card top: icon + component name + badge -->
-        <div class="issue-card-top">
-          <div class="issue-card-icon">${unsafeHTML(DIAMOND_SVG)}</div>
-          <span class="issue-name">${this.component || 'Unknown component'}</span>
-          ${this.type ? html`
-            <span class="issue-card-count ${this.severity}">
-              ${this.type}
-              ${badgeCount ? html`<span class="issue-card-count-badge">${badgeCount}</span>` : nothing}
-            </span>
+        <div class="issue-content">
+          <!-- Card top: icon + component name + badge -->
+          <div class="issue-card-top">
+            <div class="issue-card-icon">${unsafeHTML(DIAMOND_SVG)}</div>
+            <span class="issue-name">${this.component || 'Unknown component'}</span>
+            ${this.type ? html`
+              <span class="issue-card-count ${this.severity}">
+                ${this.type}
+                ${badgeCount ? html`<span class="issue-card-count-badge">${badgeCount}</span>` : nothing}
+              </span>
+            ` : nothing}
+          </div>
+
+          <!-- Issue tags (stacked, each on its own line) -->
+          ${parsedTags.length ? html`
+            <div class="issue-tag-row stacked">
+              ${parsedTags.map(t => html`
+                <specd-tag label=${t.label} intent=${t.sev ?? this.severity}></specd-tag>
+              `)}
+            </div>
           ` : nothing}
         </div>
-
-        <!-- Issue tags (stacked, each on its own line) -->
-        ${parsedTags.length ? html`
-          <div class="issue-tag-row stacked">
-            ${parsedTags.map(t => html`
-              <specd-tag label=${t.label} intent=${t.sev ?? this.severity}></specd-tag>
-            `)}
-          </div>
-        ` : nothing}
 
         <!-- Footer: Jump + View Fixes -->
         <div class="issue-card-footer">
@@ -101,7 +103,7 @@ export class SpecdIssuePreviewCard extends LitElement {
 
         <!-- Expandable fixes panel -->
         ${this.expanded ? html`
-          <div class="issue-card-fixes">
+          <div class="issue-fixes-panel">
             <slot></slot>
           </div>
         ` : nothing}
