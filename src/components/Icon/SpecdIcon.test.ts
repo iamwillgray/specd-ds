@@ -36,4 +36,28 @@ describe('SpecdIcon', () => {
     expect(svg?.getAttribute('height')).toBe('20');
     el.remove();
   });
+
+  it('renders logo-mark icon', async () => {
+    const el = await makeIcon({ name: 'logo-mark' });
+    expect(el.querySelector('svg')).toBeTruthy();
+    el.remove();
+  });
+
+  it('renders arrow-left icon', async () => {
+    const el = await makeIcon({ name: 'arrow-left' });
+    expect(el.querySelector('svg')).toBeTruthy();
+    el.remove();
+  });
+
+  it('renders plus icon', async () => {
+    const el = await makeIcon({ name: 'plus' });
+    expect(el.querySelector('svg')).toBeTruthy();
+    el.remove();
+  });
+
+  it('renders trash-2 icon', async () => {
+    const el = await makeIcon({ name: 'trash-2' });
+    expect(el.querySelector('svg')).toBeTruthy();
+    el.remove();
+  });
 });
