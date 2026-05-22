@@ -148,4 +148,25 @@ describe('SpecdButton', () => {
     expect(el.querySelector('.ai-text')).not.toBeNull();
     el.remove();
   });
+
+  it('forwards name and value to inner button', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.setAttribute('name', 'submit-btn');
+    el.setAttribute('value', 'confirm');
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const btn = el.querySelector('button');
+    expect(btn?.getAttribute('name')).toBe('submit-btn');
+    expect(btn?.getAttribute('value')).toBe('confirm');
+    el.remove();
+  });
+
+  it('forwards aria-label to inner button', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.setAttribute('aria-label', 'Close dialog');
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')?.getAttribute('aria-label')).toBe('Close dialog');
+    el.remove();
+  });
 });

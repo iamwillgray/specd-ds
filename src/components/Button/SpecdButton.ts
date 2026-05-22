@@ -43,6 +43,12 @@ export class SpecdButton extends LitElement {
   @property({ type: String }) type: ButtonType = 'button';
   @property({ type: String }) icon: string = '';
   @property({ type: String }) cls: string = '';
+  @property({ type: String }) name: string = '';
+  @property({ type: String }) value: string = '';
+  @property({ type: String }) form: string = '';
+  @property({ type: String, attribute: 'aria-label' }) ariaLabel: string = '';
+  @property({ type: String, attribute: 'aria-describedby' }) ariaDescribedBy: string = '';
+  @property({ type: Boolean }) autofocus: boolean = false;
 
   private _classes(): string {
     return [
@@ -64,6 +70,12 @@ export class SpecdButton extends LitElement {
         type=${this.type}
         ?disabled=${isDisabled}
         aria-disabled=${isDisabled ? 'true' : 'false'}
+        name=${this.name || nothing}
+        value=${this.value || nothing}
+        form=${this.form || nothing}
+        aria-label=${this.ariaLabel || nothing}
+        aria-describedby=${this.ariaDescribedBy || nothing}
+        ?autofocus=${this.autofocus}
       >
         ${effectiveIcon ? html`<span class="btn-icon" aria-hidden="true">${unsafeHTML(effectiveIcon)}</span>` : nothing}
         ${isAi

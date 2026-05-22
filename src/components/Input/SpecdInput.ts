@@ -35,6 +35,16 @@ export class SpecdInput extends LitElement {
   @property({ type: Boolean }) disabled: boolean = false;
   @property({ type: Boolean }) search: boolean = false;
   @property({ type: String }) cls: string = '';
+  @property({ type: String }) name: string = '';
+  @property({ type: String }) form: string = '';
+  @property({ type: String }) autocomplete: string = '';
+  @property({ type: String, attribute: 'aria-label' }) ariaLabel: string = '';
+  @property({ type: String, attribute: 'aria-describedby' }) ariaDescribedBy: string = '';
+  @property({ type: String }) min: string = '';
+  @property({ type: String }) max: string = '';
+  @property({ type: String }) step: string = '';
+  @property({ type: String }) pattern: string = '';
+  @property({ type: String }) inputmode: string = '';
   @state() private _revealed: boolean = false;
 
   private _inputClasses(): string {
@@ -53,6 +63,16 @@ export class SpecdInput extends LitElement {
         placeholder=${this.placeholder || nothing}
         .value=${this.value}
         ?disabled=${this.disabled}
+        name=${this.name || nothing}
+        form=${this.form || nothing}
+        autocomplete=${this.autocomplete || nothing}
+        aria-label=${this.ariaLabel || nothing}
+        aria-describedby=${this.ariaDescribedBy || nothing}
+        min=${this.min || nothing}
+        max=${this.max || nothing}
+        step=${this.step || nothing}
+        pattern=${this.pattern || nothing}
+        inputmode=${this.inputmode || nothing}
         @input=${() => this.dispatchEvent(new Event('input', { bubbles: true }))}
         @change=${() => this.dispatchEvent(new Event('change', { bubbles: true }))}
       />

@@ -81,4 +81,25 @@ describe('SpecdInput', () => {
     expect(el.querySelector('.input-group')).not.toBeNull();
     expect(el.querySelector('.input-reveal')).not.toBeNull();
   });
+
+  it('forwards name and form to inner input', async () => {
+    const el = document.createElement('specd-input') as any;
+    el.setAttribute('name', 'email');
+    el.setAttribute('form', 'login-form');
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const input = el.querySelector('input');
+    expect(input?.getAttribute('name')).toBe('email');
+    expect(input?.getAttribute('form')).toBe('login-form');
+    el.remove();
+  });
+
+  it('forwards autocomplete to inner input', async () => {
+    const el = document.createElement('specd-input') as any;
+    el.setAttribute('autocomplete', 'email');
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('input')?.getAttribute('autocomplete')).toBe('email');
+    el.remove();
+  });
 });
