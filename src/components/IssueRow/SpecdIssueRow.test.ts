@@ -64,7 +64,7 @@ describe('SpecdIssueRow', () => {
     el.title = 'Critical';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-row')?.className).toContain('issue-crit');
+    expect(el.querySelector('.issue-row')?.className).toContain('sev-crit');
     el.remove();
   });
 });

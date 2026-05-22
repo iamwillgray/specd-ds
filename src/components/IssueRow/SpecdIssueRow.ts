@@ -52,21 +52,36 @@ export class SpecdIssueRow extends LitElement {
   }
 
   private _severityClass() {
-    return this.severity === 'crit' ? 'issue-crit'
-         : this.severity === 'warn' ? 'issue-warn'
-         : 'issue-info';
+    return this.severity === 'crit' ? 'sev-crit'
+         : this.severity === 'warn' ? 'sev-warn'
+         : 'sev-info';
+  }
+
+  private _chipClass() {
+    return this.severity === 'crit' ? 'chip-v2 negative'
+         : this.severity === 'warn' ? 'chip-v2 warning'
+         : 'chip-v2';
   }
 
   override render() {
+    const isExpanded = this._state !== 'default';
     return html`
       <div
-        class="issue-row ${this._severityClass()}"
+        class="issue-row ${this._severityClass()} ${isExpanded ? 'is-expanded' : ''}"
+        data-row-state=${this._state}
         @click=${() => this._state === 'default' && this._setState('actions')}
       >
-        <div class="issue-row-hdr">
-          <span class="issue-row-title">${this.title}</span>
-          ${this.type ? html`<span class="chip-v2 dark">${this.type}</span>` : nothing}
-          ${this.component ? html`<span class="issue-row-comp">${this.component}</span>` : nothing}
+        <div class="issue-row-main">
+          <div class="issue-row-top-line">
+            <span class="issue-row-title">${this.title}</span>
+            ${this.type ? html`<span class="${this._chipClass()}">${this.type}</span>` : nothing}
+            ${this._state === 'default' ? html`
+              <span class="issue-row-chevron" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </span>
+            ` : nothing}
+          </div>
+          ${this.component ? html`<div class="issue-row-comp">${this.component}</div>` : nothing}
         </div>
 
         ${this._state === 'actions' ? html`
