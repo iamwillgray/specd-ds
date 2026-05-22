@@ -1,24 +1,38 @@
-import { describe, it, expect, beforeAll } from 'vitest';
-
-beforeAll(async () => { await import('./SpecdColorSwatch.js'); });
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import './SpecdColorSwatch.js';
 
 describe('SpecdColorSwatch', () => {
-  it('renders .qf-replace-swatch element', async () => {
-    const el = document.createElement('specd-color-swatch') as any;
-    el.color = '#ff0000';
+  let el: HTMLElement;
+
+  beforeEach(() => {
+    el = document.createElement('specd-color-swatch');
     document.body.appendChild(el);
-    await el.updateComplete;
-    expect(el.querySelector('.qf-replace-swatch')).not.toBeNull();
-    el.remove();
   });
 
-  it('applies background color style', async () => {
-    const el = document.createElement('specd-color-swatch') as any;
-    el.color = '#336699';
-    document.body.appendChild(el);
-    await el.updateComplete;
-    const swatch = el.querySelector('.qf-replace-swatch') as HTMLElement;
-    expect(swatch.style.background).toBeTruthy();
-    el.remove();
+  afterEach(() => { el.remove(); });
+
+  it('renders qf-replace-swatch for square variant (default)', async () => {
+    el.setAttribute('color', '#ff0000');
+    await (el as any).updateComplete;
+    expect(el.querySelector('.qf-replace-swatch')).toBeTruthy();
+  });
+
+  it('renders color-swatch for chip variant', async () => {
+    el.setAttribute('color', '#ff0000');
+    el.setAttribute('variant', 'chip');
+    el.setAttribute('label', 'Red');
+    await (el as any).updateComplete;
+    expect(el.querySelector('.color-swatch')).toBeTruthy();
+    expect(el.querySelector('.color-swatch-dot')).toBeTruthy();
+    expect(el.querySelector('.color-swatch-label')).toBeTruthy();
+  });
+
+  it('renders typography variant with Aa glyph', async () => {
+    el.setAttribute('color', '#ff0000');
+    el.setAttribute('variant', 'typography');
+    await (el as any).updateComplete;
+    const typo = el.querySelector('.color-swatch-typography');
+    expect(typo).toBeTruthy();
+    expect(typo?.textContent?.trim()).toBe('Aa');
   });
 });
