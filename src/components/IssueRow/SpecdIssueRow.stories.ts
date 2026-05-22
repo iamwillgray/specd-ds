@@ -103,3 +103,46 @@ export const AllFieldTypes: Story = {
     </div>
   `,
 };
+
+export const HardCodedExpanded: Story = {
+  name: 'Hard-coded — expanded (editing state)',
+  render: () => html`
+    <div style="max-width:440px;padding:16px;">
+      <specd-issue-row
+        fieldtype="hard-coded"
+        title="Hard-coded colour"
+        description="#3b82f6 — 4 instances"
+        rowstate="editing"
+      >
+        <div slot="fix-children">
+          <div class="row-assign-panel">
+            <div class="row-assign-filters">
+              <button class="row-assign-chip is-active">
+                All <span class="row-assign-chip-count">4</span>
+              </button>
+              <button class="row-assign-chip">
+                Color <span class="row-assign-chip-count">4</span>
+              </button>
+            </div>
+            <div class="qf-replace-row selected">
+              <div class="qf-replace-radio"></div>
+              <div class="qf-replace-body">
+                <div class="qf-replace-name">Blue / brand-primary</div>
+                <div class="qf-replace-collection">Semantic tokens <span class="qf-modal-hex">#3b82f6</span></div>
+              </div>
+              <span class="qf-replace-swatch" style="background:#3b82f6"></span>
+            </div>
+            <div class="qf-replace-row">
+              <div class="qf-replace-radio"></div>
+              <div class="qf-replace-body">
+                <div class="qf-replace-name">Blue / 500</div>
+                <div class="qf-replace-collection">Primitive colors <span class="qf-modal-hex">#3b82f6</span></div>
+              </div>
+              <span class="qf-replace-swatch" style="background:#3b82f6"></span>
+            </div>
+          </div>
+        </div>
+      </specd-issue-row>
+    </div>
+  `,
+};
