@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
 
 beforeAll(async () => { await import('./SpecdIssueRow.js'); });
 
@@ -111,18 +111,48 @@ describe('SpecdIssueRow', () => {
     el.remove();
   });
 
-  it('fires specd-quick-fix for hard-coded fieldtype', async () => {
-    const el = document.createElement('specd-issue-row') as any;
-    el.fieldtype = 'hard-coded';
-    el.title = 'Hard-coded values';
-    document.body.appendChild(el);
-    await el.updateComplete;
-    let fired = false;
-    el.addEventListener('specd-quick-fix', () => { fired = true; });
-    el.querySelector('.btn-row-primary')?.click();
-    await el.updateComplete;
-    expect(fired).toBe(true);
-    el.remove();
+  describe('hard-coded fieldtype', () => {
+    let hcEl: HTMLElement;
+
+    beforeEach(() => {
+      hcEl = document.createElement('specd-issue-row') as any;
+      hcEl.setAttribute('fieldtype', 'hard-coded');
+      hcEl.setAttribute('title', 'Hard-coded fill colour');
+      document.body.appendChild(hcEl);
+    });
+
+    afterEach(() => { hcEl.remove(); });
+
+    it('starts in initial state', async () => {
+      await (hcEl as any).updateComplete;
+      expect((hcEl as any)._state).toBe('initial');
+    });
+
+    it('transitions to editing state when CTA clicked', async () => {
+      await (hcEl as any).updateComplete;
+      const cta = hcEl.querySelector('.btn-row-primary') as HTMLButtonElement;
+      cta?.click();
+      await (hcEl as any).updateComplete;
+      expect((hcEl as any)._state).toBe('editing');
+    });
+
+    it('renders fix-children slot in editing state', async () => {
+      await (hcEl as any).updateComplete;
+      const cta = hcEl.querySelector('.btn-row-primary') as HTMLButtonElement;
+      cta?.click();
+      await (hcEl as any).updateComplete;
+      expect(hcEl.querySelector('.issue-row-fix-children')).toBeTruthy();
+    });
+
+    it('does NOT fire specd-quick-fix on CTA click', async () => {
+      await (hcEl as any).updateComplete;
+      let fired = false;
+      hcEl.addEventListener('specd-quick-fix', () => { fired = true; });
+      const cta = hcEl.querySelector('.btn-row-primary') as HTMLButtonElement;
+      cta?.click();
+      await (hcEl as any).updateComplete;
+      expect(fired).toBe(false);
+    });
   });
 
   it('fires specd-save with value when saved', async () => {

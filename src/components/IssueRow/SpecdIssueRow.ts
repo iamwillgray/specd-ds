@@ -28,7 +28,7 @@ function iconFor(ft: IssueRowFieldType): string {
 /** Direct-apply field types — no edit state, CTA jumps straight to applied */
 const DIRECT_APPLY: IssueRowFieldType[] = ['dev-ready', 'mark-complete'];
 /** External-action types — no state change, just fires an event */
-const EXTERNAL_ACTION: IssueRowFieldType[] = ['hard-coded'];
+const EXTERNAL_ACTION: IssueRowFieldType[] = [];
 
 /**
  * Specd DS — IssueRow
@@ -138,9 +138,9 @@ export class SpecdIssueRow extends LitElement {
     }
     if (this.fieldtype === 'hard-coded') {
       return html`
-        <button class="btn-row-primary btn-hc-ghost" type="button"
+        <button class="btn-row-primary" type="button"
           @click=${(e: Event) => { e.stopPropagation(); this._handleCta(); }}>
-          View in Quick Fix
+          View Fixes
         </button>
       `;
     }
@@ -160,6 +160,14 @@ export class SpecdIssueRow extends LitElement {
   }
 
   private _renderEditingContent() {
+    if (this.fieldtype === 'hard-coded') {
+      return html`
+        <div class="issue-row-fix-children">
+          <slot name="fix-children"></slot>
+          <slot></slot>
+        </div>
+      `;
+    }
     if (this.fieldtype === 'doc-link') {
       return html`
         <div class="row-link-field is-editing">
