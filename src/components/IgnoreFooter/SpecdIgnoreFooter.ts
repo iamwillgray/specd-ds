@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../Button/SpecdButton.js';
 
 /**
  * Specd DS — IgnoreFooter
@@ -27,11 +28,11 @@ export class SpecdIgnoreFooter extends LitElement {
   override render() {
     return html`
       <div class="ignore-footer">
-        <button class="btn-ignore-all"      type="button" @click=${() => this._fire('specd-ignore-all')}>Ignore all</button>
+        <specd-button data-action="ignore-all"    variant="danger" size="sm" label="Ignore all"      @click=${() => this._fire('specd-ignore-all')}></specd-button>
         ${this.showselected ? html`
-          <button class="btn-ignore-selected" type="button" @click=${() => this._fire('specd-ignore-selected')}>Ignore selected</button>
+          <specd-button data-action="ignore-selected" variant="primary" size="sm" label="Ignore selected" @click=${() => this._fire('specd-ignore-selected')}></specd-button>
         ` : ''}
-        <button class="btn-ignore-cancel"   type="button" @click=${() => this._fire('specd-ignore-cancel')}>Cancel</button>
+        <specd-button data-action="ignore-cancel" variant="ghost"   size="sm" label="Cancel"         @click=${() => this._fire('specd-ignore-cancel')}></specd-button>
       </div>
     `;
   }

@@ -8,8 +8,8 @@ describe('SpecdIgnoreFooter', () => {
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.querySelector('.ignore-footer')).not.toBeNull();
-    expect(el.querySelector('.btn-ignore-all')).not.toBeNull();
-    expect(el.querySelector('.btn-ignore-cancel')).not.toBeNull();
+    expect(el.querySelector('specd-button[data-action="ignore-all"]')).not.toBeNull();
+    expect(el.querySelector('specd-button[data-action="ignore-cancel"]')).not.toBeNull();
     el.remove();
   });
 
@@ -17,7 +17,7 @@ describe('SpecdIgnoreFooter', () => {
     const el = document.createElement('specd-ignore-footer') as any;
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-ignore-selected')).toBeNull();
+    expect(el.querySelector('specd-button[data-action="ignore-selected"]')).toBeNull();
     el.remove();
   });
 
@@ -26,7 +26,7 @@ describe('SpecdIgnoreFooter', () => {
     el.showselected = true;
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-ignore-selected')).not.toBeNull();
+    expect(el.querySelector('specd-button[data-action="ignore-selected"]')).not.toBeNull();
     el.remove();
   });
 
@@ -36,8 +36,16 @@ describe('SpecdIgnoreFooter', () => {
     await el.updateComplete;
     let fired = false;
     el.addEventListener('specd-ignore-all', () => { fired = true; });
-    el.querySelector('.btn-ignore-all').click();
+    el.querySelector('specd-button[data-action="ignore-all"]').click();
     expect(fired).toBe(true);
+    el.remove();
+  });
+
+  it('uses specd-button elements internally', async () => {
+    const el = document.createElement('specd-ignore-footer') as any;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelectorAll('specd-button').length).toBeGreaterThan(0);
     el.remove();
   });
 });
