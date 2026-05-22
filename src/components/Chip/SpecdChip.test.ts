@@ -88,4 +88,35 @@ describe('SpecdChip', () => {
     const el = await makeElement({ label: 'B', count: '2', severity: 'warn' });
     expect(el.querySelector('.chip-count')?.className).toContain('chip-warn');
   });
+
+  it('renders a button when clickable=true', async () => {
+    const el = document.createElement('specd-chip') as any;
+    el.label = 'Filter';
+    el.clickable = true;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')).not.toBeNull();
+    expect(el.querySelector('button')?.getAttribute('type')).toBe('button');
+    el.remove();
+  });
+
+  it('renders a span when clickable is false (default)', async () => {
+    const el = document.createElement('specd-chip') as any;
+    el.label = 'Tag';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('span')).not.toBeNull();
+    expect(el.querySelector('button')).toBeNull();
+    el.remove();
+  });
+
+  it('forwards disabled to button when clickable', async () => {
+    const el = document.createElement('specd-chip') as any;
+    el.clickable = true;
+    el.disabled = true;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')?.disabled).toBe(true);
+    el.remove();
+  });
 });

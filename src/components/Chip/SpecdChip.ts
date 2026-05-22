@@ -29,6 +29,8 @@ export class SpecdChip extends LitElement {
   @property({ type: String }) intent?: ChipIntent;
   @property({ type: String, attribute: 'data-filter' }) dataFilter: string = '';
   @property({ type: String }) cls: string = '';
+  @property({ type: Boolean }) clickable: boolean = false;
+  @property({ type: Boolean }) disabled: boolean = false;
 
   private _classes(): string {
     return [
@@ -48,12 +50,28 @@ export class SpecdChip extends LitElement {
   }
 
   override render() {
+    const inner = html`
+      ${this.label}
+      ${this.count !== undefined
+        ? html`<span class=${this._countClasses()}>${this.count}</span>`
+        : nothing}
+    `;
+
+    if (this.clickable) {
+      return html`
+        <button
+          class=${this._classes()}
+          type="button"
+          ?disabled=${this.disabled}
+          aria-pressed=${this.active ? 'true' : nothing}
+          data-filter=${this.dataFilter || nothing}
+        >${inner}</button>
+      `;
+    }
+
     return html`
       <span class=${this._classes()} data-filter=${this.dataFilter || nothing}>
-        ${this.label}
-        ${this.count !== undefined
-          ? html`<span class=${this._countClasses()}>${this.count}</span>`
-          : nothing}
+        ${inner}
       </span>
     `;
   }
