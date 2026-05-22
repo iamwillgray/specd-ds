@@ -59,6 +59,20 @@ export const AiGradient: Story = {
   `,
 };
 
+export const ActionVariants: Story = {
+  name: 'Action Variants (rounded square)',
+  render: () => html`
+    <div style="display:flex;flex-direction:column;gap:12px;padding:16px;max-width:300px;">
+      <specd-button variant="row-primary" label="Add doc link"></specd-button>
+      <specd-button variant="row-primary-ghost" label="View in Quick Fix"></specd-button>
+      <specd-button variant="row-applied" label="Applied"></specd-button>
+      <specd-button variant="edit-pill" label="Edit"></specd-button>
+      <specd-button variant="save-pill" label="Save"></specd-button>
+      <specd-button variant="cancel-pill" label="Cancel"></specd-button>
+    </div>
+  `,
+};
+
 export const AllVariants: Story = {
   render: () => html`
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">

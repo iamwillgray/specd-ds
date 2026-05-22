@@ -170,3 +170,67 @@ describe('SpecdButton', () => {
     el.remove();
   });
 });
+
+describe('SpecdButton — action variants', () => {
+  it('renders .btn-row-primary for variant="row-primary"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'row-primary';
+    el.label = 'Add doc link';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.btn-row-primary')).not.toBeNull();
+    el.remove();
+  });
+
+  it('renders .btn-row-primary.btn-hc-ghost for variant="row-primary-ghost"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'row-primary-ghost';
+    el.label = 'View in Quick Fix';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const btn = el.querySelector('button');
+    expect(btn?.classList.contains('btn-row-primary')).toBe(true);
+    expect(btn?.classList.contains('btn-hc-ghost')).toBe(true);
+    el.remove();
+  });
+
+  it('renders .btn-row-applied for variant="row-applied"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'row-applied';
+    el.label = 'Applied';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.btn-row-applied')).not.toBeNull();
+    el.remove();
+  });
+
+  it('renders .btn-edit-pill for variant="edit-pill"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'edit-pill';
+    el.label = 'Edit';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.btn-edit-pill')).not.toBeNull();
+    el.remove();
+  });
+
+  it('renders .btn-save-pill for variant="save-pill"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'save-pill';
+    el.label = 'Save';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.btn-save-pill')).not.toBeNull();
+    el.remove();
+  });
+
+  it('renders .btn-cancel-pill for variant="cancel-pill"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'cancel-pill';
+    el.label = 'Cancel';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.btn-cancel-pill')).not.toBeNull();
+    el.remove();
+  });
+});

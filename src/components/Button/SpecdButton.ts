@@ -51,8 +51,14 @@ export class SpecdButton extends LitElement {
   @property({ type: Boolean }) autofocus: boolean = false;
 
   private _classes(): string {
+    let variantClass: string;
+    if (this.variant === 'row-primary-ghost') {
+      variantClass = 'btn-row-primary btn-hc-ghost';
+    } else {
+      variantClass = `btn-${this.variant}`;
+    }
     return [
-      `btn-${this.variant}`,
+      variantClass,
       this.size === 'sm' ? 'btn-sm' : this.size === 'lg' ? 'btn-lg' : '',
       this.full    ? 'btn-full'    : '',
       this.loading ? 'is-loading'  : '',
