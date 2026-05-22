@@ -1,7 +1,7 @@
 export type ButtonVariant =
   | 'primary' | 'ghost' | 'accent' | 'danger'
   | 'sb-good' | 'sb-bad' | 'sb-muted'
-  | 'ai-gradient'
+  | 'ai-gradient' | 'pulse'
   | 'row-primary' | 'row-primary-ghost' | 'row-applied'
   | 'edit-pill' | 'save-pill' | 'cancel-pill';
 export type ButtonSize    = 'sm' | 'md' | 'lg';

@@ -6,50 +6,33 @@ const meta: Meta = {
   title: 'Atoms/ColorSwatch',
   component: 'specd-color-swatch',
   tags: ['autodocs'],
-  argTypes: {
-    variant: { control: 'select', options: ['square', 'chip', 'typography'] },
-    color:   { control: 'color' },
-    label:   { control: 'text' },
-  },
 };
 export default meta;
 type Story = StoryObj;
 
-export const Square: Story = {
-  args: { color: '#3b82f6', label: 'Blue', variant: 'square' },
-  render: (args) => html`<specd-color-swatch color=${args.color} label=${args.label} variant="square"></specd-color-swatch>`,
+export const Default: Story = {
+  render: () => html`<specd-color-swatch color="#3b82f6" label="Blue"></specd-color-swatch>`,
 };
 
-export const Chip: Story = {
-  args: { color: '#3b82f6', label: 'Blue 500', variant: 'chip' },
-  render: (args) => html`<specd-color-swatch color=${args.color} label=${args.label} variant="chip"></specd-color-swatch>`,
+export const Small: Story = {
+  name: 'sm variant',
+  render: () => html`<specd-color-swatch color="#3b82f6" label="Blue" sm></specd-color-swatch>`,
 };
 
-export const Typography: Story = {
-  args: { color: '#0C1750', label: 'Navy', variant: 'typography' },
-  render: (args) => html`<specd-color-swatch color=${args.color} label=${args.label} variant="typography"></specd-color-swatch>`,
-};
-
-export const AllVariants: Story = {
-  name: 'All three variants',
+export const AllSwatches: Story = {
   render: () => html`
-    <div style="display:flex;flex-direction:column;gap:16px;padding:16px;">
-      <div style="display:flex;gap:12px;align-items:center;">
-        <specd-color-swatch color="#3b82f6" variant="square"></specd-color-swatch>
-        <specd-color-swatch color="#b8ff57" variant="square"></specd-color-swatch>
-        <specd-color-swatch color="#ef4444" variant="square"></specd-color-swatch>
-        <specd-color-swatch color="#0C1750" variant="square"></specd-color-swatch>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <specd-color-swatch color="#3b82f6" label="Blue 500" variant="chip"></specd-color-swatch>
-        <specd-color-swatch color="#b8ff57" label="Lime" variant="chip"></specd-color-swatch>
-        <specd-color-swatch color="#ef4444" label="Red 500" variant="chip"></specd-color-swatch>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <specd-color-swatch color="#0C1750" variant="typography"></specd-color-swatch>
-        <specd-color-swatch color="#3b82f6" variant="typography"></specd-color-swatch>
-        <specd-color-swatch color="#ef4444" variant="typography"></specd-color-swatch>
-      </div>
+    <div style="display:flex;gap:8px;align-items:center;padding:12px;">
+      <specd-color-swatch color="#0C1750"></specd-color-swatch>
+      <specd-color-swatch color="#b8ff57"></specd-color-swatch>
+      <specd-color-swatch color="#3b82f6"></specd-color-swatch>
+      <specd-color-swatch color="#f59e0b"></specd-color-swatch>
+      <specd-color-swatch color="#ef4444"></specd-color-swatch>
+      <specd-color-swatch color="#22c55e"></specd-color-swatch>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;padding:0 12px 12px;">
+      <specd-color-swatch color="#0C1750" sm></specd-color-swatch>
+      <specd-color-swatch color="#b8ff57" sm></specd-color-swatch>
+      <specd-color-swatch color="#3b82f6" sm></specd-color-swatch>
     </div>
   `,
 };

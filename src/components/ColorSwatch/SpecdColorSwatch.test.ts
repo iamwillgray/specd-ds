@@ -11,28 +11,24 @@ describe('SpecdColorSwatch', () => {
 
   afterEach(() => { el.remove(); });
 
-  it('renders qf-replace-swatch for square variant (default)', async () => {
+  it('renders qf-replace-swatch by default', async () => {
     el.setAttribute('color', '#ff0000');
     await (el as any).updateComplete;
     expect(el.querySelector('.qf-replace-swatch')).toBeTruthy();
   });
 
-  it('renders color-swatch for chip variant', async () => {
+  it('renders color-swatch-sm when sm attribute is set', async () => {
     el.setAttribute('color', '#ff0000');
-    el.setAttribute('variant', 'chip');
-    el.setAttribute('label', 'Red');
+    el.setAttribute('sm', '');
     await (el as any).updateComplete;
-    expect(el.querySelector('.color-swatch')).toBeTruthy();
-    expect(el.querySelector('.color-swatch-dot')).toBeTruthy();
-    expect(el.querySelector('.color-swatch-label')).toBeTruthy();
+    expect(el.querySelector('.color-swatch-sm')).toBeTruthy();
   });
 
-  it('renders typography variant with Aa glyph', async () => {
+  it('uses aria-label from label attribute', async () => {
     el.setAttribute('color', '#ff0000');
-    el.setAttribute('variant', 'typography');
+    el.setAttribute('label', 'Red');
     await (el as any).updateComplete;
-    const typo = el.querySelector('.color-swatch-typography');
-    expect(typo).toBeTruthy();
-    expect(typo?.textContent?.trim()).toBe('Aa');
+    const span = el.querySelector('.qf-replace-swatch');
+    expect(span?.getAttribute('aria-label')).toBe('Red');
   });
 });

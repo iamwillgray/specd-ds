@@ -64,6 +64,7 @@ export class SpecdButton extends LitElement {
       this.size === 'sm' ? 'btn-sm' : this.size === 'lg' ? 'btn-lg' : '',
       this.full    ? 'btn-full'    : '',
       this.loading ? 'is-loading'  : '',
+      !this.icon && !this.badge ? 'no-adornment' : '',
       this.cls,
     ].filter(Boolean).join(' ');
   }

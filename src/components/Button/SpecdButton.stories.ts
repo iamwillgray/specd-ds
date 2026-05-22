@@ -17,7 +17,7 @@ const meta: Meta = {
     ></specd-button>
   `,
   argTypes: {
-    variant:  { control: 'select', options: ['primary', 'ghost', 'accent', 'danger', 'sb-good', 'sb-bad', 'sb-muted', 'ai-gradient'] },
+    variant:  { control: 'select', options: ['primary', 'ghost', 'accent', 'danger', 'sb-good', 'sb-bad', 'sb-muted', 'ai-gradient', 'pulse'] },
     size:     { control: 'select', options: ['sm', 'md', 'lg'] },
     label:    { control: 'text' },
     full:     { control: 'boolean' },
@@ -48,6 +48,8 @@ export const SbVariants: Story = {
     </div>
   `,
 };
+
+export const Pulse: Story = { args: { variant: 'pulse', label: 'Fix with AI' } };
 
 export const AiGradient: Story = {
   name: 'AI Gradient',
@@ -80,6 +82,7 @@ export const AllVariants: Story = {
       <specd-button variant="ghost"   label="Ghost"></specd-button>
       <specd-button variant="accent"  label="Accent"></specd-button>
       <specd-button variant="danger"  label="Danger"></specd-button>
+      <specd-button variant="pulse"   label="Fix with AI"></specd-button>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;">
       <specd-button variant="primary" size="sm" label="Small"></specd-button>

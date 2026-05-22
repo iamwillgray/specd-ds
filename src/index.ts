@@ -71,3 +71,4 @@ export { SpecdDataTable } from './components/DataTable/SpecdDataTable.js';
 export type { DataTableColumn } from './components/DataTable/SpecdDataTable.js';
 export { SpecdTag } from './components/Tag/SpecdTag.js';
 export type { TagIntent } from './components/Tag/SpecdTag.js';
+export * from './components/InteractiveTag/index.js';
