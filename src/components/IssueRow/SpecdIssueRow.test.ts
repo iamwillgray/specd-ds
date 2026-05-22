@@ -1,128 +1,142 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 
-beforeAll(async () => {
-  await import('./SpecdIssueRow.js');
-  await import('../IgnoreFooter/SpecdIgnoreFooter.js');
-});
+beforeAll(async () => { await import('./SpecdIssueRow.js'); });
 
 describe('SpecdIssueRow', () => {
-  it('renders .issue-card with default state', async () => {
+  it('renders .issue-row with data-row-state="initial" by default', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.component = 'Button/Primary';
-    el.type = 'Missing desc';
-    el.severity = 'crit';
+    el.fieldtype = 'doc-link';
+    el.title = 'Add documentation link';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-card')).not.toBeNull();
-    expect(el.getAttribute('data-row-state')).toBe('default');
+    expect(el.querySelector('.issue-row')).not.toBeNull();
+    expect(el.getAttribute('data-row-state')).toBe('initial');
     el.remove();
   });
 
-  it('renders component name in .issue-comp-tag', async () => {
+  it('renders .issue-row-title with title text', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.component = 'Card/Default';
+    el.title = 'Add documentation link';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-comp-tag')?.textContent?.trim()).toContain('Card/Default');
+    expect(el.querySelector('.issue-row-title')?.textContent?.trim()).toContain('Add documentation link');
     el.remove();
   });
 
-  it('renders severity badge with correct class', async () => {
+  it('renders .issue-row-desc with description text', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.severity = 'crit';
-    el.type = 'Missing desc';
+    el.description = 'No doc link set for this component.';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-card-count')?.className).toContain('crit');
+    expect(el.querySelector('.issue-row-desc')?.textContent?.trim()).toContain('No doc link set');
     el.remove();
   });
 
-  it('renders tags from JSON', async () => {
+  it('shows .row-state-initial CTA in initial state', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.tags = JSON.stringify([
-      { label: 'No description', sev: 'crit' },
-      { label: 'Published', sev: 'neutral' },
-    ]);
+    el.fieldtype = 'doc-link';
+    el.title = 'Add doc link';
     document.body.appendChild(el);
     await el.updateComplete;
-    const tagEls = el.querySelectorAll('specd-tag');
-    expect(tagEls.length).toBe(2);
-    expect((tagEls[0] as any).label).toBe('No description');
-    expect((tagEls[0] as HTMLElement).getAttribute('intent')).toBe('crit');
-    expect((tagEls[1] as HTMLElement).getAttribute('intent')).toBe('neutral');
+    expect(el.querySelector('.row-state-initial')).not.toBeNull();
     el.remove();
   });
 
-  it('shows footer with Jump button in default state', async () => {
+  it('transitions to editing state when edit CTA clicked (doc-link)', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.component = 'Button/Primary';
+    el.fieldtype = 'doc-link';
+    el.title = 'Add doc link';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-card-footer')).not.toBeNull();
-    expect(el.querySelector('specd-jump-btn')).not.toBeNull();
+    el.querySelector('.btn-row-primary')?.click();
+    await el.updateComplete;
+    expect(el.getAttribute('data-row-state')).toBe('editing');
+    expect(el.querySelector('.row-link-field')).not.toBeNull();
     el.remove();
   });
 
-  it('shows View Fixes button when showfixes=true', async () => {
+  it('transitions to editing state for description fieldtype', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.showfixes = true;
-    el.count = '5';
+    el.fieldtype = 'description';
+    el.title = 'Write description';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-view-fixes')).not.toBeNull();
+    el.querySelector('.btn-ai-gradient')?.click();
+    await el.updateComplete;
+    expect(el.getAttribute('data-row-state')).toBe('editing');
+    expect(el.querySelector('.row-textarea-field')).not.toBeNull();
     el.remove();
   });
 
-  it('transitions to ignore state on Ignore… click', async () => {
+  it('transitions to applied state when save pill clicked', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.component = 'Button/Primary';
+    el.fieldtype = 'doc-link';
+    el.title = 'Add doc link';
     document.body.appendChild(el);
     await el.updateComplete;
-    el.querySelector('.btn-ghost').click();
+    // Go to editing first
+    el.querySelector('.btn-row-primary')?.click();
     await el.updateComplete;
-    expect(el.getAttribute('data-row-state')).toBe('ignore');
-    expect(el.querySelector('specd-ignore-footer')).not.toBeNull();
+    // Click save
+    el.querySelector('.btn-save-pill')?.click();
+    await el.updateComplete;
+    expect(el.getAttribute('data-row-state')).toBe('applied');
+    expect(el.querySelector('.btn-row-applied')).not.toBeNull();
     el.remove();
   });
 
-  it('returns to default after ignore cancel', async () => {
+  it('returns to initial state when cancel pill clicked', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.rowstate = 'ignore';
+    el.fieldtype = 'doc-link';
+    el.title = 'Add doc link';
     document.body.appendChild(el);
     await el.updateComplete;
-    el.querySelector('specd-ignore-footer').dispatchEvent(
-      new CustomEvent('specd-ignore-cancel', { bubbles: true, composed: true })
-    );
+    el.querySelector('.btn-row-primary')?.click();
     await el.updateComplete;
-    expect(el.getAttribute('data-row-state')).toBe('default');
+    el.querySelector('.btn-cancel-pill')?.click();
+    await el.updateComplete;
+    expect(el.getAttribute('data-row-state')).toBe('initial');
     el.remove();
   });
 
-  it('auto-sets badge to "!" for crit severity with no count', async () => {
+  it('goes directly to applied for dev-ready fieldtype (no edit state)', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.severity = 'crit';
-    el.type = 'Missing desc';
+    el.fieldtype = 'dev-ready';
+    el.title = 'Mark dev ready';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-card-count-badge')?.textContent?.trim()).toBe('!');
+    el.querySelector('.btn-row-primary')?.click();
+    await el.updateComplete;
+    expect(el.getAttribute('data-row-state')).toBe('applied');
     el.remove();
   });
 
-  it('renders specd-tag elements for each tag', async () => {
+  it('fires specd-quick-fix for hard-coded fieldtype', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.tags = JSON.stringify([{ label: 'No description', sev: 'crit' }, { label: 'Published', sev: 'neutral' }]);
+    el.fieldtype = 'hard-coded';
+    el.title = 'Hard-coded values';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelectorAll('specd-tag').length).toBe(2);
+    let fired = false;
+    el.addEventListener('specd-quick-fix', () => { fired = true; });
+    el.querySelector('.btn-row-primary')?.click();
+    expect(fired).toBe(true);
     el.remove();
   });
 
-  it('renders specd-jump-btn in the footer', async () => {
+  it('fires specd-save with value when saved', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.component = 'Button/Primary';
+    el.fieldtype = 'doc-link';
+    el.title = 'Add doc link';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('specd-jump-btn')).not.toBeNull();
+    let detail: any = null;
+    el.addEventListener('specd-save', (e: any) => { detail = e.detail; });
+    el.querySelector('.btn-row-primary')?.click();
+    await el.updateComplete;
+    el.querySelector('.btn-save-pill')?.click();
+    await el.updateComplete;
+    expect(detail?.fieldtype).toBe('doc-link');
     el.remove();
   });
 });

@@ -424,7 +424,7 @@ export const IssueRow = createComponent({
   react: React,
   tagName: 'specd-issue-row',
   elementClass: SpecdIssueRow,
-  events: { onSpecdJump: 'specd-jump', onSpecdFixes: 'specd-fixes', onSpecdIgnoreAll: 'specd-ignore-all', onSpecdIgnoreCancel: 'specd-ignore-cancel' },
+  events: { onSpecdSave: 'specd-save', onSpecdCancel: 'specd-cancel', onSpecdAiWrite: 'specd-ai-write', onSpecdQuickFix: 'specd-quick-fix', onSpecdEdit: 'specd-edit' },
 });
 
 /** Auto-generated React wrapper for <specd-issue-preview-card>. Do not hand-edit. */

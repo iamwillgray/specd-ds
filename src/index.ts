@@ -59,7 +59,7 @@ export { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.
 export { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
 export { SpecdRadioRow }     from './components/RadioRow/SpecdRadioRow.js';
 export { SpecdIssueRow } from './components/IssueRow/SpecdIssueRow.js';
-export type { IssueRowState, IssueRowSeverity } from './components/IssueRow/SpecdIssueRow.js';
+export type { IssueRowFieldType, IssueRowState } from './components/IssueRow/SpecdIssueRow.js';
 export { SpecdIssuePreviewCard } from './components/IssuePreviewCard/SpecdIssuePreviewCard.js';
 export type { IssuePreviewCardState, IssuePreviewCardSeverity } from './components/IssuePreviewCard/SpecdIssuePreviewCard.js';
 export { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';

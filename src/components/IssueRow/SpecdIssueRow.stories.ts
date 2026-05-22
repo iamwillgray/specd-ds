@@ -11,131 +11,95 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-/* ── Helper ─────────────────────────────────────────────── */
-const tags = (arr: { label: string; sev?: string }[]) => JSON.stringify(arr);
-
-/* ── Stories ─────────────────────────────────────────────── */
-
-export const Critical: Story = {
-  name: 'Critical — Missing description',
+export const DocLink: Story = {
+  name: 'Doc Link — Initial',
   render: () => html`
-    <div style="width:420px; padding:12px; background:var(--bg);">
+    <div style="width:420px;padding:12px;">
       <specd-issue-row
-        component="Button/Primary"
-        type="Missing desc"
-        severity="crit"
-        tags=${tags([
-          { label: 'No description', sev: 'crit' },
-          { label: 'Published',      sev: 'neutral' },
-        ])}
+        fieldtype="doc-link"
+        title="Add documentation link"
+        description="No doc link is set for this component."
       ></specd-issue-row>
     </div>
   `,
 };
 
-export const CriticalMultiple: Story = {
-  name: 'Critical — No desc + no link',
+export const DocLinkEditing: Story = {
+  name: 'Doc Link — Editing',
   render: () => html`
-    <div style="width:420px; padding:12px; background:var(--bg);">
+    <div style="width:420px;padding:12px;">
       <specd-issue-row
-        component="Card/Default"
-        type="No desc"
-        severity="crit"
-        tags=${tags([
-          { label: 'No description', sev: 'crit' },
-          { label: 'No doc link',    sev: 'crit' },
-          { label: 'Published',      sev: 'neutral' },
-        ])}
+        fieldtype="doc-link"
+        title="Add documentation link"
+        description="No doc link is set for this component."
+        rowstate="editing"
+        value="https://zeroheight.com/button"
       ></specd-issue-row>
     </div>
   `,
 };
 
-export const Warning: Story = {
-  name: 'Warning — Hard-coded values',
+export const DocLinkApplied: Story = {
+  name: 'Doc Link — Applied',
   render: () => html`
-    <div style="width:420px; padding:12px; background:var(--bg);">
+    <div style="width:420px;padding:12px;">
       <specd-issue-row
-        component="Input/Text"
-        type="Hard-coded"
-        count="5"
-        severity="warn"
-        showfixes
-        tags=${tags([
-          { label: 'HC colours', sev: 'warn' },
-          { label: 'HC spacing', sev: 'warn' },
-        ])}
+        fieldtype="doc-link"
+        title="Add documentation link"
+        rowstate="applied"
       ></specd-issue-row>
     </div>
   `,
 };
 
-export const Info: Story = {
-  name: 'Advisory — No doc link',
+export const Description: Story = {
+  name: 'Description — Initial (AI)',
   render: () => html`
-    <div style="width:420px; padding:12px; background:var(--bg);">
+    <div style="width:420px;padding:12px;">
       <specd-issue-row
-        component="Icon/Alert"
-        type="No link"
-        severity="info"
-        tags=${tags([
-          { label: 'No documentation link', sev: 'info' },
-          { label: 'Published',             sev: 'neutral' },
-        ])}
+        fieldtype="description"
+        title="Write component description"
+        description="This component has no description."
       ></specd-issue-row>
     </div>
   `,
 };
 
-export const IgnoreState: Story = {
-  name: 'Ignore flow',
+export const DevReady: Story = {
+  name: 'Dev Ready — Initial',
   render: () => html`
-    <div style="width:420px; padding:12px; background:var(--bg);">
+    <div style="width:420px;padding:12px;">
       <specd-issue-row
-        component="Chip/Filter"
-        type="No status"
-        severity="info"
-        rowstate="ignore"
-        tags=${tags([{ label: 'Dev status not set', sev: 'info' }])}
+        fieldtype="dev-ready"
+        title="Mark as dev ready"
+        description="Dev status has not been set."
       ></specd-issue-row>
     </div>
   `,
 };
 
-export const AllSeverities: Story = {
-  name: 'All Severities',
+export const HardCoded: Story = {
+  name: 'Hard Coded — Initial (ghost)',
   render: () => html`
-    <div style="width:420px; padding:12px; background:var(--bg);">
+    <div style="width:420px;padding:12px;">
       <specd-issue-row
-        component="Button/Primary"
-        type="Missing desc"
-        severity="crit"
-        tags=${tags([
-          { label: 'No description', sev: 'crit' },
-          { label: 'Published',      sev: 'neutral' },
-        ])}
+        fieldtype="hard-coded"
+        title="Hard-coded colour values"
+        description="5 layers use raw hex values instead of variables."
       ></specd-issue-row>
+    </div>
+  `,
+};
 
-      <specd-issue-row
-        component="Input/Text"
-        type="Hard-coded"
-        count="5"
-        severity="warn"
-        showfixes
-        tags=${tags([
-          { label: 'HC colours', sev: 'warn' },
-          { label: 'HC spacing', sev: 'warn' },
-        ])}
-      ></specd-issue-row>
-
-      <specd-issue-row
-        component="Avatar/Default"
-        type="No link"
-        severity="info"
-        tags=${tags([
-          { label: 'No documentation link', sev: 'info' },
-        ])}
-      ></specd-issue-row>
+export const AllFieldTypes: Story = {
+  name: 'All Field Types',
+  render: () => html`
+    <div style="width:420px;padding:12px;display:flex;flex-direction:column;gap:8px;">
+      <specd-issue-row fieldtype="doc-link" title="Add documentation link" description="No doc link set."></specd-issue-row>
+      <specd-issue-row fieldtype="description" title="Write description" description="No description set."></specd-issue-row>
+      <specd-issue-row fieldtype="dev-ready" title="Mark dev ready" description="Dev status not set."></specd-issue-row>
+      <specd-issue-row fieldtype="mark-complete" title="Mark complete" description="Not marked complete."></specd-issue-row>
+      <specd-issue-row fieldtype="hard-coded" title="Hard-coded values" description="5 layers have raw values."></specd-issue-row>
     </div>
   `,
 };
