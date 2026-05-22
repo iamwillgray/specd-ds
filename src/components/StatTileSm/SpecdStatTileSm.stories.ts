@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdStatTileSm';
 
 const meta: Meta = {
-  title: 'Components/StatTileSm',
+  title: 'Molecules/StatTileSm',
   component: 'specd-stat-tile-sm',
   tags: ['autodocs'],
 };

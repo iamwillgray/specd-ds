@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdRadioGroup';
 
 const meta: Meta = {
-  title: 'Components/RadioGroup',
+  title: 'Molecules/RadioGroup',
   component: 'specd-radio-group',
   tags: ['autodocs'],
   render: (args) => html`

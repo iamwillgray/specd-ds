@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdAvatar';
 
 const meta: Meta = {
-  title: 'Components/Avatar',
+  title: 'Atoms/Avatar',
   component: 'specd-avatar',
   tags: ['autodocs'],
   render: (args) => html`

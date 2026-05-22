@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdAlert';
 
 const meta: Meta = {
-  title: 'Components/Alert',
+  title: 'Molecules/Alert',
   component: 'specd-alert',
   tags: ['autodocs'],
   argTypes: {

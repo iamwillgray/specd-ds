@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdIssueCard';
 
 const meta: Meta = {
-  title: 'Components/IssueCard',
+  title: 'Molecules/IssueCard',
   component: 'specd-issue-card',
   tags: ['autodocs'],
 };

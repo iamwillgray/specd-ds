@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdPagination';
 
 const meta: Meta = {
-  title: 'Components/Pagination',
+  title: 'Molecules/Pagination',
   component: 'specd-pagination',
   tags: ['autodocs'],
   argTypes: {

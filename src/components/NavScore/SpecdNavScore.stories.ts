@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdNavScore';
 
 const meta: Meta = {
-  title: 'Components/NavScore',
+  title: 'Atoms/NavScore',
   component: 'specd-nav-score',
   tags: ['autodocs'],
   render: (args) => html`

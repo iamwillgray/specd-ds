@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdToggle';
 
 const meta: Meta = {
-  title: 'Components/Toggle',
+  title: 'Atoms/Toggle',
   component: 'specd-toggle',
   tags: ['autodocs'],
   render: (args) => html`

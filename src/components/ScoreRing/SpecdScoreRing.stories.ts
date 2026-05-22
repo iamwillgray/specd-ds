@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdScoreRing';
 
 const meta: Meta = {
-  title: 'Components/ScoreRing',
+  title: 'Molecules/ScoreRing',
   component: 'specd-score-ring',
   tags: ['autodocs'],
   render: (args) => html`

@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdToast';
 
 const meta: Meta = {
-  title: 'Components/Toast',
+  title: 'Molecules/Toast',
   component: 'specd-toast',
   tags: ['autodocs'],
   argTypes: {

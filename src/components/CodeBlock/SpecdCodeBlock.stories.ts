@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdCodeBlock';
 
 const meta: Meta = {
-  title: 'Components/CodeBlock',
+  title: 'Molecules/CodeBlock',
   component: 'specd-code-block',
   tags: ['autodocs'],
   argTypes: {

@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdSeverityHeader';
 
 const meta: Meta = {
-  title: 'Components/SeverityHeader',
+  title: 'Atoms/SeverityHeader',
   component: 'specd-severity-header',
   tags: ['autodocs'],
   render: (args) => html`

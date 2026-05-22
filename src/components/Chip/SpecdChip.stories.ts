@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdChip';
 
 const meta: Meta = {
-  title: 'Components/Chip',
+  title: 'Atoms/Chip',
   component: 'specd-chip',
   tags: ['autodocs'],
   render: (args) => html`

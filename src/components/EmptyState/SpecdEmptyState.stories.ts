@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdEmptyState';
 
 const meta: Meta = {
-  title: 'Components/EmptyState',
+  title: 'Molecules/EmptyState',
   component: 'specd-empty-state',
   tags: ['autodocs'],
   argTypes: {

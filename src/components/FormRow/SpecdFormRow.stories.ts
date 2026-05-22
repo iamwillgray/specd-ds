@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdFormRow';
 
 const meta: Meta = {
-  title: 'Components/FormRow',
+  title: 'Molecules/FormRow',
   component: 'specd-form-row',
   tags: ['autodocs'],
   argTypes: {

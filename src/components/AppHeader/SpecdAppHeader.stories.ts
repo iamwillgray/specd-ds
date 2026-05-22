@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdAppHeader';
 
 const meta: Meta = {
-  title: 'Components/AppHeader',
+  title: 'Molecules/AppHeader',
   component: 'specd-app-header',
   tags: ['autodocs'],
   render: (args) => html`

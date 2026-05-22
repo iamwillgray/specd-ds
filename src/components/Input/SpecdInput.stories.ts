@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdInput';
 
 const meta: Meta = {
-  title: 'Components/Input',
+  title: 'Atoms/Input',
   component: 'specd-input',
   tags: ['autodocs'],
   render: (args) => html`

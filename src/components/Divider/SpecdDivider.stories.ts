@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdDivider';
 
 const meta: Meta = {
-  title: 'Components/Divider',
+  title: 'Atoms/Divider',
   component: 'specd-divider',
   tags: ['autodocs'],
   argTypes: {

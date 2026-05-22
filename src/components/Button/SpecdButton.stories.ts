@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdButton';
 
 const meta: Meta = {
-  title: 'Components/Button',
+  title: 'Atoms/Button',
   component: 'specd-button',
   tags: ['autodocs'],
   render: (args) => html`

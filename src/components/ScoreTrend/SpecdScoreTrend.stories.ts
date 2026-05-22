@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdScoreTrend';
 
 const meta: Meta = {
-  title: 'Components/ScoreTrend',
+  title: 'Molecules/ScoreTrend',
   component: 'specd-score-trend',
   tags: ['autodocs'],
   render: (args) => html`

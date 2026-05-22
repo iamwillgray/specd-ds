@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdProgress';
 
 const meta: Meta = {
-  title: 'Components/ProgressBar',
+  title: 'Atoms/ProgressBar',
   component: 'specd-progress',
   tags: ['autodocs'],
   render: (args) => html`

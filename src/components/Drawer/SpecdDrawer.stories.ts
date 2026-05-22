@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdDrawer';
 
 const meta: Meta = {
-  title: 'Components/Drawer',
+  title: 'Organisms/Drawer',
   component: 'specd-drawer',
   tags: ['autodocs'],
   argTypes: {

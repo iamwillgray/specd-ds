@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdSparkline';
 
 const meta: Meta = {
-  title: 'Components/Sparkline',
+  title: 'Molecules/Sparkline',
   component: 'specd-sparkline',
   tags: ['autodocs'],
 };

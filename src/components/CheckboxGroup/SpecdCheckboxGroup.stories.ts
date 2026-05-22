@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdCheckboxGroup';
 
 const meta: Meta = {
-  title: 'Components/CheckboxGroup',
+  title: 'Molecules/CheckboxGroup',
   component: 'specd-checkbox-group',
   tags: ['autodocs'],
   render: (args) => html`

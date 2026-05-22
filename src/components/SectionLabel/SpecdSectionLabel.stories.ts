@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdSectionLabel';
 
 const meta: Meta = {
-  title: 'Components/SectionLabel',
+  title: 'Atoms/SectionLabel',
   component: 'specd-section-label',
   tags: ['autodocs'],
   render: (args) => html`

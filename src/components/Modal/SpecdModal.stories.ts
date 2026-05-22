@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdModal';
 
 const meta: Meta = {
-  title: 'Components/Modal',
+  title: 'Organisms/Modal',
   component: 'specd-modal',
   tags: ['autodocs'],
   argTypes: {

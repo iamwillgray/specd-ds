@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdAiGradientBtn.js';
 
 const meta: Meta = {
-  title: 'Atoms/AiGradientBtn',
+  title: 'Molecules/AiGradientBtn',
   component: 'specd-ai-gradient-btn',
   tags: ['autodocs'],
 };

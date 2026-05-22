@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdToggleRow';
 
 const meta: Meta = {
-  title: 'Components/ToggleRow',
+  title: 'Molecules/ToggleRow',
   component: 'specd-toggle-row',
   tags: ['autodocs'],
   render: (args) => html`

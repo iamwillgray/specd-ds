@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdKvRow';
 
 const meta: Meta = {
-  title: 'Components/KvRow',
+  title: 'Molecules/KvRow',
   component: 'specd-kv-row',
   tags: ['autodocs'],
   argTypes: {

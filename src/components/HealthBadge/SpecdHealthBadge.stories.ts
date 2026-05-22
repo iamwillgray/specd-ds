@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdHealthBadge';
 
 const meta: Meta = {
-  title: 'Components/HealthBadge',
+  title: 'Atoms/HealthBadge',
   component: 'specd-health-badge',
   tags: ['autodocs'],
   render: (args) => html`

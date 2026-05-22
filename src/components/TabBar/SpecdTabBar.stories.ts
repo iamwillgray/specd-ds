@@ -19,7 +19,7 @@ const SIX_TABS = JSON.stringify([
 ]);
 
 const meta: Meta = {
-  title: 'Components/TabBar',
+  title: 'Molecules/TabBar',
   component: 'specd-tab-bar',
   tags: ['autodocs'],
   render: (args) => html`

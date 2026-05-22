@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdBreadcrumb';
 
 const meta: Meta = {
-  title: 'Components/Breadcrumb',
+  title: 'Molecules/Breadcrumb',
   component: 'specd-breadcrumb',
   tags: ['autodocs'],
   argTypes: {

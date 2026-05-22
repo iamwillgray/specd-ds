@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdJumpBtn';
 
 const meta: Meta = {
-  title: 'Components/JumpBtn',
+  title: 'Atoms/JumpBtn',
   component: 'specd-jump-btn',
   tags: ['autodocs'],
   render: (args) => html`

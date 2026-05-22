@@ -5,7 +5,7 @@ import './SpecdStepper';
 const STEPS = JSON.stringify([{ label: 'Connect Library' }, { label: 'Run Scan' }, { label: 'Review Issues' }]);
 
 const meta: Meta = {
-  title: 'Components/Stepper',
+  title: 'Molecules/Stepper',
   component: 'specd-stepper',
   tags: ['autodocs'],
   argTypes: {

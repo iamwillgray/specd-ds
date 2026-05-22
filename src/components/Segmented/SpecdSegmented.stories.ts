@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdSegmented';
 
 const meta: Meta = {
-  title: 'Components/Segmented',
+  title: 'Molecules/Segmented',
   component: 'specd-segmented',
   tags: ['autodocs'],
   render: (args) => html`

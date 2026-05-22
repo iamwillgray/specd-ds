@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './SpecdSbPill';
 
 const meta: Meta = {
-  title: 'Components/SbPill',
+  title: 'Atoms/SbPill',
   component: 'specd-sb-pill',
   tags: ['autodocs'],
   render: (args) => html`
