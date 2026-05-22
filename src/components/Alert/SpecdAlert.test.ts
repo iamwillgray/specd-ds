@@ -56,4 +56,24 @@ describe('SpecdAlert', () => {
     const el = await makeElement({ title: 'Hi' });
     expect(el.querySelector('.alert-desc')).toBeNull();
   });
+
+  it('has role="alert" for negative intent', async () => {
+    const el = await makeElement({ intent: 'negative', title: 'Error' });
+    expect(el.querySelector('[role="alert"]')).not.toBeNull();
+  });
+
+  it('has role="alert" for warning intent', async () => {
+    const el = await makeElement({ intent: 'warning', title: 'Caution' });
+    expect(el.querySelector('[role="alert"]')).not.toBeNull();
+  });
+
+  it('has role="status" for positive intent', async () => {
+    const el = await makeElement({ intent: 'positive', title: 'Success' });
+    expect(el.querySelector('[role="status"]')).not.toBeNull();
+  });
+
+  it('has role="status" for neutral intent', async () => {
+    const el = await makeElement({ intent: 'neutral', title: 'Info' });
+    expect(el.querySelector('[role="status"]')).not.toBeNull();
+  });
 });

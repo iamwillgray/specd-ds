@@ -26,8 +26,9 @@ export class SpecdAlert extends LitElement implements AlertProps {
       warning: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
       negative: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>`,
     };
+    const role = (this.intent === 'negative' || this.intent === 'warning') ? 'alert' : 'status';
     return html`
-      <div class="alert alert-${this.intent}">
+      <div class="alert alert-${this.intent}" role="${role}">
         <span class="alert-icon">${unsafeHTML(icons[this.intent])}</span>
         <div class="alert-body">
           ${this.title ? html`<div class="alert-title">${this.title}</div>` : nothing}
