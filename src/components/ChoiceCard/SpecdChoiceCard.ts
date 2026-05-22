@@ -29,6 +29,7 @@ export class SpecdChoiceCard extends LitElement {
   @property({ type: String }) pillcolor: ChoiceCardPillColor = 'mint';
   @property({ type: String }) icon?: string;
   @property({ type: String }) iconvariant: ChoiceCardIconVariant = 'default';
+  @property({ type: Boolean }) disabled: boolean = false;
 
   override render() {
     const iconClass = [
@@ -42,13 +43,13 @@ export class SpecdChoiceCard extends LitElement {
     ].filter(Boolean).join(' ');
 
     return html`
-      <div class="choice-card ${this.variant === 'gradient' ? 'gradient' : ''}">
+      <button class="choice-card ${this.variant === 'gradient' ? 'gradient' : ''}" type="button" ?disabled=${this.disabled}>
         ${this.icon ? html`<div class=${iconClass}>${unsafeHTML(this.icon)}</div>` : nothing}
         <div class="choice-card-title">${this.title}</div>
         ${this.description ? html`<div class="choice-card-desc">${this.description}</div>` : nothing}
         ${this.pill ? html`<div class=${pillClass}>${this.pill}</div>` : nothing}
         <slot></slot>
-      </div>
+      </button>
     `;
   }
 }

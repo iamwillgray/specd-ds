@@ -66,4 +66,23 @@ describe('SpecdChoiceCard', () => {
     const el = await makeElement({ pill: 'Pro', pillcolor: 'blue' });
     expect(el.querySelector('.choice-card-pill')?.className).toContain('blue');
   });
+
+  it('renders a button element at root', async () => {
+    const el = document.createElement('specd-choice-card') as any;
+    el.title = 'Option A';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')).not.toBeNull();
+    expect(el.querySelector('button')?.getAttribute('type')).toBe('button');
+    el.remove();
+  });
+
+  it('forwards disabled to button', async () => {
+    const el = document.createElement('specd-choice-card') as any;
+    el.disabled = true;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')?.disabled).toBe(true);
+    el.remove();
+  });
 });
