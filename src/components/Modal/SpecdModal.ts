@@ -25,19 +25,36 @@ export class SpecdModal extends LitElement implements ModalProps {
     this.dispatchEvent(new CustomEvent('specd-close', { bubbles: true, composed: true }));
   }
 
+  override updated(changed: Map<string, unknown>) {
+    if (!changed.has('open')) return;
+    const dialog = this.querySelector('dialog') as HTMLDialogElement | null;
+    if (!dialog) return;
+    if (this.open) {
+      try { dialog.showModal(); } catch { /* happy-dom may not support showModal */ }
+    } else {
+      try { dialog.close(); } catch { /* already closed */ }
+    }
+  }
+
   override render() {
     if (!this.open) return nothing;
     return html`
-      <div class="modal-backdrop" @click=${(e: Event) => { if (e.target === e.currentTarget) this._close(); }}>
-        <div class="modal-card" @click=${(e: Event) => e.stopPropagation()}>
+      <dialog
+        class="modal-dialog"
+        aria-modal="true"
+        aria-labelledby=${this.title ? 'modal-title' : nothing}
+        @click=${(e: MouseEvent) => { if (e.target === e.currentTarget) this._close(); }}
+        @cancel=${(e: Event) => { e.preventDefault(); this._close(); }}
+      >
+        <div class="modal-card">
           <div class="modal-header">
-            <div class="modal-title">${this.title}</div>
+            <div class="modal-title" id="modal-title">${this.title}</div>
             <button class="modal-close-btn" @click=${() => this._close()}>${unsafeHTML(CLOSE_SVG)}</button>
           </div>
           <div class="modal-body"><slot></slot></div>
           <div class="modal-footer"><slot name="footer"></slot></div>
         </div>
-      </div>
+      </dialog>
     `;
   }
 }

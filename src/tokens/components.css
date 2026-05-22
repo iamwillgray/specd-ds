@@ -1568,6 +1568,14 @@ select.input {
 .modal-body   { padding: 20px; }
 .modal-footer { display: flex; gap: 8px; justify-content: flex-end; padding: 12px 20px; border-top: 1px solid var(--border); }
 
+/* <dialog> native resets — modal */
+dialog.modal-dialog {
+  padding: 0; border: none; background: transparent; max-width: none;
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  z-index: 9990;
+}
+dialog.modal-dialog::backdrop { background: rgba(0,0,0,0.45); backdrop-filter: blur(2px); }
+
 /* ── DRAWER / SLIDE-OVER PANEL ───────────────────────────── */
 .drawer-backdrop {
   position: fixed; inset: 0; background: rgba(12,31,63,0.3);

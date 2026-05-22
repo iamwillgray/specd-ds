@@ -25,9 +25,9 @@ describe('SpecdModal', () => {
     expect(el.querySelector('.modal-backdrop')).toBeNull();
   });
 
-  it('renders .modal-backdrop when open=true', async () => {
+  it('renders dialog.modal-dialog when open=true', async () => {
     const el = await makeElement({ open: '' });
-    expect(el.querySelector('.modal-backdrop')).not.toBeNull();
+    expect(el.querySelector('dialog.modal-dialog')).not.toBeNull();
   });
 
   it('renders .modal-card when open=true', async () => {
@@ -59,5 +59,26 @@ describe('SpecdModal', () => {
     const btn = el.querySelector('.modal-close-btn') as HTMLButtonElement;
     btn.click();
     expect((el as any).open).toBe(false);
+  });
+
+  it('renders a <dialog> element', async () => {
+    const el = document.createElement('specd-modal') as any;
+    el.open = true;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('dialog')).not.toBeNull();
+    el.remove();
+  });
+
+  it('dialog has aria-modal="true" and aria-labelledby when title set', async () => {
+    const el = document.createElement('specd-modal') as any;
+    el.open = true;
+    el.title = 'Confirm action';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const dialog = el.querySelector('dialog');
+    expect(dialog?.getAttribute('aria-modal')).toBe('true');
+    expect(dialog?.getAttribute('aria-labelledby')).toBe('modal-title');
+    el.remove();
   });
 });
