@@ -81,4 +81,26 @@ describe('SpecdStatTileLg', () => {
     const el = await makeElement({ num: '1,247', title: 'Components' });
     expect(el.querySelector('.stat-trend-pill')).toBeNull();
   });
+
+  it('renders arrow using path element (not polyline)', async () => {
+    const el = await makeElement({ num: '42', title: 'Components' });
+    const arrow = el.querySelector('.stat-tile-arrow');
+    expect(arrow?.querySelector('path')).toBeTruthy();
+    expect(arrow?.querySelector('polyline')).toBeNull();
+  });
+
+  it('renders a default icon when no icon prop set', async () => {
+    const el = await makeElement({ num: '42', title: 'Components' });
+    expect(el.querySelector('.stat-tile-icon')).toBeTruthy();
+    expect(el.querySelector('.stat-tile-icon svg')).toBeTruthy();
+  });
+
+  it('renders custom icon when icon prop set', async () => {
+    const el = await makeElement({
+      num: '42',
+      title: 'Components',
+      icon: '<svg id="custom"><circle cx="12" cy="12" r="10"/></svg>'
+    });
+    expect(el.querySelector('#custom')).toBeTruthy();
+  });
 });
