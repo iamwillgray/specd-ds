@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 
 beforeAll(async () => {
+  await import('../Toggle/SpecdToggle.js');
   await import('./SpecdToggleRow');
 });
 
@@ -37,9 +38,9 @@ describe('SpecdToggleRow', () => {
     expect(el.querySelector('.toggle-track')).not.toBeNull();
   });
 
-  it('.toggle-track has class on when checked attr set', async () => {
+  it('specd-toggle has checked true when checked attr set', async () => {
     const el = await makeElement({ label: 'Ignore hidden layers', checked: '' });
-    expect(el.querySelector('.toggle-track')?.classList.contains('on')).toBe(true);
+    expect((el.querySelector('specd-toggle') as any)?.checked).toBe(true);
   });
 
   it('fires specd-change on toggle click', async () => {
@@ -53,5 +54,24 @@ describe('SpecdToggleRow', () => {
     await (el as HTMLElement & { updateComplete: Promise<boolean> }).updateComplete;
     expect(eventDetail).not.toBeNull();
     expect(typeof eventDetail!.checked).toBe('boolean');
+  });
+
+  it('contains a specd-toggle element', async () => {
+    const el = document.createElement('specd-toggle-row') as any;
+    el.label = 'Some setting';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('specd-toggle')).not.toBeNull();
+    el.remove();
+  });
+
+  it('forwards checked to specd-toggle', async () => {
+    const el = document.createElement('specd-toggle-row') as any;
+    el.label = 'Setting';
+    el.checked = true;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect((el.querySelector('specd-toggle') as any)?.checked).toBe(true);
+    el.remove();
   });
 });

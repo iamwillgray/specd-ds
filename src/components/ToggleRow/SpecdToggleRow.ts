@@ -1,5 +1,6 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import '../Toggle/SpecdToggle.js';
 
 /**
  * Specd DS — ToggleRow
@@ -32,14 +33,15 @@ export class SpecdToggleRow extends LitElement {
           <div class="toggle-row-label">${this.label}</div>
           ${this.hint ? html`<div class="toggle-row-hint">${this.hint}</div>` : nothing}
         </div>
-        <label class="toggle" @click=${(e: Event) => {
-          e.stopPropagation();
-          this.checked = !this.checked;
-          this.dispatchEvent(new CustomEvent('specd-change', { detail: { checked: this.checked }, bubbles: true, composed: true }));
-        }}>
-          <input type="checkbox" .checked=${this.checked} style="display:none" />
-          <span class="toggle-track ${this.checked ? 'on' : ''}"></span>
-        </label>
+        <specd-toggle
+          .checked=${this.checked}
+          @change=${(e: Event) => {
+            e.stopPropagation();
+            const input = (e.target as HTMLElement).querySelector('input[type="checkbox"]') as HTMLInputElement | null;
+            this.checked = input ? input.checked : !this.checked;
+            this.dispatchEvent(new CustomEvent('specd-change', { detail: { checked: this.checked }, bubbles: true, composed: true }));
+          }}
+        ></specd-toggle>
       </div>
     `;
   }
