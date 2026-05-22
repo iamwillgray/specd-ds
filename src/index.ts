@@ -52,7 +52,6 @@ export * from './components/FormRow/index.js';
 export * from './components/ToggleRow/index.js';
 export * from './components/RadioGroup/index.js';
 export * from './components/CheckboxGroup/index.js';
-export * from './components/IssueCard/index.js';
 export * from './components/ChoiceCard/index.js';
 export * from './components/Sparkline/index.js';
 export { SpecdIcon }            from './components/Icon/SpecdIcon.js';
@@ -62,7 +61,6 @@ export { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.
 export { SpecdAiGradientBtn }   from './components/AiGradientBtn/SpecdAiGradientBtn.js';
 export { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
 export { SpecdQfReplaceRow }    from './components/QfReplaceRow/SpecdQfReplaceRow.js';
-export { SpecdIssueRowActions } from './components/IssueRowActions/SpecdIssueRowActions.js';
 export { SpecdIssueRow } from './components/IssueRow/SpecdIssueRow.js';
 export type { IssueRowState, IssueRowSeverity } from './components/IssueRow/SpecdIssueRow.js';
 export { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';

@@ -51,7 +51,6 @@ import { SpecdFormRow }       from './components/FormRow/SpecdFormRow.js';
 import { SpecdToggleRow }     from './components/ToggleRow/SpecdToggleRow.js';
 import { SpecdRadioGroup }    from './components/RadioGroup/SpecdRadioGroup.js';
 import { SpecdCheckboxGroup } from './components/CheckboxGroup/SpecdCheckboxGroup.js';
-import { SpecdIssueCard }     from './components/IssueCard/SpecdIssueCard.js';
 import { SpecdChoiceCard }    from './components/ChoiceCard/SpecdChoiceCard.js';
 import { SpecdSparkline }     from './components/Sparkline/SpecdSparkline.js';
 import { SpecdIcon }            from './components/Icon/SpecdIcon.js';
@@ -61,7 +60,6 @@ import { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.
 import { SpecdAiGradientBtn }   from './components/AiGradientBtn/SpecdAiGradientBtn.js';
 import { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
 import { SpecdQfReplaceRow }    from './components/QfReplaceRow/SpecdQfReplaceRow.js';
-import { SpecdIssueRowActions } from './components/IssueRowActions/SpecdIssueRowActions.js';
 import { SpecdIssueRow }        from './components/IssueRow/SpecdIssueRow.js';
 import { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';
 import { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.js';
@@ -374,14 +372,6 @@ export const CheckboxGroup = createComponent({
   events: { onSpecdChange: 'specd-change' },
 });
 
-/** Auto-generated React wrapper for <specd-issue-card>. Do not hand-edit. */
-export const IssueCard = createComponent({
-  react: React,
-  tagName: 'specd-issue-card',
-  elementClass: SpecdIssueCard,
-  events: {},
-});
-
 /** Auto-generated React wrapper for <specd-choice-card>. Do not hand-edit. */
 export const ChoiceCard = createComponent({
   react: React,
@@ -452,14 +442,6 @@ export const QfReplaceRow = createComponent({
   tagName: 'specd-qf-replace-row',
   elementClass: SpecdQfReplaceRow,
   events: { onSpecdChange: 'specd-change' },
-});
-
-/** Auto-generated React wrapper for <specd-issue-row-actions>. Do not hand-edit. */
-export const IssueRowActions = createComponent({
-  react: React,
-  tagName: 'specd-issue-row-actions',
-  elementClass: SpecdIssueRowActions,
-  events: { onSpecdJump: 'specd-jump', onSpecdFixes: 'specd-fixes', onSpecdIgnore: 'specd-ignore' },
 });
 
 /** Auto-generated React wrapper for <specd-issue-row>. Do not hand-edit. */
