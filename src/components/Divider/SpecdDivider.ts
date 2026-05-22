@@ -16,9 +16,11 @@ export class SpecdDivider extends LitElement implements DividerProps {
 
   override render() {
     return html`
-      <div class="divider">
+      <div class="divider" style="display:flex;align-items:center;width:100%;">
         <div class="divider-line"></div>
-        ${this.label ? html`<span class="divider-label">${this.label}</span><div class="divider-line"></div>` : nothing}
+        ${this.label
+          ? html`<span class="divider-label">${this.label}</span><div class="divider-line"></div>`
+          : html`<div class="divider-line"></div>`}
       </div>
     `;
   }

@@ -32,8 +32,16 @@ describe('SpecdDivider', () => {
     expect(el.querySelectorAll('.divider-line').length).toBe(2);
   });
 
-  it('renders single .divider-line when no label', async () => {
+  it('renders two .divider-line elements when no label', async () => {
     const el = await makeElement();
-    expect(el.querySelectorAll('.divider-line').length).toBe(1);
+    expect(el.querySelectorAll('.divider-line').length).toBe(2);
+  });
+
+  it('wrapper div has flex display and full width', async () => {
+    const el = await makeElement();
+    const wrapper = el.querySelector('.divider') as HTMLElement;
+    expect(wrapper).not.toBeNull();
+    expect(wrapper.style.display).toBe('flex');
+    expect(wrapper.style.width).toBe('100%');
   });
 });
