@@ -100,3 +100,14 @@ export const AllVariants: Story = {
     </div>
   `,
 };
+
+export const WithBadge: Story = {
+  name: 'With trailing badge',
+  render: () => html`
+    <div style="display:flex;gap:8px;padding:16px;align-items:center;flex-wrap:wrap;">
+      <specd-button variant="primary" label="View fixes" badge="3"></specd-button>
+      <specd-button variant="ghost" label="Issues" badge="12"></specd-button>
+      <specd-button variant="accent" label="Alerts" badge="!"></specd-button>
+    </div>
+  `,
+};

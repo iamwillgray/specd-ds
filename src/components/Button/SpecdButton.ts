@@ -48,6 +48,7 @@ export class SpecdButton extends LitElement {
   @property({ type: String }) form: string = '';
   @property({ type: String, attribute: 'aria-label' }) ariaLabel: string = '';
   @property({ type: String, attribute: 'aria-describedby' }) ariaDescribedBy: string = '';
+  @property({ type: String }) badge: string = '';
   @property({ type: Boolean }) autofocus: boolean = false;
 
   private _classes(): string {
@@ -89,6 +90,7 @@ export class SpecdButton extends LitElement {
           ? html`<span class="ai-text">${this.label ? this.label : html`<slot></slot>`}</span>`
           : html`<span class="btn-label">${this.label ? this.label : html`<slot></slot>`}</span>`
         }
+        ${this.badge ? html`<span class="btn-badge">${this.badge}</span>` : nothing}
       </button>
     `;
   }

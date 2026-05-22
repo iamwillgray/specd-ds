@@ -169,6 +169,18 @@ describe('SpecdButton', () => {
     expect(el.querySelector('button')?.getAttribute('aria-label')).toBe('Close dialog');
     el.remove();
   });
+
+  it('renders btn-badge span when badge prop is set', async () => {
+    const el = await makeButton({ badge: '3' });
+    const badge = el.querySelector('.btn-badge');
+    expect(badge).toBeTruthy();
+    expect(badge?.textContent?.trim()).toBe('3');
+  });
+
+  it('does not render btn-badge span when no badge prop', async () => {
+    const el = await makeButton({ label: 'No badge' });
+    expect(el.querySelector('.btn-badge')).toBeNull();
+  });
 });
 
 describe('SpecdButton — action variants', () => {
