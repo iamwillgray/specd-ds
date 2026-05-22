@@ -57,7 +57,7 @@ export { SpecdColorSwatch }     from './components/ColorSwatch/SpecdColorSwatch.
 export { SpecdFieldMessage }    from './components/FieldMessage/SpecdFieldMessage.js';
 export { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.js';
 export { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
-export { SpecdQfReplaceRow }    from './components/QfReplaceRow/SpecdQfReplaceRow.js';
+export { SpecdRadioRow }     from './components/RadioRow/SpecdRadioRow.js';
 export { SpecdIssueRow } from './components/IssueRow/SpecdIssueRow.js';
 export type { IssueRowState, IssueRowSeverity } from './components/IssueRow/SpecdIssueRow.js';
 export { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';

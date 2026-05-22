@@ -56,7 +56,7 @@ import { SpecdColorSwatch }     from './components/ColorSwatch/SpecdColorSwatch.
 import { SpecdFieldMessage }    from './components/FieldMessage/SpecdFieldMessage.js';
 import { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.js';
 import { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
-import { SpecdQfReplaceRow }    from './components/QfReplaceRow/SpecdQfReplaceRow.js';
+import { SpecdRadioRow }     from './components/RadioRow/SpecdRadioRow.js';
 import { SpecdIssueRow }        from './components/IssueRow/SpecdIssueRow.js';
 import { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';
 import { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.js';
@@ -410,11 +410,11 @@ export const IgnoreFooter = createComponent({
   events: { onSpecdIgnoreAll: 'specd-ignore-all', onSpecdIgnoreSelected: 'specd-ignore-selected', onSpecdIgnoreCancel: 'specd-ignore-cancel' },
 });
 
-/** Auto-generated React wrapper for <specd-qf-replace-row>. Do not hand-edit. */
-export const QfReplaceRow = createComponent({
+/** Auto-generated React wrapper for <specd-radio-row>. Do not hand-edit. */
+export const RadioRow = createComponent({
+  tagName: 'specd-radio-row',
+  elementClass: SpecdRadioRow,
   react: React,
-  tagName: 'specd-qf-replace-row',
-  elementClass: SpecdQfReplaceRow,
   events: { onSpecdChange: 'specd-change' },
 });
 
