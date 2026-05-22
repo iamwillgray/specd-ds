@@ -60,6 +60,8 @@ export { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFoote
 export { SpecdRadioRow }     from './components/RadioRow/SpecdRadioRow.js';
 export { SpecdIssueRow } from './components/IssueRow/SpecdIssueRow.js';
 export type { IssueRowState, IssueRowSeverity } from './components/IssueRow/SpecdIssueRow.js';
+export { SpecdIssuePreviewCard } from './components/IssuePreviewCard/SpecdIssuePreviewCard.js';
+export type { IssuePreviewCardState, IssuePreviewCardSeverity } from './components/IssuePreviewCard/SpecdIssuePreviewCard.js';
 export { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';
 export { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.js';
 export { SpecdPropFixCreate }   from './components/PropFixRow/SpecdPropFixCreate.js';

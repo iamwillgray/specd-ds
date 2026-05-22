@@ -58,6 +58,7 @@ import { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.
 import { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
 import { SpecdRadioRow }     from './components/RadioRow/SpecdRadioRow.js';
 import { SpecdIssueRow }        from './components/IssueRow/SpecdIssueRow.js';
+import { SpecdIssuePreviewCard } from './components/IssuePreviewCard/SpecdIssuePreviewCard.js';
 import { SpecdPropFixRow }      from './components/PropFixRow/SpecdPropFixRow.js';
 import { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.js';
 import { SpecdPropFixCreate }   from './components/PropFixRow/SpecdPropFixCreate.js';
@@ -423,6 +424,14 @@ export const IssueRow = createComponent({
   react: React,
   tagName: 'specd-issue-row',
   elementClass: SpecdIssueRow,
+  events: { onSpecdJump: 'specd-jump', onSpecdFixes: 'specd-fixes', onSpecdIgnoreAll: 'specd-ignore-all', onSpecdIgnoreCancel: 'specd-ignore-cancel' },
+});
+
+/** Auto-generated React wrapper for <specd-issue-preview-card>. Do not hand-edit. */
+export const IssuePreviewCard = createComponent({
+  react: React,
+  tagName: 'specd-issue-preview-card',
+  elementClass: SpecdIssuePreviewCard,
   events: { onSpecdJump: 'specd-jump', onSpecdFixes: 'specd-fixes', onSpecdIgnoreAll: 'specd-ignore-all', onSpecdIgnoreCancel: 'specd-ignore-cancel' },
 });
 
