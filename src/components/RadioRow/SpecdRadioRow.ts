@@ -33,7 +33,6 @@ export class SpecdRadioRow extends LitElement {
   @property({ type: String }) hex: string = '';
 
   private _handleClick() {
-    this.checked = true;
     this.dispatchEvent(new CustomEvent('specd-change', {
       detail: { value: this.value },
       bubbles: true,
@@ -46,6 +45,7 @@ export class SpecdRadioRow extends LitElement {
       <button
         class="qf-replace-row${this.checked ? ' selected' : ''}"
         type="button"
+        aria-pressed=${this.checked ? 'true' : 'false'}
         @click=${this._handleClick}
       >
         <span class="qf-replace-radio"></span>

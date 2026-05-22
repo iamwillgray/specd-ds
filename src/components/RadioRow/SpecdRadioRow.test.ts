@@ -94,4 +94,15 @@ describe('SpecdRadioRow', () => {
     expect(el.querySelector('.qf-type-tag')).toBeNull();
     el.remove();
   });
+
+  it('does not render swatch when color is not set', async () => {
+    const el = document.createElement('specd-radio-row') as any;
+    el.label = 'spacing/300';
+    el.collection = 'Spacing';
+    // no color prop
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.qf-replace-swatch')).toBeNull();
+    el.remove();
+  });
 });
