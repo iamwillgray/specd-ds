@@ -11,6 +11,7 @@ import type { SegmentOption } from './SpecdSegmented.types.js';
  *
  * @attr {string} options - JSON array of SegmentOption objects
  * @attr {string} value   - Currently selected value
+ * @attr {boolean} dark   - If true, adds dark class for navy background variant
  *
  * @fires specd-change - Dispatched when selection changes, detail: { value: string }
  *
@@ -23,11 +24,12 @@ export class SpecdSegmented extends LitElement {
 
   @property({ type: String }) options: string = '[]';
   @property({ type: String }) value: string = '';
+  @property({ type: Boolean }) dark: boolean = false;
 
   override render() {
     const opts: SegmentOption[] = (() => { try { return JSON.parse(this.options); } catch { return []; } })();
     return html`
-      <div class="segmented-toggle">
+      <div class="segmented-toggle ${this.dark ? 'dark' : ''}">
         ${opts.map(o => html`
           <button
             class="seg-btn ${this.value === o.value ? 'active' : ''}"

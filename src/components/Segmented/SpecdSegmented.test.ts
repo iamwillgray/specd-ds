@@ -58,4 +58,16 @@ describe('SpecdSegmented', () => {
     expect(eventDetail).not.toBeNull();
     expect(eventDetail!.value).toBe('tokens');
   });
+
+  it('adds dark class to segmented-toggle when dark prop is set', async () => {
+    const el = await makeElement({ options: OPTIONS, value: 'coverage', dark: '' });
+    const toggle = el.querySelector('.segmented-toggle');
+    expect(toggle?.classList.contains('dark')).toBe(true);
+  });
+
+  it('does not add dark class when dark prop is not set', async () => {
+    const el = await makeElement({ options: OPTIONS, value: 'coverage' });
+    const toggle = el.querySelector('.segmented-toggle');
+    expect(toggle?.classList.contains('dark')).toBe(false);
+  });
 });

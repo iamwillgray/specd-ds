@@ -51,3 +51,16 @@ export const ViewToggle: Story = {
     value: 'list',
   },
 };
+
+export const Dark: Story = {
+  name: 'Dark variant',
+  render: () => html`
+    <div style="padding:16px;background:var(--navy,#0C1750);border-radius:8px;display:inline-flex;">
+      <specd-segmented
+        dark
+        options='[{"value":"overview","label":"Overview"},{"value":"issues","label":"Issues"},{"value":"components","label":"Components"}]'
+        value="overview"
+      ></specd-segmented>
+    </div>
+  `,
+};
