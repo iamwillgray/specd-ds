@@ -35,7 +35,6 @@ import { SpecdStepper }       from './components/Stepper/SpecdStepper.js';
 import { SpecdHealthBadge }   from './components/HealthBadge/SpecdHealthBadge.js';
 import { SpecdAiPill }        from './components/AiPill/SpecdAiPill.js';
 import { SpecdJumpBtn }       from './components/JumpBtn/SpecdJumpBtn.js';
-import { SpecdSbPill }        from './components/SbPill/SpecdSbPill.js';
 import { SpecdSeverityHeader } from './components/SeverityHeader/SpecdSeverityHeader.js';
 import { SpecdScoreTrend }    from './components/ScoreTrend/SpecdScoreTrend.js';
 import { SpecdScoreRing }     from './components/ScoreRing/SpecdScoreRing.js';
@@ -56,7 +55,6 @@ import { SpecdIcon }            from './components/Icon/SpecdIcon.js';
 import { SpecdColorSwatch }     from './components/ColorSwatch/SpecdColorSwatch.js';
 import { SpecdFieldMessage }    from './components/FieldMessage/SpecdFieldMessage.js';
 import { SpecdInfoTrigger }     from './components/InfoTrigger/SpecdInfoTrigger.js';
-import { SpecdAiGradientBtn }   from './components/AiGradientBtn/SpecdAiGradientBtn.js';
 import { SpecdIgnoreFooter }    from './components/IgnoreFooter/SpecdIgnoreFooter.js';
 import { SpecdQfReplaceRow }    from './components/QfReplaceRow/SpecdQfReplaceRow.js';
 import { SpecdIssueRow }        from './components/IssueRow/SpecdIssueRow.js';
@@ -244,14 +242,6 @@ export const JumpBtn = createComponent({
   events: { onClick: 'click' },
 });
 
-/** Auto-generated React wrapper for <specd-sb-pill>. Do not hand-edit. */
-export const SbPill = createComponent({
-  react: React,
-  tagName: 'specd-sb-pill',
-  elementClass: SpecdSbPill,
-  events: {},
-});
-
 /** Auto-generated React wrapper for <specd-severity-header>. Do not hand-edit. */
 export const SeverityHeader = createComponent({
   react: React,
@@ -410,14 +400,6 @@ export const InfoTrigger = createComponent({
   tagName: 'specd-info-trigger',
   elementClass: SpecdInfoTrigger,
   events: { onSpecdInfo: 'specd-info' },
-});
-
-/** Auto-generated React wrapper for <specd-ai-gradient-btn>. Do not hand-edit. */
-export const AiGradientBtn = createComponent({
-  react: React,
-  tagName: 'specd-ai-gradient-btn',
-  elementClass: SpecdAiGradientBtn,
-  events: {},
 });
 
 /** Auto-generated React wrapper for <specd-ignore-footer>. Do not hand-edit. */

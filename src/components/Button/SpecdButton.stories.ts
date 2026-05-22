@@ -17,7 +17,7 @@ const meta: Meta = {
     ></specd-button>
   `,
   argTypes: {
-    variant:  { control: 'select', options: ['primary', 'ghost', 'accent', 'danger'] },
+    variant:  { control: 'select', options: ['primary', 'ghost', 'accent', 'danger', 'sb-good', 'sb-bad', 'sb-muted', 'ai-gradient'] },
     size:     { control: 'select', options: ['sm', 'md', 'lg'] },
     label:    { control: 'text' },
     full:     { control: 'boolean' },
@@ -37,6 +37,27 @@ export const Large: Story     = { args: { variant: 'primary', label: 'Large',  s
 export const Disabled: Story  = { args: { variant: 'primary', label: 'Disabled', disabled: true } };
 export const Loading: Story   = { args: { variant: 'primary', label: 'Scanning…',  loading: true } };
 export const FullWidth: Story = { args: { variant: 'primary', label: 'Full width',  full: true } };
+
+export const SbVariants: Story = {
+  name: 'SB Match variants',
+  render: () => html`
+    <div style="display:flex;gap:8px;padding:16px;align-items:center;">
+      <specd-button variant="sb-good"  label="Matched"></specd-button>
+      <specd-button variant="sb-bad"   label="Missing"></specd-button>
+      <specd-button variant="sb-muted" label="—"></specd-button>
+    </div>
+  `,
+};
+
+export const AiGradient: Story = {
+  name: 'AI Gradient',
+  render: () => html`
+    <div style="display:flex;gap:8px;padding:16px;">
+      <specd-button variant="ai-gradient" label="Fix with AI"></specd-button>
+      <specd-button variant="ai-gradient" label="Generating…" disabled></specd-button>
+    </div>
+  `,
+};
 
 export const AllVariants: Story = {
   render: () => html`

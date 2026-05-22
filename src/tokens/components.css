@@ -90,6 +90,19 @@ specd-key-value, specd-severity-header, specd-icon {
   opacity: 0.4; cursor: not-allowed; pointer-events: none;
 }
 
+/* ── SB Pill variants — Storybook match status as buttons ── */
+.btn-sb-good, .btn-sb-bad, .btn-sb-muted {
+  display: inline-flex; align-items: center; padding: 2px 7px;
+  border-radius: var(--radius-pill); font-family: var(--font-mono);
+  font-size: 9px; font-weight: 700; line-height: 1.4; white-space: nowrap;
+  border: none; cursor: pointer; transition: opacity 0.12s;
+}
+.btn-sb-good  { background: var(--positive-light); color: var(--positive-dark); }
+.btn-sb-bad   { background: var(--negative-light); color: var(--negative-dark); }
+.btn-sb-muted { background: var(--bg);             color: var(--text-muted);   }
+.btn-sb-good:hover, .btn-sb-bad:hover, .btn-sb-muted:hover { opacity: 0.8; }
+.btn-sb-good:disabled, .btn-sb-bad:disabled, .btn-sb-muted:disabled { opacity: 0.4; cursor: not-allowed; }
+
 /* Button sub-elements: icon slot + count badge */
 .btn-icon { display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .btn-icon svg { width:14px; height:14px; }

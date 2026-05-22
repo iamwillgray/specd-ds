@@ -93,4 +93,59 @@ describe('SpecdButton', () => {
     const el = await makeButton({ label: 'No icon' });
     expect(el.querySelector('.btn-icon')).toBeNull();
   });
+
+  it('renders with variant="sb-good"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'sb-good'; el.label = 'Matched';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')?.className).toContain('btn-sb-good');
+    el.remove();
+  });
+
+  it('renders with variant="sb-bad"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'sb-bad'; el.label = 'Missing';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')?.className).toContain('btn-sb-bad');
+    el.remove();
+  });
+
+  it('renders with variant="sb-muted"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'sb-muted'; el.label = '—';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('button')?.className).toContain('btn-sb-muted');
+    el.remove();
+  });
+
+  it('renders with variant="ai-gradient"', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'ai-gradient'; el.label = 'Fix with AI';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const btn = el.querySelector('button');
+    expect(btn?.className).toContain('btn-ai-gradient');
+    el.remove();
+  });
+
+  it('auto-injects sparkle icon for ai-gradient variant', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'ai-gradient'; el.label = 'Fix with AI';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.btn-icon')).not.toBeNull();
+    el.remove();
+  });
+
+  it('wraps label in .ai-text span for ai-gradient variant', async () => {
+    const el = document.createElement('specd-button') as any;
+    el.variant = 'ai-gradient'; el.label = 'Fix with AI';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.ai-text')).not.toBeNull();
+    el.remove();
+  });
 });

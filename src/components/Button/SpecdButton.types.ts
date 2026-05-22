@@ -1,4 +1,7 @@
-export type ButtonVariant = 'primary' | 'ghost' | 'accent' | 'danger';
+export type ButtonVariant =
+  | 'primary' | 'ghost' | 'accent' | 'danger'
+  | 'sb-good' | 'sb-bad' | 'sb-muted'
+  | 'ai-gradient';
 export type ButtonSize    = 'sm' | 'md' | 'lg';
 export type ButtonType    = 'button' | 'submit' | 'reset';
 

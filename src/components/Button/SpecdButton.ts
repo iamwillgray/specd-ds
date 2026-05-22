@@ -3,6 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { ButtonProps, ButtonVariant, ButtonSize, ButtonType } from './SpecdButton.types.js';
 
+const SPARKLE_SVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.5 9 L20 10.5 L13.5 12 L12 19 L10.5 12 L4 10.5 L10.5 9 Z"/></svg>`;
+
 /**
  * Specd DS — Button
  *
@@ -54,6 +56,8 @@ export class SpecdButton extends LitElement {
 
   override render() {
     const isDisabled = this.disabled || this.loading;
+    const isAi = this.variant === 'ai-gradient';
+    const effectiveIcon = this.icon || (isAi ? SPARKLE_SVG : '');
     return html`
       <button
         class=${this._classes()}
@@ -61,10 +65,11 @@ export class SpecdButton extends LitElement {
         ?disabled=${isDisabled}
         aria-disabled=${isDisabled ? 'true' : 'false'}
       >
-        ${this.icon ? html`<span class="btn-icon" aria-hidden="true">${unsafeHTML(this.icon)}</span>` : nothing}
-        <span class="btn-label">
-          ${this.label ? this.label : html`<slot></slot>`}
-        </span>
+        ${effectiveIcon ? html`<span class="btn-icon" aria-hidden="true">${unsafeHTML(effectiveIcon)}</span>` : nothing}
+        ${isAi
+          ? html`<span class="ai-text">${this.label ? this.label : html`<slot></slot>`}</span>`
+          : html`<span class="btn-label">${this.label ? this.label : html`<slot></slot>`}</span>`
+        }
       </button>
     `;
   }
