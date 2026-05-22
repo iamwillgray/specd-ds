@@ -119,4 +119,16 @@ describe('SpecdChip', () => {
     expect(el.querySelector('button')?.disabled).toBe(true);
     el.remove();
   });
+
+  it('adds has-count class when count prop is set', async () => {
+    const el = await makeElement({ label: 'Issues', count: '5' });
+    const chip = el.querySelector('.chip-v2');
+    expect(chip?.classList.contains('has-count')).toBe(true);
+  });
+
+  it('does not add has-count class when count prop is not set', async () => {
+    const el = await makeElement({ label: 'Issues' });
+    const chip = el.querySelector('.chip-v2');
+    expect(chip?.classList.contains('has-count')).toBe(false);
+  });
 });

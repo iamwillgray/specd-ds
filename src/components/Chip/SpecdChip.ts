@@ -37,6 +37,7 @@ export class SpecdChip extends LitElement {
       'chip-v2',
       this.active ? 'active' : '',
       this.intent ? this.intent : '',
+      this.count !== undefined ? 'has-count' : '',
       this.cls,
     ].filter(Boolean).join(' ');
   }
