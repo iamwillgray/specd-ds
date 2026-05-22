@@ -2,6 +2,8 @@ import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import '../IgnoreFooter/SpecdIgnoreFooter.js';
+import '../Tag/SpecdTag.js';
+import '../JumpBtn/SpecdJumpBtn.js';
 
 export type IssueRowState    = 'default' | 'ignore';
 export type IssueRowSeverity = 'crit' | 'warn' | 'info';
@@ -9,7 +11,6 @@ export type IssueRowSeverity = 'crit' | 'warn' | 'info';
 interface IssueTag { label: string; sev?: 'crit' | 'warn' | 'info' | 'neutral'; }
 
 const DIAMOND_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0;color:var(--icon-secondary)"><path d="M12 3l9 9-9 9-9-9 9-9z"/></svg>`;
-const JUMP_SVG    = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><path d="M7 17L17 7M8 7h9v9"/></svg>`;
 
 /**
  * Specd DS — IssueRow
@@ -97,7 +98,7 @@ export class SpecdIssueRow extends LitElement {
           ${parsedTags.length ? html`
             <div class="issue-tag-row">
               ${parsedTags.map(t => html`
-                <span class="issue-tag ${t.sev ?? this.severity}">${t.label}</span>
+                <specd-tag label=${t.label} intent=${t.sev ?? this.severity}></specd-tag>
               `)}
             </div>
           ` : nothing}
@@ -107,11 +108,10 @@ export class SpecdIssueRow extends LitElement {
         <!-- Footer (default state) -->
         ${this._state === 'default' ? html`
           <div class="issue-card-footer">
-            <button class="btn-jump" type="button"
-              @click=${(e: Event) => { e.stopPropagation(); this._fire('specd-jump'); }}>
-              ${unsafeHTML(JUMP_SVG)}
-              Jump to component
-            </button>
+            <specd-jump-btn
+              label="Jump to component"
+              @click=${(e: Event) => { e.stopPropagation(); this._fire('specd-jump'); }}
+            ></specd-jump-btn>
 
             ${this.showfixes ? html`
               <button class="btn-view-fixes" type="button"

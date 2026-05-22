@@ -45,11 +45,11 @@ describe('SpecdIssueRow', () => {
     ]);
     document.body.appendChild(el);
     await el.updateComplete;
-    const tagEls = el.querySelectorAll('.issue-tag');
+    const tagEls = el.querySelectorAll('specd-tag');
     expect(tagEls.length).toBe(2);
-    expect(tagEls[0].textContent?.trim()).toBe('No description');
-    expect(tagEls[0].className).toContain('crit');
-    expect(tagEls[1].className).toContain('neutral');
+    expect((tagEls[0] as any).label).toBe('No description');
+    expect((tagEls[0] as HTMLElement).getAttribute('intent')).toBe('crit');
+    expect((tagEls[1] as HTMLElement).getAttribute('intent')).toBe('neutral');
     el.remove();
   });
 
@@ -59,7 +59,7 @@ describe('SpecdIssueRow', () => {
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.querySelector('.issue-card-footer')).not.toBeNull();
-    expect(el.querySelector('.btn-jump')).not.toBeNull();
+    expect(el.querySelector('specd-jump-btn')).not.toBeNull();
     el.remove();
   });
 
@@ -105,6 +105,24 @@ describe('SpecdIssueRow', () => {
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.querySelector('.issue-card-count-badge')?.textContent?.trim()).toBe('!');
+    el.remove();
+  });
+
+  it('renders specd-tag elements for each tag', async () => {
+    const el = document.createElement('specd-issue-row') as any;
+    el.tags = JSON.stringify([{ label: 'No description', sev: 'crit' }, { label: 'Published', sev: 'neutral' }]);
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelectorAll('specd-tag').length).toBe(2);
+    el.remove();
+  });
+
+  it('renders specd-jump-btn in the footer', async () => {
+    const el = document.createElement('specd-issue-row') as any;
+    el.component = 'Button/Primary';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('specd-jump-btn')).not.toBeNull();
     el.remove();
   });
 });
