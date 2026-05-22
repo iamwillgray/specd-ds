@@ -503,37 +503,53 @@ select.input {
   color: var(--text-secondary); margin-top: 4px; letter-spacing: 0;
 }
 
-/* ── HEALTH BADGE ────────────────────────────────────────── */
+/* ── HEALTH BADGE (unified: md=label badge, sm=score pill) ── */
 .health-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 4px 12px 4px 10px; background: var(--brand);
-  border: 1px solid rgba(184,255,87,0.4); border-radius: var(--radius-pill);
-  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
-  color: var(--blue-100); letter-spacing: 0.04em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 5px;
+  border-radius: var(--radius-pill); font-family: var(--font-mono);
+  font-weight: 700; letter-spacing: 0.04em; white-space: nowrap;
 }
 .health-badge::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--blue-100); flex-shrink: 0;
+  content: ''; border-radius: 50%; flex-shrink: 0;
 }
-.health-badge.tier-good    { /* default lime */ }
-.health-badge.tier-med     { background: var(--warning-light); border-color: rgba(217,119,6,0.3); color: var(--warning-dark); }
-.health-badge.tier-med::before     { background: var(--warning-accent); }
-.health-badge.tier-poor    { background: var(--negative-light); border-color: rgba(220,38,38,0.3); color: var(--negative-dark); }
-.health-badge.tier-poor::before    { background: var(--negative-accent); }
 
-/* ── NAV SCORE BADGE ─────────────────────────────────────── */
-.nav-score-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  height: 22px; padding: 3px 10px 3px 8px;
-  background: var(--positive-light); border: 1px solid var(--positive-accent);
-  border-radius: var(--radius-pill); font-family: var(--font-mono);
-  font-size: 11px; font-weight: 800; color: var(--positive-dark);
-  letter-spacing: 0.04em; white-space: nowrap;
+/* ── size: md (default — label badge) ── */
+.health-badge.sz-md {
+  padding: 4px 12px 4px 10px;
+  font-size: 10px; text-transform: uppercase;
 }
-.nav-score-badge::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--positive-accent); flex-shrink: 0;
+.health-badge.sz-md::before { width: 6px; height: 6px; }
+
+/* ── size: sm (compact score pill, replaces nav-score-badge) */
+.health-badge.sz-sm {
+  padding: 3px 10px 3px 8px; height: 22px;
+  font-size: 11px; font-weight: 800;
 }
+.health-badge.sz-sm::before { width: 6px; height: 6px; }
+
+/* ── tier colours ── */
+/* good: brand lime (md) / positive green (sm) */
+.health-badge.sz-md.tier-good {
+  background: var(--brand); border: 1px solid rgba(184,255,87,0.4); color: var(--blue-100);
+}
+.health-badge.sz-md.tier-good::before { background: var(--blue-100); }
+
+.health-badge.sz-sm.tier-good {
+  background: var(--positive-light); border: 1px solid rgba(34,197,94,0.4); color: var(--positive-dark);
+}
+.health-badge.sz-sm.tier-good::before { background: var(--positive-accent); }
+
+/* med: warning amber — same for both sizes */
+.health-badge.tier-med {
+  background: var(--warning-light); border: 1px solid rgba(217,119,6,0.3); color: var(--warning-dark);
+}
+.health-badge.tier-med::before { background: var(--warning-accent); }
+
+/* poor: negative red — same for both sizes */
+.health-badge.tier-poor {
+  background: var(--negative-light); border: 1px solid rgba(220,38,38,0.3); color: var(--negative-dark);
+}
+.health-badge.tier-poor::before { background: var(--negative-accent); }
 
 /* ── AI PILL ─────────────────────────────────────────────── */
 .ai-pill {

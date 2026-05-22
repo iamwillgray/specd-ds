@@ -33,7 +33,6 @@ import { SpecdBreadcrumb }    from './components/Breadcrumb/SpecdBreadcrumb.js';
 import { SpecdPagination }    from './components/Pagination/SpecdPagination.js';
 import { SpecdStepper }       from './components/Stepper/SpecdStepper.js';
 import { SpecdHealthBadge }   from './components/HealthBadge/SpecdHealthBadge.js';
-import { SpecdNavScore }      from './components/NavScore/SpecdNavScore.js';
 import { SpecdAiPill }        from './components/AiPill/SpecdAiPill.js';
 import { SpecdJumpBtn }       from './components/JumpBtn/SpecdJumpBtn.js';
 import { SpecdSbPill }        from './components/SbPill/SpecdSbPill.js';
@@ -228,13 +227,6 @@ export const HealthBadge = createComponent({
   events: {},
 });
 
-/** Auto-generated React wrapper for <specd-nav-score>. Do not hand-edit. */
-export const NavScore = createComponent({
-  react: React,
-  tagName: 'specd-nav-score',
-  elementClass: SpecdNavScore,
-  events: {},
-});
 
 /** Auto-generated React wrapper for <specd-ai-pill>. Do not hand-edit. */
 export const AiPill = createComponent({

@@ -43,4 +43,33 @@ describe('SpecdHealthBadge', () => {
     const el = await makeElement({ label: 'Healthy' });
     expect(el.textContent?.trim()).toBe('Healthy');
   });
+
+  it('renders size="sm" with compact class', async () => {
+    const el = document.createElement('specd-health-badge') as any;
+    el.size = 'sm'; el.tier = 'good'; el.label = '87';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const span = el.querySelector('span');
+    expect(span?.className).toContain('sz-sm');
+    el.remove();
+  });
+
+  it('renders size="md" as default', async () => {
+    const el = document.createElement('specd-health-badge') as any;
+    el.label = 'Healthy';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('span')?.className).toContain('sz-md');
+    el.remove();
+  });
+
+  it('supports tier=med in sm size', async () => {
+    const el = document.createElement('specd-health-badge') as any;
+    el.size = 'sm'; el.tier = 'med'; el.label = '61';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('span')?.className).toContain('tier-med');
+    expect(el.querySelector('span')?.className).toContain('sz-sm');
+    el.remove();
+  });
 });
