@@ -25,9 +25,9 @@ describe('SpecdDrawer', () => {
     expect(el.querySelector('.drawer-backdrop')).toBeNull();
   });
 
-  it('renders .drawer-backdrop when open=true', async () => {
+  it('renders <dialog> when open=true', async () => {
     const el = await makeElement({ open: '' });
-    expect(el.querySelector('.drawer-backdrop')).not.toBeNull();
+    expect(el.querySelector('dialog')).not.toBeNull();
   });
 
   it('renders .drawer-panel when open=true', async () => {
@@ -47,5 +47,14 @@ describe('SpecdDrawer', () => {
     const btn = el.querySelector('.modal-close-btn') as HTMLButtonElement;
     btn.click();
     expect(fired).toBe(true);
+  });
+
+  it('renders a <dialog> element', async () => {
+    const el = document.createElement('specd-drawer') as any;
+    el.open = true;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('dialog')).not.toBeNull();
+    el.remove();
   });
 });

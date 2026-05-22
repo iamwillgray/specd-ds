@@ -25,18 +25,35 @@ export class SpecdDrawer extends LitElement implements DrawerProps {
     this.dispatchEvent(new CustomEvent('specd-close', { bubbles: true, composed: true }));
   }
 
+  override updated(changed: Map<string, unknown>) {
+    if (!changed.has('open')) return;
+    const dialog = this.querySelector('dialog') as HTMLDialogElement | null;
+    if (!dialog) return;
+    if (this.open) {
+      try { dialog.showModal(); } catch { /* happy-dom may not support showModal */ }
+    } else {
+      try { dialog.close(); } catch { /* already closed */ }
+    }
+  }
+
   override render() {
     if (!this.open) return nothing;
     return html`
-      <div class="drawer-backdrop" @click=${() => this._close()}></div>
-      <div class="drawer-panel">
-        <div class="drawer-header">
-          <div class="drawer-title">${this.title}</div>
-          <button class="modal-close-btn" @click=${() => this._close()}>${unsafeHTML(CLOSE_SVG)}</button>
+      <dialog
+        class="drawer-dialog"
+        aria-modal="true"
+        aria-labelledby=${this.title ? 'drawer-title' : nothing}
+        @cancel=${(e: Event) => { e.preventDefault(); this._close(); }}
+      >
+        <div class="drawer-panel">
+          <div class="drawer-header">
+            <div class="drawer-title" id="drawer-title">${this.title}</div>
+            <button class="modal-close-btn" @click=${() => this._close()}>${unsafeHTML(CLOSE_SVG)}</button>
+          </div>
+          <div class="drawer-body"><slot></slot></div>
+          <div class="drawer-footer"><slot name="footer"></slot></div>
         </div>
-        <div class="drawer-body"><slot></slot></div>
-        <div class="drawer-footer"><slot name="footer"></slot></div>
-      </div>
+      </dialog>
     `;
   }
 }

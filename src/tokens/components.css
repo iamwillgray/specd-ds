@@ -1598,6 +1598,15 @@ dialog.modal-dialog::backdrop { background: rgba(0,0,0,0.45); backdrop-filter: b
 .drawer-body   { flex: 1; overflow-y: auto; padding: 16px; }
 .drawer-footer { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; }
 
+/* <dialog> native resets — drawer */
+dialog.drawer-dialog {
+  padding: 0; border: none; background: transparent;
+  position: fixed; inset: 0 0 0 auto; margin: 0;
+  height: 100%; max-height: 100%;
+  width: min(380px, 90vw);
+}
+dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
+
 /* ── DATA TABLE ──────────────────────────────────────────── */
 .comp-toolbar {
   display: flex; align-items: center; gap: 8px;
