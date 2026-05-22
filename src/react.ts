@@ -68,6 +68,7 @@ import { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.j
 import { SpecdPropFixCreate }   from './components/PropFixRow/SpecdPropFixCreate.js';
 import { SpecdVariablePicker }  from './components/VariablePicker/SpecdVariablePicker.js';
 import { SpecdDataTable }       from './components/DataTable/SpecdDataTable.js';
+import { SpecdTag }             from './components/Tag/SpecdTag.js';
 
 /** Auto-generated React wrapper for <specd-button>. Do not hand-edit. */
 export const Button = createComponent({
@@ -506,5 +507,13 @@ export const DataTable = createComponent({
   react: React,
   tagName: 'specd-data-table',
   elementClass: SpecdDataTable,
+  events: {},
+});
+
+/** Auto-generated React wrapper for <specd-tag>. Do not hand-edit. */
+export const Tag = createComponent({
+  react: React,
+  tagName: 'specd-tag',
+  elementClass: SpecdTag,
   events: {},
 });

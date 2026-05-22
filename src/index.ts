@@ -72,3 +72,5 @@ export { SpecdVariablePicker } from './components/VariablePicker/SpecdVariablePi
 export type { VariableOption } from './components/VariablePicker/SpecdVariablePicker.js';
 export { SpecdDataTable } from './components/DataTable/SpecdDataTable.js';
 export type { DataTableColumn } from './components/DataTable/SpecdDataTable.js';
+export { SpecdTag } from './components/Tag/SpecdTag.js';
+export type { TagIntent } from './components/Tag/SpecdTag.js';
