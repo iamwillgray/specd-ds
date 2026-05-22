@@ -4,8 +4,8 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 export type PropFixRowProp = 'fill' | 'typography' | 'spacing' | 'stroke';
 
-const ICON_FILL     = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>`;
-const ICON_STROKE   = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>`;
+const ICON_FILL     = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor" fill-opacity="0.15"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>`;
+const ICON_STROKE   = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1" stroke-dasharray="2 2"/></svg>`;
 const ICON_SPACING  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polyline points="5 8 2 12 5 16"/><polyline points="19 8 22 12 19 16"/><line x1="2" y1="12" x2="22" y2="12"/></svg>`;
 const ICON_TYPO     = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>`;
 

@@ -35,6 +35,20 @@ export class SpecdPropFixSlot extends LitElement {
   @property({ type: Boolean }) applied: boolean = false;
   @property({ type: String }) count: string = '';
 
+  private _handleJump(e: Event) {
+    e.stopPropagation();
+    this.dispatchEvent(new CustomEvent('specd-jump', { bubbles: true, composed: true }));
+  }
+
+  private _handleApply(e: Event) {
+    e.stopPropagation();
+    this.dispatchEvent(new CustomEvent('specd-apply', {
+      detail: { varname: this.varname },
+      bubbles: true,
+      composed: true,
+    }));
+  }
+
   override render() {
     return html`
       <div class="prop-fix-slot${this.applied ? ' applied' : ''}">
@@ -56,10 +70,7 @@ export class SpecdPropFixSlot extends LitElement {
           <button
             class="prop-fix-layer-link"
             type="button"
-            @click=${(e: Event) => {
-              e.stopPropagation();
-              this.dispatchEvent(new CustomEvent('specd-jump', { bubbles: true, composed: true }));
-            }}
+            @click=${this._handleJump}
           >${this.varname}</button>
           ${this.matchtype ? html`
             <span class="prop-fix-match-tag ${this.matchtype}">${this.matchtype.toUpperCase()}</span>
@@ -73,14 +84,7 @@ export class SpecdPropFixSlot extends LitElement {
             <button
               class="prop-fix-btn"
               type="button"
-              @click=${(e: Event) => {
-                e.stopPropagation();
-                this.dispatchEvent(new CustomEvent('specd-apply', {
-                  detail: { varname: this.varname },
-                  bubbles: true,
-                  composed: true,
-                }));
-              }}
+              @click=${this._handleApply}
             >Apply${this.count ? html` <span class="prop-fix-btn-badge">${this.count}</span>` : nothing}</button>
           `
         }
