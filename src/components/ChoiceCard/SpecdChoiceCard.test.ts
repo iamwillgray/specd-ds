@@ -85,4 +85,12 @@ describe('SpecdChoiceCard', () => {
     expect(el.querySelector('button')?.disabled).toBe(true);
     el.remove();
   });
+
+  it('renders .choice-card-arrow with an SVG', async () => {
+    const el = await makeElement({ title: 'Option A' });
+    const arrow = el.querySelector('.choice-card-arrow');
+    expect(arrow).not.toBeNull();
+    expect(arrow?.querySelector('svg')).not.toBeNull();
+    el.remove();
+  });
 });

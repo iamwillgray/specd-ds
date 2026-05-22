@@ -3,6 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import type { ChoiceCardVariant, ChoiceCardIconVariant, ChoiceCardPillColor } from './SpecdChoiceCard.types.js';
 
+const ARROW_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+
 /**
  * Specd DS — ChoiceCard
  *
@@ -44,6 +46,7 @@ export class SpecdChoiceCard extends LitElement {
 
     return html`
       <button class="choice-card ${this.variant === 'gradient' ? 'gradient' : ''}" type="button" ?disabled=${this.disabled}>
+        <span class="choice-card-arrow">${unsafeHTML(ARROW_SVG)}</span>
         ${this.icon ? html`<div class=${iconClass}>${unsafeHTML(this.icon)}</div>` : nothing}
         <div class="choice-card-title">${this.title}</div>
         ${this.description ? html`<div class="choice-card-desc">${this.description}</div>` : nothing}
