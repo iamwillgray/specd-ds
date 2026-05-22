@@ -11,22 +11,57 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const WithSuggestions: Story = {
+export const FillWithSuggestion: Story = {
   render: () => html`
-    <div style="width:340px;padding:16px;">
-      <specd-prop-fix-row prop="fill" current="#b8ff57">
-        <specd-prop-fix-slot varname="color/lime/400" color="#b8ff57"></specd-prop-fix-slot>
-        <specd-prop-fix-slot varname="color/brand/accent" color="#b8ff57" selected></specd-prop-fix-slot>
+    <div style="width:360px;padding:16px;">
+      <specd-prop-fix-row prop="fill" layer="Input/Text/Default" attr="background fill" count="1 layer">
+        <specd-prop-fix-slot
+          current="#3b82f6"
+          currentcolor="#3b82f6"
+          varname="color/brand/blue-500"
+          color="#3b82f6"
+          matchtype="exact"
+        ></specd-prop-fix-slot>
       </specd-prop-fix-row>
     </div>
   `,
 };
 
-export const WithCreate: Story = {
+export const StrokeClosestMatch: Story = {
   render: () => html`
-    <div style="width:340px;padding:16px;">
-      <specd-prop-fix-row prop="spacing" current="16px">
-        <specd-prop-fix-create value="16px"></specd-prop-fix-create>
+    <div style="width:360px;padding:16px;">
+      <specd-prop-fix-row prop="stroke" layer="Input/Text/Default" attr="border stroke" count="1 layer">
+        <specd-prop-fix-slot
+          current="#d1d5db"
+          currentcolor="#d1d5db"
+          varname="color/border/default"
+          color="#d1d5db"
+          matchtype="closest"
+        ></specd-prop-fix-slot>
+      </specd-prop-fix-row>
+    </div>
+  `,
+};
+
+export const SpacingApplied: Story = {
+  render: () => html`
+    <div style="width:360px;padding:16px;">
+      <specd-prop-fix-row prop="spacing" layer="Input/Text/Default" attr="padding horizontal" count="3 layers">
+        <specd-prop-fix-slot
+          current="12px"
+          varname="spacing/300"
+          applied
+        ></specd-prop-fix-slot>
+      </specd-prop-fix-row>
+    </div>
+  `,
+};
+
+export const NoMatch: Story = {
+  render: () => html`
+    <div style="width:360px;padding:16px;">
+      <specd-prop-fix-row prop="fill" layer="Badge/Count" attr="background fill" count="2 layers">
+        <specd-prop-fix-create value="#ab12cd"></specd-prop-fix-create>
       </specd-prop-fix-row>
     </div>
   `,
