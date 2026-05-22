@@ -93,4 +93,18 @@ describe('SpecdChoiceCard', () => {
     expect(arrow?.querySelector('svg')).not.toBeNull();
     el.remove();
   });
+
+  it('renders choice-card-arrow span', async () => {
+    const el = await makeElement({ title: 'Test card' });
+    expect(el.querySelector('.choice-card-arrow')).toBeTruthy();
+    el.remove();
+  });
+
+  it('arrow uses arrow-with-tail path (not chevron polyline)', async () => {
+    const el = await makeElement({ title: 'Test card' });
+    const arrow = el.querySelector('.choice-card-arrow');
+    expect(arrow?.querySelector('path')).toBeTruthy();
+    expect(arrow?.querySelector('polyline')).toBeNull();
+    el.remove();
+  });
 });
