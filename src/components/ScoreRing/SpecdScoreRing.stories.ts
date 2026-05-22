@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
-import './SpecdScoreRing';
+import './SpecdScoreRing.js';
 
 const meta: Meta = {
   title: 'Molecules/ScoreRing',

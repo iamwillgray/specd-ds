@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
-import './SpecdSkeleton';
+import './SpecdSkeleton.js';
 
 const meta: Meta = {
   title: 'Atoms/Skeleton',
