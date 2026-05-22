@@ -120,6 +120,7 @@ describe('SpecdIssueRow', () => {
     let fired = false;
     el.addEventListener('specd-quick-fix', () => { fired = true; });
     el.querySelector('.btn-row-primary')?.click();
+    await el.updateComplete;
     expect(fired).toBe(true);
     el.remove();
   });

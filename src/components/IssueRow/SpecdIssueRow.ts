@@ -66,9 +66,16 @@ export class SpecdIssueRow extends LitElement {
 
   override connectedCallback() {
     super.connectedCallback();
-    this._state = this.rowstate;
     this._editValue = this.value;
-    this._syncAttr();
+    this._setState(this.rowstate);
+  }
+
+  override updated(changed: Map<string, unknown>) {
+    if (changed.has('rowstate')) {
+      this._state = this.rowstate;
+      this._editValue = this.value;
+      this._syncAttr();
+    }
   }
 
   private _syncAttr() { this.setAttribute('data-row-state', this._state); }
