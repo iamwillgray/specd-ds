@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import './SpecdIssueRow.js';
-import '../IssueRowActions/SpecdIssueRowActions.js';
-import '../IgnoreFooter/SpecdIgnoreFooter.js';
 
 const meta: Meta = {
   title: 'Organisms/IssueRow',
@@ -13,57 +11,92 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {
-  name: 'Default (collapsed)',
+/* ── Helper ─────────────────────────────────────────────── */
+const tags = (arr: { label: string; sev?: string }[]) => JSON.stringify(arr);
+
+/* ── Stories ─────────────────────────────────────────────── */
+
+export const Critical: Story = {
+  name: 'Critical — Missing description',
   render: () => html`
-    <div style="width:400px; padding:16px; background:var(--bg);">
+    <div style="width:420px; padding:12px; background:var(--bg);">
       <specd-issue-row
-        title="Hard coded colour #b8ff57"
-        severity="warn"
-        type="Colour"
         component="Button/Primary"
-      ></specd-issue-row>
-      <specd-issue-row
-        title="Missing description"
+        type="Missing desc"
         severity="crit"
-        type="Docs"
-        component="Icon/Alert"
-      ></specd-issue-row>
-      <specd-issue-row
-        title="No dev status set"
-        severity="info"
-        type="Status"
-        component="Card/Base"
+        tags=${tags([
+          { label: 'No description', sev: 'crit' },
+          { label: 'Published',      sev: 'neutral' },
+        ])}
       ></specd-issue-row>
     </div>
   `,
 };
 
-export const Actions: Story = {
-  name: 'Expanded — Actions',
+export const CriticalMultiple: Story = {
+  name: 'Critical — No desc + no link',
   render: () => html`
-    <div style="width:400px; padding:16px; background:var(--bg);">
+    <div style="width:420px; padding:12px; background:var(--bg);">
       <specd-issue-row
-        title="Missing description"
+        component="Card/Default"
+        type="No desc"
         severity="crit"
-        type="Docs"
+        tags=${tags([
+          { label: 'No description', sev: 'crit' },
+          { label: 'No doc link',    sev: 'crit' },
+          { label: 'Published',      sev: 'neutral' },
+        ])}
+      ></specd-issue-row>
+    </div>
+  `,
+};
+
+export const Warning: Story = {
+  name: 'Warning — Hard-coded values',
+  render: () => html`
+    <div style="width:420px; padding:12px; background:var(--bg);">
+      <specd-issue-row
+        component="Input/Text"
+        type="Hard-coded"
+        count="5"
+        severity="warn"
+        showfixes
+        tags=${tags([
+          { label: 'HC colours', sev: 'warn' },
+          { label: 'HC spacing', sev: 'warn' },
+        ])}
+      ></specd-issue-row>
+    </div>
+  `,
+};
+
+export const Info: Story = {
+  name: 'Advisory — No doc link',
+  render: () => html`
+    <div style="width:420px; padding:12px; background:var(--bg);">
+      <specd-issue-row
         component="Icon/Alert"
-        rowstate="actions"
+        type="No link"
+        severity="info"
+        tags=${tags([
+          { label: 'No documentation link', sev: 'info' },
+          { label: 'Published',             sev: 'neutral' },
+        ])}
       ></specd-issue-row>
     </div>
   `,
 };
 
 export const IgnoreState: Story = {
-  name: 'Expanded — Ignore',
+  name: 'Ignore flow',
   render: () => html`
-    <div style="width:400px; padding:16px; background:var(--bg);">
+    <div style="width:420px; padding:12px; background:var(--bg);">
       <specd-issue-row
-        title="No dev status"
+        component="Chip/Filter"
+        type="No status"
         severity="info"
-        type="Status"
-        component="Card/Base"
         rowstate="ignore"
+        tags=${tags([{ label: 'Dev status not set', sev: 'info' }])}
       ></specd-issue-row>
     </div>
   `,
@@ -72,12 +105,37 @@ export const IgnoreState: Story = {
 export const AllSeverities: Story = {
   name: 'All Severities',
   render: () => html`
-    <div style="width:400px; padding:16px; background:var(--bg); display:flex; flex-direction:column; gap:4px;">
-      <specd-issue-row title="Hard coded spacing 16px" severity="warn" type="Spacing" component="FormRow/Default"></specd-issue-row>
-      <specd-issue-row title="Hard coded colour #1d4ed8" severity="warn" type="Colour" component="Badge/Info"></specd-issue-row>
-      <specd-issue-row title="Published but no description" severity="crit" type="Docs" component="Avatar/Default"></specd-issue-row>
-      <specd-issue-row title="No documentation link" severity="crit" type="Docs" component="Modal/Confirm"></specd-issue-row>
-      <specd-issue-row title="Dev status not set" severity="info" type="Status" component="Chip/Filter"></specd-issue-row>
+    <div style="width:420px; padding:12px; background:var(--bg);">
+      <specd-issue-row
+        component="Button/Primary"
+        type="Missing desc"
+        severity="crit"
+        tags=${tags([
+          { label: 'No description', sev: 'crit' },
+          { label: 'Published',      sev: 'neutral' },
+        ])}
+      ></specd-issue-row>
+
+      <specd-issue-row
+        component="Input/Text"
+        type="Hard-coded"
+        count="5"
+        severity="warn"
+        showfixes
+        tags=${tags([
+          { label: 'HC colours', sev: 'warn' },
+          { label: 'HC spacing', sev: 'warn' },
+        ])}
+      ></specd-issue-row>
+
+      <specd-issue-row
+        component="Avatar/Default"
+        type="No link"
+        severity="info"
+        tags=${tags([
+          { label: 'No documentation link', sev: 'info' },
+        ])}
+      ></specd-issue-row>
     </div>
   `,
 };

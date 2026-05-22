@@ -1,39 +1,49 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import '../IssueRowActions/SpecdIssueRowActions.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import '../IgnoreFooter/SpecdIgnoreFooter.js';
 
-export type IssueRowState = 'default' | 'actions' | 'ignore';
+export type IssueRowState    = 'default' | 'ignore';
 export type IssueRowSeverity = 'crit' | 'warn' | 'info';
+
+interface IssueTag { label: string; sev?: 'crit' | 'warn' | 'info' | 'neutral'; }
+
+const DIAMOND_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" style="width:14px;height:14px;flex-shrink:0;color:var(--icon-secondary)"><path d="M12 3l9 9-9 9-9-9 9-9z"/></svg>`;
+const JUMP_SVG    = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px"><path d="M7 17L17 7M8 7h9v9"/></svg>`;
 
 /**
  * Specd DS — IssueRow
  *
- * A single issue row with expandable action tray and ignore flow.
- * State machine: default → actions → ignore → default
+ * A component-level issue card matching the Specd DS reference design.
+ * Shows: component name + severity badge, issue tags, footer actions.
  *
  * @element specd-issue-row
  *
- * @attr {string} title     - Issue title / description
- * @attr {string} severity  - crit | warn | info
- * @attr {string} type      - Issue type tag label
- * @attr {string} component - Component name
- * @attr {string} rowstate  - Initial state: default | actions | ignore
+ * @attr {string}  component  - Component name (e.g. "Button/Primary")
+ * @attr {string}  type       - Badge label (e.g. "Missing desc", "Hard-coded", "No link")
+ * @attr {string}  count      - Badge count value ("!" for crit, number for others)
+ * @attr {string}  severity   - crit | warn | info
+ * @attr {string}  tags       - JSON: [{label, sev}] where sev is crit|warn|info|neutral
+ * @attr {boolean} showfixes  - Show the "View Fixes" button in the footer
+ * @attr {string}  rowstate   - Initial state: default | ignore
  *
- * @fires specd-jump         - Jump to canvas
- * @fires specd-fixes        - View fixes
- * @fires specd-ignore-all   - Ignore all issues of this type
+ * @fires specd-jump          - Jump to canvas
+ * @fires specd-fixes         - View Fixes clicked
+ * @fires specd-ignore-all    - Ignore confirmed
  * @fires specd-ignore-cancel - Ignore cancelled
  */
 @customElement('specd-issue-row')
 export class SpecdIssueRow extends LitElement {
   override createRenderRoot() { return this; }
 
-  @property({ type: String }) title: string = '';
-  @property({ type: String }) severity: IssueRowSeverity = 'info';
-  @property({ type: String }) type: string = '';
-  @property({ type: String }) component: string = '';
-  @property({ type: String }) rowstate: IssueRowState = 'default';
+  @property({ type: String }) component: string            = '';
+  @property({ type: String }) type: string                 = '';
+  @property({ type: String }) count: string                = '';
+  @property({ type: String }) severity: IssueRowSeverity   = 'info';
+  @property({ type: String }) tags: string                 = '[]';
+  @property({ type: Boolean }) showfixes: boolean          = false;
+  @property({ type: String }) rowstate: IssueRowState      = 'default';
+
   @state() private _state: IssueRowState = 'default';
 
   override connectedCallback() {
@@ -42,62 +52,99 @@ export class SpecdIssueRow extends LitElement {
     this._syncAttr();
   }
 
-  private _syncAttr() {
-    this.setAttribute('data-row-state', this._state);
+  private _syncAttr() { this.setAttribute('data-row-state', this._state); }
+
+  private _setState(s: IssueRowState) { this._state = s; this._syncAttr(); }
+
+  private _parsedTags(): IssueTag[] {
+    try { return JSON.parse(this.tags) as IssueTag[]; } catch { return []; }
   }
 
-  private _setState(s: IssueRowState) {
-    this._state = s;
-    this._syncAttr();
+  private _badgeCount(): string {
+    if (this.count) return this.count;
+    return this.severity === 'crit' ? '!' : '';
   }
 
-  private _severityClass() {
-    return this.severity === 'crit' ? 'sev-crit'
-         : this.severity === 'warn' ? 'sev-warn'
-         : 'sev-info';
-  }
-
-  private _chipClass() {
-    return this.severity === 'crit' ? 'chip-v2 negative'
-         : this.severity === 'warn' ? 'chip-v2 warning'
-         : 'chip-v2';
+  private _fire(name: string) {
+    this.dispatchEvent(new CustomEvent(name, { bubbles: true, composed: true }));
   }
 
   override render() {
-    const isExpanded = this._state !== 'default';
+    const parsedTags = this._parsedTags();
+    const badgeCount = this._badgeCount();
+
     return html`
-      <div
-        class="issue-row ${this._severityClass()} ${isExpanded ? 'is-expanded' : ''}"
-        data-row-state=${this._state}
-        @click=${() => this._state === 'default' && this._setState('actions')}
-      >
-        <div class="issue-row-main">
-          <div class="issue-row-top-line">
-            <span class="issue-row-title">${this.title}</span>
-            ${this.type ? html`<span class="${this._chipClass()}">${this.type}</span>` : nothing}
-            ${this._state === 'default' ? html`
-              <span class="issue-row-chevron" aria-hidden="true">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <div class="issue-card">
+
+        <!-- Content area -->
+        <div class="issue-content">
+
+          <!-- Header: component name + severity badge -->
+          <div class="issue-card-top">
+            <span class="issue-comp-tag">
+              ${unsafeHTML(DIAMOND_SVG)}
+              ${this.component || 'Unknown component'}
+            </span>
+            ${this.type ? html`
+              <span class="issue-card-count ${this.severity}">
+                ${this.type}
+                ${badgeCount ? html`<span class="issue-card-count-badge">${badgeCount}</span>` : nothing}
               </span>
             ` : nothing}
           </div>
-          ${this.component ? html`<div class="issue-row-comp">${this.component}</div>` : nothing}
+
+          <!-- Issue tags -->
+          ${parsedTags.length ? html`
+            <div class="issue-tag-row">
+              ${parsedTags.map(t => html`
+                <span class="issue-tag ${t.sev ?? this.severity}">${t.label}</span>
+              `)}
+            </div>
+          ` : nothing}
+
         </div>
 
-        ${this._state === 'actions' ? html`
-          <specd-issue-row-actions
-            @specd-jump=${(e: Event)   => { e.stopPropagation(); this.dispatchEvent(new CustomEvent('specd-jump',  { bubbles: true, composed: true })); }}
-            @specd-fixes=${(e: Event)  => { e.stopPropagation(); this.dispatchEvent(new CustomEvent('specd-fixes', { bubbles: true, composed: true })); }}
-            @specd-ignore=${(e: Event) => { e.stopPropagation(); this._setState('ignore'); }}
-          ></specd-issue-row-actions>
+        <!-- Footer (default state) -->
+        ${this._state === 'default' ? html`
+          <div class="issue-card-footer">
+            <button class="btn-jump" type="button"
+              @click=${(e: Event) => { e.stopPropagation(); this._fire('specd-jump'); }}>
+              ${unsafeHTML(JUMP_SVG)}
+              Jump to component
+            </button>
+
+            ${this.showfixes ? html`
+              <button class="btn-view-fixes" type="button"
+                @click=${(e: Event) => { e.stopPropagation(); this._fire('specd-fixes'); }}>
+                View Fixes
+                ${badgeCount && badgeCount !== '!' ? html`<span class="view-fixes-count">${badgeCount}</span>` : nothing}
+              </button>
+            ` : nothing}
+
+            <button class="btn-ghost" type="button"
+              style="margin-left:${this.showfixes ? '0' : 'auto'}"
+              @click=${(e: Event) => { e.stopPropagation(); this._setState('ignore'); }}>
+              Ignore…
+            </button>
+          </div>
         ` : nothing}
 
+        <!-- Ignore footer -->
         ${this._state === 'ignore' ? html`
           <specd-ignore-footer
-            @specd-ignore-all=${(e: Event)    => { e.stopPropagation(); this.dispatchEvent(new CustomEvent('specd-ignore-all',    { bubbles: true, composed: true })); this._setState('default'); }}
-            @specd-ignore-cancel=${(e: Event) => { e.stopPropagation(); this.dispatchEvent(new CustomEvent('specd-ignore-cancel', { bubbles: true, composed: true })); this._setState('default'); }}
+            @specd-ignore-all=${(e: Event) => {
+              e.stopPropagation();
+              this._fire('specd-ignore-all');
+              this._setState('default');
+            }}
+            @specd-ignore-cancel=${(e: Event) => {
+              e.stopPropagation();
+              this._fire('specd-ignore-cancel');
+              this._setState('default');
+            }}
           ></specd-ignore-footer>
         ` : nothing}
+
       </div>
     `;
   }

@@ -698,14 +698,6 @@ select.input {
 /* Tag row — issue type + scope tags below the name tag */
 .issue-tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
 
-/* When issue-tag-row lives inside specd-issue-row's action tray, reset margin */
-.issue-row specd-issue-row-actions .issue-tag-row,
-.issue-row .issue-tag-row {
-  margin-bottom: 0;
-  padding: 8px 12px;
-  border-top: 1px solid var(--border);
-  background: var(--bg);
-}
 /* Issue tag — stacked column layout by default (matches plugin) */
 .issue-tag {
   display: inline-flex; flex-direction: column; align-items: flex-start;
@@ -937,72 +929,20 @@ select.input {
   background: #008531; color: #ebffe0; border: 1px solid #22c55e; cursor: default;
 }
 
-/* ── ISSUE ROW (action state matrix) ────────────────────── */
-/* Base row — single issue with severity indicator, title,  */
-/* type chip, component name, and expandable action tray.   */
-.issue-row {
-  display: flex; flex-direction: column; gap: 0;
-  border: 1px solid var(--border-strong); border-radius: var(--radius-md);
-  background: var(--surface);
-  margin-bottom: 6px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: border-color 0.12s, box-shadow 0.12s;
-  border-left-width: 3px;
-}
-.issue-row:hover { border-color: var(--border-primary); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-.issue-row.is-expanded { cursor: default; }
-
-/* Severity left-border colours */
-.issue-row.sev-crit { border-left-color: var(--negative-accent); }
-.issue-row.sev-warn { border-left-color: var(--warning-accent); }
-.issue-row.sev-info { border-left-color: var(--neutral-accent); }
-
-/* Main content block */
-.issue-row-main {
-  display: flex; flex-direction: column; gap: 3px;
-  padding: 10px 12px;
-}
-
-/* Title line: title text + chip + chevron */
-.issue-row-top-line {
-  display: flex; align-items: center; gap: 6px;
-  min-width: 0;
-}
-.issue-row-title {
-  flex: 1; min-width: 0;
-  font-family: var(--font); font-size: 12px; font-weight: 600;
-  color: var(--text);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.issue-row-top-line .chip-v2 {
-  flex-shrink: 0;
-  font-size: 9px; padding: 2px 6px; border-radius: 4px;
-}
-
-/* Chevron — hidden when expanded */
-.issue-row-chevron {
-  flex-shrink: 0; color: var(--text-muted);
-  display: flex; align-items: center;
-  transition: transform 0.15s;
-}
-
-/* Component name sub-line */
-.issue-row-comp {
-  font-family: var(--font-mono); font-size: 10px;
-  color: var(--text-muted); line-height: 1.2;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
+/* ── ISSUE ROW (variable-fix rows inside issue-card) ─────── */
+/* These .issue-row-* classes are used for sub-rows within   */
+/* an expanded issue card, NOT for the card itself.          */
 /* Legacy body/desc classes kept for compatibility */
 .issue-row-body { flex: 1; min-width: 0; }
+.issue-row-title {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; color: var(--navy, #0c1750);
+  margin-bottom: 4px;
+}
 .issue-row-desc {
   font-size: 10px; font-weight: 400; color: var(--text-secondary);
   line-height: 1.35;
 }
-
-/* State machine: column layout when editing or applied */
-.issue-row[data-row-state] { flex-direction: column; }
 .issue-row-top { display: flex; align-items: center; gap: 12px; width: 100%; }
 .issue-row-top .issue-row-body { flex: 1; min-width: 0; }
 

@@ -2,51 +2,91 @@ import { describe, it, expect, beforeAll } from 'vitest';
 
 beforeAll(async () => {
   await import('./SpecdIssueRow.js');
-  await import('../IssueRowActions/SpecdIssueRowActions.js');
   await import('../IgnoreFooter/SpecdIgnoreFooter.js');
 });
 
 describe('SpecdIssueRow', () => {
-  it('renders .issue-row with default state', async () => {
+  it('renders .issue-card with default state', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.title = 'Hard coded colour';
+    el.component = 'Button/Primary';
+    el.type = 'Missing desc';
+    el.severity = 'crit';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-row')).not.toBeNull();
+    expect(el.querySelector('.issue-card')).not.toBeNull();
     expect(el.getAttribute('data-row-state')).toBe('default');
     el.remove();
   });
 
-  it('transitions to actions state on click', async () => {
+  it('renders component name in .issue-comp-tag', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.title = 'Test';
+    el.component = 'Card/Default';
     document.body.appendChild(el);
     await el.updateComplete;
-    el.querySelector('.issue-row').click();
-    await el.updateComplete;
-    expect(el.getAttribute('data-row-state')).toBe('actions');
-    expect(el.querySelector('specd-issue-row-actions')).not.toBeNull();
+    expect(el.querySelector('.issue-comp-tag')?.textContent?.trim()).toContain('Card/Default');
     el.remove();
   });
 
-  it('transitions to ignore state when specd-ignore fires', async () => {
+  it('renders severity badge with correct class', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.title = 'Test';
-    el.rowstate = 'actions';
+    el.severity = 'crit';
+    el.type = 'Missing desc';
     document.body.appendChild(el);
     await el.updateComplete;
-    el.querySelector('specd-issue-row-actions').dispatchEvent(
-      new CustomEvent('specd-ignore', { bubbles: true, composed: true })
-    );
+    expect(el.querySelector('.issue-card-count')?.className).toContain('crit');
+    el.remove();
+  });
+
+  it('renders tags from JSON', async () => {
+    const el = document.createElement('specd-issue-row') as any;
+    el.tags = JSON.stringify([
+      { label: 'No description', sev: 'crit' },
+      { label: 'Published', sev: 'neutral' },
+    ]);
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const tagEls = el.querySelectorAll('.issue-tag');
+    expect(tagEls.length).toBe(2);
+    expect(tagEls[0].textContent?.trim()).toBe('No description');
+    expect(tagEls[0].className).toContain('crit');
+    expect(tagEls[1].className).toContain('neutral');
+    el.remove();
+  });
+
+  it('shows footer with Jump button in default state', async () => {
+    const el = document.createElement('specd-issue-row') as any;
+    el.component = 'Button/Primary';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.issue-card-footer')).not.toBeNull();
+    expect(el.querySelector('.btn-jump')).not.toBeNull();
+    el.remove();
+  });
+
+  it('shows View Fixes button when showfixes=true', async () => {
+    const el = document.createElement('specd-issue-row') as any;
+    el.showfixes = true;
+    el.count = '5';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.querySelector('.btn-view-fixes')).not.toBeNull();
+    el.remove();
+  });
+
+  it('transitions to ignore state on Ignore… click', async () => {
+    const el = document.createElement('specd-issue-row') as any;
+    el.component = 'Button/Primary';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    el.querySelector('.btn-ghost').click();
     await el.updateComplete;
     expect(el.getAttribute('data-row-state')).toBe('ignore');
     expect(el.querySelector('specd-ignore-footer')).not.toBeNull();
     el.remove();
   });
 
-  it('returns to default state after ignore cancel', async () => {
+  it('returns to default after ignore cancel', async () => {
     const el = document.createElement('specd-issue-row') as any;
-    el.title = 'Test';
     el.rowstate = 'ignore';
     document.body.appendChild(el);
     await el.updateComplete;
@@ -58,13 +98,13 @@ describe('SpecdIssueRow', () => {
     el.remove();
   });
 
-  it('applies severity class', async () => {
+  it('auto-sets badge to "!" for crit severity with no count', async () => {
     const el = document.createElement('specd-issue-row') as any;
     el.severity = 'crit';
-    el.title = 'Critical';
+    el.type = 'Missing desc';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.issue-row')?.className).toContain('sev-crit');
+    expect(el.querySelector('.issue-card-count-badge')?.textContent?.trim()).toBe('!');
     el.remove();
   });
 });
