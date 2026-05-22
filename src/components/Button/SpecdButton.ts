@@ -52,6 +52,7 @@ export class SpecdButton extends LitElement {
 
   private _classes(): string {
     let variantClass: string;
+    // row-primary-ghost maps to two CSS classes (base + modifier)
     if (this.variant === 'row-primary-ghost') {
       variantClass = 'btn-row-primary btn-hc-ghost';
     } else {

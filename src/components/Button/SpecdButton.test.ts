@@ -178,7 +178,8 @@ describe('SpecdButton — action variants', () => {
     el.label = 'Add doc link';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-row-primary')).not.toBeNull();
+    const btn = el.querySelector('button');
+    expect(btn?.classList.contains('btn-row-primary')).toBe(true);
     el.remove();
   });
 
@@ -200,7 +201,8 @@ describe('SpecdButton — action variants', () => {
     el.label = 'Applied';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-row-applied')).not.toBeNull();
+    const btn = el.querySelector('button');
+    expect(btn?.classList.contains('btn-row-applied')).toBe(true);
     el.remove();
   });
 
@@ -210,7 +212,8 @@ describe('SpecdButton — action variants', () => {
     el.label = 'Edit';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-edit-pill')).not.toBeNull();
+    const btn = el.querySelector('button');
+    expect(btn?.classList.contains('btn-edit-pill')).toBe(true);
     el.remove();
   });
 
@@ -220,7 +223,8 @@ describe('SpecdButton — action variants', () => {
     el.label = 'Save';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-save-pill')).not.toBeNull();
+    const btn = el.querySelector('button');
+    expect(btn?.classList.contains('btn-save-pill')).toBe(true);
     el.remove();
   });
 
@@ -230,7 +234,8 @@ describe('SpecdButton — action variants', () => {
     el.label = 'Cancel';
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.btn-cancel-pill')).not.toBeNull();
+    const btn = el.querySelector('button');
+    expect(btn?.classList.contains('btn-cancel-pill')).toBe(true);
     el.remove();
   });
 });

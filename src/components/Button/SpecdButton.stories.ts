@@ -90,5 +90,13 @@ export const AllVariants: Story = {
       <specd-button variant="primary" label="Disabled" disabled></specd-button>
       <specd-button variant="primary" label="Loading…"  loading></specd-button>
     </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;">
+      <specd-button variant="row-primary"       label="Add doc link"></specd-button>
+      <specd-button variant="row-primary-ghost" label="View in Quick Fix"></specd-button>
+      <specd-button variant="row-applied"       label="Applied"></specd-button>
+      <specd-button variant="edit-pill"         label="Edit"></specd-button>
+      <specd-button variant="save-pill"         label="Save"></specd-button>
+      <specd-button variant="cancel-pill"       label="Cancel"></specd-button>
+    </div>
   `,
 };
