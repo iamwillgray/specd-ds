@@ -3741,3 +3741,31 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .tpl-section-heading { flex: 1; }
 .tpl-section-heading .input { height: 28px; font-size: 11px; }
 .tpl-section-row select { height: 28px; font-size: 11px; max-width: 140px; }
+
+/* ── GLOBAL PROPS EDITOR ────────────────────────────────────── */
+.gp-row {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 10px; background: var(--surface);
+  border: 1px solid var(--border-blue); border-radius: var(--radius-md);
+  margin-bottom: 6px;
+}
+.gp-row-top { display: flex; gap: 6px; align-items: center; }
+.gp-row-top .input { flex: 1; height: 28px; font-size: 11px; }
+.gp-row-top select { width: 110px; height: 28px; font-size: 11px; }
+.gp-row .input { height: 28px; font-size: 11px; }
+
+/* ── PROPS PANEL ────────────────────────────────────────────── */
+.props-mismatch-card {
+  background: var(--surface); border: 1px solid var(--border-blue);
+  border-radius: var(--radius-md); margin: 4px 12px;
+}
+.props-mismatch-title {
+  padding: 8px 12px; font-size: 12px; font-weight: 700;
+  color: var(--text); border-bottom: 1px solid var(--border-blue);
+}
+.props-mismatch-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-bottom: 1px solid var(--border-light);
+}
+.props-mismatch-row:last-child { border-bottom: none; }
+.props-mismatch-desc { flex: 1; font-size: 11px; color: var(--text); }
