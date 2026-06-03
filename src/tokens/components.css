@@ -454,9 +454,12 @@ select.input {
 .cov-scoring specd-health-tag { order: -2; flex-shrink: 0; }
 .cov-scoring .cov-bar-track   { order: -1; }
 .cov-scoring .cov-pct         { order:  0; }
-/* cov-row-v2 scoring section needs wider min-width */
-.cov-row-v2 .cov-scoring { min-width: 300px; padding-right: 8px; }
-.cov-pct  { font-size: 12px; font-weight: 800; text-align: right; min-width: 30px; font-family: var(--font); }
+/* cov-row-v2 scoring section is a FIXED-WIDTH column anchored to the right so
+ * every status chip / bar / % lines up vertically across all rows regardless
+ * of how long the label is. .cov-details flexes to fill the remaining space. */
+.cov-row-v2 .cov-scoring { flex: 0 0 300px; min-width: 300px; padding-right: 8px; }
+.cov-row-v2 .cov-details { flex: 1 1 0; min-width: 0; }
+.cov-pct  { font-size: 12px; font-weight: 800; text-align: right; min-width: 34px; font-family: var(--font); }
 
 /* Status chip (tier-good / tier-med / tier-poor) */
 .cov-status-chip {
@@ -491,7 +494,9 @@ select.input {
 .cov-row-chevron {
   width: 12px; height: 12px; flex-shrink: 0; color: var(--text-muted);
   transition: transform var(--duration-base) var(--ease-out);
-  margin-left: 2px;
+  /* Float to the right edge of .cov-details so the chevron sits right beside
+   * the status chip (the Poor/Good tag) rather than next to the label. */
+  margin-left: auto;
 }
 .cov-row-group.open .cov-row-chevron { transform: rotate(90deg); }
 .cov-subrows { display: none; padding: 2px 0 6px 0; background: var(--bg); }
@@ -506,7 +511,7 @@ select.input {
  * tints them by tier. Pair with a `.step-score-label` showing the tier word. */
 .step-score {
   display: flex; align-items: center; gap: 3px;
-  flex: 1; min-width: 90px; height: 6px;
+  flex: 1; min-width: 90px; max-width: 265px; height: 6px;
 }
 .step-score .step-seg {
   flex: 1; height: 100%; border-radius: 2px;
@@ -527,6 +532,18 @@ select.input {
 .step-score-label.tier-ok    { color: var(--warning-dark); }
 .step-score-label.tier-good  { color: var(--positive-dark); }
 .step-score-label.tier-great { color: var(--positive-dark); }
+
+/* Numeric step score (e.g. "4/5") — sits where the % sits on sibling rows so
+ * the right edges align. Tinted by tier. */
+.step-score-num {
+  font-size: 11px; font-weight: 800; text-align: right; min-width: 30px;
+  font-family: var(--font-mono); white-space: nowrap;
+}
+.step-score-num.tier-bad   { color: var(--negative-dark); }
+.step-score-num.tier-poor  { color: #c2410c; }
+.step-score-num.tier-ok    { color: var(--warning-dark); }
+.step-score-num.tier-good  { color: var(--positive-dark); }
+.step-score-num.tier-great { color: var(--positive-dark); }
 
 /* ── STAT TILES ──────────────────────────────────────────── */
 /* Small 4-up grid tiles */
