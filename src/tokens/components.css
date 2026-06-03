@@ -699,6 +699,16 @@ select.input {
   background: var(--positive-accent); flex-shrink: 0;
 }
 .nav-score-badge.hidden { display: none; }
+/* Tier tints so the nav score pill matches the health score colour instead of
+ * always reading green. excellent/good = green, med = amber, poor = red. */
+.nav-score-badge.tier-med {
+  background: var(--warning-light); border-color: var(--warning-accent); color: var(--warning-dark);
+}
+.nav-score-badge.tier-med::before { background: var(--warning-accent); }
+.nav-score-badge.tier-poor {
+  background: var(--negative-light); border-color: var(--negative-accent); color: var(--negative-dark);
+}
+.nav-score-badge.tier-poor::before { background: var(--negative-accent); }
 
 /* ── HEALTH BADGE (unified: md=label badge, sm=score pill) ── */
 .health-badge {
