@@ -479,6 +479,55 @@ select.input {
   border-color: rgba(220,38,38,0.25);
 }
 
+/* ── COV ROW: EXPANDABLE / ACCORDION VARIANT ─────────────────
+ * A coverage row that toggles a set of nested sub-rows. The parent gets a
+ * chevron (rotates when open) and `.cov-row-expandable`; children live in a
+ * sibling `.cov-subrows` container that is hidden until `.cov-row-group.open`. */
+.cov-row-group { border-bottom: 1px solid var(--border-light); }
+.cov-row-group:last-child { border-bottom: none; }
+.cov-row-group > .cov-row-v2 { border-bottom: none; }
+.cov-row-expandable { cursor: pointer; }
+.cov-row-expandable .cov-details { position: relative; }
+.cov-row-chevron {
+  width: 12px; height: 12px; flex-shrink: 0; color: var(--text-muted);
+  transition: transform var(--duration-base) var(--ease-out);
+  margin-left: 2px;
+}
+.cov-row-group.open .cov-row-chevron { transform: rotate(90deg); }
+.cov-subrows { display: none; padding: 2px 0 6px 0; background: var(--bg); }
+.cov-row-group.open .cov-subrows { display: block; }
+.cov-subrow { height: 28px; }
+.cov-subrow .cov-details { padding-left: 34px; }     /* indent under the parent label */
+.cov-subrow .cov-label { font-size: 11px; color: var(--text-secondary); }
+
+/* ── STEP SCORE ──────────────────────────────────────────────
+ * A 5-segment rating bar (bad → great) sized to occupy the same footprint as
+ * the .cov-track progress bar. `data-step` (0–4) fills step+1 segments and
+ * tints them by tier. Pair with a `.step-score-label` showing the tier word. */
+.step-score {
+  display: flex; align-items: center; gap: 3px;
+  flex: 1; min-width: 90px; height: 6px;
+}
+.step-score .step-seg {
+  flex: 1; height: 100%; border-radius: 2px;
+  background: var(--border-blue); transition: background var(--duration-fast) var(--ease-out);
+}
+/* Filled segments — tinted by the tier set on the wrapper. */
+.step-score.tier-bad   .step-seg.on { background: var(--negative-accent); }
+.step-score.tier-poor  .step-seg.on { background: #f97316; }   /* orange-500 */
+.step-score.tier-ok    .step-seg.on { background: var(--warning-accent); }
+.step-score.tier-good  .step-seg.on { background: #4ade80; }   /* green-400 */
+.step-score.tier-great .step-seg.on { background: var(--positive-accent); }
+.step-score-label {
+  font-size: 11px; font-weight: 700; text-align: right; min-width: 38px;
+  font-family: var(--font); text-transform: capitalize;
+}
+.step-score-label.tier-bad   { color: var(--negative-dark); }
+.step-score-label.tier-poor  { color: #c2410c; }
+.step-score-label.tier-ok    { color: var(--warning-dark); }
+.step-score-label.tier-good  { color: var(--positive-dark); }
+.step-score-label.tier-great { color: var(--positive-dark); }
+
 /* ── STAT TILES ──────────────────────────────────────────── */
 /* Small 4-up grid tiles */
 .stat-tiles-row {
