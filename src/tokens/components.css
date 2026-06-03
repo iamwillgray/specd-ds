@@ -492,12 +492,17 @@ select.input {
 .cov-row-expandable { cursor: pointer; }
 .cov-row-expandable .cov-details { position: relative; }
 .cov-row-chevron {
-  width: 12px; height: 12px; flex-shrink: 0; color: var(--text-muted);
-  transition: transform var(--duration-base) var(--ease-out);
-  /* Float to the right edge of .cov-details so the chevron sits right beside
-   * the status chip (the Poor/Good tag) rather than next to the label. */
-  margin-left: auto;
+  width: 16px; height: 16px; flex-shrink: 0; box-sizing: border-box; padding: 3px;
+  border-radius: 50%; background: var(--blue-15); color: var(--text-secondary);
+  transition:
+    transform  var(--duration-base) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color      var(--duration-fast) var(--ease-out);
+  /* Float to the right edge of .cov-details, then leave a clear gap before the
+   * status chip. Gray-circle treatment mirrors the .info-trigger "?" icons. */
+  margin-left: auto; margin-right: 12px;
 }
+.cov-row-expandable:hover .cov-row-chevron { background: var(--navy); color: #fff; }
 .cov-row-group.open .cov-row-chevron { transform: rotate(90deg); }
 .cov-subrows { display: none; padding: 2px 0 6px 0; background: var(--bg); }
 .cov-row-group.open .cov-subrows { display: block; }
@@ -535,9 +540,11 @@ select.input {
 
 /* Numeric step score (e.g. "4/5") — sits where the % sits on sibling rows so
  * the right edges align. Tinted by tier. */
+/* Sized identically to .cov-pct so the n/5 score column lines up with the %
+ * column and the step bar ends exactly where the progress bars do. */
 .step-score-num {
-  font-size: 11px; font-weight: 800; text-align: right; min-width: 30px;
-  font-family: var(--font-mono); white-space: nowrap;
+  font-size: 12px; font-weight: 800; text-align: right; min-width: 34px;
+  font-family: var(--font); white-space: nowrap;
 }
 .step-score-num.tier-bad   { color: var(--negative-dark); }
 .step-score-num.tier-poor  { color: #c2410c; }
