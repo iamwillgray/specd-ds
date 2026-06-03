@@ -36,6 +36,7 @@ export * from './components/Pagination/index.js';
 export * from './components/Stepper/index.js';
 export * from './components/HealthTag/index.js';
 export * from './components/StepScore/index.js';
+export * from './components/PropRow/index.js';
 export * from './components/AiPill/index.js';
 export * from './components/JumpBtn/index.js';
 export * from './components/SeverityHeader/index.js';
