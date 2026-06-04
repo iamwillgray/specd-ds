@@ -3998,3 +3998,12 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .impact-cta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .impact-delta { display: inline-flex; align-items: center; gap: 3px; background: var(--green-10); color: var(--green-100); border-radius: var(--radius-pill); padding: 3px 9px; font-family: var(--font-mono); font-weight: 700; font-size: 11px; white-space: nowrap; }
 .impact-delta::before { content: "\25B2"; font-size: 8px; }
+
+/* ── AUTOMATION BANNER ───────────────────────────────────────────────── */
+.auto-banner { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--radius-lg); background: linear-gradient(110deg, var(--blue-100), var(--blue-80)); color: var(--white); }
+.auto-banner .ico { width: 30px; height: 30px; flex-shrink: 0; display: grid; place-items: center; border-radius: 9px; background: rgba(184,255,87,.16); color: var(--brand-lime); }
+.auto-banner .txt { flex: 1; min-width: 0; }
+.auto-banner .txt b { font-size: 13px; }
+.auto-banner .txt span { display: block; font-size: 11px; color: var(--white-60); margin-top: 1px; }
+.auto-banner .btn-primary { background: var(--brand-lime); color: var(--blue-100); white-space: nowrap; }
+.auto-banner .btn-primary:hover { filter: brightness(.96); }
