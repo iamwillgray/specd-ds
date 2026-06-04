@@ -10,13 +10,21 @@ export class SpecdAutomationBanner extends LitElement {
 
   @property({ type: String }) title = '';
   @property({ type: String }) sub = '';
+  /** CTA button label. Rendered as the banner's action button (light DOM has no
+   *  working <slot>, so the component renders its own button). Clicking it
+   *  emits a `run` event. */
+  @property({ type: String }) cta?: string;
+
+  private _run() {
+    this.dispatchEvent(new CustomEvent('run', { bubbles: true, composed: true }));
+  }
 
   override render() {
     return html`
       <div class="auto-banner">
         <div class="ico">${unsafeHTML(BOLT)}</div>
         <div class="txt"><b>${this.title}</b><span>${this.sub}</span></div>
-        <slot></slot>
+        ${this.cta ? html`<button class="btn btn-primary" @click=${this._run}>${this.cta}</button>` : html`<slot></slot>`}
       </div>`;
   }
 }
