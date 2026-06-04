@@ -83,3 +83,4 @@ export * from './components/DeepLink/index.js';
 export * from './components/MicroScore/index.js';
 export * from './components/CheckItem/index.js';
 export * from './components/DiffRow/index.js';
+export * from './components/StageBar/index.js';
