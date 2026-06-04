@@ -4020,3 +4020,14 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .deep-link .dl-pct.good { color: var(--green-100); }
 .deep-link .dl-pct.med { color: var(--orange-100); }
 .deep-link .dl-pct.poor { color: var(--red-100); }
+
+/* ── MICRO SCORE ─────────────────────────────────────────────────────── */
+.micro-score { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+.micro-ring { --p: 0; --arc: var(--warning-accent); width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(from -90deg, var(--arc) calc(var(--p) * 1%), var(--blue-15) 0); }
+.micro-ring.good { --arc: var(--positive-accent); }
+.micro-ring.med  { --arc: var(--warning-accent); }
+.micro-ring.poor { --arc: var(--negative-accent); }
+.micro-ring .inner { width: 66px; height: 66px; border-radius: 50%; background: var(--white); display: grid; place-items: center; line-height: 1; }
+.micro-ring .frac { font-family: var(--font-heading); font-weight: 800; font-size: 19px; color: var(--blue-100); }
+.micro-ring .frac small { font-size: 11px; color: var(--text-subtle); font-weight: 700; }
+.micro-cap { font-size: 10px; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
