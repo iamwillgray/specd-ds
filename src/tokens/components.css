@@ -3899,3 +3899,22 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   margin-top: 2px; padding-top: 6px; border-top: 1px dashed var(--border-blue);
 }
 .gp-row-foot .gp-foot-spacer { flex: 1 1 auto; }
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/* Classes: prop-align-row family — unified prop/value alignment fixer used    */
+/* in the Issues "Review Props" expansion + the Props page. (Distinct from     */
+/* .prop-fix-row, which is the hard-coded value fixer.)                        */
+/* ──────────────────────────────────────────────────────────────────────── */
+.prop-align-row-2 {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+}
+.prop-align-row-2:last-child { border-bottom: none; }
+.prop-align-desc { flex: 1 1 auto; min-width: 0; font-size: 11px; color: var(--text); line-height: 1.4; }
+.prop-align-desc strong { color: var(--navy); }
+.prop-align-actions { display: inline-flex; gap: 6px; flex-shrink: 0; }
+
+/* Issue-row 'prop-issue' variant — Review Props reveals the fixers. */
+.issue-row[data-row-state] .issue-row-fix-children.prop-fix-list {
+  display: flex; flex-direction: column; gap: 0;
+}

@@ -7,7 +7,8 @@ export type IssueRowFieldType =
   | 'description'
   | 'dev-ready'
   | 'mark-complete'
-  | 'hard-coded';
+  | 'hard-coded'
+  | 'prop-issue';
 
 export type IssueRowState = 'initial' | 'editing' | 'applied';
 
@@ -17,11 +18,13 @@ const ICON_CHECK   = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none
 const ICON_CODE    = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`;
 const SPARKLE_SVG  = `<svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M15.75 12C15.9498 12 16.1308 12.1186 16.209 12.3027L16.8809 13.8691L18.4473 14.541C18.6314 14.6192 18.75 14.8002 18.75 15C18.75 15.1998 18.6314 15.3808 18.4473 15.459L16.8809 16.1309L16.209 17.6973C16.1308 17.8814 15.9498 18 15.75 18C15.5502 18 15.3692 17.8814 15.291 17.6973L14.6191 16.1309L13.0527 15.459C12.8686 15.3808 12.75 15.1998 12.75 15C12.75 14.8002 12.8686 14.6192 13.0527 14.541L14.6191 13.8691L15.291 12.3027C15.3692 12.1186 15.5502 12 15.75 12Z"/></svg>`;
 const CHECK_SVG    = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+const ICON_SLIDERS = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>`;
 
 function iconFor(ft: IssueRowFieldType): string {
   if (ft === 'doc-link')    return ICON_LINK;
   if (ft === 'description') return ICON_TEXT;
   if (ft === 'hard-coded')  return ICON_CODE;
+  if (ft === 'prop-issue')  return ICON_SLIDERS;
   return ICON_CHECK;
 }
 
@@ -144,12 +147,21 @@ export class SpecdIssueRow extends LitElement {
         </button>
       `;
     }
+    if (this.fieldtype === 'prop-issue') {
+      return html`
+        <button class="btn-row-primary btn-hc-ghost" type="button"
+          @click=${(e: Event) => { e.stopPropagation(); this._handleCta(); }}>
+          Review Props
+        </button>
+      `;
+    }
     const labels: Record<IssueRowFieldType, string> = {
       'doc-link':      'Add doc link',
       'description':   'Write with AI',
       'dev-ready':     'Mark dev ready',
       'mark-complete': 'Mark complete',
       'hard-coded':    'View in Quick Fix',
+      'prop-issue':    'Review Props',
     };
     return html`
       <button class="btn-row-primary" type="button"
@@ -164,6 +176,15 @@ export class SpecdIssueRow extends LitElement {
       return html`
         <div class="issue-row-fix-children">
           <slot name="fix-children"></slot>
+          <slot></slot>
+        </div>
+      `;
+    }
+    if (this.fieldtype === 'prop-issue') {
+      // Review Props reveals the prop fixers, slotted by the host.
+      return html`
+        <div class="issue-row-fix-children prop-fix-list">
+          <slot name="prop-fixes"></slot>
           <slot></slot>
         </div>
       `;
