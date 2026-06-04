@@ -11,6 +11,10 @@ export class SpecdImpactRow extends LitElement {
   @property({ type: Number }) delta = 0;
   @property({ type: String }) sub?: string;
   @property({ type: String, attribute: 'component-id' }) componentId?: string;
+  /** CTA button label. Rendered as the row's action button (light DOM has no
+   *  working <slot>, so the component renders its own button). Clicking it
+   *  emits the same `open` event as the name. */
+  @property({ type: String }) cta?: string;
 
   private _open() {
     this.dispatchEvent(new CustomEvent('open', { detail: this.componentId, bubbles: true, composed: true }));
@@ -26,7 +30,7 @@ export class SpecdImpactRow extends LitElement {
         </div>
         <div class="impact-cta">
           <span class="impact-delta">+${this.delta} pts</span>
-          <slot></slot>
+          ${this.cta ? html`<button class="btn btn-primary btn-sm" @click=${this._open}>${this.cta}</button>` : html`<slot></slot>`}
         </div>
       </div>
     `;

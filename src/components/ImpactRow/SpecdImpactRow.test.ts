@@ -25,4 +25,13 @@ describe('SpecdImpactRow', () => {
     (el.querySelector('.impact-name') as HTMLElement).click();
     expect(id).toBe('node:9');
   });
+  it('renders its own CTA button (no slot needed in light DOM) and emits open on click', async () => {
+    const el = await make({ rank: '1', name: 'X', delta: '1', cta: 'Review fixes', 'component-id': 'node:7' });
+    const btn = el.querySelector('.impact-cta button') as HTMLButtonElement;
+    expect(btn).not.toBeNull();
+    expect(btn.textContent).toContain('Review fixes');
+    let id = ''; el.addEventListener('open', (e: any) => { id = e.detail; });
+    btn.click();
+    expect(id).toBe('node:7');
+  });
 });
