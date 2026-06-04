@@ -3972,6 +3972,32 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .fixer-foot .spacer { flex: 1; }
 .fixer-skip { background: none; border: none; color: var(--text-secondary); font-size: 12px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
 
+/* ── COMPONENT PAGE HERO ─────────────────────────────────────────────── */
+.cmp-hero { padding: 20px 20px 16px; border-bottom: 1px solid var(--border-blue); background: linear-gradient(180deg, var(--blue-10), var(--white)); }
+.cmp-hero-row { display: flex; gap: 16px; align-items: flex-start; }
+.cmp-titleblock { flex: 1; min-width: 0; }
+.cmp-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-50); }
+.cmp-title { font-family: var(--font-heading); font-weight: 700; font-size: 24px; letter-spacing: -.015em; color: var(--blue-100); margin: 3px 0 6px; }
+.cmp-path { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 11px; color: var(--text-secondary); }
+.cmp-path .pill { background: var(--white); border: 1px solid var(--blue-20); border-radius: var(--radius-pill); padding: 2px 9px; font-weight: 600; color: var(--blue-90); }
+.cmp-actions { display: flex; gap: 8px; margin-top: 13px; flex-wrap: wrap; }
+.muted { color: var(--text-secondary); }
+
+/* honest preview placeholder (no live render — open on canvas) */
+.cmp-preview-glyph { width: 46px; height: 46px; margin: 0 auto 4px; border-radius: 12px; display: grid; place-items: center; background: var(--white); border: 1px solid var(--blue-20); color: var(--blue-50); box-shadow: var(--shadow-sm); }
+.cmp-preview-name { font-family: var(--font-heading); font-weight: 700; font-size: 15px; color: var(--blue-100); }
+
+/* ── AFFECTED-COMPONENTS MINI ROWS (Issue page list) ─────────────────── */
+.issue-mini { display: grid; grid-template-columns: auto 1fr auto; gap: 11px; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--border-blue); }
+.issue-mini:last-child { border-bottom: none; }
+.issue-mini .sev { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.issue-mini .sev.crit { background: var(--red-50); }
+.issue-mini .sev.warn { background: var(--orange-50); }
+.issue-mini .sev.info { background: var(--blue-50); }
+.issue-mini .nm { font-weight: 600; font-size: 12.5px; color: var(--blue-100); cursor: pointer; }
+.issue-mini .nm:hover { text-decoration: underline; text-underline-offset: 2px; }
+.issue-mini .meta { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+
 /* ── DRILL HEADER ────────────────────────────────────────────────────── */
 .dd-bar { display: flex; align-items: center; gap: 10px; padding: 11px 16px; background: var(--white); border-bottom: 1px solid var(--border-blue); }
 .dd-back { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--blue-20); background: var(--white); border-radius: var(--radius-pill); padding: 5px 12px 5px 9px; font-size: 11px; font-weight: 600; color: var(--blue-100); cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
