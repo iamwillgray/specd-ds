@@ -79,3 +79,4 @@ export * from './components/InteractiveTag/index.js';
 export * from './components/DrillHeader/index.js';
 export * from './components/ImpactRow/index.js';
 export * from './components/AutomationBanner/index.js';
+export * from './components/DeepLink/index.js';
