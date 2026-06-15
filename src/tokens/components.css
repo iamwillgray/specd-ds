@@ -405,7 +405,7 @@ select.input {
   transition: width var(--duration-slow) var(--ease-out); width: 0%;
 }
 .cov-fill.cov-excellent { background: var(--positive-accent); }
-.cov-fill.cov-good      { background: var(--neutral-dark);    }
+.cov-fill.cov-good      { background: var(--positive-accent); }
 .cov-fill.cov-med       { background: var(--warning-accent);  }
 .cov-fill.cov-poor      { background: var(--negative-accent); }
 /* Legacy aliases used in the plugin */
