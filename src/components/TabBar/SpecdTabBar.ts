@@ -40,20 +40,44 @@ export class SpecdTabBar extends LitElement {
   override render() {
     const tabs = this._parsedTabs();
     const gridStyle = styleMap({ gridTemplateColumns: `repeat(${this.columns}, 1fr)` });
+    // Build a flat string of data-* attributes per tab so callers can route
+    // tabs to existing selectors via `data: { panel: 'panel-overview' }`.
+    const dataAttrStr = (data?: Record<string, string>): string => {
+      if (!data) return '';
+      return Object.entries(data)
+        .map(([k, v]) => `data-${k}="${String(v).replace(/"/g, '&quot;')}"`)
+        .join(' ');
+    };
     return html`
       <nav class="tab-bar-v2" style=${gridStyle}>
-        ${tabs.map(t => html`
-          <button
-            class="tab-v2 ${this.active === t.id ? 'active' : ''}"
-            @click=${() => this._handleClick(t.id)}
-          >
-            ${t.icon ? unsafeHTML(t.icon) : nothing}
-            ${t.label}
-            ${t.badge ? html`<span class="tab-badge">${t.badge}</span>` : nothing}
-          </button>
-        `)}
+        ${tabs.map(t => {
+          const cls = `tab-v2 ${this.active === t.id ? 'active' : ''}`;
+          const dataPart = dataAttrStr(t.data);
+          // Always render a badge span (hidden when no value) so the host can
+          // address it via `[data-badge-for="${id}"]` even before a count is
+          // known. This restores the addressable pattern the original Pulse
+          // plugin relied on (`#badge-issues`, `#badge-components`, etc).
+          const hasBadge = t.badge !== undefined && t.badge !== null && t.badge !== 0;
+          const badgeText = hasBadge ? String(t.badge) : '';
+          const badgeHidden = hasBadge ? '' : ' hidden';
+          const badgeHtml = `<span class="tab-badge${badgeHidden}" data-badge-for="${t.id}">${badgeText}</span>`;
+          const buttonHtml = `<button class="${cls}" data-tab-id="${t.id}" ${dataPart}>${t.icon ?? ''}${t.label}${badgeHtml}</button>`;
+          return html`${unsafeHTML(buttonHtml)}`;
+        })}
       </nav>
     `;
+  }
+
+  override firstUpdated() { this._wireClicks(); }
+  override updated() { this._wireClicks(); }
+
+  private _wireClicks() {
+    // Wire clicks via DOM since `unsafeHTML` doesn't support Lit @click bindings.
+    this.querySelectorAll<HTMLButtonElement>('.tab-v2[data-tab-id]').forEach(btn => {
+      if ((btn as HTMLButtonElement & { _wired?: boolean })._wired) return;
+      (btn as HTMLButtonElement & { _wired?: boolean })._wired = true;
+      btn.addEventListener('click', () => this._handleClick(btn.dataset.tabId || ''));
+    });
   }
 }
 

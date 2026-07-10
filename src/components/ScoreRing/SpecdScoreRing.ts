@@ -26,16 +26,20 @@ export class SpecdScoreRing extends LitElement {
   @property({ type: Number }) size: number = 104;
 
   override render() {
+    const ratio = this.size / 104;
+    const borderPx = Math.max(3, Math.round(8 * ratio));
+    const numSize = Math.round(42 * ratio);
+    const denomSize = Math.round(11 * ratio);
+    const gapPx = Math.max(0, Math.round(2 * ratio));
     const styles = {
       '--score-percentage': String(this.score),
       '--w': `${this.size}px`,
+      '--b': `${borderPx}px`,
     };
-    const numSize = Math.round(42 * (this.size / 104));
-    const denomSize = Math.round(12 * (this.size / 104));
     return html`
       <div class="score-circle tier-${this.tier}" style=${styleMap(styles)}>
-        <span class="score-number-lg" style=${styleMap({ fontSize: `${numSize}px` })}>${this.score}</span>
-        <span class="score-denom-new" style=${styleMap({ fontSize: `${denomSize}px` })}>/100</span>
+        <span class="score-number-lg" style=${styleMap({ fontSize: `${numSize}px`, lineHeight: '1' })}>${this.score}</span>
+        <span class="score-denom-new" style=${styleMap({ fontSize: `${denomSize}px`, marginTop: `${gapPx}px` })}>/100</span>
       </div>
     `;
   }

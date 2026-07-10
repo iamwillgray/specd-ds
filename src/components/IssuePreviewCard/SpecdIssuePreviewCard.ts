@@ -40,6 +40,42 @@ export class SpecdIssuePreviewCard extends LitElement {
   @property({ type: String })  tags: string                       = '[]';
   @property({ type: Boolean }) expanded: boolean                  = false;
 
+  /** Initial children captured before Lit replaces them with the render template */
+  private _capturedSlot: Node[] = [];
+
+  override connectedCallback() {
+    super.connectedCallback();
+    // Capture original children so we can re-insert them into .issue-fixes-panel
+    if (!this._capturedSlot.length) {
+      this._capturedSlot = Array.from(this.childNodes).filter(n => {
+        if (n.nodeType === Node.TEXT_NODE) return (n.textContent || '').trim().length > 0;
+        return n.nodeType === Node.ELEMENT_NODE;
+      });
+    }
+  }
+
+  override updated() {
+    // Move captured children into the .issue-fixes-panel when expanded.
+    // Also remove any stray captured nodes that ended up outside the card
+    // (Lit light-DOM doesn't project <slot> automatically).
+    const panel = this.querySelector(':scope > .issue-card > .issue-fixes-panel') as HTMLElement | null;
+    if (this.expanded && panel) {
+      this._capturedSlot.forEach(node => {
+        if (node.parentNode !== panel) panel.appendChild(node);
+      });
+    } else {
+      // Detach so they don't appear as floating siblings
+      this._capturedSlot.forEach(node => {
+        if (node.parentNode && node.parentNode !== this) {
+          // already in a parent (panel removed when collapsed), nothing to do
+        } else if (node.parentNode === this) {
+          // direct child of host — remove from view by detaching
+          this.removeChild(node);
+        }
+      });
+    }
+  }
+
   private _parsedTags(): IssueTag[] {
     try { return JSON.parse(this.tags) as IssueTag[]; } catch { return []; }
   }
@@ -96,16 +132,14 @@ export class SpecdIssuePreviewCard extends LitElement {
               this.expanded = !this.expanded;
               this._fire('specd-fixes');
             }}>
-            View Fixes
+            ${this.expanded ? 'Hide Fixes' : 'View Fixes'}
             ${badgeCount && badgeCount !== '!' ? html`<span class="view-fixes-count">${badgeCount}</span>` : nothing}
           </button>
         </div>
 
-        <!-- Expandable fixes panel -->
+        <!-- Expandable fixes panel — children injected via updated() since light DOM has no <slot> -->
         ${this.expanded ? html`
-          <div class="issue-fixes-panel">
-            <slot></slot>
-          </div>
+          <div class="issue-fixes-panel"></div>
         ` : nothing}
 
       </div>

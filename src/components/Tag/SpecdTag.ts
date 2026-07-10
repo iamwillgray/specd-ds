@@ -1,7 +1,7 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-export type TagIntent = 'crit' | 'warn' | 'info' | 'neutral';
+export type TagIntent = 'crit' | 'warn' | 'info' | 'neutral' | 'success';
 
 /**
  * Specd DS — Tag

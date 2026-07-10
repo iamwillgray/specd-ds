@@ -62,8 +62,21 @@ describe('SpecdTabBar', () => {
 
   it('badge renders when provided', async () => {
     const el = await makeElement({ tabs: TABS, active: 'overview' });
-    const badge = el.querySelector('.tab-badge');
+    // The tab bar now always renders a .tab-badge per tab (empty ones get the
+    // `hidden` class) so the host can address them via [data-badge-for]. The
+    // visible badge is the one carrying a value.
+    const badge = el.querySelector('.tab-badge:not(.hidden)');
     expect(badge).not.toBeNull();
     expect(badge?.textContent?.trim()).toBe('7');
+    // It belongs to the tab that declared badge: 7.
+    expect(badge?.getAttribute('data-badge-for')).toBe('issues');
+  });
+
+  it('renders a hidden badge placeholder for tabs without a badge', async () => {
+    const el = await makeElement({ tabs: TABS, active: 'overview' });
+    const overviewBadge = el.querySelector('.tab-badge[data-badge-for="overview"]');
+    expect(overviewBadge).not.toBeNull();
+    expect(overviewBadge?.classList.contains('hidden')).toBe(true);
+    expect(overviewBadge?.textContent?.trim()).toBe('');
   });
 });

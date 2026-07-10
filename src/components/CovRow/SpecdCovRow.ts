@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { CovTier } from './SpecdCovRow.types.js';
+import '../HealthTag/SpecdHealthTag.js';
 
 @customElement('specd-cov-row')
 export class SpecdCovRow extends LitElement {
@@ -32,7 +33,7 @@ export class SpecdCovRow extends LitElement {
           <span class="cov-label">${this.label}</span>
         </div>
         <div class="cov-scoring">
-          <span class="cov-status-chip tier-${t}">${chipLabel}</span>
+          <specd-health-tag tier=${t} label=${chipLabel} size="xs" nodot></specd-health-tag>
           <div class="cov-bar-track">
             <div class="cov-fill ${fillClass}" style=${styleMap({ width: `${this.pct}%` })}></div>
           </div>

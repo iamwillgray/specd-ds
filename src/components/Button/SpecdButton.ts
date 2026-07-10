@@ -56,6 +56,12 @@ export class SpecdButton extends LitElement {
     // row-primary-ghost maps to two CSS classes (base + modifier)
     if (this.variant === 'row-primary-ghost') {
       variantClass = 'btn-row-primary btn-hc-ghost';
+    } else if (this.variant === 'ai-gradient') {
+      // ai-gradient maps to dedicated CSS class with gradient border
+      variantClass = 'btn-ai-gradient';
+    } else if (this.variant === 'pulse') {
+      // pulse maps to dedicated gradient CTA class
+      variantClass = 'btn-pulse';
     } else {
       variantClass = `btn-${this.variant}`;
     }

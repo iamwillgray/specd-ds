@@ -15,7 +15,7 @@ const distDir = join(root, 'dist');
 mkdirSync(distDir, { recursive: true });
 
 // tokens.css = colors + typography + spacing (no component rules)
-const tokenFiles = ['colors.css', 'typography.css', 'spacing.css'];
+const tokenFiles = ['colors.css', 'typography.css', 'spacing.css', 'motion.css'];
 const tokensCss = tokenFiles
   .map(f => `/* === ${f} === */\n` + readFileSync(join(tokensDir, f), 'utf8'))
   .join('\n');

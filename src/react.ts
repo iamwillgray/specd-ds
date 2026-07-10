@@ -32,7 +32,7 @@ import { SpecdEmptyState }    from './components/EmptyState/SpecdEmptyState.js';
 import { SpecdBreadcrumb }    from './components/Breadcrumb/SpecdBreadcrumb.js';
 import { SpecdPagination }    from './components/Pagination/SpecdPagination.js';
 import { SpecdStepper }       from './components/Stepper/SpecdStepper.js';
-import { SpecdHealthBadge }   from './components/HealthBadge/SpecdHealthBadge.js';
+import { SpecdHealthTag }     from './components/HealthTag/SpecdHealthTag.js';
 import { SpecdAiPill }        from './components/AiPill/SpecdAiPill.js';
 import { SpecdJumpBtn }       from './components/JumpBtn/SpecdJumpBtn.js';
 import { SpecdSeverityHeader } from './components/SeverityHeader/SpecdSeverityHeader.js';
@@ -218,11 +218,11 @@ export const Stepper = createComponent({
   events: {},
 });
 
-/** Auto-generated React wrapper for <specd-health-badge>. Do not hand-edit. */
-export const HealthBadge = createComponent({
+/** Auto-generated React wrapper for <specd-health-tag>. Do not hand-edit. */
+export const HealthTag = createComponent({
   react: React,
-  tagName: 'specd-health-badge',
-  elementClass: SpecdHealthBadge,
+  tagName: 'specd-health-tag',
+  elementClass: SpecdHealthTag,
   events: {},
 });
 

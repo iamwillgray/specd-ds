@@ -32,29 +32,32 @@ describe('SpecdCovRow', () => {
     expect(el.querySelector('.cov-pct')?.textContent?.trim()).toBe('75%');
   });
 
+  // The status chip is now rendered as a <specd-health-tag tier="..."> element
+  // (migrated from the legacy <span class="cov-status-chip tier-...">). Assert
+  // the derived tier via the component's reflected `tier` attribute.
   it('applies tier-excellent chip for pct >= 80', async () => {
     const el = await makeElement({ label: 'Descriptions', pct: '94' });
-    expect(el.querySelector('.cov-status-chip')?.className).toContain('tier-excellent');
+    expect(el.querySelector('specd-health-tag')?.getAttribute('tier')).toBe('excellent');
   });
 
   it('applies tier-good chip for pct = 65', async () => {
     const el = await makeElement({ label: 'Doc Links', pct: '65' });
-    expect(el.querySelector('.cov-status-chip')?.className).toContain('tier-good');
+    expect(el.querySelector('specd-health-tag')?.getAttribute('tier')).toBe('good');
   });
 
   it('applies tier-med chip for pct = 45', async () => {
     const el = await makeElement({ label: 'Token Coverage', pct: '45' });
-    expect(el.querySelector('.cov-status-chip')?.className).toContain('tier-med');
+    expect(el.querySelector('specd-health-tag')?.getAttribute('tier')).toBe('med');
   });
 
   it('applies tier-poor chip for pct = 20', async () => {
     const el = await makeElement({ label: 'Dev Status', pct: '20' });
-    expect(el.querySelector('.cov-status-chip')?.className).toContain('tier-poor');
+    expect(el.querySelector('specd-health-tag')?.getAttribute('tier')).toBe('poor');
   });
 
   it('explicit tier attr overrides derived tier', async () => {
     const el = await makeElement({ label: 'Descriptions', pct: '94', tier: 'poor' });
-    expect(el.querySelector('.cov-status-chip')?.className).toContain('tier-poor');
+    expect(el.querySelector('specd-health-tag')?.getAttribute('tier')).toBe('poor');
   });
 
   it('renders .cov-fill with correct width style', async () => {

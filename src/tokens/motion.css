@@ -1,0 +1,49 @@
+/* Admiral DS — Motion tokens
+ *
+ * Centralised easing curves + duration ladder. Every animated component pulls
+ * from this vocabulary so motion feels cohesive across the suite.
+ *
+ * Curves: stronger than the built-in `ease` family. Built-in easings lack the
+ * punch that makes UI feel intentional — these custom cubic-beziers give
+ * presence to entrances and crispness to exits.
+ *
+ * Duration ladder: capped under 300ms for UI. Modals/drawers slightly longer.
+ */
+
+:root {
+  /* ── EASING ─────────────────────────────────────────────── */
+
+  /* Strong ease-out for UI entrances + interactions (starts fast). */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Strong ease-in-out for on-screen movement. */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* iOS-feel drawer curve (from Ionic). Use for sheets, drawers, slide-overs. */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Toast emphasis curve (overshoot-free spring approximation). */
+  --ease-toast: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── DURATION LADDER ────────────────────────────────────── */
+
+  --duration-instant: 100ms; /* press-feedback, scale on :active */
+  --duration-fast:    160ms; /* tooltips, hovers, toggles, chips */
+  --duration-base:    200ms; /* dropdowns, popovers, buttons     */
+  --duration-slow:    260ms; /* progress bars, score transitions */
+  --duration-modal:   220ms; /* modal + drawer entrances         */
+  --duration-exit:    160ms; /* every exit should be faster than entry */
+}
+
+/* ── REDUCED MOTION ───────────────────────────────────────────
+ * Strip transform-based motion; keep opacity + colour transitions so state
+ * changes remain comprehensible. Per WCAG 2.3.3.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
