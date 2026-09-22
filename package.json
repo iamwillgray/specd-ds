@@ -13,6 +13,10 @@
     "./react": {
       "import": "./dist/react/index.esm.js"
     },
+    "./core": {
+      "import": "./dist/core/index.esm.js",
+      "require": "./dist/core/index.cjs.js"
+    },
     "./tokens.css": "./dist/tokens.css",
     "./components.css": "./dist/components.css"
   },
@@ -22,9 +26,10 @@
   ],
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "npm run build:wc && npm run build:react && npm run build:css",
+    "build": "npm run build:wc && npm run build:react && npm run build:core && npm run build:css",
     "build:wc": "vite build",
     "build:react": "vite build --config vite.react.config.ts",
+    "build:core": "vite build --config vite.core.config.ts",
     "build:css": "node scripts/build-css.mjs",
     "build:analyze": "cem analyze --globs 'src/**/*.ts' --outdir dist",
     "build:storybook": "storybook build",
