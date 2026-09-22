@@ -84,3 +84,6 @@ export * from './components/MicroScore/index.js';
 export * from './components/CheckItem/index.js';
 export * from './components/DiffRow/index.js';
 export * from './components/StageBar/index.js';
+
+export { suggestVariables, buildContextFromLayerDetail } from './core/variableMatcher.js';
+export type { IndexedVariable, RankedSuggestion, LayerPropertyContext } from './core/variableMatcher.js';
