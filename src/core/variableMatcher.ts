@@ -402,8 +402,11 @@ function contextMatches(
 
 /**
  * buildContextFromLayerDetail
- * Converts the HardCodedLayerDetail property field into a LayerPropertyContext.
- * Called from the scanner/issues layer to build context for suggestions.
+ * Converts a raw property name (e.g. "fill", "padding", "fontSize") plus a
+ * raw Figma node type string into a structured LayerPropertyContext, so a
+ * caller working with plain scan-result data (not this module's own types)
+ * can build the context suggestVariables() expects without hand-assembling
+ * the union itself. Unrecognized property names fall back to "other".
  */
 export function buildContextFromLayerDetail(
   property: string,

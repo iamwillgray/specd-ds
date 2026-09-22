@@ -87,6 +87,86 @@ describe('suggestVariables', () => {
     const results = suggestVariables('#000000', { property: 'fill', nodeType: 'FRAME' }, many, 3)
     expect(results.length).toBeLessThanOrEqual(3)
   })
+
+  it('applies the error-state keyword bonus regardless of property context', () => {
+    const errorVar = makeVar({ name: 'color/error/critical', collectionName: 'Misc' })
+    const results = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'SHAPE' }, [errorVar])
+    expect(results[0].matchReason).toContain('Error state keyword')
+  })
+
+  it('applies the success-state keyword bonus', () => {
+    const successVar = makeVar({ name: 'color/success/positive', collectionName: 'Misc' })
+    const results = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'SHAPE' }, [successVar])
+    expect(results[0].matchReason).toContain('Success state keyword')
+  })
+
+  it('applies the warning-state keyword bonus', () => {
+    const warningVar = makeVar({ name: 'color/warning/caution', collectionName: 'Misc' })
+    const results = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'SHAPE' }, [warningVar])
+    expect(results[0].matchReason).toContain('Warning state keyword')
+  })
+
+  it('applies the info-state keyword bonus', () => {
+    const infoVar = makeVar({ name: 'color/info/notice', collectionName: 'Misc' })
+    const results = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'SHAPE' }, [infoVar])
+    expect(results[0].matchReason).toContain('Info state keyword')
+  })
+
+  it('penalises spacing/sizing keywords in a TEXT fill context via anti-rules', () => {
+    const sizingNamed = makeVar({ name: 'color-font-size-large', collectionName: 'Misc' })
+    const plain = makeVar({ name: 'color-large', collectionName: 'Misc' })
+    const a = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'TEXT' }, [sizingNamed])
+    const b = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'TEXT' }, [plain])
+    expect(a[0]?.score ?? 0).toBeLessThan(b[0]?.score ?? 0)
+  })
+
+  it('penalises spacing keywords in a FRAME fill context via anti-rules', () => {
+    const spacingNamed = makeVar({ name: 'color-padding-large', collectionName: 'Misc' })
+    const plain = makeVar({ name: 'color-large', collectionName: 'Misc' })
+    const a = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'FRAME' }, [spacingNamed])
+    const b = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'FRAME' }, [plain])
+    expect(a[0]?.score ?? 0).toBeLessThan(b[0]?.score ?? 0)
+  })
+
+  it('penalises colour/spacing keywords in a cornerRadius context via anti-rules', () => {
+    const colourNamed = makeVar({ name: 'radius-color-8', resolvedType: 'FLOAT', resolvedValue: '8', collectionName: 'Misc' })
+    const plain = makeVar({ name: 'radius-8', resolvedType: 'FLOAT', resolvedValue: '8', collectionName: 'Misc' })
+    const a = suggestVariables('8', { property: 'cornerRadius' }, [colourNamed])
+    const b = suggestVariables('8', { property: 'cornerRadius' }, [plain])
+    expect(a[0]?.score ?? 0).toBeLessThan(b[0]?.score ?? 0)
+  })
+
+  it('prioritises "gap" over generic spacing keywords for itemSpacing context', () => {
+    const gapNamed = makeVar({ name: 'item-gap-8', resolvedType: 'FLOAT', resolvedValue: '8', collectionName: 'Misc' })
+    const spacingNamed = makeVar({ name: 'item-spacing-8', resolvedType: 'FLOAT', resolvedValue: '8', collectionName: 'Misc' })
+    const results = suggestVariables('8', { property: 'itemSpacing' }, [spacingNamed, gapNamed])
+    expect(results[0].variable.name).toBe('item-gap-8')
+  })
+
+  it('penalises unpublished local variables', () => {
+    const unpublished = makeVar({ name: 'brand/accent', collectionName: 'Misc', publishStatus: 'UNPUBLISHED' })
+    const published = makeVar({ name: 'brand/accent', collectionName: 'Misc', publishStatus: 'CURRENT' })
+    const a = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'FRAME' }, [unpublished])
+    const b = suggestVariables('#zzzzzz', { property: 'fill', nodeType: 'FRAME' }, [published])
+    expect(a[0]?.score ?? 0).toBeLessThan(b[0]?.score ?? 0)
+  })
+
+  it('clamps score to a maximum of 100 even when many bonuses stack', () => {
+    // Exact match (30) + text keyword (15) + semantic collection (8) +
+    // brand keyword (5) + CURRENT (3) + remote (2) = 63 unclamped here,
+    // but stacking several exact-match-adjacent bonuses on a single var
+    // that also wins every applicable rule should never exceed 100.
+    const stacked = makeVar({
+      name: 'primary text foreground accent',
+      resolvedValue: '#ff0000',
+      collectionName: 'Semantic',
+      publishStatus: 'CURRENT',
+      isRemote: true,
+      libraryName: 'Acme DS',
+    })
+    const results = suggestVariables('#ff0000', { property: 'fill', nodeType: 'TEXT' }, [stacked])
+    expect(results[0].score).toBeLessThanOrEqual(100)
+  })
 })
 
 describe('buildContextFromLayerDetail', () => {
@@ -101,5 +181,32 @@ describe('buildContextFromLayerDetail', () => {
   })
   it('maps an unrecognized property to "other"', () => {
     expect(buildContextFromLayerDetail('unknown-prop', 'FRAME')).toEqual({ property: 'other' })
+  })
+  it('maps stroke to a stroke context', () => {
+    expect(buildContextFromLayerDetail('stroke', 'FRAME')).toEqual({ property: 'stroke' })
+  })
+  it('maps padding to a padding context', () => {
+    expect(buildContextFromLayerDetail('padding', 'FRAME')).toEqual({ property: 'padding' })
+  })
+  it('maps gap to a gap context', () => {
+    expect(buildContextFromLayerDetail('gap', 'FRAME')).toEqual({ property: 'gap' })
+  })
+  it('maps itemSpacing to an itemSpacing context', () => {
+    expect(buildContextFromLayerDetail('itemSpacing', 'FRAME')).toEqual({ property: 'itemSpacing' })
+  })
+  it('maps cornerRadius to a cornerRadius context', () => {
+    expect(buildContextFromLayerDetail('cornerRadius', 'FRAME')).toEqual({ property: 'cornerRadius' })
+  })
+  it('maps fontSize to a fontSize context', () => {
+    expect(buildContextFromLayerDetail('fontSize', 'TEXT')).toEqual({ property: 'fontSize' })
+  })
+  it('maps lineHeight to a lineHeight context', () => {
+    expect(buildContextFromLayerDetail('lineHeight', 'TEXT')).toEqual({ property: 'lineHeight' })
+  })
+  it('maps letterSpacing to a letterSpacing context', () => {
+    expect(buildContextFromLayerDetail('letterSpacing', 'TEXT')).toEqual({ property: 'letterSpacing' })
+  })
+  it('maps opacity to an opacity context', () => {
+    expect(buildContextFromLayerDetail('opacity', 'FRAME')).toEqual({ property: 'opacity' })
   })
 })
