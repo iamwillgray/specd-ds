@@ -71,6 +71,8 @@ export { SpecdPropFixSlot }     from './components/PropFixRow/SpecdPropFixSlot.j
 export { SpecdPropFixCreate }   from './components/PropFixRow/SpecdPropFixCreate.js';
 export { SpecdVariablePicker } from './components/VariablePicker/SpecdVariablePicker.js';
 export type { VariableOption } from './components/VariablePicker/SpecdVariablePicker.js';
+export { SpecdComponentPicker } from './components/ComponentPicker/SpecdComponentPicker.js';
+export type { ComponentOption } from './components/ComponentPicker/SpecdComponentPicker.js';
 export { SpecdDataTable } from './components/DataTable/SpecdDataTable.js';
 export type { DataTableColumn } from './components/DataTable/SpecdDataTable.js';
 export { SpecdTag } from './components/Tag/SpecdTag.js';
