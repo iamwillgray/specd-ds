@@ -22,6 +22,18 @@ export default defineConfig({
     dts({
       outDir: 'dist/core',
       insertTypesEntry: true,
+      // Without entryRoot, output paths are relative to the project root,
+      // so src/core/index.ts's declaration lands at dist/core/core/index.d.ts
+      // (nested) instead of dist/core/index.d.ts (flat, matching where the
+      // JS entry actually lands) — this flattens it.
+      entryRoot: 'src/core',
+      // Without an explicit include, vite-plugin-dts walks the whole
+      // tsconfig `include` (all of src/, every component) and emits a
+      // .d.ts for each — hundreds of irrelevant files bloating this
+      // DOM-less build's output for no reason. Scope it to just this
+      // entry's own subtree.
+      include: ['src/core/**/*.ts'],
+      exclude: ['src/core/**/*.test.ts'],
     }),
   ],
 });
