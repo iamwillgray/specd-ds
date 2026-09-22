@@ -129,7 +129,7 @@ export class SpecdComponentPicker extends LitElement {
     if (!this.open) return nothing;
 
     return html`
-      <div class="variable-picker-modal">
+      <div class="picker-modal">
         <div class="vp-header">
           <span class="vp-title">${this.title}</span>
           <button class="btn-ghost vp-close" type="button"

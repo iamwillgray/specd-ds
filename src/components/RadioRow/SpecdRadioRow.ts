@@ -5,17 +5,23 @@ import { styleMap } from 'lit/directives/style-map.js';
 /**
  * Specd DS — RadioRow
  *
- * A selectable replacement option row. Used in the Quick Fix wizard and
- * Variable Picker to let the user choose between token candidates.
+ * A selectable replacement option row. Used in the Quick Fix wizard,
+ * Variable Picker, and Component Picker to let the user choose between
+ * candidate options.
  *
- * Layout: [radio indicator] [body: name + collection + hex] [color swatch]
+ * Layout: [radio indicator] [body: name + sublabel + hex] [color swatch]
  *
  * @element specd-radio-row
  *
  * @attr {string}  value      - Unique value for this option (used in specd-change event)
  * @attr {boolean} checked    - Whether this row is currently selected
- * @attr {string}  label      - Variable / token name (primary text)
- * @attr {string}  collection - Collection name shown below the label
+ * @attr {string}  label      - Primary text (variable/token name, or component name)
+ * @attr {string}  collection - Sublabel shown below the label — meaning varies by
+ *                              caller: a token collection name (Variable Picker) or
+ *                              a source library name (Component Picker). Generic on
+ *                              purpose; name kept for backward compatibility with
+ *                              existing callers rather than renamed to something
+ *                              caller-agnostic like "sublabel".
  * @attr {string}  color      - CSS color value for the preview swatch (optional)
  * @attr {string}  hex        - Hex string shown inline in the collection line (optional)
  *

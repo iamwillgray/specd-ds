@@ -20,7 +20,7 @@ describe('SpecdVariablePicker', () => {
     el.options = OPTS;
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.variable-picker-modal')).toBeNull();
+    expect(el.querySelector('.picker-modal')).toBeNull();
     el.remove();
   });
 
@@ -30,7 +30,7 @@ describe('SpecdVariablePicker', () => {
     el.options = OPTS;
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.variable-picker-modal')).not.toBeNull();
+    expect(el.querySelector('.picker-modal')).not.toBeNull();
     el.remove();
   });
 

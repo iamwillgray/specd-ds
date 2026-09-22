@@ -20,7 +20,7 @@ describe('SpecdComponentPicker', () => {
     el.options = OPTS;
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.variable-picker-modal')).toBeNull();
+    expect(el.querySelector('.picker-modal')).toBeNull();
     el.remove();
   });
 
@@ -30,7 +30,7 @@ describe('SpecdComponentPicker', () => {
     el.options = OPTS;
     document.body.appendChild(el);
     await el.updateComplete;
-    expect(el.querySelector('.variable-picker-modal')).not.toBeNull();
+    expect(el.querySelector('.picker-modal')).not.toBeNull();
     el.remove();
   });
 
@@ -54,6 +54,19 @@ describe('SpecdComponentPicker', () => {
     const titles = Array.from(el.querySelectorAll('.vp-section-title')).map((h: any) => h.textContent.trim());
     expect(titles).toContain('Suggested');
     expect(titles).toContain('All Components');
+    el.remove();
+  });
+
+  it('section meta shows correct count', async () => {
+    const el = document.createElement('specd-component-picker') as any;
+    el.open = true;
+    el.options = OPTS;
+    el.suggestions = SUGG;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    const metas = el.querySelectorAll('.vp-section-meta');
+    expect(metas[0]?.textContent?.trim()).toBe('1 result');
+    expect(metas[1]?.textContent?.trim()).toBe('2 results');
     el.remove();
   });
 

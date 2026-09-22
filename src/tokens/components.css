@@ -2708,9 +2708,9 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
-/* ── VARIABLE PICKER MODAL (plugin: .variable-picker-modal) ─ */
+/* ── PICKER MODAL (shared shell: specd-variable-picker + specd-component-picker) ─ */
 /* Selected state uses navy (not green) — matches plugin exactly */
-.variable-picker-modal {
+.picker-modal {
   width: 100%; background: #fff; border-radius: 16px;
   box-shadow: 0 20px 60px rgba(12,31,63,0.25);
   display: flex; flex-direction: column; overflow: hidden;
