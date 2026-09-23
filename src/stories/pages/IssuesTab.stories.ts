@@ -20,6 +20,9 @@ import '../../components/Tag/SpecdTag.js';
 const LOGO_SVG = `<svg width="32" height="32" viewBox="0 0 48 48" fill="none"><rect x="17" y="24.2427" width="10.2426" height="10.2426" rx="2" transform="rotate(-45 17 24.2427)" fill="white"/><rect x="12.7071" y="24.101" width="16.1133" height="16.1133" rx="4.5" transform="rotate(-45 12.7071 24.101)" stroke="white" stroke-width="1.2"/><rect x="7.70711" y="23.9664" width="22.9942" height="23.0891" rx="7.5" transform="rotate(-45 7.70711 23.9664)" stroke="white" stroke-width="1.2"/></svg>`;
 const DIAMOND_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3l9 9-9 9-9-9 9-9z"/></svg>`;
 const JUMP_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M8 7h9v9"/></svg>`;
+const SPARKLE_SVG = `<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.75 12C15.9498 12 16.1308 12.1186 16.209 12.3027L16.8809 13.8691L18.4473 14.541C18.6314 14.6192 18.75 14.8002 18.75 15C18.75 15.1998 18.6314 15.3808 18.4473 15.459L16.8809 16.1309L16.209 17.6973C16.1308 17.8814 15.9498 18 15.75 18C15.5502 18 15.3692 17.8814 15.291 17.6973L14.6191 16.1309L13.0527 15.459C12.8686 15.3808 12.75 15.1998 12.75 15C12.75 14.8002 12.8686 14.6192 13.0527 14.541L14.6191 13.8691L15.291 12.3027C15.3692 12.1186 15.5502 12 15.75 12ZM12.9219 9.8623L5.23438 17.5498C5.13483 17.6479 5.00476 17.7002 4.875 17.7002C4.7774 17.7002 4.67957 17.6706 4.59473 17.6143L4.51562 17.5498L3.2002 16.2344C3.1021 16.1348 3.0498 16.0048 3.0498 15.875C3.0498 15.7774 3.0794 15.6796 3.13574 15.5947L3.2002 15.5156L10.8877 7.82812L12.9219 9.8623ZM4.25 3.5C4.44983 3.5 4.63075 3.61863 4.70898 3.80273L5.38086 5.36914L6.94727 6.04102C7.13137 6.11925 7.25 6.30017 7.25 6.5C7.25 6.69983 7.13137 6.88075 6.94727 6.95898L5.38086 7.63086L4.70898 9.19727C4.63075 9.38137 4.44983 9.5 4.25 9.5C4.05017 9.5 3.86925 9.38137 3.79102 9.19727L3.11914 7.63086L1.55273 6.95898C1.36863 6.88075 1.25 6.69983 1.25 6.5C1.25 6.30017 1.36863 6.11925 1.55273 6.04102L3.11914 5.36914L3.79102 3.80273C3.86925 3.61863 4.05017 3.5 4.25 3.5ZM15.625 3.2998C15.7548 3.2998 15.8848 3.3521 15.9844 3.4502L17.2998 4.76562L17.3643 4.84473C17.4206 4.92957 17.4502 5.0274 17.4502 5.125C17.4502 5.25476 17.3979 5.38483 17.2998 5.48438L15.1123 7.67188L13.0781 5.6377L15.2656 3.4502C15.3652 3.3521 15.4952 3.2998 15.625 3.2998ZM9.25 1.5C9.35 1.5 9.44394 1.5625 9.48145 1.65625L9.94336 2.80664L11.0938 3.26855C11.1875 3.30605 11.25 3.4 11.25 3.5C11.25 3.6 11.1875 3.69395 11.0938 3.73145L9.94336 4.19336L9.48145 5.34375C9.44394 5.4375 9.35 5.5 9.25 5.5C9.15 5.5 9.05605 5.4375 9.01855 5.34375L8.55664 4.19336L7.40625 3.73145C7.3125 3.69395 7.25 3.6 7.25 3.5C7.25 3.4 7.3125 3.30605 7.40625 3.26855L8.55664 2.80664L9.01855 1.65625C9.05605 1.5625 9.15 1.5 9.25 1.5Z" fill="currentColor"/></svg>`;
+const BROWSE_SVG = `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 15.502C16.2769 15.502 16.4998 15.7251 16.5 16.002C16.5 16.2789 16.277 16.502 16 16.502H4C3.72302 16.502 3.5 16.2789 3.5 16.002C3.5002 15.7251 3.72314 15.502 4 15.502H16ZM11 11.502C11.2769 11.502 11.4998 11.7251 11.5 12.002C11.5 12.2789 11.277 12.502 11 12.502H4C3.72302 12.502 3.5 12.2789 3.5 12.002C3.5002 11.7251 3.72314 11.502 4 11.502H11ZM16 7.50195C16.2769 7.50195 16.4998 7.72514 16.5 8.00195C16.5 8.27894 16.277 8.50195 16 8.50195H4C3.72302 8.50195 3.5 8.27894 3.5 8.00195C3.5002 7.72514 3.72314 7.50195 4 7.50195H16ZM11 3.50195C11.2769 3.50195 11.4998 3.72514 11.5 4.00195C11.5 4.27894 11.277 4.50195 11 4.50195H4C3.72302 4.50195 3.5 4.27894 3.5 4.00195C3.5002 3.72514 3.72314 3.50195 4 3.50195H11Z" fill="currentColor"/></svg>`;
+const LANDING_ARROW_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
 
 const meta: Meta = {
   title: 'Pages/IssuesTab',
@@ -534,6 +537,42 @@ const issuesComponentContent = () => html`
   </div>
 `;
 
+/** "What would you like to do?" landing screen — shown before the browse list.
+ * Ported verbatim (copy + structure) from pulse/src/ui.html #issues-landing,
+ * which was completely absent from this story (confirmed gap, item 1). */
+const issuesLandingContent = () => html`
+  <div class="issues-landing">
+    <div class="issues-landing-header">
+      <span class="t-label">Issues</span>
+      <h2 class="t-heading">What would you like to do?</h2>
+    </div>
+    <div class="issues-landing-grid">
+      <button class="issues-landing-card issues-landing-card-dark">
+        <div class="issues-landing-card-top">
+          <div class="issues-landing-card-icon">${unsafeSVG(SPARKLE_SVG)}</div>
+          ${unsafeSVG(LANDING_ARROW_SVG)}
+        </div>
+        <div class="issues-landing-card-body">
+          <div class="issues-landing-card-title">Quick-Fix Issues</div>
+          <div class="issues-landing-card-sub">Apply variable updates and component fixes with just one click. Auto-fix will guide you through the available fixes, update on bulk or fix issues one-by-one.</div>
+          <div class="issues-landing-count issues-landing-count-lime">33 fixable</div>
+        </div>
+      </button>
+      <button class="issues-landing-card issues-landing-card-light">
+        <div class="issues-landing-card-top">
+          <div class="issues-landing-card-icon">${unsafeSVG(BROWSE_SVG)}</div>
+          ${unsafeSVG(LANDING_ARROW_SVG)}
+        </div>
+        <div class="issues-landing-card-body">
+          <div class="issues-landing-card-title">Browse all issues</div>
+          <div class="issues-landing-card-sub">Filter and search issues by type, severity or component name. A larger overview to review, fix and understand all your issues in one place.</div>
+          <div class="issues-landing-count issues-landing-count-blue">47 total</div>
+        </div>
+      </button>
+    </div>
+  </div>
+`;
+
 const sectionBlock = (name: string, content: TemplateResult) => html`
   <div style="display:flex; flex-direction:column; gap:8px;">
     <div style="font:600 11px 'IBM Plex Mono',monospace; color:#9ca3af; text-transform:uppercase; letter-spacing:0.08em; padding:0 2px;">${name}</div>
@@ -549,6 +588,16 @@ export const PluginView: Story = {
     <div class="plugin-wrap">
       ${componentShell()}
       ${issuesComponentContent()}
+    </div>
+  `,
+};
+
+export const Landing: Story = {
+  name: 'Landing (What would you like to do?)',
+  render: () => html`
+    <div class="plugin-wrap">
+      ${componentShell()}
+      ${issuesLandingContent()}
     </div>
   `,
 };

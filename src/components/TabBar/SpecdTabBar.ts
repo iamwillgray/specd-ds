@@ -51,8 +51,13 @@ export class SpecdTabBar extends LitElement {
     return html`
       <nav class="tab-bar-v2" style=${gridStyle}>
         ${tabs.map(t => {
-          const cls = `tab-v2 ${this.active === t.id ? 'active' : ''}`;
+          const isActive = this.active === t.id;
+          const cls = `tab-v2 ${isActive ? 'active' : ''}`;
           const dataPart = dataAttrStr(t.data);
+          // Filled variant when active (if the tab defines one) — a second
+          // signal beyond the pill background, per HIG's outline/fill pairing
+          // for selected states. Falls back to the outline icon otherwise.
+          const icon = (isActive && t.iconActive) ? t.iconActive : (t.icon ?? '');
           // Always render a badge span (hidden when no value) so the host can
           // address it via `[data-badge-for="${id}"]` even before a count is
           // known. This restores the addressable pattern the original Pulse
@@ -61,7 +66,7 @@ export class SpecdTabBar extends LitElement {
           const badgeText = hasBadge ? String(t.badge) : '';
           const badgeHidden = hasBadge ? '' : ' hidden';
           const badgeHtml = `<span class="tab-badge${badgeHidden}" data-badge-for="${t.id}">${badgeText}</span>`;
-          const buttonHtml = `<button class="${cls}" data-tab-id="${t.id}" ${dataPart}>${t.icon ?? ''}${t.label}${badgeHtml}</button>`;
+          const buttonHtml = `<button class="${cls}" data-tab-id="${t.id}" ${dataPart}>${icon}${t.label}${badgeHtml}</button>`;
           return html`${unsafeHTML(buttonHtml)}`;
         })}
       </nav>

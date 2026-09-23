@@ -263,6 +263,32 @@ const overviewRawContent = () => html`
       </div>
     </div>
 
+    <!-- Library Freshness (PAT + libraries connected) -->
+    <div class="freshness-section">
+      <div class="freshness-head">
+        <div>
+          <div class="section-title-lg">Library Freshness</div>
+          <div class="freshness-sub">Last checked 2 minutes ago · scan May 19, 2026, 9:41 AM</div>
+        </div>
+        <button type="button" class="btn-bulk-apply ghost">Check now</button>
+      </div>
+      <div class="freshness-grid">
+        <div class="freshness-tile ft-fresh"><div class="ft-num">92%</div><div class="ft-label">Fresh</div></div>
+        <div class="freshness-tile"><div class="ft-num">12</div><div class="ft-label">Checked</div></div>
+        <div class="freshness-tile ft-stale"><div class="ft-num">1</div><div class="ft-label">Outdated</div></div>
+        <div class="freshness-list">
+          <div class="freshness-row">
+            <div><div class="lib-name">Acme Design Tokens</div><div style="font-size:10px;color:var(--text-muted);">Updated May 18, 2026, 4:02 PM</div></div>
+            <span class="lib-state fresh">Fresh</span>
+          </div>
+          <div class="freshness-row">
+            <div><div class="lib-name">Brand Primitives</div><div style="font-size:10px;color:var(--text-muted);">Updated May 19, 2026, 11:20 AM</div></div>
+            <span class="lib-state stale">Outdated</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Health Map -->
     <div style="padding:10px 12px 14px;">
       <div class="ov-health-top">
@@ -327,13 +353,13 @@ const overviewComponentContent = () => html`
     <div class="coverage-wrap">
       <div class="coverage-table">
         <specd-section-label label="Overview Report"></specd-section-label>
-        <specd-cov-row label="Descriptions" pct="78" .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 6h16M4 10h16M4 14h10"/></svg>'}></specd-cov-row>
-        <specd-cov-row label="Doc Links" pct="45" .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'}></specd-cov-row>
-        <specd-cov-row label="Variable Coverage" pct="63" .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>'}></specd-cov-row>
-        <specd-cov-row label="Untracked Changes" pct="12" .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3.51-7.13"/><polyline points="21 4 21 10 15 10"/></svg>'}></specd-cov-row>
-        <specd-cov-row label="Ready for Dev" pct="71" .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'}></specd-cov-row>
-        <specd-cov-row label="Storybook Sync" pct="32" .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>'}></specd-cov-row>
-        <specd-cov-row label="Code Links" pct="88" .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'}></specd-cov-row>
+        <specd-cov-row label="Descriptions" pct="78" hint="Percentage of components with a non-empty description field set in Figma." .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 6h16M4 10h16M4 14h10"/></svg>'}></specd-cov-row>
+        <specd-cov-row label="Doc Links" pct="45" hint="Percentage of components with a valid documentation link in their description or dev-mode links." .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'}></specd-cov-row>
+        <specd-cov-row label="Variable Coverage" pct="63" hint="Percentage of fill, stroke, spacing, and typography properties bound to a variable or style instead of a hard-coded value." .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>'}></specd-cov-row>
+        <specd-cov-row label="Untracked Changes" pct="12" hint="Percentage of published components with local edits that haven't been re-published to the library." .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3.51-7.13"/><polyline points="21 4 21 10 15 10"/></svg>'}></specd-cov-row>
+        <specd-cov-row label="Ready for Dev" pct="71" hint="Percentage of components with a Dev Mode status of Ready for Dev or Completed." .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'}></specd-cov-row>
+        <specd-cov-row label="Storybook Sync" pct="32" hint="Percentage of components matched to a Storybook story by name, or with an existing Storybook doc link." .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>'}></specd-cov-row>
+        <specd-cov-row label="Code Links" pct="88" hint="Percentage of components with a verified Code Connect mapping to a source repo component." .icon=${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'}></specd-cov-row>
       </div>
     </div>
 
@@ -355,6 +381,31 @@ const overviewComponentContent = () => html`
         <specd-stat-tile-lg color="green" num="134" title="Code Links" subtitle="linked"></specd-stat-tile-lg>
         <specd-stat-tile-lg color="green" num="141" title="Published" subtitle="current"></specd-stat-tile-lg>
         <specd-stat-tile-lg color="amber" num="18" title="Untracked" subtitle="changed locally"></specd-stat-tile-lg>
+      </div>
+    </div>
+
+    <!-- Library Freshness (PAT + libraries connected) -->
+    <div class="freshness-section">
+      <div class="freshness-head">
+        <div>
+          <specd-section-label label="Library Freshness" hint="Last checked 2 minutes ago · scan May 19, 2026, 9:41 AM"></specd-section-label>
+        </div>
+        <specd-button variant="ghost" size="sm" label="Check now"></specd-button>
+      </div>
+      <div class="freshness-grid">
+        <div class="freshness-tile ft-fresh"><div class="ft-num">92%</div><div class="ft-label">Fresh</div></div>
+        <div class="freshness-tile"><div class="ft-num">12</div><div class="ft-label">Checked</div></div>
+        <div class="freshness-tile ft-stale"><div class="ft-num">1</div><div class="ft-label">Outdated</div></div>
+        <div class="freshness-list">
+          <div class="freshness-row">
+            <div><div class="lib-name">Acme Design Tokens</div><div style="font-size:10px;color:var(--text-muted);">Updated May 18, 2026, 4:02 PM</div></div>
+            <span class="lib-state fresh">Fresh</span>
+          </div>
+          <div class="freshness-row">
+            <div><div class="lib-name">Brand Primitives</div><div style="font-size:10px;color:var(--text-muted);">Updated May 19, 2026, 11:20 AM</div></div>
+            <span class="lib-state stale">Outdated</span>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -9,7 +9,6 @@ import '../../components/Segmented/SpecdSegmented.js';
 import '../../components/Chip/SpecdChip.js';
 import '../../components/JumpBtn/SpecdJumpBtn.js';
 import '../../components/Button/SpecdButton.js';
-import '../../components/Tag/SpecdTag.js';
 import '../../components/HealthTag/SpecdHealthTag.js';
 import '../../components/Badge/SpecdBadge.js';
 
@@ -127,7 +126,7 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-good">HIGH</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
             <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
@@ -144,8 +143,8 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-bad">NONE</span></td>
-            <td style="text-align:center;"><span class="dev-chip review">In Review</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-bad">Name ✗</span><span class="sb-pill sb-pill-muted">Link —</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip none">Not Set</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
           <tr>
@@ -161,7 +160,7 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-good">HIGH</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
             <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
@@ -178,8 +177,8 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-bad">NONE</span></td>
-            <td style="text-align:center;"><span class="dev-chip progress">In Progress</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-bad">Name ✗</span><span class="sb-pill sb-pill-muted">Link —</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip none">Not Set</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
           <tr>
@@ -195,8 +194,8 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-good">MED</span></td>
-            <td style="text-align:center;"><span class="dev-chip review">In Review</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-bad">Link ✗</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip done">Done</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
           <tr>
@@ -212,7 +211,7 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-good">HIGH</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
             <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
@@ -229,7 +228,7 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-bad">NONE</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-bad">Name ✗</span><span class="sb-pill sb-pill-muted">Link —</span></div></td>
             <td style="text-align:center;"><span class="dev-chip none">Not Set</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
@@ -246,7 +245,7 @@ const componentsRawContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><span class="sb-pill sb-pill-good">HIGH</span></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
             <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><button class="btn-jump-sm">${unsafeSVG(JUMP_SVG)}</button></td>
           </tr>
@@ -318,8 +317,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><specd-tag label="✓ Matched" intent="success"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="Ready" intent="info"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
           <tr>
@@ -335,8 +334,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><specd-tag label="✗ Missing" intent="crit"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="In Review" intent="warn"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-bad">Name ✗</span><span class="sb-pill sb-pill-muted">Link —</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip none">Not Set</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
           <tr>
@@ -352,8 +351,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><specd-tag label="✓ Matched" intent="success"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="Ready" intent="info"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
           <tr>
@@ -369,8 +368,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><specd-tag label="✗ Missing" intent="crit"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="In Progress" intent="neutral"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-bad">Name ✗</span><span class="sb-pill sb-pill-muted">Link —</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip none">Not Set</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
           <tr>
@@ -386,8 +385,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><specd-tag label="— Partial" intent="neutral"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="In Review" intent="warn"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-bad">Link ✗</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip done">Done</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
           <tr>
@@ -403,8 +402,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><specd-tag label="✓ Matched" intent="success"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="Ready" intent="info"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
           <tr>
@@ -420,8 +419,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
             <td style="text-align:center;"><span class="cap-icon off">○</span></td>
-            <td style="text-align:center;"><specd-tag label="✗ Missing" intent="crit"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="—" intent="neutral"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-bad">Name ✗</span><span class="sb-pill sb-pill-muted">Link —</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip none">Not Set</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
           <tr>
@@ -437,8 +436,8 @@ const componentsComponentContent = () => html`
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
             <td style="text-align:center;"><span class="cap-icon on">✓</span></td>
-            <td style="text-align:center;"><specd-tag label="✓ Matched" intent="success"></specd-tag></td>
-            <td style="text-align:center;"><specd-tag label="Ready" intent="info"></specd-tag></td>
+            <td style="text-align:center;"><div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div></td>
+            <td style="text-align:center;"><span class="dev-chip ready">Ready</span></td>
             <td><specd-jump-btn label="Jump"></specd-jump-btn></td>
           </tr>
         </tbody>
@@ -533,13 +532,16 @@ export const ComponentBreakdown: Story = {
           ></specd-segmented>
         `)}
 
-        ${sectionBlock('specd-tag (status)', html`
-          <specd-tag label="✓ Matched" intent="success"></specd-tag>
-          <specd-tag label="✗ Missing" intent="crit"></specd-tag>
-          <specd-tag label="— Partial" intent="neutral"></specd-tag>
-          <specd-tag label="Ready" intent="info"></specd-tag>
-          <specd-tag label="In Review" intent="warn"></specd-tag>
-          <specd-tag label="In Progress" intent="neutral"></specd-tag>
+        ${sectionBlock('.sb-cell / .sb-pill (Storybook match — two pills per Pulse\'s real ui.html, not a single tag)', html`
+          <div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-good">Link ✓</span></div>
+          <div class="sb-cell"><span class="sb-pill sb-pill-good">Name ✓</span><span class="sb-pill sb-pill-bad">Link ✗</span></div>
+          <div class="sb-cell"><span class="sb-pill sb-pill-bad">Name ✗</span><span class="sb-pill sb-pill-muted">Link —</span></div>
+        `)}
+
+        ${sectionBlock('.dev-chip (dev status — real Pulse only has 3 states)', html`
+          <span class="dev-chip ready">Ready</span>
+          <span class="dev-chip done">Done</span>
+          <span class="dev-chip none">Not Set</span>
         `)}
 
         ${sectionBlock('specd-health-tag (score)', html`

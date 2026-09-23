@@ -4,6 +4,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { CovTier } from './SpecdCovRow.types.js';
 import '../HealthTag/SpecdHealthTag.js';
+import '../InfoTrigger/SpecdInfoTrigger.js';
 
 @customElement('specd-cov-row')
 export class SpecdCovRow extends LitElement {
@@ -13,6 +14,8 @@ export class SpecdCovRow extends LitElement {
   @property({ type: Number }) pct: number = 0;
   @property({ type: String }) tier?: CovTier;
   @property({ type: String }) icon?: string;
+  /** "Show your work" (DESIGN.md) — explains why this metric scored this way. */
+  @property({ type: String }) hint?: string;
 
   private _derivedTier(): CovTier {
     if (this.tier) return this.tier;
@@ -31,6 +34,7 @@ export class SpecdCovRow extends LitElement {
         <div class="cov-details">
           ${this.icon ? html`<span class="cov-icon">${unsafeHTML(this.icon)}</span>` : nothing}
           <span class="cov-label">${this.label}</span>
+          ${this.hint ? html`<specd-info-trigger label=${`Why ${this.label} is scored this way`} title=${this.hint}></specd-info-trigger>` : nothing}
         </div>
         <div class="cov-scoring">
           <specd-health-tag tier=${t} label=${chipLabel} size="xs" nodot></specd-health-tag>

@@ -634,8 +634,8 @@ export const QuickFixPanel: Story = {
         <div class="pd-section">
           <div class="pd-section-title">Radio Rows — variable suggestions (×6)</div>
           ${colHeads}
-          ${row('specd-radio-row', [['value','semantic/fill/primary'],['label','semantic/fill/primary'],['collection','Admiral DS'],['color','#3b82f6'],['hex','#3b82f6'],['checked','']], html`<specd-radio-row value="semantic/fill/primary" label="semantic/fill/primary" collection="Admiral DS" color="#3b82f6" hex="#3b82f6" checked style="width:220px;"></specd-radio-row>`)}
-          ${row('specd-radio-row', [['value','primitives/blue-500'],['label','primitives/blue-500'],['collection','Admiral DS'],['color','#3b82f6'],['hex','#3b82f6']], html`<specd-radio-row value="primitives/blue-500" label="primitives/blue-500" collection="Admiral DS" color="#3b82f6" hex="#3b82f6" style="width:220px;"></specd-radio-row>`)}
+          ${row('specd-radio-row', [['value','semantic/fill/primary'],['label','semantic/fill/primary'],['collection','Specd DS'],['color','#3b82f6'],['hex','#3b82f6'],['checked','']], html`<specd-radio-row value="semantic/fill/primary" label="semantic/fill/primary" collection="Specd DS" color="#3b82f6" hex="#3b82f6" checked style="width:220px;"></specd-radio-row>`)}
+          ${row('specd-radio-row', [['value','primitives/blue-500'],['label','primitives/blue-500'],['collection','Specd DS'],['color','#3b82f6'],['hex','#3b82f6']], html`<specd-radio-row value="primitives/blue-500" label="primitives/blue-500" collection="Specd DS" color="#3b82f6" hex="#3b82f6" style="width:220px;"></specd-radio-row>`)}
         </div>
 
         <div class="pd-section">

@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/react.ts',
-      name: 'AdmiralDSReact',
+      name: 'SpecdDSReact',
       formats: ['es'],
       fileName: () => 'index.esm.js',
     },

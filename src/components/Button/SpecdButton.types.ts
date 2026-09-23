@@ -3,7 +3,8 @@ export type ButtonVariant =
   | 'sb-good' | 'sb-bad' | 'sb-muted'
   | 'ai-gradient' | 'pulse'
   | 'row-primary' | 'row-primary-ghost' | 'row-applied'
-  | 'edit-pill' | 'save-pill' | 'cancel-pill';
+  | 'edit-pill' | 'save-pill' | 'cancel-pill'
+  | 'pill-primary' | 'pill-ghost' | 'pill-danger';
 export type ButtonSize    = 'sm' | 'md' | 'lg';
 export type ButtonType    = 'button' | 'submit' | 'reset';
 

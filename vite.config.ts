@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.ts',
-      name: 'AdmiralDS',
+      name: 'SpecdDS',
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format === 'es' ? 'esm' : 'cjs'}.js`,
     },

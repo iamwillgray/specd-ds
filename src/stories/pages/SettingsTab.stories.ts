@@ -172,7 +172,7 @@ const settingsRawContent = () => html`
         </div>
       </div>
 
-      <!-- 4. Report Metrics -->
+      <!-- 4. Report Metrics — real toggle list (was: read-only checkmarks, wrong pattern) -->
       <div class="accordion">
         <button class="accordion-header">
           <span class="accordion-header-left">
@@ -184,17 +184,22 @@ const settingsRawContent = () => html`
           <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="accordion-body">
-          <div style="margin-top:10px;">
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Description coverage</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Token coverage (fill, stroke, spacing)</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Documentation link coverage</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Dev status tracking</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Storybook coverage (when connected)</span></div>
-          </div>
+          <div class="form-hint" style="margin:10px 0 8px;">Choose which metrics appear in the health score overview. At least one must remain enabled.</div>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Descriptions</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Variable Coverage</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Typography Styles</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Doc Links</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Dev Status</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Untracked Changes</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Code Links</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Storybook Sync</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Library Freshness</span><div class="toggle"><input type="checkbox" checked /><div class="toggle-track"></div></div></label>
+          <label class="toggle-row"><span class="toggle-row-label" style="font-size:11px;">Dev Mode: Completed (Org/Enterprise only)</span><div class="toggle"><input type="checkbox" /><div class="toggle-track"></div></div></label>
         </div>
       </div>
 
-      <!-- 5. Variable Rules -->
+      <!-- 5. Variable Rules — real embedded editor (was: "go to Variables tab"
+           redirect — Pulse's own code comment confirms rules moved HERE) -->
       <div class="accordion">
         <button class="accordion-header">
           <span class="accordion-header-left">
@@ -206,12 +211,44 @@ const settingsRawContent = () => html`
           <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="accordion-body">
-          <p style="font-size:11px; color:#6B7280; line-height:1.55; margin-top:10px;">Manage variable rules and collection preferences in the Variables tab.</p>
-          <button class="btn-ghost btn-sm" style="margin-top:8px;">Go to Variables tab</button>
+          <div style="display:flex; justify-content:flex-end; margin:10px 0 6px;">
+            <button class="btn-ghost btn-sm" style="font-size:10px;">Load presets</button>
+          </div>
+          <div style="font-size:11px; color:#6B7280; padding:0 0 12px; line-height:1.5;">
+            Define rules that tell Pulse which variable collection to use when it finds a raw value.
+            Rules with OR conditions fire if <em>any</em> condition matches.
+          </div>
+          <div class="rule-card">
+            <div class="rule-card-header">
+              <span class="rule-type-badge color">Color</span>
+              <span class="rule-title">Brand colours → Semantic Tokens</span>
+              <button class="rule-menu-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+            </div>
+            <div class="rule-body">
+              <div class="rule-condition"><span class="rule-condition-label">IF</span><span class="rule-condition-value">fill</span><span style="color:#9CA3AF; font-size:10px;">matches</span><span class="rule-condition-value">#0c1f3f, #b8ff57, #3b82f6</span></div>
+              <div class="rule-target"><span class="rule-target-label">USE</span><span class="rule-target-value">semantic/color</span><span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span></div>
+            </div>
+          </div>
+          <div class="rule-card">
+            <div class="rule-card-header">
+              <span class="rule-type-badge spacing">Spacing</span>
+              <span class="rule-title">Spacing → Primitives</span>
+              <button class="rule-menu-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+            </div>
+            <div class="rule-body">
+              <div class="rule-condition"><span class="rule-condition-label">IF</span><span class="rule-condition-value">padding</span><span style="color:#9CA3AF; font-size:10px;">OR</span><span class="rule-condition-value">gap</span><span style="color:#9CA3AF; font-size:10px;">is set</span></div>
+              <div class="rule-target"><span class="rule-target-label">USE</span><span class="rule-target-value">primitives/spacing</span><span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span></div>
+            </div>
+          </div>
+          <button class="btn-primary btn-full" style="margin:4px 0 12px;">+ Add rule</button>
+          <div class="section-label" style="margin-top:0;">Preview</div>
+          <div class="card">
+            <div style="font-size:11px; color:#6B7280; padding:4px;">Run a scan to preview how many layers would be affected by your rules.</div>
+          </div>
         </div>
       </div>
 
-      <!-- 6. Scan history -->
+      <!-- 6. Scan history — sparkline + delta + export per row (was: bare rows) -->
       <div class="accordion">
         <button class="accordion-header">
           <span class="accordion-header-left">
@@ -224,20 +261,25 @@ const settingsRawContent = () => html`
         </button>
         <div class="accordion-body">
           <div style="margin-top:10px;">
-            <div class="scan-history-row">
-              <span class="scan-history-score">87%</span>
-              <span style="flex:1;">May 19, 2026</span>
-              <span>152 components</span>
+            <div style="font-size:10px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.06em;color:#9CA3AF;margin-bottom:4px;">Score trend · 3 scans recorded</div>
+            <svg width="100%" viewBox="0 0 320 48" preserveAspectRatio="none" style="display:block;background:#f1f3f7;border-radius:6px;margin-bottom:10px;">
+              <path d="M4 14.7 L162 22.1 L316 8.1" stroke="#16A34A" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+              <circle cx="4" cy="14.7" r="1.5" fill="#16A34A"/><circle cx="162" cy="22.1" r="1.5" fill="#16A34A"/><circle cx="316" cy="8.1" r="1.5" fill="#16A34A"/>
+            </svg>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-top:1px solid var(--border);">
+              <div style="flex:1;min-width:0;"><div style="font-size:12px;color:#0c1f3f;font-weight:500;">May 19, 9:41 AM</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">152 components</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><div class="cov-status-chip good" style="font-size:11px;">87</div><div style="font-size:10px;color:#16A34A;font-family:'IBM Plex Mono',monospace;">↑ 6</div></div>
+              <button class="btn-jump-sm" title="Export this scan as JSON">↓</button>
             </div>
-            <div class="scan-history-row">
-              <span class="scan-history-score">81%</span>
-              <span style="flex:1;">May 12, 2026</span>
-              <span>149 components</span>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-top:1px solid var(--border);">
+              <div style="flex:1;min-width:0;"><div style="font-size:12px;color:#0c1f3f;font-weight:500;">May 12, 3:15 PM</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">149 components</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><div class="cov-status-chip good" style="font-size:11px;">81</div><div style="font-size:10px;color:#16A34A;font-family:'IBM Plex Mono',monospace;">↑ 7</div></div>
+              <button class="btn-jump-sm" title="Export this scan as JSON">↓</button>
             </div>
-            <div class="scan-history-row">
-              <span class="scan-history-score">74%</span>
-              <span style="flex:1;">Apr 28, 2026</span>
-              <span>143 components</span>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-top:1px solid var(--border);">
+              <div style="flex:1;min-width:0;"><div style="font-size:12px;color:#0c1f3f;font-weight:500;">Apr 28, 11:02 AM</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">143 components</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><div class="cov-status-chip med" style="font-size:11px;">74</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">—</div></div>
+              <button class="btn-jump-sm" title="Export this scan as JSON">↓</button>
             </div>
           </div>
         </div>
@@ -449,7 +491,7 @@ const settingsComponentContent = () => html`
         </div>
       </div>
 
-      <!-- 4. Report Metrics -->
+      <!-- 4. Report Metrics — real toggle list (was: read-only checkmarks, wrong pattern) -->
       <div class="accordion">
         <button class="accordion-header">
           <span class="accordion-header-left">
@@ -461,17 +503,22 @@ const settingsComponentContent = () => html`
           <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="accordion-body">
-          <div style="margin-top:10px;">
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Description coverage</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Token coverage (fill, stroke, spacing)</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Documentation link coverage</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Dev status tracking</span></div>
-            <div class="capability-row"><span class="cap-icon on">✓</span><span class="cap-text on">Storybook coverage (when connected)</span></div>
-          </div>
+          <div class="form-hint" style="margin:10px 0 8px;">Choose which metrics appear in the health score overview. At least one must remain enabled.</div>
+          <specd-toggle-row label="Descriptions" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Variable Coverage" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Typography Styles" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Doc Links" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Dev Status" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Untracked Changes" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Code Links" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Storybook Sync" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Library Freshness" checked style="width:100%;"></specd-toggle-row>
+          <specd-toggle-row label="Dev Mode: Completed (Org/Enterprise only)" style="width:100%;"></specd-toggle-row>
         </div>
       </div>
 
-      <!-- 5. Variable Rules -->
+      <!-- 5. Variable Rules — real embedded editor (was: "go to Variables tab"
+           redirect — Pulse's own code comment confirms rules moved HERE) -->
       <div class="accordion">
         <button class="accordion-header">
           <span class="accordion-header-left">
@@ -483,12 +530,44 @@ const settingsComponentContent = () => html`
           <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="accordion-body">
-          <p style="font-size:11px; color:#6B7280; line-height:1.55; margin-top:10px;">Manage variable rules and collection preferences in the Variables tab.</p>
-          <specd-button variant="ghost" size="sm" label="Go to Variables tab" style="margin-top:8px;"></specd-button>
+          <div style="display:flex; justify-content:flex-end; margin:10px 0 6px;">
+            <specd-button variant="ghost" size="sm" label="Load presets"></specd-button>
+          </div>
+          <div style="font-size:11px; color:#6B7280; padding:0 0 12px; line-height:1.5;">
+            Define rules that tell Pulse which variable collection to use when it finds a raw value.
+            Rules with OR conditions fire if <em>any</em> condition matches.
+          </div>
+          <div class="rule-card">
+            <div class="rule-card-header">
+              <specd-tag label="Color" intent="info"></specd-tag>
+              <span class="rule-title">Brand colours → Semantic Tokens</span>
+              <button class="rule-menu-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+            </div>
+            <div class="rule-body">
+              <div class="rule-condition"><span class="rule-condition-label">IF</span><span class="rule-condition-value">fill</span><span style="color:#9CA3AF; font-size:10px;">matches</span><span class="rule-condition-value">#0c1f3f, #b8ff57, #3b82f6</span></div>
+              <div class="rule-target"><span class="rule-target-label">USE</span><span class="rule-target-value">semantic/color</span><span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span></div>
+            </div>
+          </div>
+          <div class="rule-card">
+            <div class="rule-card-header">
+              <specd-tag label="Spacing" intent="neutral"></specd-tag>
+              <span class="rule-title">Spacing → Primitives</span>
+              <button class="rule-menu-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+            </div>
+            <div class="rule-body">
+              <div class="rule-condition"><span class="rule-condition-label">IF</span><span class="rule-condition-value">padding</span><span style="color:#9CA3AF; font-size:10px;">OR</span><span class="rule-condition-value">gap</span><span style="color:#9CA3AF; font-size:10px;">is set</span></div>
+              <div class="rule-target"><span class="rule-target-label">USE</span><span class="rule-target-value">primitives/spacing</span><span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span></div>
+            </div>
+          </div>
+          <specd-button variant="primary" label="+ Add rule" full style="margin:4px 0 12px; display:block;"></specd-button>
+          <specd-section-label label="Preview"></specd-section-label>
+          <div class="card">
+            <div style="font-size:11px; color:#6B7280; padding:4px;">Run a scan to preview how many layers would be affected by your rules.</div>
+          </div>
         </div>
       </div>
 
-      <!-- 6. Scan history -->
+      <!-- 6. Scan history — sparkline + delta + export per row (was: bare rows) -->
       <div class="accordion">
         <button class="accordion-header">
           <span class="accordion-header-left">
@@ -501,20 +580,25 @@ const settingsComponentContent = () => html`
         </button>
         <div class="accordion-body">
           <div style="margin-top:10px;">
-            <div class="scan-history-row">
-              <span class="scan-history-score">87%</span>
-              <span style="flex:1;">May 19, 2026</span>
-              <span>152 components</span>
+            <div style="font-size:10px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.06em;color:#9CA3AF;margin-bottom:4px;">Score trend · 3 scans recorded</div>
+            <svg width="100%" viewBox="0 0 320 48" preserveAspectRatio="none" style="display:block;background:#f1f3f7;border-radius:6px;margin-bottom:10px;">
+              <path d="M4 14.7 L162 22.1 L316 8.1" stroke="#16A34A" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+              <circle cx="4" cy="14.7" r="1.5" fill="#16A34A"/><circle cx="162" cy="22.1" r="1.5" fill="#16A34A"/><circle cx="316" cy="8.1" r="1.5" fill="#16A34A"/>
+            </svg>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-top:1px solid var(--border);">
+              <div style="flex:1;min-width:0;"><div style="font-size:12px;color:#0c1f3f;font-weight:500;">May 19, 9:41 AM</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">152 components</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><div class="cov-status-chip good" style="font-size:11px;">87</div><div style="font-size:10px;color:#16A34A;font-family:'IBM Plex Mono',monospace;">↑ 6</div></div>
+              <button class="btn-jump-sm" title="Export this scan as JSON">↓</button>
             </div>
-            <div class="scan-history-row">
-              <span class="scan-history-score">81%</span>
-              <span style="flex:1;">May 12, 2026</span>
-              <span>149 components</span>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-top:1px solid var(--border);">
+              <div style="flex:1;min-width:0;"><div style="font-size:12px;color:#0c1f3f;font-weight:500;">May 12, 3:15 PM</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">149 components</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><div class="cov-status-chip good" style="font-size:11px;">81</div><div style="font-size:10px;color:#16A34A;font-family:'IBM Plex Mono',monospace;">↑ 7</div></div>
+              <button class="btn-jump-sm" title="Export this scan as JSON">↓</button>
             </div>
-            <div class="scan-history-row">
-              <span class="scan-history-score">74%</span>
-              <span style="flex:1;">Apr 28, 2026</span>
-              <span>143 components</span>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-top:1px solid var(--border);">
+              <div style="flex:1;min-width:0;"><div style="font-size:12px;color:#0c1f3f;font-weight:500;">Apr 28, 11:02 AM</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">143 components</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;"><div class="cov-status-chip med" style="font-size:11px;">74</div><div style="font-size:10px;color:#9CA3AF;font-family:'IBM Plex Mono',monospace;">—</div></div>
+              <button class="btn-jump-sm" title="Export this scan as JSON">↓</button>
             </div>
           </div>
         </div>

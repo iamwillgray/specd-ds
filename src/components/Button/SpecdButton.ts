@@ -14,7 +14,7 @@ const SPARKLE_SVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="curre
  * @element specd-button
  *
  * @attr {string}  label    - Button label text (or use slot content)
- * @attr {string}  variant  - Visual style: primary | ghost | accent | danger
+ * @attr {string}  variant  - Visual style: primary | ghost | accent | danger | pill-primary | pill-ghost
  * @attr {string}  size     - Size: sm | md | lg
  * @attr {boolean} full     - Stretch to full container width
  * @attr {boolean} disabled - Disabled state

@@ -1,4 +1,4 @@
-# Admiral DS
+# Specd DS
 
 **Specd's global design system** — framework-agnostic Web Components with auto-generated React wrappers.
 
@@ -8,38 +8,38 @@ Write once. Use everywhere.
 
 | Import | Environment | Description |
 |---|---|---|
-| `@specd/admiral-ds` | Any | Web Components — works in Figma plugins, vanilla web, Vue, Svelte, React 19+ |
-| `@specd/admiral-ds/react` | React ≥18 | Auto-generated React wrappers via `@lit/react` |
-| `@specd/admiral-ds/tokens.css` | Any | CSS custom property tokens only (colours, spacing, typography) |
-| `@specd/admiral-ds/components.css` | Any | Full component class rules (requires tokens) |
+| `@specd/specd-ds` | Any | Web Components — works in Figma plugins, vanilla web, Vue, Svelte, React 19+ |
+| `@specd/specd-ds/react` | React ≥18 | Auto-generated React wrappers via `@lit/react` |
+| `@specd/specd-ds/tokens.css` | Any | CSS custom property tokens only (colours, spacing, typography) |
+| `@specd/specd-ds/components.css` | Any | Full component class rules (requires tokens) |
 
 ## Usage
 
 ### Figma plugins / vanilla web
 
 ```ts
-import '@specd/admiral-ds';           // registers <admiral-*> custom elements
-import '@specd/admiral-ds/tokens.css';
-import '@specd/admiral-ds/components.css';
+import '@specd/specd-ds';           // registers <specd-*> custom elements
+import '@specd/specd-ds/tokens.css';
+import '@specd/specd-ds/components.css';
 ```
 
 ```html
-<admiral-button variant="primary">Scan now</admiral-button>
-<admiral-chip label="Critical" count="3"></admiral-chip>
+<specd-button variant="primary">Scan now</specd-button>
+<specd-chip label="Critical" count="3"></specd-chip>
 ```
 
 ### React web apps
 
 ```tsx
-import { AdmiralButton, AdmiralChip } from '@specd/admiral-ds/react';
-import '@specd/admiral-ds/tokens.css';
-import '@specd/admiral-ds/components.css';
+import { SpecdButton, SpecdChip } from '@specd/specd-ds/react';
+import '@specd/specd-ds/tokens.css';
+import '@specd/specd-ds/components.css';
 
 function App() {
   return (
-    <AdmiralButton variant="primary" onClick={handleScan}>
+    <SpecdButton variant="primary" onClick={handleScan}>
       Scan now
-    </AdmiralButton>
+    </SpecdButton>
   );
 }
 ```
@@ -66,20 +66,20 @@ npm run typecheck    # TypeScript check
 ## Consuming in Specd plugins (local development)
 
 ```bash
-# From the admiral-ds directory
+# From the specd-ds directory
 npm link
 
 # From the plugin directory (e.g. pulse/)
-npm link @specd/admiral-ds
+npm link @specd/specd-ds
 ```
 
 Or via package.json workspace reference:
 
 ```json
-"@specd/admiral-ds": "file:../admiral-ds"
+"@specd/specd-ds": "file:../specd-ds"
 ```
 
-## Specd products using Admiral DS
+## Specd products using Specd DS
 
 | Product | Status |
 |---|---|

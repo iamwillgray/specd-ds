@@ -1,13 +1,19 @@
 /* Specd DS — Typography Tokens
- * Font families, scale, line-height.
- * Fonts loaded via Google Fonts link in consuming app/plugin.
+ * Single family per DESIGN.md (approved 2026-09-19): Geist for UI + display,
+ * JetBrains Mono for technical/token values. Fonts loaded via Google Fonts
+ * link in consuming app/plugin.
+ *
+ * Was: Inter (UI) + Bricolage Grotesque (display) + IBM Plex Mono — the
+ * two-family split was the one departure from the pattern every reference
+ * brand reviewed actually uses (one family, hierarchy via weight/size).
+ * Old fonts remain in the fallback stacks below.
  */
 
 /* Font stacks */
 :root {
-  --font:         'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Bricolage Grotesque', 'Inter', sans-serif;
-  --font-mono:    'IBM Plex Mono', 'Fira Code', monospace;
+  --font:         'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Geist', 'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', monospace;
 
   /* Scale */
   --text-xs:   10px;
@@ -19,6 +25,7 @@
   --text-2xl:  20px;
   --text-3xl:  24px;
   --text-4xl:  32px;
+  --text-5xl:  40px;
 
   /* Line heights */
   --leading-tight:  1.2;

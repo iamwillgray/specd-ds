@@ -76,14 +76,60 @@ button, input, select, textarea { font: inherit; color: inherit; }
     transform    var(--duration-instant) var(--ease-out);
   box-shadow: none;
 }
-.btn-danger:hover:not(:disabled)  { background: #fecaca; border-color: rgba(220,38,38,0.45); }
+.btn-danger:hover:not(:disabled)  { background: var(--red-10); border-color: rgba(220,38,38,0.45); }
 .btn-danger:active:not(:disabled) { transform: scale(0.98); }
 /* Dark (solid red) danger variant */
-.btn-danger.dark { background: #cd1d1d; color: #fff; border: 1px solid #cd1d1d; }
+.btn-danger.dark { background: var(--color-error); color: #fff; border: 1px solid var(--color-error); }
 .btn-danger.dark:hover:not(:disabled)  { background: #b91c1c; border-color: #b91c1c; }
-.btn-danger.dark .btn-badge { background: #fff; color: #cd1d1d; }
+.btn-danger.dark .btn-badge { background: #fff; color: var(--color-error); }
 .btn-primary:disabled, .btn-ghost:disabled, .btn-accent:disabled, .btn-danger:disabled {
   opacity: 0.4; cursor: not-allowed; pointer-events: none;
+}
+
+/* ── Pill button variants ────────────────────────────────────
+ * .btn-primary/.btn-ghost above are this design system's original button
+ * treatment (--radius-md box, --btn-primary-bg fill) and are used broadly
+ * across parts of the app that predate this redesign — left untouched
+ * rather than reskinned globally, since that would ripple out to every
+ * consumer whether reviewed or not. These two variants are the redesign's
+ * own pill treatment (matching .cd2-jump-btn/.cd2-edit-trigger exactly:
+ * pill radius, hairline border, hover-nudge icon) exposed through
+ * <specd-button variant="pill-primary|pill-ghost">, purely additive — an
+ * explicit opt-in for pages that have already moved to the newer look,
+ * rather than a silent global change. */
+.btn-pill-primary, .btn-pill-ghost, .btn-pill-danger {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; height: 34px; padding: 0 var(--space-4);
+  border-radius: var(--radius-pill); border: 1px solid var(--border);
+  font-family: var(--font); font-size: 12px; font-weight: 700; line-height: 1;
+  cursor: pointer; text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition:
+    background     var(--duration-fast)    var(--ease-out),
+    border-color   var(--duration-fast)    var(--ease-out),
+    transform      var(--duration-instant) var(--ease-out);
+}
+.btn-pill-ghost { background: var(--surface); color: var(--text); }
+.btn-pill-ghost:hover:not(:disabled) { background: var(--color-hover-tint); border-color: var(--blue-40); }
+.btn-pill-primary { background: var(--color-signal-violet); color: #fff; border-color: transparent; }
+.btn-pill-primary:hover:not(:disabled) { background: var(--color-signal-violet-hover); }
+/* Outline, not solid-red-fill — a destructive action still only earns a
+   solid fill treatment when it's the primary CTA for shape E (see
+   DESIGN.md's External-action reminder); everywhere else, red communicates
+   through colour alone, same restraint as any other status colour. */
+.btn-pill-danger { background: var(--negative-light); color: var(--negative-dark); border-color: rgba(220,38,38,0.25); }
+.btn-pill-danger:hover:not(:disabled) { background: var(--red-10, #fee2e2); border-color: rgba(220,38,38,0.45); }
+.btn-pill-primary:active:not(:disabled), .btn-pill-ghost:active:not(:disabled), .btn-pill-danger:active:not(:disabled) { transform: scale(0.97); }
+.btn-pill-primary:disabled, .btn-pill-ghost:disabled, .btn-pill-danger:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+/* Higher specificity than .btn-sm alone so the pill radius/compact padding
+   win regardless of source order. */
+.btn-pill-primary.btn-sm, .btn-pill-ghost.btn-sm, .btn-pill-danger.btn-sm {
+  height: auto; padding: 5px 12px; font-size: 11px; border-radius: var(--radius-pill);
+}
+.btn-pill-primary .btn-icon svg, .btn-pill-ghost .btn-icon svg, .btn-pill-danger .btn-icon svg {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.btn-pill-primary:hover .btn-icon svg, .btn-pill-ghost:hover .btn-icon svg, .btn-pill-danger:hover .btn-icon svg {
+  transform: translate(1px, -1px);
 }
 
 /* Explicit keyboard focus ring — predictable across browsers and on-brand.
@@ -93,7 +139,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn-ghost:focus-visible,
 .btn-accent:focus-visible,
 .btn-danger:focus-visible,
-.btn-pulse:focus-visible {
+.btn-pulse:focus-visible,
+.btn-pill-primary:focus-visible,
+.btn-pill-ghost:focus-visible,
+.btn-pill-danger:focus-visible {
   outline: 2px solid var(--blue-40);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(12,31,63,0.10);
@@ -130,7 +179,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn-primary .btn-badge { background: rgba(255,255,255,0.18); }
 .btn-ghost   .btn-badge { background: rgba(12,31,63,0.10); }
 .btn-accent  .btn-badge { background: rgba(12,31,63,0.12); }
-.btn-danger  .btn-badge { background: #cd1d1d; color: #fee2e2; }
+.btn-danger  .btn-badge { background: var(--color-error); color: var(--red-10); }
 
 /* Sizes */
 .btn-sm   { height:26px; padding:0 var(--space-3); font-size:11px; border-radius:var(--radius-sm); }
@@ -156,7 +205,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn-pulse {
   display: inline-flex; align-items: center; justify-content: center;
   gap: var(--space-2); height: 34px; padding: 0 var(--space-4);
-  background: linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+  background: var(--pulse);
   color: #fff; border: none; border-radius: var(--radius-md);
   font-family: var(--font); font-size: 12px; font-weight: 600; line-height: 1;
   cursor: pointer; white-space: nowrap; flex-shrink: 0; position: relative;
@@ -171,10 +220,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ── CHIP / TAG ─────────────────────────────────────────── */
 .chip-v2 {
-  display: inline-flex; align-items: center; gap: var(--space-1);
+  display: inline-flex; align-items: center; gap: var(--space-2);
   background: transparent; color: var(--text-secondary);
   border: 1px solid var(--border); border-radius: var(--radius-pill);
-  padding: 4px 11px; font-family: var(--font); font-size: 10px;
+  padding: 5px 12px; font-family: var(--font); font-size: 10px;
   font-weight: 600; line-height: 1.4; cursor: pointer;
   transition:
     background   var(--duration-fast) var(--ease-out),
@@ -197,7 +246,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* Count badge */
 .chip-count {
   display: inline-flex; align-items: center; justify-content: center;
-  min-width: 16px; height: 16px; padding: 0 4px;
+  min-width: 17px; height: 17px; padding: 0 5px;
   background: rgba(0,0,0,0.12); border-radius: 100px;
   font-size: 9px; font-weight: 700; font-family: var(--font-mono); line-height: 1;
 }
@@ -220,7 +269,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .chip-v2.dark .chip-count { background: rgba(255,255,255,0.15); }
 .chip-v2.dark.active .chip-count { background: rgba(12,31,63,0.15); color: var(--blue-100); }
 /* Reduce right padding when count badge present — badge provides its own visual padding */
-.chip-v2.has-count { padding-right: 7px; }
+.chip-v2.has-count { padding-right: 9px; }
 
 /* Intent — negative */
 .chip-v2.negative { color: var(--negative-dark); border-color: rgba(205,29,29,0.30); }
@@ -250,7 +299,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .input {
   width: 100%; height: 34px; padding: 0 10px;
   background: var(--surface); border: 1px solid var(--border-blue);
-  border-radius: var(--radius-md); font-family: var(--font);
+  border-radius: var(--radius-input); font-family: var(--font);
   font-size: 12px; font-weight: 400; color: var(--text);
   outline: none; -webkit-appearance: none;
   transition:
@@ -323,7 +372,7 @@ select.input {
   content: ''; position: absolute; left: 2px; top: 50%;
   transform: translateY(-50%); width: 15px; height: 15px;
   border-radius: 50%; background: var(--white);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-strong);
   transition: transform var(--duration-fast) var(--ease-out);
 }
 .toggle input:checked  ~ .toggle-track { background: var(--blue-50); }
@@ -340,8 +389,16 @@ select.input {
   padding: 10px 14px; border-bottom: 1px solid var(--border); cursor: pointer;
 }
 .toggle-row:last-child     { border-bottom: none; }
-.toggle-row-label { flex: 1; font-size: 12px; font-weight: 600; color: var(--text); }
-.toggle-row-hint  { font-size: 10px; color: var(--text-subtle); margin-top: 2px; line-height: 1.4; }
+/* display:block on both is required, not cosmetic: the real
+ * <specd-toggle-row> component renders the label as a <div> (block by
+ * default), but this class pair is also consumed by plugins that hand-roll
+ * the markup with <span> for both label and hint (e.g. Library Asset
+ * Auditor's Settings panel) — without an explicit display here, two
+ * sibling inline spans render on the same line with no visual separation
+ * at all. Stated explicitly so the class works correctly regardless of
+ * which element a consumer picks. */
+.toggle-row-label { flex: 1; font-size: 12px; font-weight: 600; color: var(--text); display: block; }
+.toggle-row-hint  { font-size: 10px; color: var(--text-subtle); margin-top: 2px; line-height: 1.4; display: block; }
 .toggle-row-text  { flex: 1; }
 
 /* ── CARD ────────────────────────────────────────────────── */
@@ -354,9 +411,9 @@ select.input {
 }
 .card-inner { padding: 14px; }
 
-.card.card-elevated { box-shadow: var(--shadow-md); }
+.card.card-elevated { border-color: var(--border-strong); background: var(--surface-alt); }
 .card.card-flat     { border-color: transparent; background: var(--bg); }
-.card.card-inset    { background: var(--bg); box-shadow: inset 0 1px 3px rgba(12,31,63,0.06); }
+.card.card-inset    { background: var(--bg); }
 
 /* ── SECTION LABEL ───────────────────────────────────────── */
 /* Padding 20px 16px 8px and font-weight 600 match the original Pulse
@@ -417,12 +474,12 @@ select.input {
 /* Coverage row (legacy — used in coverage-table wrappers) */
 .coverage-table {
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg); overflow: hidden;
 }
 .cov-row {
   display: flex; align-items: center; height: 30px;
   padding-left: 8px;
-  border-bottom: 1px solid #dbeafe; transition: background var(--duration-fast) var(--ease-out);
+  border-bottom: 1px solid var(--blue-20); transition: background var(--duration-fast) var(--ease-out);
 }
 .cov-row:hover      { background: var(--bg); }
 .cov-row:last-child { border-bottom: none; }
@@ -437,7 +494,7 @@ select.input {
 .cov-row-v2:last-child { border-bottom: none; }
 
 /* cov-details: flex wrapper for icon + label inside cov-row-v2 */
-.cov-details { display: flex; align-items: center; flex: 1; padding-left: 12px; gap: 8px; }
+.cov-details { display: flex; align-items: center; flex: 1; gap: 8px; }
 
 .cov-icon  { width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--icon-secondary); }
 .cov-icon svg { width: 14px; height: 14px; display: block; }
@@ -454,6 +511,15 @@ select.input {
 .cov-scoring specd-health-tag { order: -2; flex-shrink: 0; }
 .cov-scoring .cov-bar-track   { order: -1; }
 .cov-scoring .cov-pct         { order:  0; }
+/* The badge's own CSS (.health-badge.sz-xs) sizes to its text with no fixed
+ * width, so "EXC"/"MED" (3 chars) render narrower than "GOOD"/"POOR" (4
+ * chars) — that shifts where .cov-bar-track starts on each row, throwing
+ * off the vertical alignment of every progress bar in the list. Scoped to
+ * this context rather than fixing .health-badge.sz-xs globally, since other
+ * xs-badge usages elsewhere may rely on its normal content-sized width. */
+.cov-scoring specd-health-tag .health-badge.sz-xs {
+  min-width: 40px; justify-content: center;
+}
 /* cov-row-v2 scoring section is a FIXED-WIDTH column anchored to the right so
  * every status chip / bar / % lines up vertically across all rows regardless
  * of how long the label is. .cov-details flexes to fill the remaining space. */
@@ -556,11 +622,11 @@ select.input {
 /* Small 4-up grid tiles */
 .stat-tiles-row {
   display: grid; grid-template-columns: repeat(4,1fr);
-  border: 1px solid #f5f8ff;
+  border: 1px solid var(--blue-10);
   overflow: hidden; background: var(--surface);
 }
 .stat-tile-sm {
-  padding: 11px 14px; border-right: 1px solid #dbeafe; background: var(--surface);
+  padding: 11px 14px; border-right: 1px solid var(--blue-20); background: var(--surface);
   display: flex; flex-direction: column; justify-content: center;
 }
 .stat-tile-sm:last-child { border-right: none; }
@@ -590,7 +656,7 @@ select.input {
   display: flex; flex-direction: column;
   padding: 16px; min-height: 112px; width: 100%; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm); cursor: pointer; text-align: left;
+  cursor: pointer; text-align: left;
   transition:
     box-shadow   var(--duration-base)    var(--ease-out),
     transform    var(--duration-instant) var(--ease-out),
@@ -598,33 +664,48 @@ select.input {
   font-family: var(--font); appearance: none; -webkit-appearance: none;
 }
 @media (hover: hover) and (pointer: fine) {
-  .stat-tile-lg:hover { transform: translateY(-1px); border-color: var(--border-blue); box-shadow: var(--shadow-md); }
+  .stat-tile-lg:hover { transform: translateY(-1px); border-color: var(--color-signal-violet, var(--border-blue)); }
 }
 .stat-tile-lg:active { transform: scale(0.985); }
 
-/* Header row: small icon + mono label + arrow chevron */
-.stat-tile-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+/* Header row: icon + label + arrow chevron.
+ * Was a two-tone treatment — icon sat in its own filled colour well
+ * (background-color per tier) while the title text got a SEPARATE colour
+ * assignment next to it. Same information said two different visual ways.
+ * Apple Health / the Component Detail section headers (.specd-tone-header,
+ * .cd2-section-title-row) use one rule instead: a plain icon (no fill/well)
+ * and its heading share ONE colour, set by a single tone. Icon well removed
+ * below so these tiles read the same simple way. */
+.stat-tile-header { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
 .stat-tile-icon {
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  width: 24px; height: 24px; border-radius: 6px;
-  background-color: var(--surface-alt, #eef0f4); color: var(--text-secondary);
-  transition:
-    background-color var(--duration-base) var(--ease-out),
-    color            var(--duration-base) var(--ease-out);
+  width: 16px; height: 16px; color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease-out);
 }
-.stat-tile-icon svg, .stat-tile-icon img { width: 14px; height: 14px; }
-.stat-tile-title  { font-size: 12px; font-family: var(--font-mono); font-weight: 500; color: var(--text-secondary); flex: 1; letter-spacing: 0.01em; }
+.stat-tile-icon svg, .stat-tile-icon img { width: 15px; height: 15px; }
+.stat-tile-title  { font-size: 12px; font-family: var(--font-mono); font-weight: 600; color: var(--text-secondary); flex: 1; letter-spacing: 0.01em; }
 .stat-tile-arrow  { color: var(--text-subtle, var(--text-muted)); display: flex; align-items: center; }
+/* Animated-arrow-on-hover — same recipe as .cd2-jump-btn/.cx2-jump: the
+ * arrow itself doesn't move on its own, it nudges toward its pointing
+ * direction on hover as the "this goes somewhere" affordance. */
+.stat-tile-arrow svg { transition: transform var(--duration-fast) var(--ease-out); }
+.stat-tile-lg:hover .stat-tile-arrow svg { transform: translate(2px, -2px); }
 
-/* Large number below the header */
+/* Large number below the header — was 56px, badly out of balance against a
+ * 12px title and a 14px subtitle (the subtitle read almost as loud as the
+ * title above it, undermining which line was the heading). Brought down to
+ * a size that still reads as the hero figure without overwhelming a tile
+ * this compact, and the subtitle below drops to a genuinely quieter
+ * caption size so the hierarchy reads title -> number -> caption instead of
+ * three lines competing at similar weight. */
 .stat-tile-lg-num {
-  font-family: var(--font-heading); font-size: 56px; font-weight: 800;
-  letter-spacing: -0.04em; line-height: 1; color: var(--blue-100);
+  font-family: var(--font-heading); font-size: 34px; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1; color: var(--blue-100);
   font-variant-numeric: tabular-nums;
   transition: color var(--duration-base) var(--ease-out);
 }
 /* Subtitle / description below the number */
-.stat-tile-subtitle { font-size: 14px; font-weight: 500; color: var(--text-secondary); line-height: 1.3; margin-top: 2px; font-family: var(--font); }
+.stat-tile-subtitle { font-size: 11px; font-weight: 500; color: var(--text-muted); line-height: 1.4; margin-top: 4px; font-family: var(--font); }
 /* Legacy label alias */
 .stat-tile-lg-label { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); margin-top: 6px; line-height: 1.3; }
 
@@ -640,19 +721,31 @@ select.input {
 .stat-trend-pill.flat { background: var(--bg);             color: var(--text-muted);   }
 .stat-trend-pill svg  { width: 10px; height: 10px; }
 
-/* Colour modifier variants — icon colour inherits title colour */
+/* Colour modifier variants — icon + title now share exactly one colour per
+ * tier (no separate background-well colour on the icon any more, see the
+ * .stat-tile-icon comment above). */
 .stat-tile-lg.green .stat-tile-lg-num { color: var(--positive-dark); }
-.stat-tile-lg.green .stat-tile-icon   { color: var(--positive-dark); background: var(--positive-light); }
+.stat-tile-lg.green .stat-tile-icon,
 .stat-tile-lg.green .stat-tile-title  { color: var(--positive-dark); }
 .stat-tile-lg.red   .stat-tile-lg-num { color: var(--negative-dark); }
-.stat-tile-lg.red   .stat-tile-icon   { color: var(--negative-dark); background: var(--negative-light); }
+.stat-tile-lg.red   .stat-tile-icon,
 .stat-tile-lg.red   .stat-tile-title  { color: var(--negative-dark); }
 .stat-tile-lg.blue  .stat-tile-lg-num { color: var(--blue-50); }
 .stat-tile-lg.amber .stat-tile-lg-num { color: var(--warning-dark); }
-.stat-tile-lg.amber .stat-tile-icon   { color: var(--warning-dark); background: var(--warning-light); }
+.stat-tile-lg.amber .stat-tile-icon,
 .stat-tile-lg.amber .stat-tile-title  { color: var(--warning-dark); }
 
 /* ── SCORE RING ──────────────────────────────────────────── */
+/* Registering --score-percentage as a typed <number> is what makes the
+ * conic-gradient below actually interpolate smoothly on change — an
+ * unregistered custom property can't be animated by the browser, so the
+ * ring previously just snapped straight to its final value despite the
+ * `transition: background` rule already being present. */
+@property --score-percentage {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
 .score-circle {
   --p:   var(--score-percentage, 0);  /* 0–100, set via inline style */
   --b:   8px;                          /* ring thickness              */
@@ -665,8 +758,20 @@ select.input {
   padding: 16px; margin: 8px;
   background:
     radial-gradient(farthest-side, #fff calc(99% - var(--b)), #0000 calc(100% - var(--b))),
-    conic-gradient(from -90deg, var(--arc) calc(var(--p) * 1%), var(--blue-15) 0); /* --blue-15 = ring track */
-  transition: background var(--duration-slow) var(--ease-in-out);
+    conic-gradient(from -90deg, var(--arc) calc(var(--p) * 1%), var(--score-track) 0); /* translucent — reacts to whatever's behind the ring */
+  /* No CSS transition on --score-percentage/background here on purpose:
+   * the JS count-up (SpecdScoreRing.ts) already drives --score-percentage
+   * at 60fps with its own easing curve. Adding a second, slower (320ms)
+   * CSS transition on the same property would fight it — each rAF frame
+   * would restart a new transition before the last one resolved, so the
+   * ring would perpetually lag behind the number instead of matching it. */
+  animation: score-ring-pop var(--duration-slow) var(--easing-spring, var(--ease-out)) both;
+  animation-delay: 560ms;
+}
+@keyframes score-ring-pop {
+  0%   { transform: scale(1); }
+  60%  { transform: scale(1.045); }
+  100% { transform: scale(1); }
 }
 .score-circle.tier-excellent,
 .score-circle.tier-good { --arc: var(--positive-accent); }
@@ -749,11 +854,14 @@ select.input {
 .health-badge.no-dot.sz-md { padding-left: 12px; }
 
 /* ── tier colours ── */
-/* good: brand lime (md) / positive green (sm) */
+/* good: positive green, all sizes. Was: --brand (lime) for the md size only —
+ * that aliases to the new signal-violet accent post-rebrand, which made a
+ * "healthy" badge render as the interactive accent colour. Status colour must
+ * stay strictly semantic and never double as the brand accent (DESIGN.md). */
 .health-badge.sz-md.tier-good {
-  background: var(--brand); border: 1px solid rgba(184,255,87,0.4); color: var(--blue-100);
+  background: var(--positive-light); border: 1px solid rgba(34,197,94,0.4); color: var(--positive-dark);
 }
-.health-badge.sz-md.tier-good::before { background: var(--blue-100); }
+.health-badge.sz-md.tier-good::before { background: var(--positive-accent); }
 
 .health-badge.sz-sm.tier-good {
   background: var(--positive-light); border: 1px solid rgba(34,197,94,0.4); color: var(--positive-dark);
@@ -772,11 +880,11 @@ select.input {
 }
 .health-badge.tier-poor::before { background: var(--negative-accent); }
 
-/* excellent: brand lime — same as good but distinct hue for top-tier */
+/* excellent: positive green — same family as good, was also --brand (lime) */
 .health-badge.tier-excellent {
-  background: var(--brand); border: 1px solid rgba(184,255,87,0.4); color: var(--blue-100);
+  background: var(--positive-light); border: 1px solid rgba(34,197,94,0.5); color: var(--positive-dark);
 }
-.health-badge.tier-excellent::before { background: var(--blue-100); }
+.health-badge.tier-excellent::before { background: var(--positive-accent); }
 
 /* xs/sm — tier-good fallback uses positive-green variant so it reads in tight spaces */
 .health-badge.sz-xs.tier-good {
@@ -816,39 +924,79 @@ select.input {
 .btn-jump svg   { width: 12px; height: 12px; color: var(--icon-secondary); }
 
 /* ── TAB BAR ─────────────────────────────────────────────── */
+/* Redesign v2: pill-based selector (was underline) — per explicit feedback:
+   "explore a more rounded pill style" + strengthen the contrast between
+   selected/unselected so the bar reads sharper, not muddy-grey-on-grey.
+   Active = solid ink pill (matches the bold-selected convention used
+   elsewhere). Inactive = quiet, using --color-muted instead of the darker
+   --text-secondary so it actually recedes instead of competing. */
 .tab-bar-v2 {
   flex-shrink: 0; background: var(--surface);
-  /* Equal-width flex so tabs fill the available width on any viewport. Labels
-     truncate gracefully when space is tight (min-width: 0 on .tab-v2). */
-  display: flex; padding: 0;
+  display: flex; gap: 5px; padding: 8px 10px;
   border-bottom: 1px solid var(--border);
+  /* Tabs are no longer flex:1 (content-sized instead — see .tab-v2), so
+     this distributes the leftover bar width as extra inter-tab gap
+     rather than leaving it as unused space after the last tab. */
+  justify-content: space-between;
 }
 .tab-v2 {
-  flex: 1; min-width: 0;
-  height: 42px; border: none; border-bottom: 2px solid transparent;
-  margin-bottom: -1px; background: none;
+  /* flex:1 was the actual root cause of the padding complaint, not the
+     padding value itself: forcing every tab to the SAME width regardless
+     of label length meant padding only ever mattered for the longest
+     label ("Components") — shorter labels (e.g. "Library") just got
+     extra centering slack that looked like padding but wasn't actually
+     governed by the padding value at all. flex:0 0 auto sizes each tab
+     to its own content+padding, so the same 16px reads identically on
+     every tab; .tab-bar-v2 gets justify-content:space-between to
+     redistribute the leftover width as inter-tab gap instead. */
+  flex: 0 0 auto;
+  height: 34px; border: none; border-radius: var(--radius-pill);
+  background: none;
   font-family: var(--font); font-size: 12px; font-weight: 500;
-  color: var(--text-secondary); cursor: pointer;
+  color: var(--color-muted); cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  padding: 0 4px;
-  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  padding: 0 8px;
+  transition: color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), transform var(--duration-instant) var(--ease-out);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   position: relative;
 }
-.tab-v2 svg { width: 12px; height: 12px; flex-shrink: 0; }
-.tab-v2:hover { color: var(--blue-100); }
-.tab-v2.active {
-  color: #0c1f3f; border-bottom-color: #0c1f3f; font-weight: 600;
+/* Icon is reserved-width but invisible at rest — reveals on hover/active so
+   the idle bar reads calmer and the reveal itself signals "this responds to
+   you." Opacity+scale only (never width/margin) so nothing reflows. */
+/* Rests slightly to the right and scaled down, as if it's about to emerge
+ * FROM the label text — reveals by sliding left into position + scaling up,
+ * rather than just fading/scaling in place. */
+.tab-v2 svg {
+  /* Back up to 14px now that tabs are content-sized (flex:0 0 auto)
+     rather than forced to a shared equal width — the width pressure
+     that motivated shrinking this to 10px is gone since padding no
+     longer competes with 5 other tabs' worth of slack for the same
+     fixed-width budget. */
+  width: 14px; height: 14px; flex-shrink: 0;
+  opacity: 0; transform: translateX(5px) scale(0.6);
+  transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--easing-spring, var(--ease-out));
 }
+.tab-v2:hover svg, .tab-v2.active svg { opacity: 1; transform: translateX(0) scale(1); }
+.tab-v2:hover:not(.active) { color: var(--color-ink); background: var(--color-hover-tint); }
+.tab-v2:active { transform: scale(0.96); }
+.tab-v2.active {
+  color: #fff; background: var(--color-ink); font-weight: 700;
+}
+.tab-v2.active .tab-badge { background: rgba(255,255,255,0.2); color: #fff; }
 
-/* Tab count badge — sits top-right of the tab */
+/* Tab count badge — sits top-right of the tab. Always rendered by SpecdTabBar
+   (addressable via data-badge-for even before a count is known) with a
+   `.hidden` modifier when empty — this rule was missing, so every tab
+   without a count silently showed a small phantom coloured dot. */
 .tab-badge {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 16px; height: 16px; padding: 0 4px;
-  background: #fee2e2; color: #cd1d1d; border-radius: 100px;
+  background: var(--red-10); color: var(--color-error); border-radius: 100px;
   font-family: var(--font-mono); font-size: 8px; font-weight: 700; line-height: 1;
   margin-left: 2px; flex-shrink: 0;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
+.tab-badge.hidden { display: none; }
 
 /* ── SEVERITY HEADER ─────────────────────────────────────── */
 .severity-header {
@@ -874,6 +1022,11 @@ select.input {
 .sb-pill-good  { background: var(--positive-light); color: var(--positive-dark); }
 .sb-pill-bad   { background: var(--negative-light); color: var(--negative-dark); }
 .sb-pill-muted { background: var(--bg);             color: var(--text-muted);   }
+/* Per-component Storybook cell (Components table SB column) — two pills:
+   Name match + Link match. Ported from pulse/src/ui.html .sb-cell — was
+   missing here entirely; the story used a single HIGH/MED/NONE pill that
+   actually belongs to the Storybook tab's mapping table, a different UI. */
+.sb-cell { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 
 /* ── SCORE TREND ─────────────────────────────────────────── */
 /* gap 8px + colour var(--text-secondary) match the original Pulse plugin
@@ -895,7 +1048,6 @@ select.input {
 .issue-card {
   background: var(--surface); border: 1px solid rgba(0,0,0,0.08);
   border-radius: 14px; margin: 0 12px 10px;
-  box-shadow: var(--shadow-sm);
   transition: border-color var(--duration-fast) var(--ease-out); overflow: hidden;
 }
 .issue-card:hover { border-color: var(--blue-30); }
@@ -928,7 +1080,7 @@ select.input {
   font-size: 10px; font-weight: 600; letter-spacing: 0.02em; flex-shrink: 0;
   white-space: nowrap;
 }
-.issue-card-count.crit { background: #cd1d1d; color: var(--white); border: 1px solid #cd1d1d; }
+.issue-card-count.crit { background: var(--color-error); color: var(--white); border: 1px solid var(--color-error); }
 .issue-card-count.warn { background: #a85c00; color: var(--white); border: 1px solid #a85c00; }
 .issue-card-count.info { background: var(--blue-100); color: var(--white); border: 1px solid var(--blue-100); }
 .issue-card-count-badge {
@@ -936,9 +1088,9 @@ select.input {
   height: 14px; min-width: 14px; padding: 0 4px;
   border-radius: 100px; font-size: 8px; font-weight: 800; font-family: var(--font-mono);
 }
-.issue-card-count.crit .issue-card-count-badge { background: #fee2e2; color: #cd1d1d; }
-.issue-card-count.warn .issue-card-count-badge { background: #fef3c7; color: #92400e; }
-.issue-card-count.info .issue-card-count-badge { background: #dbeafe; color: var(--blue-100); }
+.issue-card-count.crit .issue-card-count-badge { background: var(--red-10); color: var(--color-error); }
+.issue-card-count.warn .issue-card-count-badge { background: var(--orange-10); color: #92400e; }
+.issue-card-count.info .issue-card-count-badge { background: var(--blue-20); color: var(--blue-100); }
 
 /* Legacy icon-based card header (kept for backward compat) */
 .issue-card-icon {
@@ -967,9 +1119,9 @@ select.input {
   letter-spacing: -0.005em; line-height: 1.3; gap: 1px;
 }
 .issue-tag.crit { background: #FEE4E2; color: #B42318; }
-.issue-tag.warn { background: #FEF3C7; color: #8A5500; }
+.issue-tag.warn { background: var(--orange-10); color: #8A5500; }
 .issue-tag.info { background: var(--blue-15); color: var(--blue-100); }
-.issue-tag.neutral { background: transparent; color: var(--text-secondary); border: 1px solid #dbeafe; border-radius: 6px; }
+.issue-tag.neutral { background: transparent; color: var(--text-secondary); border: 1px solid var(--blue-20); border-radius: 6px; }
 .issue-tag.success { background: var(--positive-light); color: var(--positive-dark); }
 /* .stacked kept as no-op alias for backward compat */
 .issue-tag.stacked { }
@@ -979,8 +1131,8 @@ select.input {
 .issue-status-hdr {
   display: flex; align-items: center; gap: 6px;
   padding: 6px 12px; background: var(--bg);
-  border-top: 1px solid #dbeafe;
-  border-bottom: 1px solid #dbeafe;
+  border-top: 1px solid var(--blue-20);
+  border-bottom: 1px solid var(--blue-20);
 }
 .issue-status-dot {
   width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
@@ -999,7 +1151,7 @@ select.input {
 /* Issue row box — one component instance within an expanded card */
 .issue-row-box {
   display: flex; align-items: center; gap: 8px;
-  padding: 8px 12px; border-bottom: 1px solid #dbeafe;
+  padding: 8px 12px; border-bottom: 1px solid var(--blue-20);
   transition: background var(--duration-fast) var(--ease-out);
 }
 .issue-row-box:last-child { border-bottom: none; }
@@ -1050,7 +1202,7 @@ select.input {
   transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
 }
 .issue-card-footer .btn-jump:hover { background: var(--blue-15); }
-/* View Fixes button — navy bg, badge #dbeafe */
+/* View Fixes button — navy bg, badge var(--blue-20) */
 .btn-view-fixes {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--blue-100); color: var(--white); border: none;
@@ -1063,7 +1215,7 @@ select.input {
 .view-fixes-count {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 16px; height: 16px; padding: 0 5px;
-  background: #dbeafe; color: var(--blue-100);
+  background: var(--blue-20); color: var(--blue-100);
   border-radius: 6px; font-size: 8px; font-weight: 700; font-family: var(--font-mono);
 }
 
@@ -1084,13 +1236,13 @@ select.input {
 /* Standard hover: border shift to navy-30. Gated to fine pointers so it
    doesn't get stuck on touch devices after tap. */
 @media (hover: hover) and (pointer: fine) {
-  .choice-card:hover { border-color: #4a6080; box-shadow: 0 4px 14px rgba(12,31,63,0.10); transform: translateY(-1px); }
+  .choice-card:hover { border-color: var(--color-signal-violet, var(--blue-60)); transform: translateY(-1px); }
 }
 .choice-card:active { transform: scale(0.99); }
 /* Gradient card */
 .choice-card.gradient {
   border: 2px solid transparent;
-  background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+  background-image: linear-gradient(#fff, #fff), var(--pulse);
   background-origin: border-box; background-clip: padding-box, border-box;
 }
 /* Gradient hover: smooth ::before overlay approach */
@@ -1098,12 +1250,12 @@ select.input {
   content: '';
   position: absolute; inset: 0;
   border-radius: 12px;
-  background: linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+  background: var(--pulse);
   opacity: 0;
   transition: opacity var(--duration-slow) var(--ease-out);
   z-index: 0;
 }
-.choice-card.gradient:hover { box-shadow: 0 4px 20px rgba(107,40,225,0.25); transform: translateY(-1px); }
+.choice-card.gradient:hover { border-color: var(--color-signal-violet); transform: translateY(-1px); }
 .choice-card.gradient:hover::before { opacity: 1; }
 /* Ensure card children sit above the pseudo-element */
 .choice-card.gradient > * { position: relative; z-index: 1; }
@@ -1122,7 +1274,7 @@ select.input {
 }
 .choice-card-icon svg { width: 18px; height: 18px; }
 .choice-card-icon.gradient {
-  background: linear-gradient(135deg, #004fde 0%, #6b28e1 100%); color: #fff;
+  background: var(--pulse); color: #fff;
 }
 .choice-card-arrow {
   position: absolute; top: 14px; right: 14px;
@@ -1134,7 +1286,7 @@ select.input {
   letter-spacing: -0.02em; color: var(--blue-100); line-height: 1.1;
 }
 .choice-card.gradient .choice-card-title {
-  background: linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+  background: var(--pulse);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .choice-card-desc { font-size: 12px; line-height: 1.45; color: var(--blue-60); }
@@ -1142,8 +1294,8 @@ select.input {
   align-self: flex-start; padding: 6px 12px; border-radius: 100px;
   font-size: 11px; font-weight: 600; font-family: var(--font); white-space: nowrap;
 }
-.choice-card-pill.mint { background: var(--green-10, #ebffe0); color: var(--green-100, #008531); }
-.choice-card-pill.blue { background: var(--blue-20, #dbeafe); color: var(--blue-100); }
+.choice-card-pill.mint { background: var(--green-10, var(--green-10)); color: var(--green-100, var(--color-success)); }
+.choice-card-pill.blue { background: var(--blue-20, var(--blue-20)); color: var(--blue-100); }
 
 /* NOTE: The actual plugin uses these issue-row action button classes:
    .btn-ai-gradient / .btn-ai-gradient.is-applied / .btn-row-primary /
@@ -1156,7 +1308,7 @@ select.input {
   height: 22px; padding: 0 var(--space-3); margin: var(--space-2) var(--space-3);
   background: transparent; border: 1px solid rgba(220,38,38,0.25);
   border-radius: var(--radius-pill); font-family: var(--font);
-  font-size: 10px; font-weight: 500; color: #dc2626;
+  font-size: 10px; font-weight: 500; color: var(--color-error);
   cursor: pointer; transition: background var(--duration-fast) var(--ease-out);
 }
 .hc-ignore-chip:hover { background: #fef2f2; }
@@ -1192,7 +1344,7 @@ select.input {
 .btn-row-primary.btn-hc-ghost:hover { background: var(--navy-light, rgba(12,31,63,0.06)); }
 /* Applied / success state — green */
 .btn-row-primary.is-applied {
-  background: #008531; color: #ebffe0; border: 1px solid #22c55e; cursor: default;
+  background: var(--color-success); color: var(--green-10); border: 1px solid var(--color-success); cursor: default;
 }
 
 /* ── ISSUE ROW (variable-fix rows inside issue-card) ─────── */
@@ -1202,7 +1354,7 @@ select.input {
 .issue-row-body { flex: 1; min-width: 0; }
 .issue-row-title {
   display: flex; align-items: center; gap: 6px;
-  font-size: 12px; font-weight: 600; color: var(--navy, #0c1750);
+  font-size: 12px; font-weight: 600; color: var(--navy, var(--color-ink));
   margin-bottom: 4px;
 }
 .issue-row-desc {
@@ -1227,7 +1379,7 @@ select.input {
   background: transparent; border: 1px solid transparent;
   background-image:
     linear-gradient(#fff, #fff),
-    linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+    var(--pulse);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   -webkit-background-clip: padding-box, border-box;
@@ -1235,7 +1387,7 @@ select.input {
   cursor: pointer; white-space: nowrap;
 }
 .btn-ai-gradient .ai-text {
-  background: linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+  background: var(--pulse);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
   font-weight: 500;
@@ -1246,8 +1398,8 @@ select.input {
 /* AI applied state — solid gradient fill, white label */
 .btn-ai-gradient.is-applied {
   background-image:
-    linear-gradient(135deg, #004fde 0%, #6b28e1 100%),
-    linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+    var(--pulse),
+    var(--pulse);
   color: #fff;
 }
 .btn-ai-gradient.is-applied .ai-text {
@@ -1260,8 +1412,8 @@ select.input {
 .btn-row-applied {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   padding: 8px 12px; border-radius: 6px;
-  background: #008531; color: #ebffe0;
-  border: 1px solid #22c55e;
+  background: var(--color-success); color: var(--green-10);
+  border: 1px solid var(--color-success);
   font-family: inherit; font-size: 12px; font-weight: 500;
   cursor: default; white-space: nowrap; min-width: 76px;
 }
@@ -1270,43 +1422,43 @@ select.input {
 .row-link-field {
   display: flex; align-items: center; gap: 8px;
   height: 32px; padding: 4px 4px 4px 12px;
-  background: #f5f8ff; border: 1px solid #b8cadf; border-radius: 8px;
-  font-family: var(--font); font-size: 12px; color: var(--blue-100, #3b82f6);
+  background: var(--blue-10); border: 1px solid #b8cadf; border-radius: 8px;
+  font-family: var(--font); font-size: 12px; color: var(--blue-100);
 }
 .row-link-field .row-link-value {
   flex: 1; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.row-link-field.is-editing { background: #fff; border-color: #4a6080; }
+.row-link-field.is-editing { background: #fff; border-color: var(--blue-60); }
 .row-link-field input {
   flex: 1; min-width: 0;
   background: transparent; border: none; outline: none;
-  font: inherit; color: var(--blue-100, #3b82f6);
+  font: inherit; color: var(--blue-100);
 }
 
 /* Textarea field — for description editing */
 .row-textarea-field {
   position: relative; padding: 12px;
-  background: #f5f8ff; border: 1px solid #b8cadf; border-radius: 8px;
+  background: var(--blue-10); border: 1px solid #b8cadf; border-radius: 8px;
   min-height: 73px;
 }
-.row-textarea-field.is-editing { background: #fff; border-color: #4a6080; }
+.row-textarea-field.is-editing { background: #fff; border-color: var(--blue-60); }
 .row-textarea-field.is-gradient {
   border: 2px solid transparent;
   background-image:
-    linear-gradient(#f5f8ff, #f5f8ff),
-    linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+    linear-gradient(var(--blue-10), var(--blue-10)),
+    var(--pulse);
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
 .row-textarea-field .row-textarea-value {
-  font: 400 12px/1.35 var(--font); color: var(--blue-100, #3b82f6);
+  font: 400 12px/1.35 var(--font); color: var(--blue-100);
   white-space: pre-wrap; word-break: break-word; padding-right: 40px;
 }
 .row-textarea-field textarea {
   width: 100%; min-height: 49px;
   background: transparent; border: none; outline: none; resize: vertical;
-  font: 400 12px/1.35 var(--font); color: var(--blue-100, #3b82f6);
+  font: 400 12px/1.35 var(--font); color: var(--blue-100);
   padding-right: 40px;
 }
 .row-textarea-field .row-edit-cluster {
@@ -1321,11 +1473,11 @@ select.input {
   font: 500 10px var(--font); cursor: pointer; white-space: nowrap;
 }
 .btn-edit-pill, .btn-save-pill {
-  background: #fff; color: var(--blue-100, #3b82f6); border: 1px solid #b8cadf;
+  background: #fff; color: var(--blue-100); border: 1px solid #b8cadf;
 }
-.btn-edit-pill:hover, .btn-save-pill:hover { background: #f5f8ff; }
+.btn-edit-pill:hover, .btn-save-pill:hover { background: var(--blue-10); }
 .btn-cancel-pill {
-  background: #fee2e2; color: #cd1d1d; border: 1px solid rgba(205,29,29,0.2);
+  background: var(--red-10); color: var(--color-error); border: 1px solid rgba(205,29,29,0.2);
 }
 .btn-cancel-pill:hover { background: #fccaca; }
 
@@ -1336,21 +1488,21 @@ select.input {
 }
 .row-assign-filters {
   display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
-  padding-bottom: 8px; border-bottom: 1px solid #dbeafe;
+  padding-bottom: 8px; border-bottom: 1px solid var(--blue-20);
 }
 .row-assign-chip {
   display: inline-flex; align-items: center; gap: 6px;
   height: 24px; padding: 0 10px; border-radius: 999px;
-  background: #fff; color: var(--blue-100, #3b82f6); border: 1px solid #8099b8;
+  background: #fff; color: var(--blue-100); border: 1px solid #8099b8;
   font: 500 10px var(--font); cursor: pointer;
 }
 .row-assign-chip.is-active {
-  background: var(--blue-100, #3b82f6); color: #fff; border-color: #1e3f6b;
+  background: var(--blue-100); color: #fff; border-color: #1e3f6b;
 }
 .row-assign-chip .row-assign-chip-count {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 16px; height: 14px; padding: 0 4px;
-  background: #eef3fb; color: var(--blue-100, #3b82f6);
+  background: var(--blue-15); color: var(--blue-100);
   border-radius: 999px; font: 700 9px var(--font-mono);
 }
 .row-assign-chip.is-active .row-assign-chip-count {
@@ -1368,21 +1520,21 @@ select.input {
 .btn-ignore-cancel {
   display: inline-flex; align-items: center;
   height: 28px; padding: 0 12px;
-  background: var(--navy, #0c1750); color: #fff; border: 0;
+  background: var(--navy, var(--color-ink)); color: #fff; border: 0;
   border-radius: 8px; font: 600 11px var(--font); cursor: pointer;
 }
 .btn-ignore-cancel:hover { background: #1a2870; }
 .btn-ignore-selected {
   display: inline-flex; align-items: center; gap: 6px;
   height: 28px; padding: 0 12px;
-  background: #fee2e2; color: #cd1d1d; border: 0;
+  background: var(--red-10); color: var(--color-error); border: 0;
   border-radius: 8px; font: 600 11px var(--font); cursor: pointer;
 }
-.btn-ignore-selected:hover { background: #fecaca; }
+.btn-ignore-selected:hover { background: var(--red-10); }
 .btn-ignore-all {
   display: inline-flex; align-items: center; gap: 6px;
   height: 28px; padding: 0 12px;
-  background: #cd1d1d; color: #fff; border: 0;
+  background: var(--color-error); color: #fff; border: 0;
   border-radius: 8px; font: 600 11px var(--font); cursor: pointer;
 }
 .btn-ignore-all:hover { background: #b91c1c; }
@@ -1392,7 +1544,7 @@ select.input {
 /* Selected state: navy border + navy radio fill + blue-15 bg (matches plugin) */
 .qf-replace-row {
   display: flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border: 1px solid #dbeafe;
+  padding: 10px 12px; border: 1px solid var(--blue-20);
   border-radius: 10px; background: #fff; width: 100%;
   cursor: pointer; transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
   font-family: var(--font); margin-bottom: 6px;
@@ -1401,10 +1553,12 @@ select.input {
 /* Host element should fill horizontal space when used as <specd-radio-row> */
 specd-radio-row { display: block; width: 100%; }
 .qf-replace-row:hover { border-color: var(--blue-100); }
-.qf-replace-row.selected { border-color: var(--navy); background: var(--blue-15); }
+/* Selected: bold 2px dark border, not a light tinted wash — background stays
+ * clean white, boldness comes from border weight/colour. */
+.qf-replace-row.selected { border: 2px solid var(--color-ink); background: var(--color-paper); }
 .qf-replace-radio {
   width: 18px; height: 18px; border-radius: 50%;
-  border: 1.5px solid #4a6080; flex-shrink: 0; position: relative;
+  border: 1.5px solid var(--blue-60); flex-shrink: 0; position: relative;
   background: #fff;
 }
 .qf-replace-row.selected  .qf-replace-radio { border-color: var(--navy); }
@@ -1438,7 +1592,7 @@ specd-radio-row { display: block; width: 100%; }
 /* Outer overlay */
 .qf-wizard {
   position: absolute; inset: 0; z-index: 9996;
-  background: var(--navy, #0c1750); color: #fff;
+  background: var(--navy, var(--color-ink)); color: #fff;
   display: flex; flex-direction: column;
   overflow: hidden;
 }
@@ -1456,7 +1610,7 @@ specd-radio-row { display: block; width: 100%; }
 }
 .qf-topbar-logo {
   width: 28px; height: 28px; border-radius: 8px;
-  background: linear-gradient(135deg, #3b4ddf 0%, #6b28e1 100%);
+  background: var(--pulse);
   display: inline-flex; align-items: center; justify-content: center;
   color: #fff; flex-shrink: 0;
 }
@@ -1467,7 +1621,7 @@ specd-radio-row { display: block; width: 100%; }
 /* Left / right topbar action buttons */
 .qf-btn-close, .qf-btn-bulk, .qf-btn-single {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 14px; border-radius: 10px;
+  padding: 8px 14px; border-radius: var(--radius-pill);
   border: 1px solid rgba(255,255,255,0.18);
   background: transparent; color: #fff;
   font-family: var(--font); font-size: 12px; font-weight: 500;
@@ -1514,6 +1668,12 @@ specd-radio-row { display: block; width: 100%; }
   flex: 1; min-height: 0; padding: 16px 18px 18px;
   display: flex;
 }
+/* Scoped .hidden per this codebase's convention (no global utility
+ * class — see the Settings danger-zone fix and Library reveal-more fix
+ * for the exact bug this avoids if forgotten). Single/Bulk mode toggle
+ * needs all five of these. */
+.qf-card.hidden, .qf-bulk-view.hidden, .qf-bulk-header.hidden,
+.qf-filter-chips.hidden, .qf-filter-label.hidden { display: none; }
 
 /* ── Single-issue white card ── */
 .qf-card {
@@ -1532,7 +1692,7 @@ specd-radio-row { display: block; width: 100%; }
 .qf-comp-head {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 4px 10px; border-radius: 6px;
-  background: #f5f8ff; min-width: 0; height: 23px;
+  background: var(--blue-10); min-width: 0; height: 23px;
 }
 .qf-comp-icon {
   display: inline-flex; align-items: center; justify-content: center;
@@ -1562,7 +1722,7 @@ specd-radio-row { display: block; width: 100%; }
   display: flex; flex-direction: column;
 }
 .qf-col-right { overflow-y: auto; }
-.qf-col + .qf-col { border-left: 1px solid #e8eefc; background: #f5f8ff; }
+.qf-col + .qf-col { border-left: 1px solid #e8eefc; background: var(--blue-10); }
 .qf-col-head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 12px;
@@ -1595,11 +1755,11 @@ specd-radio-row { display: block; width: 100%; }
 .qf-type-tag {
   display: inline-flex; align-items: center; gap: 4px;
   height: 23px; padding: 0 8px; border-radius: 6px;
-  background: var(--blue-60); color: #eef3fb;
+  background: var(--blue-60); color: var(--blue-15);
   font-family: var(--font); font-size: 12px; font-weight: 600;
 }
 .qf-ignore-btn {
-  padding: 6px 12px; border-radius: 8px;
+  padding: 6px 12px; border-radius: var(--radius-pill);
   background: transparent; border: 1px solid var(--blue-20);
   color: var(--blue-100); font-size: 11px; font-weight: 500;
   cursor: pointer; font-family: var(--font);
@@ -1631,12 +1791,12 @@ specd-radio-row { display: block; width: 100%; }
 .qf-footer-right { display: flex; align-items: center; gap: 8px; justify-self: end; }
 .qf-nav-btn {
   display: inline-flex; align-items: center; gap: 6px;
-  height: 30px; padding: 0 14px; border-radius: 6px;
+  height: 30px; padding: 0 14px; border-radius: var(--radius-pill);
   background: transparent; border: 1px solid var(--blue-20);
   color: var(--blue-100);
   font-family: var(--font); font-size: 12px; font-weight: 500; cursor: pointer;
 }
-.qf-nav-btn:hover { background: #f5f8ff; }
+.qf-nav-btn:hover { background: var(--blue-10); }
 .qf-counter {
   display: inline-flex; align-items: center; gap: 6px;
   height: 22px; padding: 0 10px; border-radius: 100px;
@@ -1647,7 +1807,7 @@ specd-radio-row { display: block; width: 100%; }
 }
 .qf-apply-btn, .qf-applyall-btn {
   display: inline-flex; align-items: center; gap: 6px;
-  height: 30px; padding: 0 14px; border-radius: 6px;
+  height: 30px; padding: 0 14px; border-radius: var(--radius-pill);
   border: none; cursor: pointer;
   font-family: var(--font); font-size: 12px; font-weight: 500;
   background: var(--blue-100); color: #fff;
@@ -1683,7 +1843,7 @@ specd-radio-row { display: block; width: 100%; }
 .qf-bulk-view {
   background: #fff; border-radius: 12px; width: 100%;
   display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
 }
 .qf-bulk-filters {
   display: flex; gap: 6px; align-items: center;
@@ -1697,7 +1857,7 @@ specd-radio-row { display: block; width: 100%; }
   font-family: var(--font); font-size: 10px; font-weight: 500;
   color: var(--blue-100); cursor: pointer;
 }
-.qf-bulk-filter-chip:hover { background: #f5f8ff; }
+.qf-bulk-filter-chip:hover { background: var(--blue-10); }
 .qf-bulk-filter-chip.is-active {
   background: var(--blue-100); color: #fff; border-color: var(--blue-80);
 }
@@ -1759,7 +1919,7 @@ specd-radio-row { display: block; width: 100%; }
 .bulk-current {
   display: inline-flex; align-items: center; gap: 6px;
   height: 24px; padding: 0 8px;
-  background: #f5f8ff; border: 1px solid var(--blue-30); border-radius: 6px;
+  background: var(--blue-10); border: 1px solid var(--blue-30); border-radius: 6px;
   flex: 1 1 0; min-width: 0;
 }
 .bulk-current .swatch-sq {
@@ -1797,7 +1957,7 @@ specd-radio-row { display: block; width: 100%; }
 }
 .qf-bulk-apply-all {
   display: inline-flex; align-items: center; gap: 6px;
-  height: 30px; padding: 0 10px; border: none; border-radius: 6px;
+  height: 30px; padding: 0 10px; border: none; border-radius: var(--radius-pill);
   background: var(--blue-100); color: #fff;
   font-family: var(--font); font-size: 12px; font-weight: 500; cursor: pointer;
 }
@@ -1857,14 +2017,41 @@ dialog.modal-dialog::backdrop { background: rgba(0,0,0,0.45); backdrop-filter: b
 }
 .drawer-backdrop.hidden { display: none; }
 .drawer-panel {
-  position: fixed; top: 0; right: 0; bottom: 0;
-  width: min(420px, 90vw);
+  /* Covers the full plugin window, not a partial side panel — a Figma
+     plugin's UI is already a bounded floating window (no true OS-level
+     fullscreen exists for plugins), so "full screen" here means 100% of
+     that window, which the parent <dialog> (positioned to match that
+     window — see SpecdDrawer.ts's _positionToHost()) already achieves.
+     Deliberately NO `position` here at all — tried position:absolute
+     (inset:0) first: computed styles were fully correct (offsetParent
+     correctly the dialog, top/left/right/bottom all resolving to 0) and
+     it STILL rendered offset by exactly one dialog-width. Tried
+     position:fixed with the same explicit inline coordinates as the
+     dialog itself next — also fully correct computed styles, ALSO still
+     offset by exactly one dialog-width. Both attempts hit the same
+     unexplained quirk once dialog elements are involved. A plain
+     normal-flow block needs no containing-block resolution at all: it
+     just fills its already-correctly-positioned parent by ordinary block
+     layout, which sidesteps the quirk entirely rather than finding a
+     third way to trigger it. */
+  width: 100%; height: 100%;
   background: var(--surface); box-shadow: var(--shadow-lg);
   display: flex; flex-direction: column; z-index: 9981;
-  /* iOS-style drawer curve — feels physical, like Vaul */
+  /* Opacity only — deliberately no transform. A translateX slide-in here
+     (the original "feels physical, like Vaul" version) gives this panel
+     a transform value for its entire animation window; in an automated/
+     backgrounded browser tab that doesn't run the animation to
+     completion, the transform can stay stuck at its START keyframe
+     indefinitely — which for a `from { transform: translateX(100%) }`
+     entrance means the panel renders permanently offset by its own full
+     width. That's not hypothetical: it's exactly what happened here,
+     chased for a long time as a mysterious "position:fixed containing-
+     block" bug before the real cause turned up in a computed-style
+     check. Same lesson as .view.active's entrance animation elsewhere in
+     this file — plain opacity is worth the small loss of the slide feel. */
   animation: ad-drawer-in var(--duration-modal) var(--ease-drawer);
 }
-@keyframes ad-drawer-in { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes ad-drawer-in { from { opacity: 0; } to { opacity: 1; } }
 .drawer-header {
   display: flex; align-items: center; gap: 12px;
   padding: 14px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0;
@@ -1873,16 +2060,35 @@ dialog.modal-dialog::backdrop { background: rgba(0,0,0,0.45); backdrop-filter: b
 .drawer-body   { flex: 1; overflow-y: auto; padding: 16px; }
 .drawer-footer { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; }
 
-/* <dialog> native resets — drawer */
-dialog.drawer-dialog {
+/* A plain div, not native <dialog> — see SpecdDrawer.ts's
+   _positionToHost() comment for why: every child of a real <dialog>
+   rendered offset by exactly one dialog-width regardless of positioning
+   strategy, a UA-level quirk not worth continuing to chase. role="dialog"
+   + aria-modal on the element itself substitutes for the semantics
+   <dialog> would otherwise provide for free. No native ::backdrop either
+   way (showModal() was already ruled out earlier — top-layer promotion
+   breaks confining this to the plugin window's own bounds); the manual
+   .drawer-manual-backdrop below stands in for it as a real element. */
+.drawer-dialog {
   padding: 0; border: none; background: transparent;
-  position: fixed; inset: 0 0 0 auto; margin: 0;
+  position: fixed; inset: 0; margin: 0; z-index: 9980;
   height: 100%; max-height: 100%;
-  width: min(380px, 90vw);
+  width: 100%; max-width: 100%;
 }
-dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
+.drawer-manual-backdrop {
+  position: fixed; inset: 0; z-index: 9979;
+  background: rgba(0,0,0,0.35);
+  animation: ad-fade-in var(--duration-fast) var(--ease-out);
+}
 
 /* ── DATA TABLE ──────────────────────────────────────────── */
+/* .table-toolbar is the generic outer container for a search+controls row
+   above a data table; .comp-toolbar is a modifier used by the Components
+   panel specifically. Consuming plugins compose both classes together. */
+.table-toolbar {
+  display: flex; gap: 8px; align-items: center;
+  padding: 12px 12px 8px;
+}
 .comp-toolbar {
   display: flex; align-items: center; gap: 8px;
   padding: 10px 12px; border-bottom: 1px solid var(--border); flex-wrap: wrap;
@@ -2200,7 +2406,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 /* ── POPOVER ─────────────────────────────────────────────── */
 .ad-popover {
   position: absolute; z-index: 9990;
-  background: var(--surface); border: 1.5px solid #4a6080;
+  background: var(--surface); border: 1.5px solid var(--blue-60);
   border-radius: 14px; box-shadow: var(--shadow-lg);
   min-width: 175px; max-width: 300px; overflow: hidden;
   /* Popovers scale from their trigger. JS sets --popover-origin per anchor. */
@@ -2227,17 +2433,17 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .ad-popover-check {
   display: flex; align-items: center; gap: 8px;
   min-height: 28px; padding: 0 12px;
-  font-size: 10px; font-weight: 500; color: #0c1f3f;
+  font-size: 10px; font-weight: 500; color: var(--color-ink);
   cursor: pointer; transition: background var(--duration-instant) var(--ease-out); user-select: none;
 }
 .ad-popover-check:hover { background: var(--bg); }
 .ad-popover-check input[type="checkbox"] {
-  width: 12px; height: 12px; accent-color: #22c55e; flex-shrink: 0; cursor: pointer;
-  border-radius: 4px; border: 1px solid #4a6080; appearance: none;
+  width: 12px; height: 12px; accent-color: var(--color-success); flex-shrink: 0; cursor: pointer;
+  border-radius: 4px; border: 1px solid var(--blue-60); appearance: none;
   background: #fff; position: relative;
 }
 .ad-popover-check input[type="checkbox"]:checked {
-  background: #22c55e; border-color: #008531;
+  background: var(--color-success); border-color: var(--color-success);
 }
 .ad-popover-check input[type="checkbox"]:checked::after {
   content: ''; position: absolute;
@@ -2252,10 +2458,10 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .ad-popover-group-label {
   min-height: 20px; padding: 4px 12px;
   font-family: var(--font); font-size: 10px; font-weight: 500;
-  color: #4a6080; display: flex; align-items: center;
+  color: var(--blue-60); display: flex; align-items: center;
 }
 /* Popover divider — light blue to match Figma */
-.ad-popover-divider { height: 1px; background: #dbeafe; margin: 0; }
+.ad-popover-divider { height: 1px; background: var(--blue-20); margin: 0; }
 /* Popover footer — contains primary action */
 .ad-popover-footer {
   height: 40px; padding: 0 12px; border-top: 1px solid #b8cadf;
@@ -2393,20 +2599,35 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .sparkline-area.negative { fill: var(--negative-accent); }
 
 /* ── SEGMENTED TOGGLE ────────────────────────────────────── */
-/* Inline 2+ option control (e.g. Variables coverage/rules view) */
+/* Inline 2+ option control (e.g. Health Breakdown, Variables coverage/rules
+   view). Full pill rather than the old small-radius rounded-rect — segmented
+   controls are a capsule/interactive-control shape (same exception as
+   buttons and chips, see DESIGN.md "Border Radius"), so making it visibly
+   *rounder* than its 20px card container is correct, not a concentricity
+   violation. Neutral-tint background instead of a blue tint, matching the
+   rest of the redesigned surfaces' no-color-backdrop convention. */
 .segmented-toggle {
-  display: inline-flex; background: var(--blue-15); border: 1px solid var(--border-blue);
-  border-radius: var(--radius-md); padding: 2px; gap: 2px;
+  display: inline-flex; background: var(--color-neutral-tint); border: 1px solid var(--border);
+  border-radius: var(--radius-pill); padding: 3px; gap: 2px;
 }
-.seg-btn {
-  flex: 1; padding: 5px 10px; font-size: 11px; font-weight: 600;
-  border-radius: calc(var(--radius-md) - 2px); border: none;
+/* Scoped to .segmented-toggle specifically — a second, unrelated
+ * `.seg-toggle .seg-btn { border-radius: 6px }` rule exists further down
+ * this file (Component toolbar's Audit/Storybook control) and, being later
+ * in source order with equal specificity, was silently winning the cascade
+ * for EVERY `.seg-btn` on the page, including this one — the active
+ * Health Breakdown segment was rendering at 6px instead of the intended
+ * pill. Scoping both to their own parent class stops them fighting. */
+.segmented-toggle .seg-btn {
+  flex: 1; padding: 6px 12px; font-size: 11px; font-weight: 600;
+  border-radius: var(--radius-pill); border: none;
   background: transparent; color: var(--text-muted); cursor: pointer;
   font-family: var(--font); transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
   white-space: nowrap;
 }
-.seg-btn:hover:not(.active) { color: var(--blue-100); background: rgba(255,255,255,0.5); }
-.seg-btn.active { background: #fff; color: var(--blue-100); box-shadow: 0 1px 2px rgba(12,23,80,0.08); }
+.segmented-toggle .seg-btn:hover:not(.active) { color: var(--blue-100); background: rgba(255,255,255,0.5); }
+/* Selected state: solid dark fill, not a thin tinted border — matches the
+ * bold-selected convention used elsewhere (chip-v2.active, row-assign-chip). */
+.segmented-toggle .seg-btn.active { background: var(--color-ink); color: #fff; border: 1px solid var(--color-ink); }
 
 /* dark variant: navy panel context */
 .segmented-toggle.dark { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
@@ -2428,8 +2649,8 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   display: flex; align-items: center; gap: 4px;
   font-size: 11px; line-height: 1.3; margin-top: 2px;
 }
-.field-message.error   { color: var(--negative-dark, #cd1d1d); }
-.field-message.success { color: var(--positive-dark, #008531); }
+.field-message.error   { color: var(--negative-dark, var(--color-error)); }
+.field-message.success { color: var(--positive-dark, var(--color-success)); }
 .field-message svg { width: 12px; height: 12px; flex-shrink: 0; }
 
 /* ── FILTER POPOVER (checkbox multi-select) ──────────────── */
@@ -2478,18 +2699,18 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 }
 .issue-rows-desc-text {
   flex: 1; font-family: var(--font); font-size: 10px; font-weight: 400;
-  color: #4a6080; line-height: 1.4; display: flex; flex-direction: column; gap: 2px;
+  color: var(--blue-60); line-height: 1.4; display: flex; flex-direction: column; gap: 2px;
 }
 /* Title inside issue-rows-desc-text: Inter SemiBold 600 12px navy */
 .issue-rows-desc-title {
-  font-family: var(--font); font-size: 12px; font-weight: 600; color: #0c1f3f;
+  font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--color-ink);
   display: flex; align-items: center; gap: 6px; line-height: 1.2;
 }
 .issue-rows-desc-title svg { width: 16px; height: 16px; flex-shrink: 0; }
 /* Body text below title */
 .issue-rows-desc-body {
   font-family: var(--font); font-size: 10px; font-weight: 400;
-  color: #4a6080; line-height: 1.4;
+  color: var(--blue-60); line-height: 1.4;
 }
 .issue-rows-desc-cta { flex-shrink: 0; }
 
@@ -2516,7 +2737,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .issue-rows-list  .issue-row {
   display: flex; align-items: center; gap: 8px;
   padding: 9px 12px;
-  border: 0; border-bottom: 1px solid #dbeafe;
+  border: 0; border-bottom: 1px solid var(--blue-20);
   border-radius: 0; background: #fff; margin-bottom: 0;
   font-size: 11px; transition: background var(--duration-fast) var(--ease-out);
 }
@@ -2551,7 +2772,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 /* Hard-coded value badge */
 .issue-row-hc-val {
   font-family: var(--font-mono); font-size: 10px; font-weight: 700;
-  background: #fee2e2; color: #cd1d1d;
+  background: var(--red-10); color: var(--color-error);
   border-radius: 4px; padding: 2px 7px; white-space: nowrap; flex-shrink: 0;
   border: 1px solid rgba(205,29,29,0.2);
 }
@@ -2568,12 +2789,12 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 
 /* Sub-rows expand section */
 .issue-sub-rows {
-  border-top: 1px solid #dbeafe; background: var(--bg);
+  border-top: 1px solid var(--blue-20); background: var(--bg);
 }
 .issue-sub-row {
   display: flex; align-items: center; gap: 8px;
   padding: 7px 12px 7px 28px; /* indent by 28px */
-  border-bottom: 1px solid #dbeafe; font-size: 10px;
+  border-bottom: 1px solid var(--blue-20); font-size: 10px;
 }
 .issue-sub-row:last-child { border-bottom: none; }
 .issue-sub-row-name {
@@ -2637,7 +2858,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .prop-fix-current {
   display: inline-flex; align-items: center; gap: 6px;
   height: 24px; padding: 0 8px;
-  background: #f5f8ff; border: 1px solid #b8cadf; border-radius: 6px;
+  background: var(--blue-10); border: 1px solid #b8cadf; border-radius: 6px;
   flex: 1 1 0; min-width: 0;
 }
 /* Suggested variable chip */
@@ -2648,7 +2869,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   flex: 1 1 0; min-width: 0;
 }
 .prop-fix-varname { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-mono); font-size: 10px; color: var(--navy); }
-.prop-fix-chevron { color: #4a6080; font-size: 9px; flex-shrink: 0; }
+.prop-fix-chevron { color: var(--blue-60); font-size: 9px; flex-shrink: 0; }
 /* Apply button — navy, rounded.
    min-width 76px keeps the button the same size when its label toggles
    between "Apply", "Applied", or "Apply all" so surrounding rows don't
@@ -2662,11 +2883,15 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   transition: background var(--duration-fast) var(--ease-out);
 }
 .prop-fix-btn:hover:not(:disabled):not(.applied) { background: #162d56; }
-.prop-fix-btn.applied { background: #008531; color: #ebffe0; }
+/* Was `color: var(--green-10)` — that token is a ~14%-opacity tint meant for
+   light backgrounds, not solid foreground text; on top of the solid
+   --color-success fill it was nearly invisible, reading as a blank green
+   button. */
+.prop-fix-btn.applied { background: var(--color-success); color: #fff; }
 .prop-fix-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .prop-fix-btn-badge {
   display: inline-flex; align-items: center; justify-content: center;
-  background: #dbeafe; color: var(--navy); border-radius: 6px;
+  background: var(--blue-20); color: var(--navy); border-radius: 6px;
   font-family: var(--font-mono); font-size: 8px; font-weight: 700;
   padding: 2px 5px; min-width: 16px; text-align: center;
 }
@@ -2703,7 +2928,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .prop-fix-typo-label {
   display: inline-flex; align-items: center; gap: 4px;
   height: 24px; padding: 0 8px;
-  background: #f5f8ff; border: 1px solid #b8cadf; border-radius: 6px;
+  background: var(--blue-10); border: 1px solid #b8cadf; border-radius: 6px;
   flex: 1 1 0; min-width: 0; font-size: 10px; color: var(--text-secondary);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
@@ -2727,7 +2952,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .vp-close {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 12px; border-radius: 6px;
-  background: transparent; color: var(--navy); border: 1px solid #dbeafe;
+  background: transparent; color: var(--navy); border: 1px solid var(--blue-20);
   font-family: var(--font); font-size: 12px; font-weight: 500; cursor: pointer;
   transition: background var(--duration-fast) var(--ease-out);
 }
@@ -2738,7 +2963,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 }
 .vp-search {
   width: 100%; padding: 8px 12px;
-  border: 1px solid #4a6080; border-radius: 8px;
+  border: 1px solid var(--blue-60); border-radius: 8px;
   background: #fff; color: var(--navy);
   font-family: var(--font); font-size: 12px; outline: none;
 }
@@ -2748,20 +2973,21 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   font-family: var(--font); font-size: 12px;
 }
 .vp-section-title { font-weight: 600; color: var(--navy); }
-.vp-section-meta { font-weight: 400; color: #4a6080; }
+.vp-section-meta { font-weight: 400; color: var(--blue-60); }
 .vp-section-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
 /* Radio row */
 .vp-radio-row {
   display: flex; align-items: center; gap: 8px; padding: 12px;
-  border: 1px solid #dbeafe; border-radius: 10px;
+  border: 1px solid var(--blue-20); border-radius: 10px;
   background: #fff; cursor: pointer;
   transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
 }
-.vp-radio-row:hover { border-color: var(--blue-100); background: #f5f8ff; }
-.vp-radio-row.selected { border-color: var(--navy); background: var(--blue-15); }
+.vp-radio-row:hover { border-color: var(--blue-100); background: var(--blue-10); }
+/* Selected: bold 2px dark border, not a light tinted wash. */
+.vp-radio-row.selected { border: 2px solid var(--color-ink); background: var(--color-paper); }
 .vp-radio-circle {
   width: 18px; height: 18px; border-radius: 50%;
-  border: 1.5px solid #4a6080; flex-shrink: 0;
+  border: 1.5px solid var(--blue-60); flex-shrink: 0;
   background: #fff; position: relative;
 }
 .vp-radio-row.selected .vp-radio-circle { border-color: var(--navy); }
@@ -2775,7 +3001,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .vp-radio-details {
-  font-size: 10px; color: #4a6080; margin-top: 2px;
+  font-size: 10px; color: var(--blue-60); margin-top: 2px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .vp-radio-swatch {
@@ -2831,10 +3057,10 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 
 /* Ignore chip in assign filter row — pushed to far right */
 .row-assign-chip.is-ignore {
-  background: transparent; color: #cd1d1d; border-color: rgba(205,29,29,0.35);
+  background: transparent; color: var(--color-error); border-color: rgba(205,29,29,0.35);
   margin-left: auto;
 }
-.row-assign-chip.is-ignore:hover { background: #fee2e2; }
+.row-assign-chip.is-ignore:hover { background: var(--red-10); }
 
 /* Remove inner padding from prop-fix-content when inside the assign panel */
 .row-assign-panel .prop-fix-content { padding: 0; }
@@ -2864,7 +3090,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .row-assign-panel .qf-bulk-group-card + .qf-bulk-group-card {
   border-top: 1px solid var(--border);
 }
-.row-assign-chip.is-ignore:hover { background: #fee2e2; }
+.row-assign-chip.is-ignore:hover { background: var(--red-10); }
 
 /* ── PLUGIN SHELL ────────────────────────────────────────── */
 /* Outer container — use when rendering pages standalone in a browser */
@@ -2872,6 +3098,18 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   width: 660px; height: 720px; background: var(--bg); border-radius: 12px;
   overflow: hidden; box-shadow: 0 8px 48px rgba(0,0,0,0.22);
   display: flex; flex-direction: column;
+  /* position:relative (not a transform) so this is the containing block
+     for any position:absolute descendant that needs to cover exactly the
+     simulated plugin window — the Quick-Fix Wizard overlay (.qf-wizard)
+     specifically, which is position:absolute in the real plugin.
+     Deliberately NOT a transform-based trick for position:FIXED
+     descendants (the Drawer) — see SpecdDrawer.ts's _positionToHost()
+     comment for what went wrong there and why that needs JS-measured
+     positioning instead. position:relative has none of that history: it
+     doesn't create the same rendering-context side effects transform
+     does, so it's safe to rely on here for plain position:absolute
+     confinement. */
+  position: relative;
 }
 /* Scroll area — flex child of plugin-wrap that holds all page content */
 /* display:block so children stack naturally and aren't flex-shrunk by the container */
@@ -2893,11 +3131,17 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   background: var(--blue-100);
   padding: 10px 14px; display: flex; align-items: center; gap: 10px; min-height: 52px;
 }
+/* Plugin icon tile — per DESIGN.md's Plugin Icon System (Apple Settings-icon
+ * pattern): a colour-per-plugin squircle instead of a bare glyph blended
+ * into the navy header. Pulse's tile uses the shared signal-violet accent
+ * since it's the flagship/reference plugin; other Specd Tools plugins get
+ * their own dedicated colour (see DESIGN.md) while keeping this same shape. */
 .logo-mark {
   width: 28px; height: 28px; border-radius: 7px;
+  background: var(--color-signal-violet, var(--brand));
   display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #fff;
 }
-.logo-mark svg { width: 28px; height: 28px; }
+.logo-mark svg { width: 18px; height: 18px; }
 .header-text {
   flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 8px;
 }
@@ -2910,7 +3154,13 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   font-weight: 400; letter-spacing: 0; display: none;
 }
 .header-icon-btn {
-  width: 30px; height: 30px; border-radius: var(--radius-sm);
+  /* Was --radius-sm (4px) — DESIGN.md's own radius table (pill: "buttons,
+     badges, tags, chips — categorically capsule") already says buttons
+     should be pill-shaped; on an equal width/height box, pill = a full
+     circle, matching every other interactive control in the app that's
+     already pill (.tab-v2, .cd2-jump-btn, .issues-back-btn, segmented
+     controls). */
+  width: 30px; height: 30px; border-radius: var(--radius-pill);
   background: transparent; border: 1px solid rgba(221,229,244,0.5);
   color: rgba(245,248,255,0.85);
   display: flex; align-items: center; justify-content: center;
@@ -3004,6 +3254,52 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .stat-tiles-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .stat-tiles-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 
+/* ── LIBRARY FRESHNESS (Overview) ────────────────────────────
+ * Ported from pulse/src/ui.html — was PAT-gated and absent from this
+ * design system's OverviewTab story. Colours updated to the new
+ * success/warning/error semantic tokens (DESIGN.md, approved 2026-09-19). */
+.freshness-section { margin: 12px 0 16px; padding: 0 12px; }
+.freshness-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  margin-bottom: 8px;
+}
+.freshness-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+.freshness-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+.freshness-tile {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card, 10px);
+  padding: 10px 12px; display: flex; flex-direction: column; gap: 4px;
+}
+.freshness-tile .ft-num {
+  font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--text); line-height: 1;
+}
+.freshness-tile .ft-label {
+  font-size: 10px; color: var(--text-muted);
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.freshness-tile.ft-fresh .ft-num { color: var(--color-success, #16A34A); }
+.freshness-tile.ft-stale .ft-num { color: var(--color-warning, #D97706); }
+.freshness-list {
+  grid-column: 1 / -1; margin-top: 4px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card, 10px);
+  overflow: hidden;
+}
+.freshness-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 11px;
+}
+.freshness-row:last-child { border-bottom: 0; }
+.freshness-row .lib-name { font-weight: 600; color: var(--text); }
+.freshness-row .lib-state {
+  font-size: 10px; padding: 2px 6px; border-radius: 999px; font-weight: 600;
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.4px;
+}
+.freshness-row .lib-state.fresh { background: color-mix(in srgb, var(--color-success, #16A34A) 14%, transparent); color: var(--color-success, #16A34A); }
+.freshness-row .lib-state.stale { background: color-mix(in srgb, var(--color-warning, #D97706) 14%, transparent); color: var(--color-warning, #D97706); }
+.freshness-row .lib-state.error { background: color-mix(in srgb, var(--color-error, #DC2626) 14%, transparent); color: var(--color-error, #DC2626); }
+
 /* ── ACTION BAR ──────────────────────────────────────────── */
 .action-bar {
   display: flex; align-items: center; gap: 8px; padding: 10px 12px;
@@ -3050,18 +3346,26 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 }
 .hm-dot:active { transform: scale(0.92); }
 
-/* ── SEGMENTED TOGGLE ────────────────────────────────────── */
+/* ── SEGMENTED TOGGLE (Component toolbar's Audit/Storybook control) ─────
+ * Scoped to .seg-toggle specifically — see the .segmented-toggle block
+ * above for why unscoped `.seg-btn` rules in two places fight each other. */
+/* Mirrors .segmented-toggle exactly (Health Breakdown's control) — these
+ * were two different segmented-control styles (this one square-cornered
+ * and blue-tinted) that read as inconsistent once placed side by side.
+ * One segmented-control look across the whole app now. */
 .seg-toggle {
-  display: flex; background: var(--bg); border: 1px solid var(--border-blue);
-  border-radius: var(--radius-md); padding: 2px; gap: 2px; flex-shrink: 0;
+  display: flex; background: var(--color-neutral-tint); border: 1px solid var(--border);
+  border-radius: var(--radius-pill); padding: 3px; gap: 2px; flex-shrink: 0;
 }
-.seg-btn {
-  padding: 3px 10px; border-radius: 6px; border: none;
+.seg-toggle .seg-btn {
+  padding: 6px 12px; border-radius: var(--radius-pill); border: none;
   background: transparent; font-family: var(--font); font-size: 11px;
-  font-weight: 600; color: var(--text-secondary); cursor: pointer; white-space: nowrap;
+  font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
-.seg-btn:hover:not(.active) { color: var(--text); background: var(--bg); }
-.seg-btn.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+.seg-toggle .seg-btn:hover:not(.active) { color: var(--blue-100); background: rgba(255,255,255,0.5); }
+/* Selected state: solid dark fill, matching the bold-selected convention. */
+.seg-toggle .seg-btn.active { background: var(--color-ink); color: #fff; border: 1px solid var(--color-ink); }
 
 /* ── COMPONENT TOOLBAR ───────────────────────────────────── */
 .comp-toolbar {
@@ -3071,7 +3375,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .comp-search-input {
   flex: 1; height: 30px; padding: 0 10px 0 28px;
   background: var(--bg); border: 1px solid var(--border-blue);
-  border-radius: var(--radius-md); font-family: var(--font); font-size: 12px;
+  border-radius: var(--radius-input); font-family: var(--font); font-size: 12px;
   color: var(--text); outline: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%234a6080' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: left 8px center;
@@ -3114,6 +3418,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .dev-chip.ready    { background: var(--positive-light); color: var(--positive-dark); }
 .dev-chip.review   { background: var(--neutral-light);  color: var(--blue-100); }
 .dev-chip.progress { background: var(--warning-light);  color: var(--warning-dark); }
+.dev-chip.done     { background: var(--color-neutral-tint, var(--neutral-light)); color: var(--color-ink-soft, var(--blue-100)); }
 .dev-chip.none     { background: var(--bg);              color: var(--text-subtle); }
 .btn-jump-sm {
   display: inline-flex; align-items: center; justify-content: center;
@@ -3121,10 +3426,67 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   cursor: pointer; color: var(--icon-secondary); border-radius: 4px;
 }
 .btn-jump-sm:hover { background: var(--bg); }
-.btn-jump-sm svg { width: 11px; height: 11px; }
+.btn-jump-sm svg { width: 11px; height: 11px; transition: transform var(--duration-fast) var(--ease-out); }
+.btn-jump-sm:hover svg { transform: translate(1px, -1px); }
 .comp-name-cell { display: flex; align-items: center; gap: 6px; max-width: 144px; overflow: hidden; }
 .comp-name-icon { color: var(--icon-secondary); flex-shrink: 0; }
 .comp-name-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; font-size: 11px; }
+
+/* ── ISSUES LANDING ("What would you like to do?") ────────
+ * Ported from pulse/src/ui.html (#issues-landing) — was entirely absent
+ * from this design system's IssuesTab story. Gradient now uses var(--pulse)
+ * (the rebranded violet gradient) instead of the old blue/purple hex. */
+.issues-landing { padding: 20px 16px 24px; display: flex; flex-direction: column; gap: 16px; }
+.issues-landing-header { display: flex; flex-direction: column; gap: 6px; }
+.issues-landing-header .t-heading { font-size: 22px; line-height: 1.15; margin: 0; font-family: var(--font-heading); font-weight: 800; color: var(--text); }
+.issues-landing-header .t-label { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.issues-landing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.issues-landing-card {
+  text-align: left; border: none; padding: 0; cursor: pointer;
+  font-family: inherit; display: flex; flex-direction: column;
+  overflow: hidden; min-height: 224px; border-radius: var(--radius-modal, 12px);
+  transition: transform var(--duration-fast, 0.18s) var(--easing-standard, ease), box-shadow var(--duration-fast, 0.18s) var(--easing-standard, ease);
+}
+.issues-landing-card:hover { transform: translateY(-2px); }
+.issues-landing-card:active { transform: translateY(0); }
+.issues-landing-card-dark {
+  background-image: linear-gradient(var(--surface), var(--surface)), var(--pulse);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent;
+  color: var(--text);
+  transition: all ease-in 0.4s;
+}
+.issues-landing-card-dark:hover { background: var(--pulse); transition: all ease-in 0.4s; }
+.issues-landing-card-dark .issues-landing-card-icon { background: var(--pulse); border: none; color: #fff; }
+.issues-landing-card-dark:hover .issues-landing-card-icon { background: var(--surface); border: none; color: var(--color-signal-violet, var(--blue-50)); }
+.issues-landing-card-dark .issues-landing-card-title {
+  background: var(--pulse); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.issues-landing-card-dark:hover .issues-landing-card-title {
+  background: var(--surface); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.issues-landing-card-dark .issues-landing-arrow { color: var(--blue-60); }
+.issues-landing-card-dark:hover .issues-landing-arrow { color: var(--surface); }
+.issues-landing-card-dark .issues-landing-card-sub { color: var(--text-secondary); }
+.issues-landing-card-dark:hover .issues-landing-card-sub { color: var(--surface); }
+.issues-landing-card-light { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+.issues-landing-card-light .issues-landing-card-icon { background: var(--blue-15); border: 1px solid var(--blue-20); color: var(--blue-80); }
+.issues-landing-card-light .issues-landing-arrow { color: var(--text-subtle); }
+.issues-landing-card-light .issues-landing-card-sub { color: var(--text-secondary); }
+.issues-landing-arrow { display: inline-flex; transition: transform var(--duration-fast) var(--ease-out); }
+.issues-landing-card:hover .issues-landing-arrow { transform: translate(2px, -2px); }
+.issues-landing-card-top { flex: 1; padding: 20px 20px 0; display: flex; align-items: flex-start; justify-content: space-between; }
+.issues-landing-card-icon { width: 32px; height: 32px; border-radius: var(--radius-chip, 6px); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.issues-landing-card-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 8px; }
+.issues-landing-card-title { font-family: var(--font-heading); font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+.issues-landing-card-sub { font-size: 13px; line-height: 1.43; font-weight: 400; }
+.issues-landing-count {
+  margin-top: 8px; align-self: flex-start; padding: 4px 10px; border-radius: var(--radius-input, 8px); height: 23px;
+  display: inline-flex; align-items: center; font-family: var(--font); font-size: 12px; font-weight: 600; line-height: 1; min-height: 0;
+}
+.issues-landing-count-lime { background: var(--green-10); color: var(--color-success, #16A34A); }
+.issues-landing-count-blue { background: var(--blue-20); color: var(--text); }
 
 /* ── ISSUES PAGE STICKY TOP / FILTER BAR ────────────────── */
 .issues-sticky-top { background: var(--surface-alt); border-bottom: 1px solid var(--border-strong); padding-bottom: 12px; }
@@ -3143,7 +3505,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .issues-search-input {
   width: 100%; padding: 8px 10px 8px 30px;
   background: var(--surface); border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md); font-family: var(--font); font-size: 12px;
+  border-radius: var(--radius-input); font-family: var(--font); font-size: 12px;
   color: var(--text); outline: none;
 }
 .issues-type-trigger {
@@ -3237,7 +3599,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .sb-mapping-editor {
   display: none;
   padding: 10px 12px 12px; gap: 8px; flex-direction: column;
-  background: var(--blue-10, #eef3fb); border-top: 1px solid var(--border-blue);
+  background: var(--blue-10, var(--blue-15)); border-top: 1px solid var(--border-blue);
 }
 .sb-mapping-row.is-editing .sb-mapping-editor { display: flex; }
 .sb-mapping-editor-row { display: flex; flex-direction: column; gap: 4px; }
@@ -3381,7 +3743,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
    from remote/team libraries. Local libraries can't be disconnected, only
    toggled, so the badge doubles as a visual cue that disconnect isn't an action. */
 .lib-purpose-badge.local {
-  background: var(--warning-light, #fef3c7); color: var(--warning-dark, #92400e);
+  background: var(--warning-light, var(--orange-10)); color: var(--warning-dark, #92400e);
 }
 .lib-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--positive-accent); }
 .lib-status-text { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); }
@@ -3471,13 +3833,13 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .btn-ai {
   display: inline-flex; align-items: center; gap: 5px;
   height: 30px; padding: 0 10px;
-  background-image: linear-gradient(#fff,#fff), linear-gradient(135deg,#004fde 0%,#6b28e1 100%);
+  background-image: linear-gradient(#fff,#fff), var(--pulse);
   background-origin: border-box; background-clip: padding-box, border-box;
   border: 1.5px solid transparent; border-radius: 6px;
   font-family: var(--font); font-size: 10px; font-weight: 600; cursor: pointer; white-space: nowrap;
 }
 .btn-ai-text {
-  background: linear-gradient(135deg,#004fde 0%,#6b28e1 100%);
+  background: var(--pulse);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 
@@ -3496,12 +3858,20 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   padding: 5px 10px; font-family: var(--font); font-size: 11px; font-weight: 600;
   cursor: pointer; white-space: nowrap;
 }
+/* Matches .dd-back's exact recipe (<specd-drill-header>'s back button) —
+ * full pill, hover-nudge — so "back" reads the same everywhere in the app
+ * instead of this being the one square-cornered exception. */
 .issues-back-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: transparent; border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm); color: var(--text); cursor: pointer;
-  font-size: 12px; font-weight: 600; font-family: var(--font); padding: 6px 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-pill); color: var(--text); cursor: pointer;
+  font-size: 12px; font-weight: 600; font-family: var(--font); padding: 6px 14px 6px 11px;
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
+.issues-back-btn:hover { background: var(--color-hover-tint); border-color: var(--blue-40); transform: translateX(-1px); }
+.issues-back-btn:active { transform: translateX(-2px) scale(0.98); }
+.issues-back-btn svg { transition: transform var(--duration-fast) var(--ease-out); }
+.issues-back-btn:hover svg { transform: translateX(-1px); }
 
 /* ── STAT-TILE-LG SM VARIANT ─────────────────────────────── */
 .stat-tile-lg-num.sm { font-size: 30px; }
@@ -3628,12 +3998,373 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 }
 .accordion-status.connected::before { opacity: 1; background: var(--positive-accent); }
 .accordion-status.warn {
-  background: var(--warning-light, #fef3c7); color: var(--warning-dark, #92400e);
+  background: var(--warning-light, var(--orange-10)); color: var(--warning-dark, #92400e);
 }
 .accordion-status.warn::before { opacity: 1; background: var(--warning-accent, #f59e0b); }
 .accordion-status.muted {
   background: var(--neutral-light); color: var(--text-muted);
 }
+
+/* ── ONBOARDING CAROUSEL ─────────────────────────────────────
+ * Shared first-run wizard shell used by Pulse and other Specd plugins.
+ * Structure: fullscreen overlay -> progress dots -> horizontal slide track
+ * (translateX per step) -> footer with Skip/Next nav. Slide content classes
+ * below (icon-card, label/title/body, field/input, toggle-list, setup-card
+ * with numbered steps) are generic building blocks for onboarding copy and
+ * simple forms — plugin-specific narrative content (e.g. animated score
+ * previews) should live in the consuming plugin, not here. */
+#onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: opacity 0.35s ease;
+}
+#onboarding-overlay.ob-hidden { display: none; }
+#onboarding-overlay.ob-fade-out { opacity: 0; pointer-events: none; }
+
+/* Completion screen (shown after overlay dismisses) */
+#ob-finish {
+  position: fixed;
+  inset: 0;
+  z-index: 9989;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  gap: 10px;
+}
+.ob-finish-icon { font-size: 36px; color: var(--blue, var(--color-signal-violet)); }
+.ob-finish-title { font-family: var(--font-heading, 'Inter', sans-serif); font-size: 20px; font-weight: 700; color: var(--navy, var(--color-ink)); }
+.ob-finish-sub   { font-size: 13px; color: var(--text-muted, #6b7280); }
+
+/* Progress dots */
+.ob-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 18px 0 0;
+  flex-shrink: 0;
+}
+.ob-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.12);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ob-dot.active { width: 22px; border-radius: 3px; background: var(--navy, var(--color-ink)); }
+.ob-dot.done   { background: var(--blue, var(--color-signal-violet)); }
+
+/* Slide track — width is set from the slide count in JS so it never drifts
+   out of sync when slides are added/removed; this is a static fallback. */
+.ob-track {
+  display: flex;
+  flex-direction: row;
+  width: calc(100vw * 8);
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.ob-slide {
+  width: 100vw;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 0;
+  overflow-y: auto;
+}
+@keyframes ob-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+.ob-slide-content { animation: ob-fade-up 0.4s ease both; }
+
+/* Icon hero card */
+.ob-icon-card {
+  background: linear-gradient(135deg, var(--navy, var(--color-ink)) 0%, #1e3a8a 100%);
+  border-radius: 12px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 18px;
+}
+.ob-icon-box {
+  width: 64px; height: 64px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* Slide text */
+.ob-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue, var(--color-signal-violet));
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  margin-bottom: 4px;
+}
+.ob-title {
+  font-family: var(--font-heading, 'Bricolage Grotesque', 'Inter', sans-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy, var(--color-ink));
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.ob-body { font-size: 13px; line-height: 1.6; color: #374151; margin-bottom: 14px; }
+.ob-body strong { color: var(--navy, var(--color-ink)); }
+
+/* Generic chip row (e.g. feature highlights) */
+.ob-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.ob-chip  {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border, rgba(0,0,0,0.08));
+  font-size: 12px;
+  color: var(--navy, var(--color-ink));
+  background: #fff;
+}
+.ob-chip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* Callout / hint box */
+.ob-callout {
+  background: var(--surface, #f8f9fc);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #374151;
+  margin-bottom: 14px;
+  border: 1px solid var(--border, rgba(0,0,0,0.08));
+}
+.ob-callout strong { color: var(--navy, var(--color-ink)); }
+
+/* Form fields */
+.ob-field-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy, var(--color-ink));
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  margin-bottom: 6px;
+  display: block;
+}
+.ob-field-label .ob-optional { color: var(--text-muted, #6b7280); font-weight: 400; margin-left: 4px; }
+.ob-input {
+  width: 100%;
+  height: 38px;
+  border: 1px solid var(--border, rgba(0,0,0,0.12));
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  color: var(--navy, var(--color-ink));
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  margin-bottom: 6px;
+}
+.ob-input:focus { border-color: var(--blue, var(--color-signal-violet)); }
+.ob-field-hint { font-size: 11px; color: var(--text-muted, #6b7280); line-height: 1.5; margin-bottom: 12px; }
+.ob-field-hint code { font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-size: 10px; background: rgba(0,0,0,0.05); padding: 1px 4px; border-radius: 3px; }
+
+/* Toggle rows */
+.ob-toggle-list { display: flex; flex-direction: column; }
+.ob-toggle-row  {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border, rgba(0,0,0,0.06));
+  gap: 10px;
+}
+.ob-toggle-row:last-child { border-bottom: none; }
+.ob-toggle-info { flex: 1; min-width: 0; }
+.ob-toggle-name { font-size: 13px; font-weight: 500; color: var(--navy, var(--color-ink)); }
+.ob-toggle-desc { font-size: 11px; color: var(--text-muted, #6b7280); margin-top: 1px; }
+.ob-toggle { position: relative; flex-shrink: 0; }
+.ob-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.ob-toggle-track {
+  display: block;
+  width: 36px; height: 20px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.15);
+  transition: background 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+.ob-toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+}
+.ob-toggle input:checked + .ob-toggle-track { background: var(--blue, var(--color-signal-violet)); }
+.ob-toggle input:checked + .ob-toggle-track::after { transform: translateX(16px); }
+
+/* Footer nav */
+.ob-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px 18px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border, rgba(0,0,0,0.06));
+}
+.ob-btn-skip {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--text-muted, #6b7280);
+  cursor: pointer;
+  padding: 6px 0;
+  font-family: var(--font, 'Inter', sans-serif);
+  transition: color 0.15s;
+}
+.ob-btn-skip:hover { color: var(--navy, var(--color-ink)); }
+.ob-btn-next {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--navy, var(--color-ink));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font, 'Inter', sans-serif);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.ob-btn-next:hover  { background: #162d56; }
+.ob-btn-next:active { transform: scale(0.98); }
+.ob-arrow { transition: transform 0.15s; }
+.ob-btn-next:hover .ob-arrow { transform: translateX(2px); }
+
+/* Setup card with numbered instructions */
+.ob-setup-card {
+  background: #f8f9fc;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.ob-setup-title {
+  font-family: var(--font, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy, var(--color-ink));
+  margin-bottom: 12px;
+}
+.ob-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.ob-step  { display: flex; align-items: flex-start; gap: 10px; }
+.ob-step-num {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--navy, var(--color-ink));
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ob-step-text { font-size: 12px; line-height: 1.5; color: #374151; }
+.ob-step-text a { color: var(--blue, var(--color-signal-violet)); text-decoration: none; }
+.ob-step-text code {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 10px;
+  background: rgba(0,0,0,0.06);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* Input with reveal button (e.g. password/token fields) */
+.ob-input-row {
+  display: flex; align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.ob-input-row .ob-input { margin-bottom: 0; flex: 1; }
+.ob-reveal-btn {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 8px;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted, #6b7280);
+  transition: border-color 0.15s, color 0.15s;
+}
+.ob-reveal-btn:hover { border-color: var(--blue, var(--color-signal-violet)); color: var(--navy, var(--color-ink)); }
+
+/* Validation message */
+.ob-validation-msg {
+  font-size: 11px;
+  line-height: 1.4;
+  min-height: 16px;
+  color: transparent;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.ob-validation-msg.success { color: #16a34a; }
+.ob-validation-msg.error   { color: var(--color-error); }
+
+/* Connect / primary action button */
+.ob-connect-btn {
+  width: 100%;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: var(--navy, var(--color-ink));
+  color: #fff;
+  font-family: var(--font, 'Inter', sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.ob-connect-btn:hover  { background: #162d56; }
+.ob-connect-btn:active { transform: scale(0.98); }
+.ob-connect-btn:disabled { opacity: 0.55; cursor: default; transform: none; }
+.ob-connect-btn.ob-connected {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.ob-connect-btn.ob-connected:hover { background: #bbf7d0; }
+
+.ob-skip-link {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted, #6b7280);
+  margin-top: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.ob-skip-link:hover { color: var(--navy, var(--color-ink)); }
 
 /* ── HC BULK ROW (Variables / Library hard-coded hotspot rows) ── */
 /* Hard-coded bulk row — Figma 91:3330 */
@@ -3691,7 +4422,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .bulk-fix-row .bulk-current {
   display: inline-flex; align-items: center; gap: 6px;
   height: 24px; padding: 0 8px;
-  background: #f5f8ff; border: 1px solid #b8cadf; border-radius: 6px;
+  background: var(--blue-10); border: 1px solid #b8cadf; border-radius: 6px;
   flex: 1 1 0; min-width: 0;
 }
 .bulk-fix-row .bulk-suggestion,
@@ -3725,8 +4456,8 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   font-family: 'IBM Plex Mono', monospace;
   white-space: nowrap;
 }
-.bulk-match-chip.exact   { background: #ebffe0; color: #008531; }
-.bulk-match-chip.partial { background: #fef3c7; color: #b45309; }
+.bulk-match-chip.exact   { background: var(--green-10); color: var(--color-success); }
+.bulk-match-chip.partial { background: var(--orange-10); color: #b45309; }
 .bulk-match-chip.none    { background: rgba(0,0,0,0.04); color: var(--text-muted); }
 
 /* ── BULK SET-TO-ZERO BUTTON ─────────────────────────────── */
@@ -3756,7 +4487,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   content: ''; width: 10px; height: 1px; background: #8099b8; flex-shrink: 0;
 }
 .vcov-section-sub {
-  padding: 0 12px 8px; font-size: 11px; color: #4a6080;
+  padding: 0 12px 8px; font-size: 11px; color: var(--blue-60);
 }
 .vcov-grid {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -3779,14 +4510,14 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
   font-family: var(--font-mono); font-size: 8px; font-weight: 600;
 }
 .vcov-badge.good { background: #dcfce7; color: #16a34a; }
-.vcov-badge.med  { background: #fef3c7; color: #d97706; }
-.vcov-badge.poor { background: #fee2e2; color: #dc2626; }
+.vcov-badge.med  { background: var(--orange-10); color: #d97706; }
+.vcov-badge.poor { background: var(--red-10); color: var(--color-error); }
 .vcov-pct {
   font-family: var(--font-heading); font-size: 20px; font-weight: 700;
   letter-spacing: -0.03em; line-height: 1; margin-bottom: 5px;
 }
 .vcov-bar {
-  height: 4px; background: #eef3fb; border-radius: 2px;
+  height: 4px; background: var(--blue-15); border-radius: 2px;
   overflow: hidden; margin-bottom: 4px;
 }
 .vcov-fill {
@@ -3891,7 +4622,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .prop-row-edit   { background: var(--surface); color: var(--navy); }
 .prop-row-edit:hover   { background: var(--surface-hover); }
 .prop-row-remove { background: var(--negative-light); color: var(--negative-dark); border-color: rgba(205,29,29,0.2); }
-.prop-row-remove:hover { background: #fecaca; }
+.prop-row-remove:hover { background: var(--red-10); }
 
 /* Editor-card footer — Done / Remove actions shown while a .gp-row is open. */
 .gp-row-foot {
@@ -3934,10 +4665,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .metric-chip.up { color: var(--green-100); border-color: var(--green-10); background: var(--green-10); }
 .metric-chip.down { color: var(--red-100); border-color: var(--red-10); background: var(--red-10); }
 
-.proto-sect, .page-sect { padding: 18px 18px 4px; }
-.sect-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
-.sect-title { font-family: var(--font-heading); font-weight: 600; font-size: 15px; color: var(--blue-100); letter-spacing: -.01em; }
-.sect-note { font-size: 11px; color: var(--text-secondary); }
+.proto-sect { padding: 18px 18px 4px; }
 
 .explain { background: linear-gradient(180deg, var(--blue-10), var(--white)); border: 1px solid var(--blue-20); border-radius: var(--radius-lg); padding: 14px 16px; }
 .explain ol { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
@@ -3948,14 +4676,6 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .subscore-card { border: 1px solid var(--border-blue); border-radius: var(--radius-lg); padding: 4px 14px; }
 
 .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-.cmp-preview { position: relative; border: 1px solid var(--border-blue); border-radius: var(--radius-lg);
-  background: repeating-linear-gradient(45deg, var(--blue-10) 0 10px, transparent 10px 20px), var(--white);
-  min-height: 150px; display: grid; place-items: center; overflow: hidden; }
-.cmp-preview .ph { text-align: center; color: var(--text-secondary); }
-.cmp-preview .ph .demo-btn { display: inline-block; background: var(--blue-100); color: var(--white); font-weight: 700; font-size: 13px; padding: 9px 20px; border-radius: 8px; box-shadow: var(--shadow-md); }
-.cmp-preview .ph .cap { margin-top: 10px; font-size: 10.5px; font-family: var(--font-mono); letter-spacing: .04em; }
-.cmp-preview .dims { position: absolute; top: 8px; left: 10px; font-family: var(--font-mono); font-size: 9.5px; color: var(--blue-60); background: var(--white); border: 1px solid var(--blue-20); border-radius: 5px; padding: 2px 6px; }
-.cmp-preview .live-note { position: absolute; bottom: 8px; right: 10px; font-size: 9.5px; color: var(--text-subtle); }
 
 .fixer { border: 1px solid var(--blue-20); border-radius: var(--radius-lg); overflow: hidden; }
 .fixer-head { display: flex; align-items: center; gap: 12px; padding: 11px 14px; background: var(--blue-10); border-bottom: 1px solid var(--blue-20); }
@@ -3972,20 +4692,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .fixer-foot .spacer { flex: 1; }
 .fixer-skip { background: none; border: none; color: var(--text-secondary); font-size: 12px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
 
-/* ── COMPONENT PAGE HERO ─────────────────────────────────────────────── */
-.cmp-hero { padding: 20px 20px 16px; border-bottom: 1px solid var(--border-blue); background: linear-gradient(180deg, var(--blue-10), var(--white)); }
-.cmp-hero-row { display: flex; gap: 16px; align-items: flex-start; }
-.cmp-titleblock { flex: 1; min-width: 0; }
-.cmp-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-50); }
-.cmp-title { font-family: var(--font-heading); font-weight: 700; font-size: 24px; letter-spacing: -.015em; color: var(--blue-100); margin: 3px 0 6px; }
-.cmp-path { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 11px; color: var(--text-secondary); }
-.cmp-path .pill { background: var(--white); border: 1px solid var(--blue-20); border-radius: var(--radius-pill); padding: 2px 9px; font-weight: 600; color: var(--blue-90); }
-.cmp-actions { display: flex; gap: 8px; margin-top: 13px; flex-wrap: wrap; }
 .muted { color: var(--text-secondary); }
-
-/* honest preview placeholder (no live render — open on canvas) */
-.cmp-preview-glyph { width: 46px; height: 46px; margin: 0 auto 4px; border-radius: 12px; display: grid; place-items: center; background: var(--white); border: 1px solid var(--blue-20); color: var(--blue-50); box-shadow: var(--shadow-sm); }
-.cmp-preview-name { font-family: var(--font-heading); font-weight: 700; font-size: 15px; color: var(--blue-100); }
 
 /* ── AFFECTED-COMPONENTS MINI ROWS (Issue page list) ─────────────────── */
 .issue-mini { display: grid; grid-template-columns: auto 1fr auto; gap: 11px; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--border-blue); }
@@ -4011,7 +4718,7 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 /* ── IMPACT ROW ──────────────────────────────────────────────────────── */
 .impact-list { display: grid; gap: 8px; }
 .impact-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 11px 13px; border: 1px solid var(--border-blue); border-radius: var(--radius-md); background: var(--white); transition: border-color .12s ease, box-shadow .12s ease; }
-.impact-row:hover { border-color: var(--blue-40); box-shadow: var(--shadow-sm); }
+.impact-row:hover { border-color: var(--color-signal-violet, var(--blue-40)); }
 .impact-rank { width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0; display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; font-size: 12px; color: var(--blue-100); background: var(--blue-15); }
 .impact-list > specd-impact-row:first-child .impact-rank, .impact-row.top .impact-rank { background: var(--brand-lime); }
 .impact-main { min-width: 0; }
@@ -4069,25 +4776,71 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .check.fail { border-color: var(--red-10); background: linear-gradient(0deg, var(--red-10), var(--white) 60%); }
 .check .ck-sub { font-size: 10px; color: var(--text-secondary); font-weight: 500; margin-left: auto; }
 
-/* ── DIFF ROW (before/after) ─────────────────────────────────────────── */
+/* ── DIFF ROW (before/after) — <specd-diff-row> ───────────────────────
+ * Rebuilt to match the soft-card language the rest of the redesign uses
+ * (was hardcoded --border-blue/--radius-md/6-7px radii, a flat-cornered
+ * "old system" look that read as inconsistent once placed next to
+ * --radius-surface cards). Concentric with a --radius-surface-sm(16px)
+ * container: the nested before/after fields sit ~10-12px in, so their own
+ * radius derives to --radius-tile-sm(4px) rather than a hand-picked value. */
 .diff { display: grid; gap: 10px; }
-.diff-row { border: 1px solid var(--border-blue); border-radius: var(--radius-md); overflow: hidden; }
-.diff-row.staged { border-color: var(--green-50); box-shadow: 0 0 0 1px var(--green-10); }
-.diff-row-head { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--blue-10); border-bottom: 1px solid var(--border-blue); }
-.diff-row-head .field { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--blue-60); font-weight: 600; }
-.diff-row-head .staged-tag { margin-left: auto; display: none; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: var(--green-100); }
+.diff-row {
+  border: 1px solid var(--border); border-radius: var(--radius-surface-sm); overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+.diff-row.staged { border-color: var(--positive-accent); box-shadow: 0 0 0 1px var(--positive-light); }
+.diff-row-head { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--color-neutral-tint); border-bottom: 1px solid var(--border); }
+.diff-row-head .field { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); font-weight: 700; }
+.diff-row-head .staged-tag { margin-left: auto; display: none; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: var(--positive-dark); }
 .diff-row.staged .diff-row-head .staged-tag { display: inline-flex; }
+/* Explains WHY the row below is highlighted, rather than relying on the
+   dashed border alone to communicate "this is flagged" — same fail-red
+   used for this check's dot everywhere else (health-check tabs, etc.),
+   so the meaning is consistent across the whole page, not a one-off. */
+.diff-row-flag { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; color: var(--negative-dark); text-transform: uppercase; letter-spacing: 0.04em; }
+.diff-row-flag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--negative-accent); flex-shrink: 0; }
 .diff-cols { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; }
-.diff-cell { padding: 10px 12px; min-width: 0; }
-.diff-cell .lbl { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-subtle); margin-bottom: 5px; }
-.diff-cell.before { background: var(--red-10); }
-.diff-cell.before .val { color: var(--red-100); }
+.diff-cell { padding: 12px 14px; min-width: 0; }
+.diff-cell .lbl { font-family: var(--font-mono); font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-subtle); margin-bottom: 6px; }
+.diff-cell.before { background: var(--negative-light); }
+.diff-cell.before .val { color: var(--negative-dark); }
 .diff-cell.before.empty .val { color: var(--text-subtle); font-style: italic; }
-.diff-cell .val { font-size: 12px; line-height: 1.45; color: var(--blue-100); word-break: break-word; }
-.diff-arrow { display: grid; place-items: center; color: var(--blue-40); padding: 0 4px; }
-.diff-cell.after { background: var(--green-10); }
-.diff-cell.after textarea, .diff-cell.after input { width: 100%; border: 1px solid var(--green-50); border-radius: 7px; background: var(--white); font-family: var(--font-body); font-size: 12px; color: var(--blue-100); padding: 7px 9px; resize: vertical; line-height: 1.45; }
-.diff-cell.after textarea:focus, .diff-cell.after input:focus { outline: 2px solid var(--green-50); outline-offset: 1px; }
+.diff-cell .val { font-size: 12px; line-height: 1.5; color: var(--text); word-break: break-word; }
+.diff-arrow { display: grid; place-items: center; color: var(--text-subtle); padding: 0 4px; }
+.diff-cell.after { background: var(--positive-light); }
+.diff-cell.after textarea, .diff-cell.after input {
+  width: 100%; border: 1px solid var(--positive-accent); border-radius: var(--radius-tile-sm);
+  background: var(--surface); font-family: var(--font); font-size: 12px; color: var(--text);
+  padding: 8px 10px; resize: vertical; line-height: 1.5;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.diff-cell.after textarea:focus, .diff-cell.after input:focus { outline: none; border-color: var(--color-signal-violet); }
+
+/* Empty-state variant — replaces the before/after grid entirely when
+ * there's nothing to diff against yet. Dashed violet OUTLINE (not a
+ * filled tint) on the editable field itself: signals "empty slot,
+ * waiting for input" without a violet-painted card, keeping the "violet
+ * is a control colour, not a paint colour" rule intact. */
+.diff-row-empty .diff-empty-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.diff-row-empty textarea,
+.diff-row-empty input {
+  width: 100%; border: 1.5px dashed var(--color-signal-violet); border-radius: var(--radius-tile-sm);
+  background: var(--surface); font-family: var(--font); font-size: 12px; color: var(--text);
+  padding: 10px 12px; resize: vertical; line-height: 1.5;
+  transition: border-style var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+.diff-row-empty textarea::placeholder,
+.diff-row-empty input::placeholder { color: var(--text-subtle); font-style: italic; }
+.diff-row-empty textarea:focus,
+.diff-row-empty input:focus { outline: none; border-style: solid; }
+.diff-generate-btn {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: var(--radius-pill); border: none;
+  background: var(--color-signal-violet); color: #fff; font-size: 11.5px; font-weight: 700;
+  cursor: pointer; transition: background var(--duration-fast) var(--ease-out), transform var(--duration-instant) var(--ease-out);
+}
+.diff-generate-btn:hover { background: var(--color-signal-violet-hover); }
+.diff-generate-btn:active { transform: scale(0.97); }
 
 /* ── STAGE BAR (commit) ──────────────────────────────────────────────── */
 .stage-bar { position: sticky; bottom: 0; z-index: 6; display: flex; align-items: center; gap: 12px; padding: 11px 16px; border-top: 1px solid var(--blue-20); background: var(--white); }
@@ -4099,3 +4852,1088 @@ dialog.drawer-dialog::backdrop { background: rgba(0,0,0,0.35); }
 .stage-bar .btn-primary { background: var(--blue-100); color: var(--white); }
 .stage-bar.empty .btn-primary { opacity: .45; pointer-events: none; }
 .stage-bar.empty .num { background: var(--blue-30); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+ * REDESIGN — PHASE 1 (Overview + Issues ground-up redesign)
+ * Namespaced with a `2-` infix (ov2-, is2-) so nothing collides with the
+ * existing `.ov-*` / `.issue-*` classes above, which stay untouched so the
+ * original design remains viewable for comparison. See DESIGN.md +
+ * OverviewTab.redesign.stories.ts / IssuesTab.redesign.stories.ts.
+ * Principles applied: Apple progressive disclosure (one hero, drill for
+ * detail), Stripe generous whitespace + one-headline-per-card, Linear
+ * single-focus segmented views, "Calm confidence" motion throughout.
+ * ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Overview V2: Hero zone ─────────────────────────────────────────── */
+.ov2-hero {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 40px 24px 28px; gap: 4px;
+}
+.ov2-hero-ring-wrap { margin-bottom: 16px; }
+.ov2-hero-name { font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.01em; }
+.ov2-hero-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.ov2-hero-badges { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+
+/* ── Overview V2: dynamic hero (promoted from experiment) ───────────────
+ * Reference: Apple Health's Summary header — a soft, slowly-drifting
+ * pastel gradient behind the page's main heading. Applied here to the
+ * score+name+meta block specifically, tinted by score tier so the
+ * background itself carries a little of the score's meaning (calm green
+ * wash for a healthy library, warm amber for a middling one, soft coral
+ * for a poor one) rather than being decorative.
+ *
+ * This is the THIRD gradient use case in the system, alongside DESIGN.md's
+ * original two (score ring, header wash) — proposed as an explicit
+ * experiment, reviewed and iterated live (colour count, motion style,
+ * anchor corner, blur amount), then formally promoted to the canonical
+ * treatment. See DESIGN.md's "Gradients" section for the sanctioned-use
+ * writeup. The former separate `PluginView (dynamic hero — experiment)`
+ * story export has been removed — this is now simply what `PluginView`
+ * renders; there's no more "plain hero" story to compare against.
+ *
+ * Contrast, checked for real rather than assumed: every gradient stop
+ * below is a very light pastel (all ≥88% lightness). --color-ink text
+ * measures 14.2–16.5:1 against every stop (comfortably AA/AAA). The
+ * secondary meta line originally used --text-muted, which FAILED on 3 of
+ * 8 stops (as low as 3.80:1, below the 4.5:1 minimum) — swapped to
+ * --text-secondary (--color-ink-soft) instead, which passes everywhere at
+ * 7.75–9.01:1. This only matters in light theme; dark theme keeps the
+ * plain --ov2-hero background (a bright pastel wash reads wrong on a dark
+ * canvas regardless of contrast math, so this treatment is light-theme
+ * only for now). */
+/* The gradient + motion live on a ::before layer, not on the card itself —
+ * keeps the actual heading/score/badges perfectly still (no text "zoom"
+ * artefact) while the backdrop drifts AND gently breathes in scale behind
+ * it. ::before is oversized (inset: -8%) so the breathe scale never
+ * reveals a gap at the card's rounded edge; the parent's overflow:hidden
+ * clips it back down to the card shape every frame. */
+.ov2-hero-dynamic {
+  /* Top margin (was 0 — card touched the tab bar directly above it,
+     same bug fixed for .cd2-hero on Component Detail; same fix here). */
+  position: relative; border-radius: var(--radius-surface); margin: 14px 12px 12px;
+  overflow: hidden; isolation: isolate;
+}
+.ov2-hero-dynamic::before {
+  content: ""; position: absolute; inset: -8%; z-index: 0;
+  background-size: 200% 200%;
+  animation: ov2-hero-drift 16s ease-in-out infinite, ov2-hero-breathe 16s ease-in-out infinite;
+}
+[data-theme="dark"] .ov2-hero-dynamic { background: var(--surface); }
+[data-theme="dark"] .ov2-hero-dynamic::before { display: none; }
+.ov2-hero-dynamic .ov2-hero { position: relative; z-index: 1; padding: 32px 24px 24px; }
+.ov2-hero-dynamic .ov2-hero-meta { color: var(--text-secondary); }
+/* Third stop added to each tier (was a 2-colour A/B/A loop) so the hue
+ * itself visibly shifts mid-cycle instead of just sliding position —
+ * contrast-checked against --text-secondary same as the other stops
+ * (6.60–8.05:1, all comfortably above the 4.5:1 AA minimum).
+ *
+ * TIER MAPPING — the wrapper's tier-* class must match the score ring's
+ * OWN tier, not be picked independently. The real score ring only has 4
+ * tiers (excellent/good/med/poor), which collapse to 3 arc colours (see
+ * `.score-circle.tier-*` above): excellent+good -> positive-accent (green),
+ * med -> warning-accent (amber), poor -> negative-accent (red). So:
+ *   score-ring tier excellent or good  -> .ov2-hero-dynamic.tier-positive
+ *   score-ring tier med                -> .ov2-hero-dynamic.tier-warning
+ *   score-ring tier poor                -> .ov2-hero-dynamic.tier-negative
+ * tier-advisory (violet) has NO live equivalent — there is no 4th score
+ * tier — it exists only as a 4th sample colour for the DynamicHeroAllTiers
+ * comparison story. Caught a real bug from this: the mockup's default
+ * Overview view was wrapped in tier-advisory (violet background) while
+ * showing an actual "GOOD" tag/score (which should be green) — classic
+ * copy-paste of the comparison story's sample tier onto the "live" example.
+ * When wiring this to real data, derive the class from the actual score
+ * tier via the mapping above; never hand-pick tier-advisory for a real
+ * scored result. */
+.ov2-hero-dynamic.tier-positive::before { background-image: linear-gradient(120deg, #DEF3E3, #D3F0D0, #DCEFF6, #DEF3E3); }
+.ov2-hero-dynamic.tier-warning::before  { background-image: linear-gradient(120deg, #FBE7C9, #FBD9A8, #FFF4D8, #FBE7C9); }
+.ov2-hero-dynamic.tier-negative::before { background-image: linear-gradient(120deg, #F9DEDB, #F6C9C2, #FCEBDE, #F9DEDB); }
+.ov2-hero-dynamic.tier-advisory::before { background-image: linear-gradient(120deg, #EAE7FA, #EFE0F5, #E1EDFB, #EAE7FA); }
+@keyframes ov2-hero-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@keyframes ov2-hero-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* ── HEADER RIPPLE (verbatim reference) ──────────────────────
+ * User supplied a working ripple-background CSS/HTML pattern directly and
+ * asked for it dropped in UNCHANGED except what's structurally required
+ * to run inside our page rather than as a standalone demo. Two prior
+ * rounds tried to pre-emptively adapt this (recolour to tier accents,
+ * reposition, blur, cut opacity) and both missed — this version keeps
+ * every visual value from the reference identical: white circles, the
+ * same 5 sizes (200/400/600/800/1000px), the same 5 opacities
+ * (0.2/0.5/0.7/0.8/0.9), the same box-shadow (not blur). Anchor corner
+ * (bottom-right, not the reference's bottom-left) and the loop shape
+ * (one-way expand-and-fade, not the reference's symmetric breathe) were
+ * both explicit follow-up requests, not part of the "unchanged" ask —
+ * see the two dated addenda below for that history.
+ *
+ * The only changes made, and why each was unavoidable:
+ * 1. Selectors scoped under `.ov2-header-ripple` instead of bare
+ *    `.circle`/`.small`/`.medium`/`.large`/`.xlarge`/`.xxlarge`/`.shade1-5`.
+ *    Those are dangerously generic names to add unscoped into a shared
+ *    ~4700-line stylesheet used by every page in this design system —
+ *    without scoping they'd risk colliding with unrelated components.
+ *    The reference's own class names are kept as-is on the elements
+ *    (class="circle small shade5" etc.) — only the CSS selector prefix
+ *    changed, not the HTML.
+ * 2. `body { background: #abf7b1; }` was NOT ported. Applying that to
+ *    our actual <body> would repaint the whole plugin green; the
+ *    reference only used it so the white circles had something to show
+ *    up against in an isolated demo. Whatever the host container's own
+ *    background is (currently the existing gradient wash) is left alone.
+ * 3. `.ov2-header-ripple` needs `position:absolute; inset:0; z-index:0;
+ *    overflow:hidden` to fill and clip to its host container (the
+ *    reference relied on `body`/viewport for this implicitly). The real
+ *    content inside that host container needs `z-index:1` — otherwise,
+ *    at shade5's 0.9 opacity, a white circle would sit on top of and
+ *    obscure the text, which is not how the reference demo reads either
+ *    (there the circles sit behind everything by virtue of being the
+ *    page's own background, not layered content).
+ * 4. Keyframe renamed `ripple` → `ov2-header-ripple` only to match this
+ *    file's existing naming convention and guarantee no collision; the
+ *    keyframe body (0%/50%/100%, scale 0.8/1.2/0.8) is untouched.
+ *
+ * Deliberately NOT done pre-emptively this time: no resizing the circles
+ * for our smaller card, no repositioning to a different corner, no
+ * opacity/contrast tuning. Sizes this large (up to 1000px) on a ~370px
+ * plugin panel will likely cover most of the header in white given
+ * shade4/shade5's 0.8/0.9 opacity — that's expected from running the
+ * numbers unchanged, not a bug, and is exactly what should be reviewed
+ * live before deciding what (if anything) to scale down. */
+.ov2-header-ripple {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+}
+/* Loop style, changed from the reference's symmetric breathe (grow→shrink→
+ * grow, 0.8→1.2→0.8) to a one-way expand: each circle only ever grows
+ * (0.6→1.7), then resets instantly back to 0.6 — which is what "expands
+ * out of the container, then repeats from the start" means literally: an
+ * outward ripple, not an in-place pulse. The hard scale reset at the loop
+ * boundary would otherwise be a visible pop; --so (per-shade opacity,
+ * replacing the old static `opacity:` on each `.shade*` rule) lets the
+ * keyframe fade each circle out to 0 right as it finishes expanding and
+ * back in right as the next cycle starts, so the reset itself is never
+ * seen — that's the "seamless" part, not a longer/slower transform. */
+.ov2-header-ripple .circle {
+  --so: 1;
+  position: absolute;
+  border-radius: 30%;
+  background: white;
+  opacity: 0;
+  animation: ov2-header-ripple 15s linear infinite;
+  box-shadow: 0px 0px 1px 0px #508fb9;
+  filter: blur(3px);
+}
+.ov2-header-ripple .small   { width: 200px;  height: 200px;  right: -100px; top: -100px; }
+.ov2-header-ripple .medium  { width: 400px;  height: 400px;  right: -200px; top: -200px; }
+.ov2-header-ripple .large   { width: 600px;  height: 600px;  right: -300px; top: -300px; }
+.ov2-header-ripple .xlarge  { width: 800px;  height: 800px;  right: -400px; top: -400px; }
+.ov2-header-ripple .xxlarge { width: 1000px; height: 1000px; right: -500px; top: -500px; }
+.ov2-header-ripple .shade1 { --so: 0.2; }
+.ov2-header-ripple .shade2 { --so: 0.5; }
+.ov2-header-ripple .shade3 { --so: 0.7; }
+.ov2-header-ripple .shade4 { --so: 0.8; }
+.ov2-header-ripple .shade5 { --so: 0.9; }
+/* Scale is declared only at 0% and 100% so it interpolates as one
+ * continuous straight ramp (0.6→1.7) with no rate change anywhere. Opacity
+ * uses 11 stops sampling a sine curve (so * sin(π·t)) instead of the
+ * previous 3-stop rise/flat-hold/fall shape — that flat hold from 12–65%
+ * met a sudden slope change at 65% (≈9.75s into the 15s loop, matching
+ * the reported "~9secs in" pause), which read as a stall even after
+ * switching to linear timing. A sine envelope has no flat segment and no
+ * sudden slope change at any point, so there's nothing left to feel like
+ * a pause — verify by sampling opacity slope either side of any stop. */
+@keyframes ov2-header-ripple {
+  0%   { transform: scale(0.6); opacity: 0; }
+  10%  { opacity: calc(var(--so) * 0.309); }
+  20%  { opacity: calc(var(--so) * 0.588); }
+  30%  { opacity: calc(var(--so) * 0.809); }
+  40%  { opacity: calc(var(--so) * 0.951); }
+  50%  { opacity: var(--so); }
+  60%  { opacity: calc(var(--so) * 0.951); }
+  70%  { opacity: calc(var(--so) * 0.809); }
+  80%  { opacity: calc(var(--so) * 0.588); }
+  90%  { opacity: calc(var(--so) * 0.309); }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* Stat grid — grouped tiles, not a flat divided row. Reference: iOS grouped-
+   list items (iCloud's "Saved to iCloud" tile grid, Health's pinned cards) —
+   each stat is its own soft rounded surface on a neutral tint, no hairline
+   dividers between them. Edge margin matches --radius-surface cards below
+   (12px) rather than the old 24px, which made this section visibly wider-
+   inset than everything under it. */
+.ov2-stat-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  padding: 4px 12px 16px; margin: 0;
+}
+.ov2-stat {
+  background: var(--color-neutral-tint); border-radius: 14px;
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+.ov2-stat-num { font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.01em; }
+.ov2-stat-label { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-top: 2px; }
+
+/* ── Overview V2: Stale banner — quiet inline notice, not a loud block ── */
+.ov2-stale-notice {
+  display: flex; align-items: center; gap: 8px; margin: 0 12px 16px;
+  /* Matches .ov2-stat's literal 14px above it — was var(--radius-md), a
+     visibly sharper corner than every card around it. */
+  padding: 10px 12px; border: 1px solid var(--border); border-radius: 14px;
+  font-size: 11px; color: var(--text-secondary);
+}
+.ov2-stale-notice svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--warning-accent); }
+.ov2-stale-notice a { color: var(--color-signal-violet); font-weight: 600; text-decoration: none; margin-left: auto; flex-shrink: 0; }
+
+/* ── Overview V2: Health Breakdown card (segmented, one panel at a time) ──
+ * Softer radius per feedback (was --radius-lg/14px). min-height on the
+ * panel reserves roughly the tallest panel's space so switching segments
+ * (Coverage/Readiness/Freshness/Health Map) doesn't jump the whole page —
+ * shorter panels get a little extra breathing room at the bottom instead
+ * of the surrounding layout snapping to a new height every click. */
+.ov2-breakdown {
+  margin: 0 12px 16px; border: 1px solid var(--border); border-radius: var(--radius-surface);
+  background: var(--surface); overflow: hidden;
+}
+.ov2-breakdown-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px 12px; border-bottom: 1px solid var(--border);
+}
+.ov2-breakdown-title { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--text); }
+/* Was a flat min-height: 360px on the panel itself, calibrated to whichever
+   panel happened to be tallest — every shorter panel (Freshness especially)
+   was left with a lot of dead space below its own content. Now the WRAPPER
+   animates its height to each panel's real measured content on switch (see
+   handleBreakdownChange/toggleComponentsView-equivalent JS), so each panel
+   only ever takes the room it actually needs. */
+.ov2-breakdown-body {
+  overflow: hidden;
+  transition: height var(--duration-base) var(--ease-out);
+}
+.ov2-breakdown-panel {
+  padding: 16px;
+  animation: ov2-panel-in var(--duration-base) var(--ease-out);
+}
+.ov2-breakdown-panel.hidden { display: none; }
+@keyframes ov2-panel-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ov2-readiness-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ov2-panel-hint { font-size: 11px; color: var(--text-muted); margin: 0 0 14px; line-height: 1.5; }
+
+/* ── Overview V2: Action bar — sticky footer, top hairline only ──────── */
+.ov2-action-bar {
+  position: sticky; bottom: 0; display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px; background: var(--surface); border-top: 1px solid var(--border);
+}
+/* Scoped to this bar rather than changing .btn-primary/.btn-ghost/.btn-accent
+   globally — those base classes are used by every button in every plugin
+   page, most of which haven't been reviewed in this redesign pass. Same
+   underlying rule as .header-icon-btn above (DESIGN.md's radius table
+   already says buttons are pill, categorically) applied narrowly to where
+   it was actually asked for. If/when the redesign reaches the rest of the
+   app, this should become the global default instead of a scoped override. */
+.ov2-action-bar .btn-primary,
+.ov2-action-bar .btn-ghost,
+.ov2-action-bar .btn-accent { border-radius: var(--radius-pill); }
+/* "Export" label groups Report/CSV/JSON as one unit rather than 3 loose
+   buttons with no relationship to each other. */
+.ov2-export-group { display: flex; align-items: center; gap: 8px; }
+.ov2-export-label {
+  font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--text-muted); margin-right: 2px;
+}
+/* Deliberate exception to the nav-tab reveal rule (reserved width always,
+ * opacity/transform only): reserving the icon's width here left "Report"/
+ * "CSV"/"JSON" visibly off-centre at rest (empty invisible icon-space
+ * pulling the label right of the button's actual centre) — confirmed by
+ * screenshot, not assumed. Nav tabs sit in a shared row where a width
+ * change would shift every tab after it; these 3 buttons are an isolated
+ * group, so letting the button itself grow slightly on hover is the
+ * cleaner fix here. gap:0 on the button — spacing between icon and label
+ * is now driven entirely by the icon wrapper's own margin-right (0 at
+ * rest, so a 0-width/0-margin icon contributes literally nothing to
+ * layout, not just an invisible gap-sized shim). Icon sized to 11px to
+ * match .btn-sm's own 11px font-size — the same visual weight as the
+ * Re-scan button's plain "↺" character glyph, not the global 14px
+ * .btn-icon default. */
+.ov2-export-btn { gap: 0; }
+.ov2-export-btn .btn-icon {
+  width: 0; margin-right: 0; overflow: hidden;
+  opacity: 0; transform: translateX(5px) scale(0.6);
+  transition: width var(--duration-base) var(--ease-out), margin-right var(--duration-base) var(--ease-out), opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--easing-spring, var(--ease-out));
+}
+.ov2-export-btn .btn-icon svg { width: 11px; height: 11px; }
+.ov2-export-btn:hover .btn-icon { width: 11px; margin-right: 6px; opacity: 1; transform: translateX(0) scale(1); }
+
+/* ── Overview V2: Empty state — calm, centered, one clear action ─────── */
+.ov2-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 64px 32px; }
+.ov2-empty-icon {
+  width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--color-neutral-tint); color: var(--text-muted);
+}
+.ov2-empty-title { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--text); }
+.ov2-empty-desc { font-size: 12px; color: var(--text-muted); max-width: 260px; line-height: 1.6; }
+
+/* ── Overview V2: Scan progress — calm, focused, no spinner anxiety ──── */
+.ov2-scanning { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; padding: 56px 32px; }
+.ov2-scanning-pct { font-family: var(--font-heading); font-size: 40px; font-weight: 800; color: var(--color-signal-violet); letter-spacing: -0.02em; }
+.ov2-scanning-label { font-size: 12px; color: var(--text-muted); }
+.ov2-scanning-component { font-family: var(--font-mono); font-size: 10px; color: var(--text-subtle); }
+.ov2-scanning-track { width: 100%; max-width: 240px; height: 4px; border-radius: 999px; background: var(--border); overflow: hidden; }
+.ov2-scanning-fill { height: 100%; background: var(--color-signal-violet); border-radius: 999px; transition: width var(--duration-slow) var(--ease-out); }
+
+/* ── Issues V2: card with progressive tag disclosure ───────────────────
+ * Softer radius (was --radius-lg/14px). Hover now shifts background too,
+ * not just border, for a more noticeable but still calm hover response.
+ * Expand/collapse uses the CSS grid 0fr→1fr technique instead of
+ * display:none/block — that's what was causing the "jump": display toggles
+ * can't be transitioned at all, so the card snapped open/closed instantly
+ * and shoved everything below it down/up with no animation. grid-template-
+ * rows CAN transition smoothly to an intrinsic ("auto") height without any
+ * JS height-measuring. */
+/* Issues V2: 2-column grid at wider (≥560px) canvases. A single-column list
+ * of short text rows left a lot of dead space once the app grew to 600px —
+ * two columns actually uses the width. Opened cards break out to full width
+ * (`grid-column: 1/-1`) rather than stretching their row-neighbor's cell to
+ * match height, which is the one thing that makes a "grid of expanding
+ * cards" pattern hold together. Severity headers also span full width. */
+/* Single column, always — the 2-column grid tried a round ago (with a
+ * :has()-based rule to span lone/stranded cards full-width) fixed the
+ * "dead gap" complaint but introduced a new problem: opening a card in a
+ * 2-up pair reflows its neighbor to a new position, which combined with
+ * the open/close height animation read as a wobbly, unpredictable layout
+ * shift rather than a clean expand. Reverted to one full-width row per
+ * card — simpler, and the reflow-on-open issue disappears entirely since
+ * there's never a neighbor to displace. */
+.is2-grid {
+  display: grid; grid-template-columns: 1fr; gap: 10px; padding: 0 12px;
+}
+.is2-grid .severity-header { padding-left: 0; padding-right: 0; }
+.is2-grid .is2-card { margin: 0; }
+
+.is2-card {
+  border: 1px solid var(--border); border-radius: var(--radius-surface); background: var(--surface);
+  margin: 0 12px 10px; overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.is2-card:hover { border-color: var(--blue-40); background: var(--color-hover-tint); }
+.is2-card-top { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; }
+.is2-card-icon {
+  /* Nested tile — concentric with the card's own radius/inset, not a
+     hand-picked value. See DESIGN.md "Border Radius — nested & concentric". */
+  width: 28px; height: 28px; border-radius: var(--radius-tile); background: var(--color-neutral-tint);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text-secondary);
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+/* The diamond glyph SVGs are authored with only a viewBox, no width/height —
+   without this rule they fall back to the browser's ~300×150 intrinsic SVG
+   size and get stretched to fill (then clipped by) the tile, reading as an
+   oversized icon. Same fix applied to every icon-tile family below. */
+.is2-card-icon svg { width: 13px; height: 13px; }
+.is2-card:hover .is2-card-icon { background: var(--surface); color: var(--color-signal-violet); }
+.is2-card-body { flex: 1; min-width: 0; }
+.is2-card-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.is2-card-primary-tag { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.is2-card-more { font-family: var(--font-mono); font-size: 9px; color: var(--text-subtle); background: var(--color-neutral-tint); border-radius: 999px; padding: 2px 7px; flex-shrink: 0; }
+.is2-card-chevron { width: 16px; height: 16px; color: var(--text-subtle); flex-shrink: 0; transition: transform var(--duration-base) var(--ease-out), color var(--duration-fast) var(--ease-out); }
+.is2-card.open .is2-card-chevron { transform: rotate(90deg); }
+/* Quiet nudge on hover — hints "this expands" before the click, same
+   affordance language as the jump-arrow nudges. Doesn't fight the
+   open-state rotation: closed hover nudges right, then opening rotates
+   from wherever it currently sits. */
+.is2-card:hover .is2-card-chevron { color: var(--text-secondary); transform: translateX(2px); }
+.is2-card.open:hover .is2-card-chevron { transform: rotate(90deg) translateX(2px); }
+/* Expand/collapse: JS measures .is2-card-detail-inner's natural height
+ * (scrollHeight, which is unaffected by overflow:hidden clipping) and sets
+ * max-height inline on toggle — see toggleCard() in the story/mockup JS.
+ * (First attempt used the CSS grid 0fr→1fr technique, which needs the grid
+ * container to be in a definite-height context to resolve `1fr` against;
+ * it stayed pinned at 0px here, so switched to the more broadly-reliable
+ * measured-max-height approach instead.) */
+.is2-card-detail {
+  max-height: 0; overflow: hidden; background: var(--surface);
+  transition: max-height var(--duration-base) var(--ease-out);
+}
+/* Cards that start pre-opened (no JS toggle has run yet) get an uncapped
+ * fallback so their content isn't clipped before any click ever happens.
+ * The JS toggle handler overrides this with an inline, measured px value
+ * (higher specificity) so subsequent close/open cycles still animate. */
+.is2-card.open .is2-card-detail { max-height: none; }
+.is2-card-detail > .is2-card-detail-inner {
+  /* padding-bottom is deliberately NOT in the transition list below (only
+   * border-top-width is) — toggleCard() measures .is2-card-detail-inner's
+   * scrollHeight immediately after adding the .open class, in the same
+   * synchronous tick, to size .is2-card-detail's own max-height transition.
+   * If padding-bottom were still animating from 0 at that exact moment
+   * (transitions don't apply instantly just because a class changed),
+   * scrollHeight would be measured 16px short of the true final height —
+   * exactly enough to make the last row inside read as flush against the
+   * card's bottom edge with no visible gap. Border-top-width can stay
+   * animated safely: it doesn't affect the CONTENT height being measured,
+   * so it doesn't matter whether it's still interpolating at measurement
+   * time. */
+  padding: 0 16px; border-top: 0 solid var(--border);
+  transition: border-top-width var(--duration-base) var(--ease-out);
+}
+.is2-card.open .is2-card-detail > .is2-card-detail-inner { padding: 0 16px 16px; border-top-width: 1px; }
+.is2-card-tags-full { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 12px; }
+
+/* ── Components V2 (Phase 2, cx2-*) ─────────────────────────────────────
+ * Real ui.html/ui.ts columns (Component, Score, Desc, Link, Tokens, Dev,
+ * Publish, Code, Storybook) preserved in full — none dropped — but the
+ * presentation moves off the old dense sticky-column/mask-fade table (built
+ * for a 400px canvas, 10-11px type, 7px cell padding) onto a two-line
+ * card-row: name + score on the first line, a wrapped strip of secondary
+ * indicator pills on the second. This is what the extra width at 600px is
+ * actually for — cramming 9 columns into one scrolling table row wouldn't
+ * have looked any different from the 400px version. Desc+Link condense
+ * into one "Docs" two-pill indicator (same visual language as the existing
+ * Storybook Name/Link match cell) since they're both simple present/absent
+ * signals; the per-row Jump action moves to a hover-reveal icon instead of
+ * a permanent 9th column, freeing up room for everything else. */
+.cx2-toolbar {
+  padding: 14px 16px 10px; display: flex; flex-direction: column; gap: 10px;
+  border-bottom: 1px solid var(--border); background: var(--surface);
+}
+.cx2-toolbar-row { display: flex; align-items: center; gap: 8px; }
+.cx2-count { font-size: 11px; color: var(--text-muted); }
+.cx2-chips-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.cx2-list { display: flex; flex-direction: column; padding: 10px 12px 4px; gap: 8px; }
+.cx2-row {
+  border: 1px solid var(--border); border-radius: var(--radius-surface-sm); background: var(--surface);
+  padding: 12px 14px; cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+}
+.cx2-row:hover { border-color: var(--blue-40); background: var(--color-hover-tint); }
+.cx2-row-top { display: flex; align-items: center; gap: 10px; }
+.cx2-icon {
+  /* Nested tile — concentric with .cx2-row's own radius/inset. */
+  width: 26px; height: 26px; border-radius: var(--radius-tile-sm); background: var(--color-neutral-tint);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text-secondary);
+}
+.cx2-icon svg { width: 12px; height: 12px; }
+/* Solid accent-fill on row hover, same recipe as .cd2-tool-icon on
+   Component Detail — this belongs on the row's LEADING icon, not the
+   trailing jump arrow (was misapplied to .cx2-jump below; moved here). */
+.cx2-row:hover .cx2-icon { background: var(--color-signal-violet); color: #fff; }
+.cx2-name-block { flex: 1; min-width: 0; }
+.cx2-name { font-size: 13px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cx2-meta { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cx2-score { font-family: var(--font-mono); font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.cx2-score.green { color: var(--positive-dark); }
+.cx2-score.amber { color: var(--warning-dark); }
+.cx2-score.red   { color: var(--negative-dark); }
+/* Always visible — was opacity:0 at rest, only revealed on row hover. Per
+ * feedback: keep the icon visible permanently, and let it communicate
+ * "interactive" purely through the same hover-nudge motion the chevrons
+ * elsewhere use (.is2-card-chevron), not through a disappear/reappear. */
+.cx2-jump {
+  /* Same corner as .cx2-icon — both hug the same row's edge, so they should
+     read as the same nested tile size, not two arbitrary small radii. */
+  width: 24px; height: 24px; border-radius: var(--radius-tile-sm); border: none; background: transparent;
+  color: var(--icon-secondary); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+/* No colour/fill hover here — that treatment belongs on .cx2-icon (the
+   row's leading icon), not this trailing jump arrow; was misapplied here
+   in an earlier round. This icon signals "interactive" purely through
+   motion, matching the chevron-nudge pattern used elsewhere
+   (.is2-card-chevron): stays visually static, just nudges on row hover. */
+.cx2-jump svg { width: 12px; height: 12px; transition: transform var(--duration-fast) var(--ease-out); }
+.cx2-row:hover .cx2-jump svg { transform: translate(2px, -2px); }
+
+.cx2-row-stats { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 10px 0 0 36px; }
+.cx2-stat-label { font-family: var(--font-mono); font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-subtle); margin-right: -2px; }
+.cx2-row-stats.hidden { display: none; }
+
+.sb-pill-warn { background: var(--warning-light); color: var(--warning-dark); }
+
+.cx2-pub {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 18px; padding: 0 7px; border-radius: 999px;
+  font-size: 9.5px; font-weight: 700; white-space: nowrap;
+}
+.cx2-pub.current { background: var(--positive-light); color: var(--positive-dark); }
+.cx2-pub.changed { background: var(--warning-light); color: var(--warning-dark); }
+.cx2-pub.unpub   { background: var(--negative-light); color: var(--negative-dark); }
+
+/* ── Component Detail (Phase 2, cd2-*) ──────────────────────────────────
+ * Full ground-up rebuild. The first pass ported pulse-beta's classes
+ * (`.cmp-hero`, `.page-sect`, `.tool-tiles`, `.score-block`) directly — they
+ * resolved to correct COLORS through the legacy --blue-* aliases, but colour
+ * was never the problem: their SHAPE language (flat 0-radius sections,
+ * hardcoded 6-7px corners, box-shadow hover lifts, an unanimated static
+ * score block) never went through the concentric-radius/no-shadow/motion
+ * system this whole redesign is built on, so next to .is2-card/.ov2-
+ * breakdown it read as a different, older app. `.tool-tiles`/`.tool-tile`
+ * additionally never had ANY real CSS in this file at all — pulse-beta's
+ * version lived in a completely separate stylesheet — so those buttons
+ * rendered with zero layout/icon sizing, which is what "broken tool button
+ * icon sizing" actually was. Every rule below is either a reuse of an
+ * existing --radius-surface/--duration/--ease token or a concentric-derived
+ * value, same discipline as is2-card/cx2-row/ov2-breakdown. */
+
+.cd2-hero {
+  display: flex; align-items: center; gap: 16px;
+  border: 1px solid var(--border); border-radius: var(--radius-surface);
+  background: var(--surface); padding: 20px;
+  /* Top margin — was 0, touching .dd-bar directly above it. */
+  margin: 14px 12px 12px;
+}
+.cd2-titleblock { flex: 1; min-width: 0; }
+/* Puts the primary "go to canvas" action at the top-right of the card,
+ * level with the eyebrow — the single most reached-for action on this
+ * page shouldn't be buried in a row of secondary actions below the fold
+ * of the title block. */
+.cd2-hero-top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cd2-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+.cd2-title { font-family: var(--font-heading); font-weight: 800; font-size: 22px; letter-spacing: -.01em; color: var(--text); margin: 4px 0 8px; }
+.cd2-path { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 11px; color: var(--text-secondary); }
+.cd2-path .pill { background: var(--color-neutral-tint); border-radius: var(--radius-pill); padding: 3px 10px; font-weight: 600; color: var(--text-secondary); }
+.cd2-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+/* Jump/action button — pill, hover-nudge arrow, same directional-affordance
+ * language as .cx2-jump/.btn-jump-sm/.issues-landing-arrow. */
+.cd2-jump-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: var(--radius-pill); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font: 600 12px var(--font); cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-instant) var(--ease-out);
+}
+.cd2-jump-btn:hover { background: var(--color-hover-tint); border-color: var(--blue-40); }
+.cd2-jump-btn:active { transform: scale(0.97); }
+.cd2-jump-btn.sm { padding: 5px 12px; font-size: 11px; }
+.cd2-jump-btn svg { width: 13px; height: 13px; transition: transform var(--duration-fast) var(--ease-out); }
+.cd2-jump-btn:hover svg { transform: translate(1px, -1px); }
+
+/* Section shell — a real soft card (was .page-sect: flat padding, no
+ * border, no radius at all) matching .ov2-breakdown's exact recipe so a
+ * "section" reads the same everywhere in the app. */
+.cd2-section {
+  border: 1px solid var(--border); border-radius: var(--radius-surface);
+  background: var(--surface); margin: 0 12px 12px; overflow: hidden;
+}
+.cd2-section-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px 12px; border-bottom: 1px solid var(--border);
+}
+.cd2-section-title-row { display: flex; align-items: center; gap: 7px; }
+.cd2-section-icon { display: flex; flex-shrink: 0; }
+.cd2-section-icon svg { width: 15px; height: 15px; }
+.cd2-section-title { font-family: var(--font-heading); font-weight: 700; font-size: 14px; color: var(--text); }
+/* Meaningful colour per section — was plain ink everywhere ("too white"),
+ * borrowed from Apple Health's icon+heading colour pairing (Activity in
+ * orange, Heart Rate in red, etc). Kept anchored to EXISTING semantic
+ * meaning rather than inventing a new palette: tools/generate-style
+ * sections use the one violet accent (they're actions), Health Checks
+ * uses the same positive/warning/negative tier tokens the score itself
+ * uses (so the colour actually means something — a mostly-passing
+ * component gets a calm green heading, a mostly-failing one gets red),
+ * neutral sections (Canvas docs) stay plain. Icon and heading always share
+ * the same tone so they read as one unit, same as the reference. */
+.cd2-section-title-row.tone-violet .cd2-section-icon,
+.cd2-section-title-row.tone-violet .cd2-section-title { color: var(--color-signal-violet); }
+.cd2-section-title-row.tone-positive .cd2-section-icon,
+.cd2-section-title-row.tone-positive .cd2-section-title { color: var(--positive-dark); }
+.cd2-section-title-row.tone-warning .cd2-section-icon,
+.cd2-section-title-row.tone-warning .cd2-section-title { color: var(--warning-dark); }
+.cd2-section-title-row.tone-negative .cd2-section-icon,
+.cd2-section-title-row.tone-negative .cd2-section-title { color: var(--negative-dark); }
+.cd2-section-note { font-size: 11px; color: var(--text-muted); }
+
+/* ── SCORED SECTION HEADER (suite-wide pattern) ────────────────────────
+ * Generic version of the tone-header recipe above, for use anywhere in
+ * ANY Specd Tools plugin (not just Pulse/Component Detail) that has a
+ * sub-heading introducing a score, status, or pass/fail summary. See
+ * DESIGN.md's "Scored section headers" writeup for the full usage rule —
+ * short version: icon + heading always share one colour, computed from
+ * what the section is actually reporting (not decorative), one of
+ * tone-violet (action/informational) / tone-positive / tone-warning /
+ * tone-negative. `.cd2-section-title-row` above is the same pattern under
+ * its original Component-Detail-specific name; new usages should reach
+ * for `.specd-tone-header` instead. First applied to Pulse's Overview
+ * "Health Breakdown" header. */
+.specd-tone-header { display: flex; align-items: center; gap: 7px; }
+.specd-tone-header-icon { display: flex; flex-shrink: 0; }
+.specd-tone-header-icon svg { width: 15px; height: 15px; }
+.specd-tone-header-title { font-family: var(--font-heading); font-weight: 700; font-size: 14px; color: var(--text); }
+.specd-tone-header.tone-violet .specd-tone-header-icon,
+.specd-tone-header.tone-violet .specd-tone-header-title { color: var(--color-signal-violet); }
+.specd-tone-header.tone-positive .specd-tone-header-icon,
+.specd-tone-header.tone-positive .specd-tone-header-title { color: var(--positive-dark); }
+.specd-tone-header.tone-warning .specd-tone-header-icon,
+.specd-tone-header.tone-warning .specd-tone-header-title { color: var(--warning-dark); }
+.specd-tone-header.tone-negative .specd-tone-header-icon,
+.specd-tone-header.tone-negative .specd-tone-header-title { color: var(--negative-dark); }
+.cd2-section-body { padding: 16px; }
+.cd2-section-body.gap-sm { display: flex; flex-direction: column; gap: 10px; }
+
+/* Tools — 3 icon tiles. Mini soft cards inside the section body: outer
+ * radius is --radius-surface-sm(16) since the tile itself is a card, not a
+ * corner-hugging chip; its icon well is concentric with THAT card at
+ * --radius-tile-sm(4, matching the same 16-12 math .cx2-icon uses). Hover
+ * shifts background + violet icon, same as .is2-card/.cx2-row — no
+ * box-shadow lift (pulse-beta's version used one; that's the one thing this
+ * rebuild deliberately drops per DESIGN.md's no-shadow rule). */
+.cd2-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cd2-tool {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  padding: 14px; border-radius: var(--radius-surface-sm); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); cursor: pointer; text-align: left; font-family: inherit;
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+.cd2-tool:hover { background: var(--color-hover-tint); border-color: var(--blue-40); transform: translateY(-1px); }
+.cd2-tool:active { transform: translateY(0) scale(0.98); }
+.cd2-tool-icon {
+  width: 32px; height: 32px; border-radius: var(--radius-tile-sm);
+  background: var(--color-neutral-tint); color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+/* Fills solid on hover (violet + white icon), not just a colour swap — a
+ * bolder "this is interactive" signal for a container that's the main
+ * clickable target, same fill+invert logic as .tab-v2.active. */
+.cd2-tool:hover .cd2-tool-icon { background: var(--color-signal-violet); color: #fff; }
+/* Explicit sizing — the earlier "oversized icon" bug (is2-card-icon/cx2-icon
+ * svgs with no width/height fell back to the browser's ~300×150 default)
+ * happened once already this project; every raw SVG placed directly in
+ * markup gets an explicit size rule from here on, no exceptions. */
+.cd2-tool-icon svg { width: 16px; height: 16px; }
+.cd2-tool-label { font-size: 11.5px; font-weight: 700; letter-spacing: -.01em; color: var(--text); }
+
+/* Health checks — vertical sidebar of check tabs + a detail panel that
+ * cross-fades on switch (same .ov2-panel-in recipe the Health Breakdown
+ * segmented control uses for its panels, so tab-driven content changes
+ * read consistently across the whole app). */
+.cd2-checks { display: flex; gap: 10px; align-items: flex-start; }
+.cd2-check-tabs { display: flex; flex-direction: column; gap: 4px; flex: 0 0 132px; min-width: 0; }
+.cd2-check-tab {
+  display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+  padding: 8px 10px; border: none; border-radius: var(--radius-input);
+  background: transparent; color: var(--text-secondary); font: 600 11px var(--font); cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+.cd2-check-tab:hover:not(.active) { background: var(--color-hover-tint); color: var(--text); }
+.cd2-check-tab.active { background: var(--color-ink); color: #fff; }
+.cd2-check-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.cd2-check-dot.pass { background: var(--positive-accent); }
+.cd2-check-dot.warn { background: var(--warning-accent); }
+.cd2-check-dot.fail { background: var(--negative-accent); }
+.cd2-check-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cd2-check-body { flex: 1; min-width: 0; }
+.cd2-check-detail { animation: cd2-panel-in var(--duration-base) var(--ease-out); }
+.cd2-check-detail.hidden { display: none; }
+@keyframes cd2-panel-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Generic status card (Ready for Dev / Publish / Storybook / Code Connect
+ * detail panels) — a quiet nested surface, one step softer than the
+ * section it sits in, matching the same "nested surface gets a smaller
+ * radius" logic as everywhere else. */
+.cd2-status-card { padding: 14px 16px; border-radius: var(--radius-input); background: var(--color-neutral-tint); }
+/* .cd2-status-head can hold just [dot+title] (most checks), or
+   [dot+title] plus a trailing edit action pushed to the far right — the
+   wrapper below groups dot+title as one unit so justify-content:
+   space-between only ever splits "heading" from "action", never
+   separates the dot from its own title. */
+.cd2-status-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.cd2-status-head-main { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.cd2-status-title { font-size: 13px; font-weight: 700; color: var(--text); }
+.cd2-status-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+.cd2-status-desc + .cd2-jump-btn,
+.cd2-status-desc + .sb-pill { margin-top: 10px; }
+.cd2-status-desc + .cd2-status-actions,
+.cd2-status-desc + .cd2-edit-trigger,
+.cd2-status-desc + specd-segmented { margin-top: 10px; }
+.cd2-status-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+/* Undefined/custom elements default to display:inline per the CSS spec
+ * unless something says otherwise — margin-top on an inline box is a
+ * no-op (vertical margins don't apply to inline-level boxes), which is
+ * why the rule above looked "missing" on Ready for Dev even though it
+ * was present all along: specd-segmented had no base display rule, so
+ * its own margin-top was silently discarded. specd-radio-row hit the
+ * same thing earlier (see its own display:block rule elsewhere in this
+ * file) — same fix here. */
+specd-segmented { display: block; }
+/* Actions that belong to a specific field (Generate / Apply template for
+ * Description) sit just above that field, styled like every other
+ * check's .cd2-edit-trigger rather than the square Tools-tile look —
+ * these affect the description directly, so they read as part of that
+ * check, not as general-purpose component tools. */
+.cd2-desc-actions { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+/* Primary CTA variant of .cd2-jump-btn — for the one case (Publish
+ * status) where there's no in-app edit at all, only an external action
+ * we want to actively nudge toward (not just offer quietly like the
+ * secondary "Jump to canvas" link). Solid violet vs. the outline default
+ * marks it as the recommended action, same fill+invert logic used
+ * everywhere else an accent CTA appears. */
+.cd2-jump-btn.primary {
+  background: var(--color-signal-violet); color: #fff; border-color: transparent;
+}
+.cd2-jump-btn.primary:hover { background: var(--color-signal-violet-hover); }
+
+/* Generic "open the focused editor" trigger — used on the 3 checks whose
+ * edit flow needs more room than a status card (Variable coverage,
+ * Storybook sync, Code links). Same visual weight as .cd2-jump-btn,
+ * different verb (Edit vs Jump) so the two affordances read distinctly:
+ * one takes you to Figma's canvas, the other opens the in-plugin drawer. */
+.cd2-edit-trigger {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: var(--radius-pill); border: 1px solid var(--border);
+  background: var(--surface); color: var(--color-signal-violet); font: 700 12px var(--font); cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), transform var(--duration-instant) var(--ease-out);
+}
+.cd2-edit-trigger:hover { background: var(--color-hover-tint); border-color: var(--blue-40); }
+.cd2-edit-trigger:active { transform: scale(0.97); }
+.cd2-edit-trigger svg { width: 13px; height: 13px; transition: transform var(--duration-fast) var(--ease-out); }
+.cd2-edit-trigger:hover svg { transform: translate(1px, -1px); }
+/* Small variant — same recipe as .cd2-jump-btn.sm, used when the edit
+   trigger sits in a card's header row rather than its body (see
+   .cd2-status-head-main below): a header-row action reads as secondary
+   to the heading itself, so it shouldn't be the same visual weight as a
+   standalone body button. */
+.cd2-edit-trigger.sm { padding: 5px 12px; font-size: 11px; }
+.cd2-edit-trigger.sm svg { width: 11px; height: 11px; }
+
+/* ── Drawer content: shared shapes for the 3 "focused editor" checks ──
+ * All three (Variable coverage, Storybook sync, Code links) open the
+ * same <specd-drawer>; only the body content differs. Shared building
+ * blocks below keep the 3 flows visually consistent rather than each
+ * inventing its own list/row style. */
+.cd2-drawer-intro { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0 0 14px; }
+.cd2-drawer-search {
+  width: 100%; border: 1px solid var(--border); border-radius: var(--radius-input);
+  background: var(--surface); font-family: var(--font); font-size: 12.5px; color: var(--text);
+  padding: 9px 12px; margin-bottom: 14px; transition: border-color var(--duration-fast) var(--ease-out);
+}
+.cd2-drawer-search:focus { outline: none; border-color: var(--color-signal-violet); }
+
+/* F. Variable coverage — itemized list, one row per hard-coded value
+ * found, each with its own apply action. This is the shape-F pattern:
+ * an aggregate number expands into a list of independent micro-decisions. */
+.cd2-vc-list { display: flex; flex-direction: column; gap: 8px; }
+.cd2-vc-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: var(--radius-surface-sm); background: var(--surface);
+}
+.cd2-vc-swatch { width: 22px; height: 22px; border-radius: var(--radius-tile-sm); border: 1px solid var(--border); flex-shrink: 0; }
+.cd2-vc-info { flex: 1; min-width: 0; }
+.cd2-vc-prop { font-size: 12px; font-weight: 700; color: var(--text); }
+.cd2-vc-suggestion { font-family: var(--font-mono); font-size: 10.5px; color: var(--color-signal-violet); margin-top: 2px; }
+.cd2-vc-apply {
+  flex-shrink: 0; padding: 5px 12px; border-radius: var(--radius-pill); border: none;
+  background: var(--color-neutral-tint); color: var(--text); font-size: 11px; font-weight: 700; cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+.cd2-vc-apply:hover { background: var(--color-signal-violet); color: #fff; }
+.cd2-vc-apply.applied { background: var(--positive-light); color: var(--positive-dark); pointer-events: none; }
+
+/* G. Search & match — search field + ranked candidate list. Shape-G
+ * pattern: playback shows the current match; editing means finding a
+ * different one, which needs room to browse/search, hence the drawer. */
+.cd2-match-list { display: flex; flex-direction: column; gap: 6px; }
+.cd2-match-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-surface-sm);
+  background: var(--surface); cursor: pointer; transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+}
+.cd2-match-item:hover { background: var(--color-hover-tint); }
+.cd2-match-item.selected { border-color: var(--color-signal-violet); background: var(--color-hover-tint); }
+.cd2-match-name { font-size: 12.5px; font-weight: 700; color: var(--text); }
+.cd2-match-score { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-muted); flex-shrink: 0; }
+.cd2-match-item.selected .cd2-match-score { color: var(--color-signal-violet); font-weight: 700; }
+
+/* H. Structured multi-step mapping — a small numbered flow, each step
+ * unlocked visually (not literally gated) once the one above has a
+ * value, so the whole shape of the task is visible up front rather than
+ * hidden behind a wizard's "next" button. */
+.cd2-step-list { display: flex; flex-direction: column; gap: 14px; }
+.cd2-step { display: flex; gap: 10px; }
+.cd2-step-num {
+  width: 20px; height: 20px; border-radius: 50%; background: var(--color-neutral-tint); color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 10.5px;
+  flex-shrink: 0; margin-top: 1px;
+}
+.cd2-step.done .cd2-step-num { background: var(--positive-accent); color: #fff; }
+.cd2-step-body { flex: 1; min-width: 0; }
+.cd2-step-label { font-size: 11.5px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.cd2-step-value { font-size: 12px; color: var(--text-secondary); }
+.cd2-prop-map-row {
+  display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px;
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+}
+.cd2-prop-map-row:last-child { border-bottom: none; }
+.cd2-prop-map-figma { color: var(--text-secondary); }
+.cd2-prop-map-arrow { color: var(--text-subtle); }
+.cd2-prop-map-code { color: var(--color-signal-violet); }
+
+/* B2. Multi-field templated text — one field per doc-template heading.
+   Plain, unadorned fields (no dashed-empty highlight like the single-
+   field inline case) since EVERY field here starts blank by definition;
+   highlighting all of them would just be visual noise, not a flag. */
+.cd2-template-fields { display: flex; flex-direction: column; gap: 14px; }
+.cd2-template-field-label { font-size: 11.5px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.cd2-template-field textarea {
+  width: 100%; border: 1px solid var(--border); border-radius: var(--radius-input);
+  background: var(--surface); font-family: var(--font); font-size: 12px; color: var(--text);
+  padding: 9px 12px; resize: vertical; line-height: 1.5;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.cd2-template-field textarea:focus { outline: none; border-color: var(--color-signal-violet); }
+
+/* The drawer footer holds up to 3 pre-rendered action rows (one per
+   check), only one visible at a time — same show/hide mechanism as the
+   body blocks above, applied to whichever sits in the footer slot. */
+.cd2-drawer-footer-block { display: flex; align-items: center; width: 100%; gap: 8px; }
+.cd2-drawer-footer-block.hidden { display: none; }
+.cd2-drawer-body-block.hidden { display: none; }
+
+/* Canvas-docs sync row — quiet inline status + actions. */
+.cd2-canvas-docs {
+  display: flex; align-items: center; gap: 8px; margin: 0 12px 12px;
+  padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-surface-sm);
+}
+.cd2-canvas-docs-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-subtle); flex-shrink: 0; }
+.cd2-canvas-docs-dot.done { background: var(--positive-accent); }
+.cd2-canvas-docs-label { font-size: 11.5px; font-weight: 700; color: var(--text); }
+.cd2-canvas-docs-detail { font-size: 11.5px; color: var(--text-muted); flex: 1; min-width: 0; }
+
+/* Variant descriptions — one row per variant. */
+.cd2-variant-row { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--border-light); }
+.cd2-variant-row:first-child { border-top: none; padding-top: 2px; }
+.cd2-variant-dot { font-size: 12px; line-height: 1.7; flex-shrink: 0; }
+.cd2-variant-dot.written { color: var(--positive-accent); }
+.cd2-variant-dot.empty { color: var(--text-subtle); }
+.cd2-variant-sig { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); min-width: 110px; line-height: 1.7; word-break: break-word; }
+.cd2-variant-input {
+  flex: 1; min-height: 32px; padding: 6px 10px; font-size: 11.5px; resize: vertical;
+  border: 1px solid var(--border); border-radius: var(--radius-input);
+  background: var(--bg); font-family: var(--font); color: var(--text);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.cd2-variant-input:focus { outline: none; border-color: var(--color-signal-violet); }
+
+/* ── Settings V2 (Phase 3, st2-*) ─────────────────────────────────────
+ * Reuses .cd2-section/.cd2-section-head exactly (same card+header recipe
+ * as Component Detail) so Settings reads as the same app, not a bolted-on
+ * page. New here: a grouped accordion list for the many collapsible
+ * sub-sections (Code Connect, Claude AI, Supporting Libraries, Report
+ * Metrics, Variable Rules, Scan history, Change history) — one shared
+ * card, hairline-divided disclosure rows, matching Apple Settings' own
+ * grouped-list convention (see DESIGN.md's Plugin Icon System reference)
+ * rather than .is2-card's separate-tile pattern, which is specifically
+ * for stat tiles, not disclosure rows. Expand/collapse mechanic is a
+ * direct reuse of .is2-card's — including the "don't transition padding,
+ * only border-top-width" fix (see DESIGN.md Motion) so the same
+ * measurement-undershoot bug can't resurface here. */
+.st2-accordion-list { display: flex; flex-direction: column; }
+.st2-accordion-row + .st2-accordion-row { border-top: 1px solid var(--border); }
+.st2-accordion-header {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 12px 16px; background: none; border: none; cursor: pointer;
+  font-family: var(--font); text-align: left;
+}
+.st2-accordion-header:hover { background: var(--color-hover-tint); }
+.st2-accordion-icon { display: flex; flex-shrink: 0; color: var(--text-secondary); }
+.st2-accordion-icon svg { width: 15px; height: 15px; }
+.st2-accordion-label { flex: 1; font-size: 12.5px; font-weight: 600; color: var(--text); }
+.st2-accordion-chevron { width: 15px; height: 15px; color: var(--text-subtle); flex-shrink: 0; transition: transform var(--duration-base) var(--ease-out); }
+.st2-accordion-row.open .st2-accordion-chevron { transform: rotate(90deg); }
+.st2-accordion-detail { max-height: 0; overflow: hidden; transition: max-height var(--duration-base) var(--ease-out); }
+.st2-accordion-row.open .st2-accordion-detail { max-height: none; }
+/* No border-top here, unlike .is2-card-detail-inner's equivalent rule —
+ * that pattern separates a card's own header from its detail content, but
+ * here every row already has its own top hairline from
+ * .st2-accordion-row + .st2-accordion-row above. Adding a second border
+ * directly under an open header reads as a redundant, oddly-placed
+ * divider rather than a second one intentionally separating sections. */
+.st2-accordion-detail-inner { padding: 0 16px; }
+.st2-accordion-row.open .st2-accordion-detail-inner { padding: 0 16px 16px; }
+
+/* Connected-account row (PAT / Claude key) */
+.st2-account-row { display: flex; align-items: center; gap: 12px; }
+.st2-account-avatar {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--color-neutral-tint);
+  display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.st2-account-info { flex: 1; min-width: 0; }
+.st2-account-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.st2-account-meta { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+
+/* Capability checklist ("What this unlocks") */
+.st2-capability-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 12px; }
+.st2-capability-row + .st2-capability-row { border-top: 1px solid var(--border); }
+.st2-capability-icon {
+  width: 16px; height: 16px; flex-shrink: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700;
+}
+.st2-capability-row.on .st2-capability-icon { background: var(--positive-light); color: var(--positive-dark); }
+.st2-capability-row.off .st2-capability-icon { background: var(--color-neutral-tint); color: var(--text-subtle); }
+.st2-capability-row.on .st2-capability-text { color: var(--text); }
+.st2-capability-row.off .st2-capability-text { color: var(--text-muted); }
+
+/* Supporting Libraries — connected library row */
+.st2-lib-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; }
+.st2-lib-row + .st2-lib-row { border-top: 1px solid var(--border); }
+.st2-lib-icon {
+  width: 28px; height: 28px; border-radius: var(--radius-tile-sm); background: var(--color-neutral-tint);
+  display: flex; align-items: center; justify-content: center; color: var(--text-secondary); flex-shrink: 0;
+}
+.st2-lib-icon svg { width: 14px; height: 14px; }
+.st2-lib-icon.green { background: var(--positive-light); color: var(--positive-dark); }
+.st2-lib-name { font-size: 12px; font-weight: 700; color: var(--text); }
+.st2-lib-meta { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+
+/* Variable Rules — rule card (embedded editor, same one Variables tab uses) */
+.st2-rule-card { border: 1px solid var(--border); border-radius: var(--radius-input); padding: 10px 12px; }
+.st2-rule-card + .st2-rule-card { margin-top: 8px; }
+.st2-rule-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.st2-rule-title { font-size: 12px; font-weight: 700; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.st2-rule-menu-btn {
+  width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; border: none; background: none; color: var(--text-muted); cursor: pointer; flex-shrink: 0;
+}
+.st2-rule-menu-btn:hover { background: var(--color-hover-tint); }
+.st2-rule-condition, .st2-rule-target { display: flex; align-items: center; gap: 6px; font-size: 11px; flex-wrap: wrap; margin-top: 6px; }
+.st2-rule-condition-label, .st2-rule-target-label {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700; color: var(--text-subtle);
+  text-transform: uppercase; letter-spacing: 0.04em; flex-shrink: 0;
+}
+.st2-rule-condition-value, .st2-rule-target-value {
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--text);
+  background: var(--color-neutral-tint); border-radius: 4px; padding: 2px 6px;
+}
+.st2-rule-joiner { font-size: 10px; color: var(--text-subtle); }
+.st2-rule-target-lib { font-size: 10px; color: var(--text-muted); margin-left: auto; flex-shrink: 0; }
+
+/* Scan history row */
+.st2-scan-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; }
+.st2-scan-row + .st2-scan-row { border-top: 1px solid var(--border); }
+.st2-scan-date { font-size: 12px; font-weight: 600; color: var(--text); }
+.st2-scan-meta { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 1px; }
+.st2-scan-score-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+.st2-scan-delta { font-size: 10px; font-family: var(--font-mono); font-weight: 700; }
+.st2-scan-delta.up { color: var(--positive-dark); }
+.st2-scan-delta.flat { color: var(--text-subtle); }
+.st2-scan-export-btn {
+  width: 26px; height: 26px; border-radius: var(--radius-tile-sm); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+.st2-scan-export-btn:hover { background: var(--color-hover-tint); border-color: var(--blue-40); }
+.st2-scan-export-btn svg { width: 13px; height: 13px; }
+
+/* Colour swatch input (Report Appearance) */
+.st2-color-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.st2-color-swatch-group { display: flex; align-items: center; gap: 8px; }
+.st2-color-swatch {
+  width: 26px; height: 26px; border-radius: 7px; border: 1px solid var(--border);
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.st2-color-swatch input[type="color"] {
+  position: absolute; inset: -4px; width: calc(100% + 8px); height: calc(100% + 8px);
+  border: none; padding: 0; cursor: pointer;
+}
+.st2-color-hex { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-secondary); }
+
+/* About */
+.st2-about { text-align: center; padding: 6px 0; }
+.st2-about-name { font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: var(--text); }
+.st2-about-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.6; }
+.st2-about-meta a { color: var(--color-signal-violet); font-weight: 600; text-decoration: none; }
+
+/* Danger zone */
+.st2-danger-card {
+  padding: 16px; border-radius: var(--radius-surface); margin: 0 12px 12px;
+  border: 1px solid rgba(220,38,38,0.2); background: var(--negative-light);
+}
+.st2-danger-copy { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin: 0 0 12px; }
+/* This codebase scopes .hidden per-context rather than a global utility
+ * class (see DESIGN.md/CLAUDE.md) — forgetting this exact rule is what
+ * made both reset steps render simultaneously the first time around. */
+.st2-reset-step-1.hidden, .st2-reset-step-2.hidden { display: none; }
+
+/* ── Library V2 (Phase 3, lb2-*) ──────────────────────────────────────
+ * Reuses .cd2-section/.cd2-section-head exactly, same as Settings. New
+ * here: library connection cards (richer than Settings' compact
+ * .st2-lib-row — this page is specifically ABOUT libraries, so each one
+ * gets its own description + status line), usage-breakdown bars (same
+ * bar-track recipe as .cov-bar-track, standalone since this page doesn't
+ * need per-row health tiering), and hotspot rows for hard-coded value
+ * hotspots (same shape as the Issues page's prop-fix rows, pill buttons). */
+.lb2-lib-card { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; }
+.lb2-lib-card + .lb2-lib-card { border-top: 1px solid var(--border); }
+.lb2-lib-icon {
+  width: 32px; height: 32px; border-radius: var(--radius-tile-sm); background: var(--color-neutral-tint);
+  display: flex; align-items: center; justify-content: center; color: var(--text-secondary); flex-shrink: 0;
+}
+.lb2-lib-icon svg { width: 15px; height: 15px; }
+.lb2-lib-icon.green { background: var(--positive-light); color: var(--positive-dark); }
+.lb2-lib-info { flex: 1; min-width: 0; }
+.lb2-lib-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.lb2-lib-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-top: 2px; }
+.lb2-lib-meta-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+.lb2-lib-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--positive-accent); flex-shrink: 0; }
+.lb2-lib-status-text { font-size: 10.5px; color: var(--text-muted); }
+
+.lb2-add-card {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%;
+  padding: 16px; margin-top: 4px; border-radius: var(--radius-input);
+  border: 1.5px dashed var(--border); background: none; cursor: pointer; text-align: center;
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+.lb2-add-card:hover { background: var(--color-hover-tint); border-color: var(--blue-40); }
+.lb2-add-icon {
+  width: 28px; height: 28px; border-radius: 50%; background: var(--color-neutral-tint);
+  display: flex; align-items: center; justify-content: center; color: var(--color-signal-violet); margin-bottom: 2px;
+}
+.lb2-add-icon svg { width: 14px; height: 14px; }
+.lb2-add-label { font-size: 12px; font-weight: 700; color: var(--text); }
+.lb2-add-hint { font-size: 10.5px; color: var(--text-muted); }
+
+/* Usage-breakdown bars — same recipe as .cov-bar-track/.cov-fill, kept
+   standalone since this context has no per-row health tiering. */
+.lb2-usage-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+.lb2-usage-row + .lb2-usage-row { border-top: 1px solid var(--border); }
+.lb2-usage-name { font-family: var(--font-mono); font-size: 11px; color: var(--text); flex: 0 0 130px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lb2-usage-bar-track { flex: 1; height: 6px; border-radius: var(--radius-pill); background: var(--color-neutral-tint); overflow: hidden; }
+.lb2-usage-bar-fill { height: 100%; border-radius: var(--radius-pill); background: var(--color-signal-violet); }
+.lb2-usage-pct { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text); flex-shrink: 0; min-width: 32px; text-align: right; }
+
+/* Hard-coded hotspot rows — same shape as the Issues page's prop-fix
+   rows (value/attr/count header, current -> suggestion, Apply/New var
+   actions), using pill buttons throughout. */
+.lb2-hotspot-row { padding: 12px 0; }
+.lb2-hotspot-row + .lb2-hotspot-row { border-top: 1px solid var(--border); }
+.lb2-hotspot-header { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.lb2-hotspot-icon { width: 14px; height: 14px; color: var(--text-subtle); flex-shrink: 0; display: flex; }
+.lb2-hotspot-value { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text); }
+.lb2-hotspot-attr { font-size: 10.5px; color: var(--text-muted); }
+.lb2-hotspot-count { font-family: var(--font-mono); font-size: 10px; color: var(--text-subtle); margin-left: auto; }
+.lb2-hotspot-fix-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.lb2-hotspot-swatch { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.12); flex-shrink: 0; }
+.lb2-hotspot-current, .lb2-hotspot-suggest { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--text); }
+.lb2-hotspot-arrow { color: var(--text-subtle); font-size: 11px; }
+
+/* "View more" reveal — scoped .hidden per this codebase's convention
+ * (no global utility class; see the Settings danger-zone fix for the
+ * exact bug this avoids). */
+.lb2-hidden-row.hidden { display: none; }
+
+/* Unused-variable rows — NOT specd-kv-row: that component's label column
+ * is a fixed flex:0 0 140px, sized for short human labels, and these are
+ * long monospace variable paths that overflowed straight into the value
+ * column instead of wrapping cleanly. A flexible name column with a
+ * fixed-width, non-shrinking count fits this content shape correctly. */
+.lb2-unused-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; }
+.lb2-unused-row + .lb2-unused-row { border-top: 1px solid var(--border); }
+.lb2-unused-name { font-family: var(--font-mono); font-size: 11px; color: var(--text); flex: 1; min-width: 0; word-break: break-word; }
+.lb2-unused-count { font-family: var(--font-mono); font-size: 10px; color: var(--text-subtle); flex-shrink: 0; }

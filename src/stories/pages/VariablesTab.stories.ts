@@ -110,89 +110,11 @@ const variablesRawContent = () => html`
       </div>
     </div>
 
-    <!-- Variable Rules -->
-    <div class="section-header-row">
-      <span class="section-heading">Variable Rules</span>
-      <button class="btn-presets">Presets</button>
-      <button class="btn-add-rule">+ Add Rule</button>
-    </div>
+    <!-- Note: Variable Rules moved to the Settings tab (see ui.html comment:
+         "Coverage-only view; variable mapping rules now live on the Settings
+         panel"). See SettingsTab.stories.ts for the rules editor. -->
 
-    <p style="font-size:11px; color:#6B7280; padding:0 14px 10px; line-height:1.5;">Define rules that tell Pulse which variable collection to use when it finds a raw value. Rules fire on any matching condition.</p>
-
-    <!-- Rule card 1: Color -->
-    <div class="rule-card">
-      <div class="rule-card-header">
-        <span class="rule-type-badge color">Color</span>
-        <span class="rule-title">Brand colours → Semantic Tokens</span>
-        <button class="rule-menu-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-      </div>
-      <div class="rule-body">
-        <div class="rule-condition">
-          <span class="rule-condition-label">IF</span>
-          <span class="rule-condition-value">fill</span>
-          <span style="color:#9CA3AF; font-size:10px;">matches</span>
-          <span class="rule-condition-value">#0c1f3f, #b8ff57, #3b82f6</span>
-        </div>
-        <div class="rule-target">
-          <span class="rule-target-label">USE</span>
-          <span class="rule-target-value">semantic/color</span>
-          <span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Rule card 2: Spacing -->
-    <div class="rule-card">
-      <div class="rule-card-header">
-        <span class="rule-type-badge spacing">Spacing</span>
-        <span class="rule-title">Spacing → Primitives</span>
-        <button class="rule-menu-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-      </div>
-      <div class="rule-body">
-        <div class="rule-condition">
-          <span class="rule-condition-label">IF</span>
-          <span class="rule-condition-value">padding</span>
-          <span style="color:#9CA3AF; font-size:10px;">OR</span>
-          <span class="rule-condition-value">gap</span>
-          <span style="color:#9CA3AF; font-size:10px;">is set</span>
-        </div>
-        <div class="rule-target">
-          <span class="rule-target-label">USE</span>
-          <span class="rule-target-value">primitives/spacing</span>
-          <span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Rule card 3: Typography -->
-    <div class="rule-card">
-      <div class="rule-card-header">
-        <span class="rule-type-badge typography">Typography</span>
-        <span class="rule-title">Font sizes → Type scale</span>
-        <button class="rule-menu-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-      </div>
-      <div class="rule-body">
-        <div class="rule-condition">
-          <span class="rule-condition-label">IF</span>
-          <span class="rule-condition-value">fontSize</span>
-          <span style="color:#9CA3AF; font-size:10px;">is</span>
-          <span class="rule-condition-value">12, 14, 16, 20, 24, 32</span>
-        </div>
-        <div class="rule-target">
-          <span class="rule-target-label">USE</span>
-          <span class="rule-target-value">semantic/typography</span>
-          <span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hard-coded Hotspots -->
+    <!-- Hard-coded Hotspots (Variables' own bulk-fix view — #vars-bulk-fix-view) -->
     <div class="section-header-row" style="margin-top:4px;">
       <span class="section-heading">Hard-coded Hotspots</span>
     </div>
@@ -352,89 +274,11 @@ const variablesComponentContent = () => html`
       </div>
     </div>
 
-    <!-- Variable Rules -->
-    <div class="section-header-row">
-      <specd-section-label label="Variable Rules"></specd-section-label>
-      <specd-button variant="ghost" size="sm" label="Presets"></specd-button>
-      <specd-button variant="primary" size="sm" label="+ Add Rule"></specd-button>
-    </div>
+    <!-- Note: Variable Rules moved to the Settings tab (see ui.html comment:
+         "Coverage-only view; variable mapping rules now live on the Settings
+         panel"). See SettingsTab.stories.ts for the rules editor. -->
 
-    <p style="font-size:11px; color:#6B7280; padding:0 14px 10px; line-height:1.5;">Define rules that tell Pulse which variable collection to use when it finds a raw value. Rules fire on any matching condition.</p>
-
-    <!-- Rule card 1: Color -->
-    <div class="rule-card">
-      <div class="rule-card-header">
-        <specd-tag label="Color" intent="info"></specd-tag>
-        <span class="rule-title">Brand colours → Semantic Tokens</span>
-        <button class="rule-menu-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-      </div>
-      <div class="rule-body">
-        <div class="rule-condition">
-          <span class="rule-condition-label">IF</span>
-          <span class="rule-condition-value">fill</span>
-          <span style="color:#9CA3AF; font-size:10px;">matches</span>
-          <span class="rule-condition-value">#0c1f3f, #b8ff57, #3b82f6</span>
-        </div>
-        <div class="rule-target">
-          <span class="rule-target-label">USE</span>
-          <span class="rule-target-value">semantic/color</span>
-          <span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Rule card 2: Spacing -->
-    <div class="rule-card">
-      <div class="rule-card-header">
-        <specd-tag label="Spacing" intent="neutral"></specd-tag>
-        <span class="rule-title">Spacing → Primitives</span>
-        <button class="rule-menu-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-      </div>
-      <div class="rule-body">
-        <div class="rule-condition">
-          <span class="rule-condition-label">IF</span>
-          <span class="rule-condition-value">padding</span>
-          <span style="color:#9CA3AF; font-size:10px;">OR</span>
-          <span class="rule-condition-value">gap</span>
-          <span style="color:#9CA3AF; font-size:10px;">is set</span>
-        </div>
-        <div class="rule-target">
-          <span class="rule-target-label">USE</span>
-          <span class="rule-target-value">primitives/spacing</span>
-          <span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Rule card 3: Typography -->
-    <div class="rule-card">
-      <div class="rule-card-header">
-        <specd-tag label="Typography" intent="neutral"></specd-tag>
-        <span class="rule-title">Font sizes → Type scale</span>
-        <button class="rule-menu-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-        </button>
-      </div>
-      <div class="rule-body">
-        <div class="rule-condition">
-          <span class="rule-condition-label">IF</span>
-          <span class="rule-condition-value">fontSize</span>
-          <span style="color:#9CA3AF; font-size:10px;">is</span>
-          <span class="rule-condition-value">12, 14, 16, 20, 24, 32</span>
-        </div>
-        <div class="rule-target">
-          <span class="rule-target-label">USE</span>
-          <span class="rule-target-value">semantic/typography</span>
-          <span style="font-size:10px; color:#6B7280; margin-left:auto;">Acme DS</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hard-coded Hotspots -->
+    <!-- Hard-coded Hotspots (Variables' own bulk-fix view — #vars-bulk-fix-view) -->
     <div class="section-header-row" style="margin-top:4px;">
       <specd-section-label label="Hard-coded Hotspots"></specd-section-label>
     </div>

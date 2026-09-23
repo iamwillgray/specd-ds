@@ -1,4 +1,4 @@
-/* Admiral DS — Motion tokens
+/* Specd DS — Motion tokens
  *
  * Centralised easing curves + duration ladder. Every animated component pulls
  * from this vocabulary so motion feels cohesive across the suite.
@@ -25,14 +25,24 @@
   /* Toast emphasis curve (overshoot-free spring approximation). */
   --ease-toast: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* ── DURATION LADDER ────────────────────────────────────── */
+  /* Aliases some components already reference with a hard-coded fallback
+     (var(--easing-spring, var(--ease-out))) — defining them for real gives
+     those spots their intended overshoot/standard character instead of
+     silently falling back every time. Values match DESIGN.md's Quick Start. */
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --duration-instant: 100ms; /* press-feedback, scale on :active */
-  --duration-fast:    160ms; /* tooltips, hovers, toggles, chips */
-  --duration-base:    200ms; /* dropdowns, popovers, buttons     */
-  --duration-slow:    260ms; /* progress bars, score transitions */
-  --duration-modal:   220ms; /* modal + drawer entrances         */
-  --duration-exit:    160ms; /* every exit should be faster than entry */
+  /* ── DURATION LADDER ────────────────────────────────────── *
+   * Bumped ~25-30% across the board (2026-09-20) — feedback was that
+   * interactions felt "too fast and instant." Exits stay proportionally
+   * quicker than entries, per the existing convention below. */
+
+  --duration-instant: 120ms; /* press-feedback, scale on :active */
+  --duration-fast:    200ms; /* tooltips, hovers, toggles, chips */
+  --duration-base:    260ms; /* dropdowns, popovers, buttons     */
+  --duration-slow:    340ms; /* progress bars, score transitions */
+  --duration-modal:   280ms; /* modal + drawer entrances         */
+  --duration-exit:    180ms; /* every exit should be faster than entry */
 }
 
 /* ── REDUCED MOTION ───────────────────────────────────────────

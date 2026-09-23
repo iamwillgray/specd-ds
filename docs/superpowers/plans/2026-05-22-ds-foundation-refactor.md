@@ -113,7 +113,7 @@ src/components/
 Run this sed script to batch-rename `Components/X` → correct tier:
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 
 # Atoms
 for comp in Button Chip Badge Toggle Input Progress Skeleton Divider Avatar JumpBtn SbPill HealthBadge NavScore AiPill SeverityHeader; do
@@ -144,7 +144,7 @@ sed -i '' "s|title: 'Components/Drawer'|title: 'Organisms/Drawer'|" src/componen
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/**/*.stories.ts
 git commit -m "refactor(storybook): reclassify all components into Atoms/Molecules/Organisms taxonomy"
 ```
@@ -210,7 +210,7 @@ describe('SpecdTag', () => {
 - [ ] **Step 2: Run test to confirm it fails**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 npx vitest run src/components/Tag/SpecdTag.test.ts --reporter=verbose
 ```
 Expected: FAIL — "Cannot find module './SpecdTag.js'"
@@ -1000,7 +1000,7 @@ git commit -m "refactor(IssueRow): compose specd-tag and specd-jump-btn atoms"
 - [ ] **Step 1: Verify no tests import IssueCard**
 
 ```bash
-grep -r "SpecdIssueCard\|specd-issue-card\|IssueCard" /Users/home/Desktop/code/admiral-ds/src --include="*.test.ts"
+grep -r "SpecdIssueCard\|specd-issue-card\|IssueCard" /Users/home/Desktop/code/specd-ds/src --include="*.test.ts"
 ```
 Expected: no results. If any exist, update them to use `specd-issue-row` first.
 
@@ -1048,7 +1048,7 @@ git commit -m "refactor: retire SpecdIssueCard (superseded by SpecdIssueRow)"
 
 ```bash
 grep -r "specd-issue-row-actions\|SpecdIssueRowActions\|IssueRowActions" \
-  /Users/home/Desktop/code/admiral-ds/src --include="*.ts"
+  /Users/home/Desktop/code/specd-ds/src --include="*.ts"
 ```
 Expected: only in the component's own file. If referenced elsewhere, update those callers first.
 
@@ -1275,7 +1275,7 @@ it('supports tier=med in sm size', async () => {
 - [ ] **Step 2: Run to confirm failure**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 npx vitest run src/components/HealthBadge/SpecdHealthBadge.test.ts --reporter=verbose
 ```
 

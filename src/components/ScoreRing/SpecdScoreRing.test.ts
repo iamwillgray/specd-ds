@@ -12,6 +12,17 @@ async function makeElement(attrs: Record<string, string> = {}): Promise<HTMLElem
   return el;
 }
 
+/** SpecdScoreRing now animates from 0 to its target score via a ~620ms
+ * requestAnimationFrame count-up (see component for why: it's the "score
+ * ring fill animation" DESIGN.md's motion section calls for). Tests that
+ * care about the settled value need to wait past that, not just the
+ * initial Lit update. */
+async function makeSettledElement(attrs: Record<string, string> = {}): Promise<HTMLElement> {
+  const el = await makeElement(attrs);
+  await new Promise((resolve) => setTimeout(resolve, 700));
+  return el;
+}
+
 describe('SpecdScoreRing', () => {
   it('registers as a custom element', () => {
     expect(customElements.get('specd-score-ring')).toBeDefined();
@@ -42,15 +53,20 @@ describe('SpecdScoreRing', () => {
     expect(el.querySelector('.score-circle')?.className).toContain('tier-poor');
   });
 
-  it('sets --score-percentage inline style', async () => {
-    const el = await makeElement({ score: '74', tier: 'good' });
+  it('sets --score-percentage inline style once the count-up settles', async () => {
+    const el = await makeSettledElement({ score: '74', tier: 'good' });
     const circle = el.querySelector<HTMLElement>('.score-circle');
     expect(circle?.style.getPropertyValue('--score-percentage')).toBe('74');
-  });
+  }, 2000);
 
-  it('shows the score number', async () => {
-    const el = await makeElement({ score: '74', tier: 'good' });
+  it('shows the score number once the count-up settles', async () => {
+    const el = await makeSettledElement({ score: '74', tier: 'good' });
     expect(el.querySelector('.score-number-lg')?.textContent?.trim()).toBe('74');
+  }, 2000);
+
+  it('starts the count-up from 0 immediately on mount', async () => {
+    const el = await makeElement({ score: '74', tier: 'good' });
+    expect(el.querySelector('.score-number-lg')?.textContent?.trim()).toBe('0');
   });
 
   it('shows "/100" denominator', async () => {

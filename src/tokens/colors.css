@@ -1,29 +1,97 @@
 /* Specd DS — Colour Tokens
- * Brand palette, semantic colours, intent colours, tiers.
+ * Brand palette per DESIGN.md (approved 2026-09-19): one theme-specific
+ * signal-violet accent, ink/neutral scale, semantic status colours.
  * All values are --kebab-case custom properties on :root.
+ *
+ * Legacy token names (--navy, --blue-*, --brand, --text-muted, --border,
+ * --surface, --btn-primary-*, etc.) are kept as aliases pointing at the new
+ * values below, so existing components.css rules and any component that
+ * still references the old names pick up the rebrand automatically without
+ * a mechanical rename pass. New code should prefer the --color-* names.
  */
 :root {
-  /* Primitives */
+  /* ── New brand primitives (DESIGN.md) — light theme defaults ────── */
+  --color-signal-violet:       #5B3DF0;
+  --color-signal-violet-hover: #7A64F2;
+  --color-violet-tint:         #F1EDFF;
+
+  --color-ink:      #12142B;
+  --color-ink-soft: #40415C;
+  --color-muted:    #6B6D85;
+  --color-faint:    #9799AC;
+  --color-hairline: rgba(18,20,43,0.10);
+  --color-canvas:   #FAFAFB;
+  --color-paper:    #FFFFFF;
+  /* Neutral wash for general-purpose surfaces (hover states, alt panels,
+   * subtle backgrounds) — NOT violet. Per explicit design review: violet-tint
+   * reads as too much colour for large/frequent backdrops and dilutes the
+   * "one accent, used sparingly" discipline. Violet stays reserved for actual
+   * interactive/selected moments (see "Defer to the data" in DESIGN.md). */
+  --color-neutral-tint: #F1F2F5;
+  /* Hover-only tint — a deliberate exception to the neutral-tint-for-
+   * backdrops rule above. That rule is about STATIC/persistent surfaces;
+   * this is transient feedback that only exists while a pointer is over an
+   * element, so a hint of the accent here doesn't dilute "one accent, used
+   * sparingly" the way a violet-tinted card background would. Used for
+   * :hover states specifically (.is2-card, .cx2-row, .cd2-tool, .tab-v2,
+   * etc.) instead of plain --color-neutral-tint. */
+  --color-hover-tint: color-mix(in srgb, var(--color-neutral-tint) 82%, var(--color-signal-violet) 10%);
+
+  /* Score-ring unfilled track. Was a flat OPAQUE --color-neutral-tint —
+   * fine on a plain white hero, but the ring sits directly on whatever's
+   * behind it (no solid background-color under the conic-gradient), so on
+   * the new dynamic-gradient hero an opaque grey ring completely hid the
+   * colour behind it instead of "reacting" to it. Translucent dark ink
+   * instead: lets the backdrop tint show through (reacts to whatever's
+   * behind it, coloured or plain), and reads as a deliberately darker,
+   * more defined track than the old near-invisible light grey. */
+  --score-track: rgba(18,20,43,0.14);
+
+  /* Dark-theme values, referenced directly by [data-theme="dark"] below */
+  --color-paper-dark:    #F4F4F8;
+  --color-mist-dark:     #B8B9CC;
+  --color-muted-dark:    #82849B; /* was #7B7D93 — failed AA at 4.49:1 vs carbon, nudged to 4.95:1 */
+  --color-hairline-dark: rgba(255,255,255,0.10);
+  --color-void:          #0A0B14;
+  --color-carbon:        #14151F;
+  --color-obsidian:      #1B1C2B;
+
+  --color-success: #16A34A;  --color-success-dark: #34D399;
+  --color-warning: #D97706;  --color-warning-dark: #FBBF24;
+  --color-error:   #DC2626;  --color-error-dark:   #F87171;
+
+  /* ── Legacy primitives — aliased to new values ──────────────────── */
   --black: #000000;  --white: #ffffff;
-  --brand: #b8ff57;  --navy:  #0C1750;
-  --pulse: linear-gradient(135deg, #004fde 0%, #6b28e1 100%);
+  --brand: var(--color-signal-violet);  --navy:  var(--color-ink);
+  --pulse: linear-gradient(135deg, var(--color-signal-violet) 0%, var(--color-signal-violet-hover) 100%);
 
-  /* Blue scale */
-  --blue-10:  #f5f8ff;  --blue-15:  #eef3fb;
-  --blue-20:  #dbeafe;  --blue-30:  #b9d2f9;
-  --blue-40:  #6b9ae8;  --blue-50:  #1d4ed8;
-  --blue-60:  #4a6080;  --blue-70:  #2d4566;
-  --blue-80:  #1e3f6b;  --blue-90:  #162d56;
-  --blue-100: #0c1f3f;
+  /* Blue scale — remapped onto the ink/violet system. Darkest (100) is ink,
+     lightest (10) is canvas; the old "action blue" rungs (40-60) now read
+     as violet so buttons/links/focus states inherit the new accent.
+     15/20 go to the neutral wash, not violet — these are general-purpose
+     surface/border rungs used dozens of times, not accent moments. */
+  --blue-10:  var(--color-canvas);        --blue-15:  var(--color-neutral-tint);
+  --blue-20:  var(--color-neutral-tint);  --blue-30:  var(--color-hairline);
+  --blue-40:  var(--color-signal-violet-hover); --blue-50:  var(--color-signal-violet);
+  --blue-60:  var(--color-muted);         --blue-70:  var(--color-ink-soft);
+  --blue-80:  var(--color-ink-soft);      --blue-90:  var(--color-ink);
+  --blue-100: var(--color-ink);
 
-  /* Green scale */
-  --green-10: #ebffe0;  --green-50: #22c55e;  --green-100: #008531;
+  /* Green / Red / Orange scales — remapped onto the new semantic colours.
+   * -50 is the brand semantic value (indicators, dots, backgrounds-at-tint).
+   * -100 is the dedicated TEXT-safe shade — WCAG audit found --color-success
+   * and --color-warning both fail 4.5:1 as text-on-white (3.30:1 / 3.19:1),
+   * so -100 uses darker literals for the -dark theme-alias text roles
+   * (--positive-dark / --warning-dark) instead of reusing the brand value.
+   * Dark theme overrides -100 back to the (already AA-passing) *-dark tokens. */
+  --green-10: color-mix(in srgb, var(--color-success) 14%, transparent);
+  --green-50: var(--color-success);  --green-100: #15803D;
 
-  /* Red scale */
-  --red-10: #fee2e2;  --red-50: #f00013;  --red-100: #cd1d1d;
+  --red-10: color-mix(in srgb, var(--color-error) 14%, transparent);
+  --red-50: var(--color-error);  --red-100: var(--color-error);
 
-  /* Orange scale */
-  --orange-10: #FEF3C7;  --orange-50: #ff912b;  --orange-100: #92400e;
+  --orange-10: color-mix(in srgb, var(--color-warning) 14%, transparent);
+  --orange-50: var(--color-warning);  --orange-100: #B45309;
 
   /* White alpha */
   --white-80: rgba(255,255,255,0.8);  --white-60: rgba(255,255,255,0.6);
@@ -38,36 +106,39 @@
   --neutral-dark:    var(--blue-50);   --neutral-accent:  var(--blue-50);
 
   /* Brand extended */
-  --navy-800: #162d56;
-  --navy-light: rgba(12,31,63,0.06);
+  --navy-800: var(--color-ink-soft);
+  --navy-light: var(--color-neutral-tint);
 
-  /* Surfaces */
-  --bg:            var(--blue-10);
-  --surface:       var(--white);
-  --surface-alt:   var(--blue-15);
-  --surface-shade: var(--blue-15);
-  --surface-hover: var(--blue-15);
-  --card-bg:       var(--white);
+  /* Surfaces — neutral, not violet. Reserve violet strictly for the
+     interactive accent and bold selected-state treatments (see components.css
+     selected-state rules), never as a general-purpose surface wash. */
+  --bg:            var(--color-canvas);
+  --surface:       var(--color-paper);
+  --surface-alt:   var(--color-neutral-tint);
+  --surface-shade: var(--color-neutral-tint);
+  --surface-hover: var(--color-neutral-tint);
+  --card-bg:       var(--color-paper);
 
   /* Borders */
-  --border:         var(--blue-15);   --border-blue:   var(--blue-20);
-  --border-light:   var(--blue-10);   --border-strong: var(--blue-30);
-  --border-primary: var(--blue-60);
+  --border:         var(--color-hairline);       --border-blue:   var(--color-hairline);
+  --border-light:   var(--color-hairline);       --border-strong: var(--color-hairline);
+  --border-primary: var(--color-signal-violet);
 
   /* Text */
-  --text:           var(--blue-100);  --text-secondary: var(--blue-60);
-  --text-inverse:   var(--white);     --text-muted:     #6B7280;
-  --text-subtle:    #9CA3AF;
+  --text:           var(--color-ink);   --text-secondary: var(--color-ink-soft);
+  --text-inverse:   var(--white);       --text-muted:     var(--color-muted);
+  --text-subtle:    var(--color-faint);
 
   /* Icons */
-  --icon-primary:   var(--blue-100);  --icon-secondary: var(--blue-60);
-  --icon-muted:     var(--blue-40);   --icon-inverse:   var(--white);
+  --icon-primary:   var(--color-ink);              --icon-secondary: var(--color-ink-soft);
+  --icon-muted:     var(--color-signal-violet-hover); --icon-inverse:   var(--white);
 
   /* Button tokens */
-  --btn-primary-bg: var(--blue-100);
+  --btn-primary-bg: var(--color-signal-violet);
   --btn-primary-fg: var(--white);
 
-  /* Radii */
+  /* Radii — legacy scale kept for existing components; new DESIGN.md-named
+     tokens added below for new work. See spacing.css for the full radius set. */
   --radius-sm: 6px;  --radius-md: 10px;
   --radius-lg: 14px; --radius-xl: 20px;  --radius-pill: 100px;
 
@@ -75,14 +146,55 @@
   --space-1: 4px;  --space-2: 8px;   --space-3: 12px;
   --space-4: 16px; --space-5: 20px;  --space-6: 24px;  --space-8: 32px;
 
-  /* Shadows (navy-tinted) */
-  --shadow-sm: 0 1px 3px rgba(12,31,63,0.08), 0 1px 2px rgba(12,31,63,0.04);
-  --shadow-md: 0 4px 12px rgba(12,31,63,0.10), 0 2px 4px rgba(12,31,63,0.06);
-  --shadow-lg: 0 12px 32px rgba(12,31,63,0.14), 0 4px 8px rgba(12,31,63,0.06);
+  /* Shadows — kept for legacy components that still use elevation; new
+     Specd components should avoid shadows entirely per DESIGN.md. */
+  --shadow-sm: 0 1px 3px rgba(18,20,43,0.08), 0 1px 2px rgba(18,20,43,0.04);
+  --shadow-md: 0 4px 12px rgba(18,20,43,0.10), 0 2px 4px rgba(18,20,43,0.06);
+  --shadow-lg: 0 12px 32px rgba(18,20,43,0.14), 0 4px 8px rgba(18,20,43,0.06);
 
-  /* Typography */
-  --font:         'Inter', -apple-system, sans-serif;
-  --font-body:    'Inter', -apple-system, sans-serif; /* alias for --font */
-  --font-heading: 'Bricolage Grotesque', 'Inter', -apple-system, sans-serif;
-  --font-mono:    'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+  /* Typography — single family per DESIGN.md (Geist decision, 2026-09-19) */
+  --font:         'Geist', 'Inter', -apple-system, sans-serif;
+  --font-body:    'Geist', 'Inter', -apple-system, sans-serif; /* alias for --font */
+  --font-heading: 'Geist', 'Inter', -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+}
+
+/* ── Dark theme ──────────────────────────────────────────────────────
+ * Flips the accent to its lighter dark-theme value (contrast-checked
+ * against --color-void, see DESIGN.md) and swaps ink/surface direction.
+ * Apply via <html data-theme="dark"> or an equivalent ancestor attribute.
+ */
+[data-theme="dark"] {
+  --color-signal-violet:       #8B76FF;
+  --color-signal-violet-hover: #A695FF;
+  --color-violet-tint:         rgba(139,118,255,0.16);
+  --color-neutral-tint:        rgba(255,255,255,0.06);
+  --color-hover-tint:          color-mix(in srgb, rgba(255,255,255,0.06) 70%, var(--color-signal-violet) 14%);
+  /* Dark theme: track needs to be a translucent LIGHT ink to read against
+     dark surfaces — the light-theme dark-ink value would nearly disappear. */
+  --score-track: rgba(255,255,255,0.16);
+
+  --color-ink:      var(--color-paper-dark);
+  --color-ink-soft: var(--color-mist-dark);
+  --color-muted:    var(--color-muted-dark);
+  --color-faint:    #5C5E70;
+  --color-hairline: var(--color-hairline-dark);
+  --color-canvas:   var(--color-void);
+  --color-paper:    var(--color-carbon);
+
+  --color-success: var(--color-success-dark);
+  --color-warning: var(--color-warning-dark);
+  --color-error:   var(--color-error-dark);
+
+  /* Text-safe -100 shades: on dark surfaces the brighter *-dark semantic
+   * values already clear AA (9.4:1 / 10.9:1 vs carbon), so use them directly
+   * instead of the light-theme-tuned literals above. */
+  --green-100:  var(--color-success-dark);
+  --orange-100: var(--color-warning-dark);
+
+  /* Primary button text: white on the dark-theme accent (#8B76FF) only
+   * reaches 3.42:1 — fails AA. The accent was deliberately made lighter to
+   * pass as text-on-void (5.73:1); that same lightness means dark text reads
+   * better than white when the accent is the FILL instead. Void gives 5.73:1. */
+  --btn-primary-fg: var(--color-void);
 }

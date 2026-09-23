@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Specd — Typeface Fidelity Experiment v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Inter+Tight:wght@400;500;600;700;800;900&family=Geist:wght@400;500;600;700;800;900&family=Archivo:wght@400;500;600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-signal-violet-old: #6E56F5;
+    --color-signal-violet-light: #5B3DF0;
+    --color-signal-violet-dark: #8B76FF;
+    --color-ink: #12142B;
+    --color-muted: #6B6D85;
+    --color-hairline: rgba(18,20,43,0.10);
+    --color-canvas: #FAFAFB;
+    --color-paper: #FFFFFF;
+    --color-void: #0A0B14;
+    --color-carbon: #14151F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #eef0f4; font-family: 'IBM Plex Mono', monospace; padding: 32px; }
+  .page-title { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--color-ink); margin: 0 0 4px; font-weight: 600; }
+  .page-meta { font-size: 11px; color: var(--color-muted); margin: 0 0 24px; line-height: 1.6; max-width: 900px; }
+
+  /* ── Contrast panel ─────────────────────────────────────── */
+  .contrast-panel { background: #fff; border: 1px solid var(--color-hairline); border-radius: 12px; padding: 18px 20px; margin-bottom: 32px; max-width: 900px; }
+  .contrast-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink); margin: 0 0 12px; }
+  .contrast-row { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; font-size: 11px; }
+  .swatch { width: 20px; height: 20px; border-radius: 5px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
+  .contrast-row .label { width: 210px; color: var(--color-ink); font-weight: 600; }
+  .contrast-row .ratio { color: var(--color-muted); }
+  .contrast-row .ratio b.pass { color: #16A34A; }
+  .contrast-row .ratio b.fail { color: #DC2626; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1180px; margin-bottom: 32px; }
+  .combo { background: var(--color-canvas); border: 1px solid var(--color-hairline); border-radius: 12px; overflow: hidden; }
+  .combo.is-fav { border: 2px solid var(--color-signal-violet-light); }
+  .combo-head { padding: 12px 16px; border-bottom: 1px solid var(--color-hairline); background: var(--color-paper); }
+  .combo-name { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-signal-violet-light); margin: 0 0 3px; }
+  .combo-fonts { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--color-muted); margin: 0 0 3px; }
+  .combo-closest { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--color-muted); margin: 0; line-height: 1.4; }
+  .combo-body { padding: 16px; background: var(--color-paper); }
+
+  .score-row { display: flex; align-items: baseline; gap: 5px; margin-bottom: 10px; }
+  .score-num { font-size: 34px; font-weight: 800; color: var(--color-ink); line-height: 1; letter-spacing: -0.03em; }
+  .score-pct { font-size: 15px; font-weight: 700; color: var(--color-signal-violet-light); }
+  .score-label { font-family: 'IBM Plex Mono', monospace; font-size: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-muted); margin-left: 3px; }
+
+  .heading { font-size: 15px; font-weight: 700; color: var(--color-ink); margin: 0 0 5px; letter-spacing: -0.01em; }
+  .body-copy { font-size: 12px; color: var(--color-muted); line-height: 1.5; margin: 0 0 12px; }
+
+  .token-label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--color-muted); background: rgba(18,20,43,0.04); border: 1px solid var(--color-hairline); border-radius: 6px; padding: 3px 7px; display: inline-block; margin-bottom: 12px; }
+  .token-label b { color: var(--color-ink); font-weight: 600; }
+
+  .btn { font-size: 12px; font-weight: 500; color: #fff; background: var(--color-signal-violet-light); border: none; border-radius: 9999px; padding: 7px 16px; cursor: default; }
+
+  .fav-tag { display: inline-block; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: var(--color-signal-violet-light); border-radius: 4px; padding: 2px 6px; margin-left: 6px; }
+
+  /* Font assignments */
+  .combo-sf .heading, .combo-sf .score-num, .combo-sf .body-copy, .combo-sf .btn { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif; }
+  .combo-sf .score-label, .combo-sf .token-label { font-family: ui-monospace, 'SF Mono', 'IBM Plex Mono', monospace; }
+
+  .combo-geist .heading, .combo-geist .score-num, .combo-geist .body-copy, .combo-geist .btn { font-family: 'Geist', sans-serif; }
+  .combo-geist .score-label, .combo-geist .token-label { font-family: 'JetBrains Mono', monospace; }
+
+  .combo-inter .heading, .combo-inter .score-num, .combo-inter .body-copy, .combo-inter .btn { font-family: 'Inter', sans-serif; }
+
+  .combo-tight .heading, .combo-tight .score-num, .combo-tight .body-copy, .combo-tight .btn { font-family: 'Inter Tight', sans-serif; }
+  .combo-tight .score-label, .combo-tight .token-label { font-family: 'JetBrains Mono', monospace; }
+
+  .combo-archivo .heading, .combo-archivo .score-num, .combo-archivo .body-copy, .combo-archivo .btn { font-family: 'Archivo', sans-serif; }
+  .combo-archivo .score-label, .combo-archivo .token-label { font-family: 'JetBrains Mono', monospace; }
+
+  .combo-bricolage .heading, .combo-bricolage .score-num { font-family: 'Bricolage Grotesque', sans-serif; }
+  .combo-bricolage .body-copy, .combo-bricolage .btn { font-family: 'Inter', sans-serif; }
+
+  /* ── Later: CTA direction exploration ─────────────────────── */
+  .later-section { max-width: 900px; }
+  .later-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); margin: 0 0 4px; }
+  .later-note { font-size: 11px; color: var(--color-muted); margin: 0 0 16px; line-height: 1.5; }
+  .later-demo { background: var(--color-void); border-radius: 12px; padding: 24px; display: flex; align-items: center; gap: 24px; }
+  .later-demo .score-num-dark { font-family: 'Geist', sans-serif; font-size: 34px; font-weight: 800; color: #F4F4F8; letter-spacing: -0.03em; }
+  .later-demo .score-pct-dark { font-size: 15px; font-weight: 700; color: var(--color-signal-violet-dark); }
+  .later-btn-dark { font-family: 'Geist', sans-serif; font-size: 12px; font-weight: 500; color: #F4F4F8; background: #000; border: 1px solid rgba(255,255,255,0.12); border-radius: 9999px; padding: 7px 16px; cursor: default; }
+  .later-link { font-family: 'Geist', sans-serif; font-size: 12px; color: var(--color-signal-violet-dark); text-decoration: underline; }
+  .later-col { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+</style>
+</head>
+<body>
+  <p class="page-title">SPECD — TYPEFACE FIDELITY EXPERIMENT v2</p>
+  <p class="page-meta">SF Pro set as the baseline anchor (rendered as the real system font via -apple-system — not a substitute, this is literally SF Pro/SF Mono if you're viewing on a Mac). Other combos use only fonts a reference brand names as real or their own listed substitute. Accent updated to theme-specific violets per the contrast check below.</p>
+
+  <div class="contrast-panel">
+    <p class="contrast-title">Accent contrast check (WCAG)</p>
+    <div class="contrast-row"><div class="swatch" style="background:#6E56F5"></div><div class="label">Old — #6E56F5 (single value, both themes)</div><div class="ratio">vs white <b class="fail">4.87:1</b> · vs void <b class="fail">4.03:1</b> — passes AA large-text only, weak headroom</div></div>
+    <div class="contrast-row"><div class="swatch" style="background:#5B3DF0"></div><div class="label">New — Light theme: #5B3DF0</div><div class="ratio">vs white <b class="pass">6.23:1</b> · vs canvas <b class="pass">5.97:1</b> — passes AA normal text with headroom, reads more saturated/impactful</div></div>
+    <div class="contrast-row"><div class="swatch" style="background:#8B76FF"></div><div class="label">New — Dark theme: #8B76FF (was "hover", now primary)</div><div class="ratio">vs void <b class="pass">5.73:1</b> — passes AA normal text; the darker light-theme violet would have failed here (3.15:1)</div></div>
+  </div>
+
+  <div class="grid">
+
+    <div class="combo combo-sf">
+      <div class="combo-head">
+        <p class="combo-name">SF · Baseline anchor</p>
+        <p class="combo-fonts">-apple-system → real SF Pro/SF Mono (Apple), Segoe UI (Windows fallback)</p>
+        <p class="combo-closest">Apple, rendered as the actual OS font — zero licensing risk since no font file is embedded, just referencing the system stack</p>
+      </div>
+      <div class="combo-body">
+        <div class="score-row"><span class="score-num">84</span><span class="score-pct">%</span><span class="score-label">HEALTH SCORE</span></div>
+        <h3 class="heading">Component Coverage</h3>
+        <p class="body-copy">126 of 150 components have bound tokens. 24 reference hard-coded values.</p>
+        <div class="token-label">--color-signal-violet <b>#5B3DF0</b></div><br>
+        <button class="btn">Run Scan</button>
+      </div>
+    </div>
+
+    <div class="combo combo-geist is-fav">
+      <div class="combo-head">
+        <p class="combo-name">GEIST <span class="fav-tag">current favorite</span></p>
+        <p class="combo-fonts">Geist (400–900) + JetBrains Mono</p>
+        <p class="combo-closest">shadcn's real font (not a substitute) + Linear's #1-listed Berkeley Mono substitute</p>
+      </div>
+      <div class="combo-body">
+        <div class="score-row"><span class="score-num">84</span><span class="score-pct">%</span><span class="score-label">HEALTH SCORE</span></div>
+        <h3 class="heading">Component Coverage</h3>
+        <p class="body-copy">126 of 150 components have bound tokens. 24 reference hard-coded values.</p>
+        <div class="token-label">--color-signal-violet <b>#5B3DF0</b></div><br>
+        <button class="btn">Run Scan</button>
+      </div>
+    </div>
+
+    <div class="combo combo-inter">
+      <div class="combo-head">
+        <p class="combo-name">INTER</p>
+        <p class="combo-fonts">Inter (400–900) + IBM Plex Mono</p>
+        <p class="combo-closest">Apple (SF Pro→Inter), Notion (NotionInter→Inter), Linear (literally Inter Variable), shadcn (Geist→Inter)</p>
+      </div>
+      <div class="combo-body">
+        <div class="score-row"><span class="score-num">84</span><span class="score-pct">%</span><span class="score-label">HEALTH SCORE</span></div>
+        <h3 class="heading">Component Coverage</h3>
+        <p class="body-copy">126 of 150 components have bound tokens. 24 reference hard-coded values.</p>
+        <div class="token-label">--color-signal-violet <b>#5B3DF0</b></div><br>
+        <button class="btn">Run Scan</button>
+      </div>
+    </div>
+
+    <div class="combo combo-tight">
+      <div class="combo-head">
+        <p class="combo-name">INTER TIGHT</p>
+        <p class="combo-fonts">Inter Tight (400–900) + JetBrains Mono</p>
+        <p class="combo-closest">Stripe — sohne-var's own listed substitute is Inter Tight</p>
+      </div>
+      <div class="combo-body">
+        <div class="score-row"><span class="score-num">84</span><span class="score-pct">%</span><span class="score-label">HEALTH SCORE</span></div>
+        <h3 class="heading">Component Coverage</h3>
+        <p class="body-copy">126 of 150 components have bound tokens. 24 reference hard-coded values.</p>
+        <div class="token-label">--color-signal-violet <b>#5B3DF0</b></div><br>
+        <button class="btn">Run Scan</button>
+      </div>
+    </div>
+
+    <div class="combo combo-archivo">
+      <div class="combo-head">
+        <p class="combo-name">ARCHIVO</p>
+        <p class="combo-fonts">Archivo (400–900) + JetBrains Mono</p>
+        <p class="combo-closest">Closest free proxy for Neue Haas Grotesk — Oryzo's own substitute list for halyard-display-variable (alongside Söhne)</p>
+      </div>
+      <div class="combo-body">
+        <div class="score-row"><span class="score-num">84</span><span class="score-pct">%</span><span class="score-label">HEALTH SCORE</span></div>
+        <h3 class="heading">Component Coverage</h3>
+        <p class="body-copy">126 of 150 components have bound tokens. 24 reference hard-coded values.</p>
+        <div class="token-label">--color-signal-violet <b>#5B3DF0</b></div><br>
+        <button class="btn">Run Scan</button>
+      </div>
+    </div>
+
+    <div class="combo combo-bricolage">
+      <div class="combo-head">
+        <p class="combo-name">INTER + BRICOLAGE (current DESIGN.md)</p>
+        <p class="combo-fonts">Inter (UI) + Bricolage Grotesque (display) + IBM Plex Mono</p>
+        <p class="combo-closest">For contrast — the two-family split, the outlier vs. every reference brand's single-family pattern</p>
+      </div>
+      <div class="combo-body">
+        <div class="score-row"><span class="score-num">84</span><span class="score-pct">%</span><span class="score-label">HEALTH SCORE</span></div>
+        <h3 class="heading">Component Coverage</h3>
+        <p class="body-copy">126 of 150 components have bound tokens. 24 reference hard-coded values.</p>
+        <div class="token-label">--color-signal-violet <b>#5B3DF0</b></div><br>
+        <button class="btn">Run Scan</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="later-section">
+    <p class="later-title">For later (not deciding now) — dark CTA, accent used elsewhere</p>
+    <p class="later-note">One quick look at the idea you flagged: primary button goes black/dark instead of violet-filled, and the accent moves to text/links/small indicators instead. shadcn actually does exactly this already (their filled button is #0a0a0a, not their accent color) — precedent exists. Shown here in Geist since that's the current favorite. Not folded into DESIGN.md yet.</p>
+    <div class="later-demo">
+      <div class="later-col">
+        <div style="display:flex; align-items:baseline; gap:5px;"><span class="score-num-dark">84</span><span class="score-pct-dark">%</span></div>
+        <button class="later-btn-dark">Run Scan</button>
+        <a class="later-link">View full report →</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

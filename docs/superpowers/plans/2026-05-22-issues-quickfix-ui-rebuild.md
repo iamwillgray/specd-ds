@@ -130,7 +130,7 @@ describe('SpecdButton — action variants', () => {
 - [ ] **Step 2: Run tests to confirm they fail**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- --reporter=verbose 2>&1 | grep -E "FAIL|PASS|action variants" | head -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- --reporter=verbose 2>&1 | grep -E "FAIL|PASS|action variants" | head -20
 ```
 
 Expected: 6 failures — element renders with wrong class names.
@@ -190,7 +190,7 @@ private _classes(): string {
 - [ ] **Step 5: Run tests to confirm they pass**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- --reporter=verbose 2>&1 | grep -E "FAIL|PASS|action variants" | head -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- --reporter=verbose 2>&1 | grep -E "FAIL|PASS|action variants" | head -20
 ```
 
 Expected: all 6 new tests pass.
@@ -218,7 +218,7 @@ export const ActionVariants: Story = {
 - [ ] **Step 7: Run full test suite to ensure no regressions**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -10
+cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -10
 ```
 
 Expected: all pre-existing tests still pass.
@@ -226,7 +226,7 @@ Expected: all pre-existing tests still pass.
 - [ ] **Step 8: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && git add src/components/Button/ && git commit -m "feat(button): add action button variants — row-primary, row-applied, pill sizes"
+cd /Users/home/Desktop/code/specd-ds && git add src/components/Button/ && git commit -m "feat(button): add action button variants — row-primary, row-applied, pill sizes"
 ```
 
 ---
@@ -360,7 +360,7 @@ describe('SpecdRadioRow', () => {
 - [ ] **Step 2: Run tests to confirm they fail**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- RadioRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- RadioRow --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: errors — `specd-radio-row` not defined.
@@ -446,7 +446,7 @@ declare global {
 - [ ] **Step 4: Run tests to confirm they pass**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- RadioRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- RadioRow --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: all 8 tests pass.
@@ -510,7 +510,7 @@ export const NoSwatch: Story = {
 - [ ] **Step 6: Delete the old QfReplaceRow directory**
 
 ```bash
-rm -rf /Users/home/Desktop/code/admiral-ds/src/components/QfReplaceRow
+rm -rf /Users/home/Desktop/code/specd-ds/src/components/QfReplaceRow
 ```
 
 - [ ] **Step 7: Update src/index.ts**
@@ -547,7 +547,7 @@ export const RadioRow = createComponent({
 - [ ] **Step 9: Run full test suite to ensure no regressions**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -10
+cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -10
 ```
 
 Expected: all tests pass (QfReplaceRow tests gone, RadioRow tests in).
@@ -555,7 +555,7 @@ Expected: all tests pass (QfReplaceRow tests gone, RadioRow tests in).
 - [ ] **Step 10: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && git add src/components/RadioRow/ src/components/QfReplaceRow/ src/index.ts src/react.ts && git commit -m "feat(radio-row): rename QfReplaceRow→RadioRow, fix structure to button+custom-radio+swatch-right"
+cd /Users/home/Desktop/code/specd-ds && git add src/components/RadioRow/ src/components/QfReplaceRow/ src/index.ts src/react.ts && git commit -m "feat(radio-row): rename QfReplaceRow→RadioRow, fix structure to button+custom-radio+swatch-right"
 ```
 
 ---
@@ -769,7 +769,7 @@ describe('SpecdPropFixCreate', () => {
 - [ ] **Step 2: Run tests to confirm they fail**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- PropFixRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- PropFixRow --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: multiple failures — missing `.prop-fix-layer`, `.prop-fix-attr`, `.prop-fix-count`, `.prop-fix-current`, `.prop-fix-varname`, `.prop-fix-layer-link`.
@@ -968,7 +968,7 @@ declare global {
 - [ ] **Step 5: Run tests to confirm they pass**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- PropFixRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- PropFixRow --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: all tests pass.
@@ -1051,7 +1051,7 @@ export const NoMatch: Story = {
 - [ ] **Step 7: Run full test suite**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -10
+cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -10
 ```
 
 Expected: all tests pass.
@@ -1059,7 +1059,7 @@ Expected: all tests pass.
 - [ ] **Step 8: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && git add src/components/PropFixRow/ && git commit -m "feat(prop-fix-row): rebuild header props (layer/attr/count) and full slot structure with current→suggest→apply"
+cd /Users/home/Desktop/code/specd-ds && git add src/components/PropFixRow/ && git commit -m "feat(prop-fix-row): rebuild header props (layer/attr/count) and full slot structure with current→suggest→apply"
 ```
 
 ---
@@ -1091,7 +1091,7 @@ it('renders .choice-card-arrow element', async () => {
 - [ ] **Step 2: Run test to confirm it fails**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- ChoiceCard --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- ChoiceCard --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: 1 failure — `.choice-card-arrow` not found.
@@ -1141,7 +1141,7 @@ override render() {
 - [ ] **Step 4: Run tests to confirm they pass**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- ChoiceCard --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- ChoiceCard --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: all tests pass including new arrow test.
@@ -1149,7 +1149,7 @@ Expected: all tests pass including new arrow test.
 - [ ] **Step 5: Run full test suite**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -10
+cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -10
 ```
 
 Expected: all tests pass.
@@ -1157,7 +1157,7 @@ Expected: all tests pass.
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && git add src/components/ChoiceCard/ && git commit -m "fix(choice-card): add missing choice-card-arrow element (chevron top-right)"
+cd /Users/home/Desktop/code/specd-ds && git add src/components/ChoiceCard/ && git commit -m "fix(choice-card): add missing choice-card-arrow element (chevron top-right)"
 ```
 
 ---
@@ -1257,7 +1257,7 @@ describe('SpecdIssuePreviewCard', () => {
 - [ ] **Step 2: Run test to confirm it fails**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- IssuePreviewCard --reporter=verbose 2>&1 | tail -10
+cd /Users/home/Desktop/code/specd-ds && npm test -- IssuePreviewCard --reporter=verbose 2>&1 | tail -10
 ```
 
 Expected: all 6 tests fail — `specd-issue-preview-card` not defined.
@@ -1477,7 +1477,7 @@ export const IgnoreState: Story = {
 - [ ] **Step 5: Run tests to confirm they pass**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- IssuePreviewCard --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- IssuePreviewCard --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: all 6 tests pass.
@@ -1509,7 +1509,7 @@ export const IssuePreviewCard = createComponent({
 - [ ] **Step 8: Run full test suite**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -10
+cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -10
 ```
 
 Expected: all tests pass.
@@ -1517,7 +1517,7 @@ Expected: all tests pass.
 - [ ] **Step 9: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && git add src/components/IssuePreviewCard/ src/index.ts src/react.ts && git commit -m "feat(issue-preview-card): rename IssueRow→IssuePreviewCard, new specd-issue-preview-card tag"
+cd /Users/home/Desktop/code/specd-ds && git add src/components/IssuePreviewCard/ src/index.ts src/react.ts && git commit -m "feat(issue-preview-card): rename IssueRow→IssuePreviewCard, new specd-issue-preview-card tag"
 ```
 
 ---
@@ -1695,7 +1695,7 @@ describe('SpecdIssueRow', () => {
 - [ ] **Step 2: Run tests to confirm they fail**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- src/components/IssueRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- src/components/IssueRow --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: failures — old `SpecdIssueRow` with `.issue-card` structure doesn't match `.issue-row` / `data-row-state` expectations.
@@ -1938,7 +1938,7 @@ declare global {
 - [ ] **Step 4: Run tests to confirm they pass**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- src/components/IssueRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- src/components/IssueRow --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: all 11 tests pass.
@@ -2071,7 +2071,7 @@ export type { IssueRowFieldType, IssueRowState } from './components/IssueRow/Spe
 - [ ] **Step 7: Run full test suite**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -10
+cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -10
 ```
 
 Expected: all tests pass.
@@ -2079,7 +2079,7 @@ Expected: all tests pass.
 - [ ] **Step 8: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && git add src/components/IssueRow/ src/index.ts && git commit -m "feat(issue-row): new action-state component with initial/editing/applied state machine for 5 field types"
+cd /Users/home/Desktop/code/specd-ds && git add src/components/IssueRow/ src/index.ts && git commit -m "feat(issue-row): new action-state component with initial/editing/applied state machine for 5 field types"
 ```
 
 ---
@@ -2237,7 +2237,7 @@ describe('SpecdVariablePicker', () => {
 - [ ] **Step 2: Run tests to confirm they fail**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- VariablePicker --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- VariablePicker --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: failures — no `.vp-search`, no `specd-radio-row`, no section headers.
@@ -2411,7 +2411,7 @@ declare global {
 - [ ] **Step 4: Run tests to confirm they pass**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test -- VariablePicker --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm test -- VariablePicker --reporter=verbose 2>&1 | tail -20
 ```
 
 Expected: all 9 tests pass.
@@ -2466,7 +2466,7 @@ export const WithSections: Story = {
 - [ ] **Step 6: Run the full test suite**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -15
+cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -15
 ```
 
 Expected: all tests pass with no failures.
@@ -2474,7 +2474,7 @@ Expected: all tests pass with no failures.
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && git add src/components/VariablePicker/ && git commit -m "feat(variable-picker): add search input, Suggested/All sections, compose specd-radio-row atoms"
+cd /Users/home/Desktop/code/specd-ds && git add src/components/VariablePicker/ && git commit -m "feat(variable-picker): add search input, Suggested/All sections, compose specd-radio-row atoms"
 ```
 
 ---

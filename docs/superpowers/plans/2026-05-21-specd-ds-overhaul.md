@@ -97,7 +97,7 @@ export default preview;
 
 - [ ] **Step 4: Verify fonts load**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- --reporter=verbose 2>&1 | tail -5`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- --reporter=verbose 2>&1 | tail -5`
 Expected: all tests pass (fonts.css doesn't break anything)
 
 - [ ] **Step 5: Commit**
@@ -136,7 +136,7 @@ it('renders .progress-bar-fill with correct width', async () => {
 
 - [ ] **Step 2: Run tests to confirm they fail**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- ProgressBar 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- ProgressBar 2>&1 | tail -10`
 Expected: FAIL — `.progress-bar` not found
 
 - [ ] **Step 3: Fix `SpecdProgress.ts`** — rename classes
@@ -204,7 +204,7 @@ And remove the `const nothing = undefined as any;` line.
 
 - [ ] **Step 5: Run tests to confirm pass**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- ProgressBar 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- ProgressBar 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 6: Commit**
@@ -312,7 +312,7 @@ it('applies chip-crit class to count badge', async () => {
 
 - [ ] **Step 4: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- Chip 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- Chip 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
@@ -418,7 +418,7 @@ declare global {
 
 - [ ] **Step 3: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- Input 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- Input 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 4: Commit**
@@ -508,7 +508,7 @@ it('applies pillcolor class to pill', async () => {
 
 - [ ] **Step 4: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- ChoiceCard 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- ChoiceCard 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
@@ -581,7 +581,7 @@ declare global {
 
 - [ ] **Step 3: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- ScoreRing 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- ScoreRing 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 4: Commit**
@@ -730,7 +730,7 @@ it('shows .issue-fixes-panel when open', async () => {
 
 - [ ] **Step 4: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- IssueCard 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- IssueCard 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
@@ -882,7 +882,7 @@ export * from './SpecdIcon.js';
 
 - [ ] **Step 6: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- Icon 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- Icon 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 7: Commit**
@@ -1014,7 +1014,7 @@ export * from './SpecdFieldMessage.js';
 
 - [ ] **Step 8: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- "ColorSwatch|FieldMessage" 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- "ColorSwatch|FieldMessage" 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 9: Commit**
@@ -1208,7 +1208,7 @@ describe('SpecdIgnoreFooter', () => {
 
 - [ ] **Step 11: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- "InfoTrigger|AiGradient|IgnoreFooter" 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- "InfoTrigger|AiGradient|IgnoreFooter" 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 12: Commit**
@@ -1352,7 +1352,7 @@ describe('SpecdIssueRowActions', () => {
 
 - [ ] **Step 8: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- "QfReplaceRow|IssueRowActions" 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- "QfReplaceRow|IssueRowActions" 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 9: Commit**
@@ -1472,7 +1472,7 @@ export const AIGhost: Story = {
 
 - [ ] **Step 5: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- IssueRow 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- IssueRow 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 6: Commit**
@@ -1668,7 +1668,7 @@ export const NoMatch: Story = {
 
 - [ ] **Step 7: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- PropFixRow 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- PropFixRow 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 8: Commit**
@@ -1864,7 +1864,7 @@ describe('SpecdDataTable', () => {
 
 - [ ] **Step 8: Run tests**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test -- "VariablePicker|DataTable" 2>&1 | tail -10`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test -- "VariablePicker|DataTable" 2>&1 | tail -10`
 Expected: PASS
 
 - [ ] **Step 9: Commit**
@@ -1925,17 +1925,17 @@ export const DataTable = createComponent({ react: React, tagName: 'specd-data-ta
 
 - [ ] **Step 3: Typecheck**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm run typecheck 2>&1 | tail -20`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm run typecheck 2>&1 | tail -20`
 Expected: no errors. Fix any import path or type errors before continuing.
 
 - [ ] **Step 4: Run full test suite**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test 2>&1 | tail -20`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test 2>&1 | tail -20`
 Expected: all tests pass
 
 - [ ] **Step 5: Build**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm run build 2>&1 | tail -20`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm run build 2>&1 | tail -20`
 Expected: build succeeds, no errors
 
 - [ ] **Step 6: Commit**
@@ -1951,7 +1951,7 @@ git commit -m "feat: update barrel exports and React wrappers for all new compon
 
 - [ ] **Step 1: Run full test + build**
 
-Run: `cd /Users/home/Desktop/code/admiral-ds && npm test && npm run build 2>&1 | tail -30`
+Run: `cd /Users/home/Desktop/code/specd-ds && npm test && npm run build 2>&1 | tail -30`
 Expected: all green
 
 - [ ] **Step 2: Final commit**

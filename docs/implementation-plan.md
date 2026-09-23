@@ -1,8 +1,8 @@
-# Admiral DS — Standalone Component Library Plan
+# Specd DS — Standalone Component Library Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Extract the Specd/Admiral design system into a standalone, framework-agnostic TypeScript component library (`@specd/admiral-ds`) that compiles to Web Components and auto-generated React wrappers from a single source.
+**Goal:** Extract the Specd/Specd design system into a standalone, framework-agnostic TypeScript component library (`@specd/specd-ds`) that compiles to Web Components and auto-generated React wrappers from a single source.
 
 **Architecture:** Write once in Lit (Web Components), build twice — `dist/web-components/` for Figma plugins and vanilla web, `dist/react/` for React web apps (auto-generated via `@lit/react`). Single CSS token source shared across all outputs.
 
@@ -17,7 +17,7 @@
 - **Path C (dual output)** chosen: Web Components primary, React wrappers auto-generated
 - **No Shadow DOM** — light DOM rendering so global CSS applies and Figma plugin event delegation is unbroken
 - **Lit** as the WC authoring framework (same pattern as Shoelace, Material Web, Carbon)
-- **Local workspace link** during dev so the Pulse plugin consumes it immediately via `"@specd/admiral-ds": "file:../admiral-ds"`
+- **Local workspace link** during dev so the Pulse plugin consumes it immediately via `"@specd/specd-ds": "file:../specd-ds"`
 - **React is generated**, not hand-written — `@lit/react` wraps each element automatically
 - **Existing `specd-ds.ts`** has all props interfaces and factory functions — these are the migration source, not a rewrite from scratch
 
@@ -51,12 +51,12 @@ QfReplaceRow, IssueRow, PropertyFixRow, ChooseVarModal, SegmentedToggle
 
 ## New repo location
 
-Create `admiral-ds/` as a sibling to the pulse plugin:
+Create `specd-ds/` as a sibling to the pulse plugin:
 
 ```
 ~/Desktop/code/
   pulse/              ← existing Figma plugin
-  admiral-ds/         ← NEW standalone library
+  specd-ds/         ← NEW standalone library
 ```
 
 Or as a monorepo with the plugin — TBD based on team preference.
@@ -66,15 +66,15 @@ Or as a monorepo with the plugin — TBD based on team preference.
 ## File structure target
 
 ```
-admiral-ds/
+specd-ds/
   src/
     components/
       Button/
-        AdmiralButton.ts        ← Lit component (extends LitElement)
-        AdmiralButton.css.ts    ← CSS tagged template (inlined into component)
-        AdmiralButton.types.ts  ← exported ButtonProps interface
-        AdmiralButton.stories.ts ← Storybook story
-        AdmiralButton.test.ts   ← Vitest unit test
+        SpecdButton.ts        ← Lit component (extends LitElement)
+        SpecdButton.css.ts    ← CSS tagged template (inlined into component)
+        SpecdButton.types.ts  ← exported ButtonProps interface
+        SpecdButton.stories.ts ← Storybook story
+        SpecdButton.test.ts   ← Vitest unit test
         index.ts                ← re-exports
       Chip/
       Input/
@@ -108,62 +108,62 @@ admiral-ds/
 // pulse/package.json
 {
   "dependencies": {
-    "@specd/admiral-ds": "file:../admiral-ds"
+    "@specd/specd-ds": "file:../specd-ds"
   }
 }
 ```
 
 ```ts
 // pulse/src/ui.ts
-import '@specd/admiral-ds';           // registers all custom elements
-import '@specd/admiral-ds/tokens.css'; // CSS tokens
+import '@specd/specd-ds';           // registers all custom elements
+import '@specd/specd-ds/tokens.css'; // CSS tokens
 
 // ui.html can then use:
-// <admiral-button variant="primary">Scan now</admiral-button>
-// <admiral-chip label="Critical" count="3"></admiral-chip>
+// <specd-button variant="primary">Scan now</specd-button>
+// <specd-chip label="Critical" count="3"></specd-chip>
 ```
 
 ## Consumption in a React web app
 
 ```tsx
 // web-app/src/App.tsx
-import { AdmiralButton, AdmiralChip } from '@specd/admiral-ds/react';
-import '@specd/admiral-ds/tokens.css';
+import { SpecdButton, SpecdChip } from '@specd/specd-ds/react';
+import '@specd/specd-ds/tokens.css';
 
 export function App() {
-  return <AdmiralButton variant="primary" onClick={handleScan}>Scan now</AdmiralButton>;
+  return <SpecdButton variant="primary" onClick={handleScan}>Scan now</SpecdButton>;
 }
 ```
 
 ---
 
-## Task 1: Scaffold the `admiral-ds` repo
+## Task 1: Scaffold the `specd-ds` repo
 
 **Files to create:**
-- `admiral-ds/package.json`
-- `admiral-ds/tsconfig.json`
-- `admiral-ds/vite.config.ts` (lib mode, dual output)
-- `admiral-ds/vitest.config.ts`
-- `admiral-ds/.storybook/main.ts` (web-components renderer)
-- `admiral-ds/.storybook/preview.ts`
-- `admiral-ds/src/index.ts` (empty barrel)
-- `admiral-ds/src/react.ts` (empty barrel)
-- `admiral-ds/src/tokens/` (split from specd-ds.css)
+- `specd-ds/package.json`
+- `specd-ds/tsconfig.json`
+- `specd-ds/vite.config.ts` (lib mode, dual output)
+- `specd-ds/vitest.config.ts`
+- `specd-ds/.storybook/main.ts` (web-components renderer)
+- `specd-ds/.storybook/preview.ts`
+- `specd-ds/src/index.ts` (empty barrel)
+- `specd-ds/src/react.ts` (empty barrel)
+- `specd-ds/src/tokens/` (split from specd-ds.css)
 
 - [ ] **Step 1: Create repo directory**
 
 ```bash
-mkdir -p ~/Desktop/code/admiral-ds/src/components
-mkdir -p ~/Desktop/code/admiral-ds/src/tokens
-mkdir -p ~/Desktop/code/admiral-ds/.storybook
-cd ~/Desktop/code/admiral-ds && git init
+mkdir -p ~/Desktop/code/specd-ds/src/components
+mkdir -p ~/Desktop/code/specd-ds/src/tokens
+mkdir -p ~/Desktop/code/specd-ds/.storybook
+cd ~/Desktop/code/specd-ds && git init
 ```
 
 - [ ] **Step 2: Write `package.json`**
 
 ```json
 {
-  "name": "@specd/admiral-ds",
+  "name": "@specd/specd-ds",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/web-components/index.cjs.js",
@@ -224,7 +224,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.ts',
-      name: 'AdmiralDS',
+      name: 'SpecdDS',
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format === 'es' ? 'esm' : 'cjs'}.js`,
     },
@@ -247,7 +247,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/react.ts',
-      name: 'AdmiralDSReact',
+      name: 'SpecdDSReact',
       formats: ['es'],
       fileName: () => 'index.esm.js',
     },
@@ -285,7 +285,7 @@ export default defineConfig({
 - [ ] **Step 6: Install dependencies**
 
 ```bash
-cd ~/Desktop/code/admiral-ds
+cd ~/Desktop/code/specd-ds
 npm install
 ```
 
@@ -300,7 +300,7 @@ Expected: `dist/web-components/index.esm.js`, `dist/web-components/index.d.ts` c
 - [ ] **Step 8: Commit scaffold**
 
 ```bash
-git add -A && git commit -m "chore: scaffold admiral-ds library"
+git add -A && git commit -m "chore: scaffold specd-ds library"
 ```
 
 ---
@@ -331,33 +331,33 @@ git commit -m "feat(tokens): split specd-ds.css into token files"
 **Migration source:** `ButtonOpts` interface + `button()` / `buttonHtml()` from `specd-ds.ts` lines 46–90.
 
 **Files to create:**
-- `src/components/Button/AdmiralButton.ts`
-- `src/components/Button/AdmiralButton.types.ts`
-- `src/components/Button/AdmiralButton.stories.ts`
-- `src/components/Button/AdmiralButton.test.ts`
+- `src/components/Button/SpecdButton.ts`
+- `src/components/Button/SpecdButton.types.ts`
+- `src/components/Button/SpecdButton.stories.ts`
+- `src/components/Button/SpecdButton.test.ts`
 - `src/components/Button/index.ts`
 
 - [ ] **Step 1: Write the failing test**
 
 ```ts
-// AdmiralButton.test.ts
+// SpecdButton.test.ts
 import { fixture, html } from '@open-wc/testing';
-import './AdmiralButton';
+import './SpecdButton';
 
 test('renders with label', async () => {
-  const el = await fixture(html`<admiral-button label="Click me"></admiral-button>`);
+  const el = await fixture(html`<specd-button label="Click me"></specd-button>`);
   expect(el.shadowRoot ?? el).toContainHTML('Click me');
 });
 
 test('applies variant class', async () => {
-  const el = await fixture(html`<admiral-button variant="ghost"></admiral-button>`);
+  const el = await fixture(html`<specd-button variant="ghost"></specd-button>`);
   expect(el.querySelector('button')?.className).toContain('btn-ghost');
 });
 ```
 
 Run: `npm test` — expected: FAIL (component not defined)
 
-- [ ] **Step 2: Write `AdmiralButton.types.ts`**
+- [ ] **Step 2: Write `SpecdButton.types.ts`**
 
 ```ts
 export interface ButtonProps {
@@ -372,15 +372,15 @@ export interface ButtonProps {
 }
 ```
 
-- [ ] **Step 3: Write `AdmiralButton.ts`**
+- [ ] **Step 3: Write `SpecdButton.ts`**
 
 ```ts
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { ButtonProps } from './AdmiralButton.types';
+import type { ButtonProps } from './SpecdButton.types';
 
-@customElement('admiral-button')
-export class AdmiralButton extends LitElement {
+@customElement('specd-button')
+export class SpecdButton extends LitElement {
   // Light DOM — no shadow root, global CSS applies
   createRenderRoot() { return this; }
 
@@ -412,7 +412,7 @@ export class AdmiralButton extends LitElement {
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'admiral-button': AdmiralButton; }
+  interface HTMLElementTagNameMap { 'specd-button': SpecdButton; }
 }
 ```
 
@@ -425,15 +425,15 @@ npm test -- --reporter=verbose
 - [ ] **Step 5: Write Storybook story**
 
 ```ts
-// AdmiralButton.stories.ts
+// SpecdButton.stories.ts
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
-import './AdmiralButton';
+import './SpecdButton';
 
 const meta: Meta = {
   title: 'Components/Button',
   tags: ['autodocs'],
-  render: (args) => html`<admiral-button variant=${args.variant} label=${args.label}></admiral-button>`,
+  render: (args) => html`<specd-button variant=${args.variant} label=${args.label}></specd-button>`,
   argTypes: {
     variant: { control: 'select', options: ['primary', 'ghost', 'accent', 'danger'] },
   },
@@ -458,12 +458,12 @@ Expected: Button stories visible at localhost:6006
 ```ts
 import React from 'react';
 import { createComponent } from '@lit/react';
-import { AdmiralButton } from './components/Button/AdmiralButton';
+import { SpecdButton } from './components/Button/SpecdButton';
 
 export const Button = createComponent({
   react: React,
-  tagName: 'admiral-button',
-  elementClass: AdmiralButton,
+  tagName: 'specd-button',
+  elementClass: SpecdButton,
   events: { onClick: 'click' },
 });
 ```
@@ -479,10 +479,10 @@ ls dist/react/            # expect: index.esm.js, index.d.ts
 - [ ] **Step 9: Link to Pulse plugin and smoke-test**
 
 ```bash
-cd ~/Desktop/code/admiral-ds && npm link
-cd ~/Desktop/code/pulse && npm link @specd/admiral-ds
-# Add to pulse/src/ui.ts: import '@specd/admiral-ds';
-# Add to pulse/src/ui.html: <admiral-button variant="primary">Test</admiral-button>
+cd ~/Desktop/code/specd-ds && npm link
+cd ~/Desktop/code/pulse && npm link @specd/specd-ds
+# Add to pulse/src/ui.ts: import '@specd/specd-ds';
+# Add to pulse/src/ui.html: <specd-button variant="primary">Test</specd-button>
 npm run build  # verify plugin still builds
 ```
 
@@ -523,8 +523,8 @@ Each follows: write failing test → implement component → pass test → write
 
 ## Task 6: Link to Pulse plugin properly
 
-- [ ] Add `"@specd/admiral-ds": "file:../admiral-ds"` to `pulse/package.json`
-- [ ] Update `pulse/src/ui.ts` static import: `import '@specd/admiral-ds';`
+- [ ] Add `"@specd/specd-ds": "file:../specd-ds"` to `pulse/package.json`
+- [ ] Update `pulse/src/ui.ts` static import: `import '@specd/specd-ds';`
 - [ ] Replace first real usage in plugin (Button in issues panel toolbar)
 - [ ] Verify `npm run build` in pulse still produces valid `dist/ui.html`
 - [ ] Remove the corresponding class-based markup from `ui.html`

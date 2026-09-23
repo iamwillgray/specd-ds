@@ -48,9 +48,12 @@ export const Palette: Story = {
 
       ${heading('Brand')}
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:8px;">
-        ${swatch('navy',  '#0C1750')}
-        ${swatch('brand / lime', '#b8ff57')}
+        ${swatch('signal-violet (light)', '#5B3DF0', '#fff')}
+        ${swatch('signal-violet (dark)', '#8B76FF', '#12142B')}
+        ${swatch('ink', '#12142B', '#fff')}
+        ${swatch('violet-tint', '#F1EDFF')}
       </div>
+      <p style="font-family:var(--font); font-size:11px; color:var(--text-muted); margin:8px 0 0; line-height:1.5;">Per DESIGN.md (approved 2026-09-19): one accent, expressed as a light/dark pair for contrast — never the same value on both surfaces. Legacy --navy and --brand tokens now alias to ink and signal-violet respectively.</p>
 
       ${heading('Blue Scale')}
       <div style="display:flex; gap:12px; flex-wrap:wrap;">
@@ -161,16 +164,16 @@ export const UsageGuide: Story = {
 
       <div style="display:flex; flex-direction:column; gap:16px;">
         ${[
-          ['Navy (#0C1750)',       'Primary brand colour. Use for gradients, app header background, score ring strokes at 100%.',     '#0C1750'],
-          ['Lime (#b8ff57)',       'Accent/CTA on dark backgrounds only. Never use on light surfaces — contrast ratio too low.',       '#b8ff57'],
-          ['Blue-100 (#0c1f3f)',   'Primary text and icon colour on light surfaces.',                                                   '#0c1f3f'],
-          ['Blue-60 (#4a6080)',    'Secondary text. Use for descriptions, subtitles, meta labels.',                                     '#4a6080'],
-          ['Blue-50 (#1d4ed8)',    'Interactive accent — links, active highlights.',                                                    '#1d4ed8'],
-          ['Surface (#fff)',       'Default card/panel background. Always use var(--surface) not a hardcoded hex.',                     '#ffffff'],
-          ['BG (#f5f8ff)',         'Page/panel background. Never use pure white for layout backgrounds.',                               '#f5f8ff'],
-          ['Green (positive)',     'Coverage 80%+, published, passing states. Use positive-light bg + positive-dark text.',             '#22c55e'],
-          ['Orange (warning)',     'Coverage 50–79%, draft, stale states. Use warning-light bg + warning-dark text.',                   '#ff912b'],
-          ['Red (negative)',       'Coverage <50%, critical issues, error states. Use negative-light bg + negative-dark text.',         '#f00013'],
+          ['Signal Violet — light (#5B3DF0)', 'The one interactive colour on light surfaces. Filled buttons, active tab/nav, focus rings, links. Never a background fill larger than a control.', '#5B3DF0'],
+          ['Signal Violet — dark (#8B76FF)',  'The dark-theme accent value. Never mix with the light value on the same surface — each is contrast-checked against its own canvas only.',        '#8B76FF'],
+          ['Ink (#12142B)',       'Primary text and icon colour on light surfaces. Legacy --navy now aliases here.',                     '#12142B'],
+          ['Ink Soft (#40415C)',  'Secondary text. Use for descriptions, subtitles, meta labels.',                                       '#40415C'],
+          ['Muted (#6B6D85)',     'Tertiary text, helper copy, placeholder text, inactive icons.',                                       '#6B6D85'],
+          ['Surface (#fff)',      'Default card/panel background. Always use var(--surface) / var(--color-paper), not a hardcoded hex.',  '#ffffff'],
+          ['Canvas (#FAFAFB)',    'Page/panel background. Never use pure white for layout backgrounds.',                                 '#FAFAFB'],
+          ['Success (positive)',  'Coverage 80%+, published, passing states. Semantic only — never a brand/action colour.',              '#16A34A'],
+          ['Warning',             'Coverage 50–79%, draft, stale states. Semantic only — never a brand/action colour.',                  '#D97706'],
+          ['Error (negative)',    'Coverage <50%, critical issues, error states. Semantic only — never a brand/action colour.',          '#DC2626'],
         ].map(([name, rule, hex]) => html`
           <div style="display:flex; gap:16px; align-items:flex-start; padding:16px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md);">
             <div style="width:36px; height:36px; border-radius:var(--radius-sm); background:${hex}; border:1px solid rgba(0,0,0,0.08); flex-shrink:0;"></div>

@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "storybook"],
       "port": 6006
+    },
+    {
+      "name": "type-experiment",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", ".", "-p", "7899", "--no-clipboard"],
+      "port": 7899
     }
   ]
 }

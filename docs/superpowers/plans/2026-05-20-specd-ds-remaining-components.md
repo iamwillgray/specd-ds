@@ -69,7 +69,7 @@ describe('SpecdHealthBadge', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/HealthBadge/SpecdHealthBadge.types.ts`
@@ -138,7 +138,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/HealthBadge/SpecdHealthBadge.stories.ts`
@@ -228,7 +228,7 @@ describe('SpecdNavScore', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/NavScore/SpecdNavScore.types.ts`
@@ -286,7 +286,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/NavScore/SpecdNavScore.stories.ts`
@@ -367,7 +367,7 @@ describe('SpecdAiPill', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/AiPill/SpecdAiPill.types.ts`
@@ -442,7 +442,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/AiPill/SpecdAiPill.stories.ts`
@@ -527,7 +527,7 @@ describe('SpecdJumpBtn', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/JumpBtn/SpecdJumpBtn.types.ts`
@@ -601,7 +601,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/JumpBtn/SpecdJumpBtn.stories.ts`
@@ -701,7 +701,7 @@ describe('SpecdSbPill', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/SbPill/SpecdSbPill.types.ts`
@@ -770,7 +770,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/SbPill/SpecdSbPill.stories.ts`
@@ -888,12 +888,12 @@ export const SbPill = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/HealthBadge src/components/NavScore src/components/AiPill src/components/JumpBtn src/components/SbPill src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdHealthBadge, SpecdNavScore, SpecdAiPill, SpecdJumpBtn, SpecdSbPill"
 ```
@@ -969,7 +969,7 @@ describe('SpecdSeverityHeader', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/SeverityHeader/SpecdSeverityHeader.types.ts`
@@ -1043,7 +1043,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/SeverityHeader/SpecdSeverityHeader.stories.ts`
@@ -1155,7 +1155,7 @@ describe('SpecdScoreTrend', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/ScoreTrend/SpecdScoreTrend.types.ts`
@@ -1228,7 +1228,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/ScoreTrend/SpecdScoreTrend.stories.ts`
@@ -1309,12 +1309,12 @@ export const ScoreTrend = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/SeverityHeader src/components/ScoreTrend src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdSeverityHeader and SpecdScoreTrend"
 ```
@@ -1399,7 +1399,7 @@ describe('SpecdScoreRing', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/ScoreRing/SpecdScoreRing.types.ts`
@@ -1481,7 +1481,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/ScoreRing/SpecdScoreRing.stories.ts`
@@ -1565,12 +1565,12 @@ export const ScoreRing = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/ScoreRing src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdScoreRing with conic-gradient arc and tier colour variants"
 ```
@@ -1661,7 +1661,7 @@ describe('SpecdCovRow', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/CovRow/SpecdCovRow.types.ts`
@@ -1791,7 +1791,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/CovRow/SpecdCovRow.stories.ts`
@@ -1877,12 +1877,12 @@ export const CovRow = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/CovRow src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdCovRow with derived tier, progress bar, and status chip"
 ```
@@ -1967,7 +1967,7 @@ describe('SpecdStatTileSm', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/StatTileSm/SpecdStatTileSm.types.ts`
@@ -2048,7 +2048,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/StatTileSm/SpecdStatTileSm.stories.ts`
@@ -2206,7 +2206,7 @@ describe('SpecdStatTileLg', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 3:** Create `src/components/StatTileLg/SpecdStatTileLg.types.ts`
@@ -2341,7 +2341,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 6:** Create `src/components/StatTileLg/SpecdStatTileLg.stories.ts`
@@ -2460,12 +2460,12 @@ export const StatTileLg = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/StatTileSm src/components/StatTileLg src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdStatTileSm and SpecdStatTileLg metric tile components"
 ```
@@ -2550,7 +2550,7 @@ describe('SpecdTabBar', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/TabBar --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/TabBar --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/TabBar/SpecdTabBar.types.ts`
@@ -2650,7 +2650,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/TabBar --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/TabBar --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/TabBar/SpecdTabBar.stories.ts`
@@ -2783,7 +2783,7 @@ describe('SpecdAppHeader', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/AppHeader --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/AppHeader --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/AppHeader/SpecdAppHeader.types.ts`
@@ -2893,7 +2893,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/AppHeader --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/AppHeader --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/AppHeader/SpecdAppHeader.stories.ts`
@@ -2998,7 +2998,7 @@ describe('SpecdSegmented', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Segmented --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Segmented --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Segmented/SpecdSegmented.types.ts`
@@ -3086,7 +3086,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Segmented --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Segmented --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Segmented/SpecdSegmented.stories.ts`
@@ -3185,12 +3185,12 @@ export const Segmented = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/TabBar src/components/AppHeader src/components/Segmented src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdTabBar, SpecdAppHeader, SpecdSegmented navigation components"
 ```
@@ -3251,7 +3251,7 @@ describe('SpecdSectionLabel', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/SectionLabel --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/SectionLabel --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/SectionLabel/SpecdSectionLabel.types.ts`
@@ -3316,7 +3316,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/SectionLabel --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/SectionLabel --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/SectionLabel/SpecdSectionLabel.stories.ts`
@@ -3411,7 +3411,7 @@ describe('SpecdFormRow', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/FormRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/FormRow --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/FormRow/SpecdFormRow.types.ts`
@@ -3485,7 +3485,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/FormRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/FormRow --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/FormRow/SpecdFormRow.stories.ts`
@@ -3589,7 +3589,7 @@ describe('SpecdToggleRow', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/ToggleRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/ToggleRow --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/ToggleRow/SpecdToggleRow.types.ts`
@@ -3672,7 +3672,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/ToggleRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/ToggleRow --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/ToggleRow/SpecdToggleRow.stories.ts`
@@ -3790,7 +3790,7 @@ describe('SpecdRadioGroup', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/RadioGroup --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/RadioGroup --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/RadioGroup/SpecdRadioGroup.types.ts`
@@ -3896,7 +3896,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/RadioGroup --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/RadioGroup --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/RadioGroup/SpecdRadioGroup.stories.ts`
@@ -4028,7 +4028,7 @@ describe('SpecdCheckboxGroup', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/CheckboxGroup --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/CheckboxGroup --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/CheckboxGroup/SpecdCheckboxGroup.types.ts`
@@ -4138,7 +4138,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/CheckboxGroup --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/CheckboxGroup --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/CheckboxGroup/SpecdCheckboxGroup.stories.ts`
@@ -4262,12 +4262,12 @@ export const CheckboxGroup = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/SectionLabel src/components/FormRow src/components/ToggleRow src/components/RadioGroup src/components/CheckboxGroup src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdSectionLabel, SpecdFormRow, SpecdToggleRow, SpecdRadioGroup, SpecdCheckboxGroup form primitives"
 ```
@@ -4350,7 +4350,7 @@ describe('SpecdModal', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Modal --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Modal --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Modal/SpecdModal.types.ts`
@@ -4452,7 +4452,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Modal --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Modal --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Modal/SpecdModal.stories.ts`
@@ -4559,7 +4559,7 @@ describe('SpecdDrawer', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Drawer --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Drawer --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Drawer/SpecdDrawer.types.ts`
@@ -4660,7 +4660,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Drawer --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Drawer --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Drawer/SpecdDrawer.stories.ts`
@@ -4770,7 +4770,7 @@ describe('SpecdToast', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Toast --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Toast --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Toast/SpecdToast.types.ts`
@@ -4896,7 +4896,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Toast --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Toast --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Toast/SpecdToast.stories.ts`
@@ -5007,7 +5007,7 @@ describe('SpecdAlert', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Alert --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Alert --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Alert/SpecdAlert.types.ts`
@@ -5082,7 +5082,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Alert --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Alert --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Alert/SpecdAlert.stories.ts`
@@ -5185,12 +5185,12 @@ export const Alert = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/Modal src/components/Drawer src/components/Toast src/components/Alert src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdModal, SpecdDrawer, SpecdToast, SpecdAlert overlay components"
 ```
@@ -5255,7 +5255,7 @@ describe('SpecdDivider', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Divider --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Divider --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Divider/SpecdDivider.types.ts`
@@ -5320,7 +5320,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Divider --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Divider --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Divider/SpecdDivider.stories.ts`
@@ -5406,7 +5406,7 @@ describe('SpecdKvRow', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/KvRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/KvRow --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/KvRow/SpecdKvRow.types.ts`
@@ -5477,7 +5477,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/KvRow --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/KvRow --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/KvRow/SpecdKvRow.stories.ts`
@@ -5573,7 +5573,7 @@ describe('SpecdCodeBlock', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/CodeBlock --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/CodeBlock --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/CodeBlock/SpecdCodeBlock.types.ts`
@@ -5663,7 +5663,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/CodeBlock --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/CodeBlock --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/CodeBlock/SpecdCodeBlock.stories.ts`
@@ -5773,7 +5773,7 @@ describe('SpecdSkeleton', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Skeleton --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Skeleton --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Skeleton/SpecdSkeleton.types.ts`
@@ -5868,7 +5868,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Skeleton --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Skeleton --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Skeleton/SpecdSkeleton.stories.ts`
@@ -5970,7 +5970,7 @@ describe('SpecdEmptyState', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/EmptyState --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/EmptyState --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/EmptyState/SpecdEmptyState.types.ts`
@@ -6050,7 +6050,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/EmptyState --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/EmptyState --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/EmptyState/SpecdEmptyState.stories.ts`
@@ -6157,7 +6157,7 @@ describe('SpecdBreadcrumb', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Breadcrumb --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Breadcrumb --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Breadcrumb/SpecdBreadcrumb.types.ts`
@@ -6238,7 +6238,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Breadcrumb --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Breadcrumb --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Breadcrumb/SpecdBreadcrumb.stories.ts`
@@ -6346,7 +6346,7 @@ describe('SpecdPagination', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Pagination --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Pagination --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Pagination/SpecdPagination.types.ts`
@@ -6444,7 +6444,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Pagination --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Pagination --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Pagination/SpecdPagination.stories.ts`
@@ -6554,7 +6554,7 @@ describe('SpecdStepper', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Stepper --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Stepper --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Stepper/SpecdStepper.types.ts`
@@ -6645,7 +6645,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Stepper --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Stepper --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Stepper/SpecdStepper.stories.ts`
@@ -6790,12 +6790,12 @@ export const Stepper = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/Divider src/components/KvRow src/components/CodeBlock src/components/Skeleton src/components/EmptyState src/components/Breadcrumb src/components/Pagination src/components/Stepper src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdDivider, SpecdKvRow, SpecdCodeBlock, SpecdSkeleton, SpecdEmptyState, SpecdBreadcrumb, SpecdPagination, SpecdStepper layout primitives"
 ```
@@ -6876,7 +6876,7 @@ describe('SpecdIssueCard', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/IssueCard --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/IssueCard --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/IssueCard/SpecdIssueCard.types.ts`
@@ -6993,7 +6993,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/IssueCard --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/IssueCard --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/IssueCard/SpecdIssueCard.stories.ts`
@@ -7140,7 +7140,7 @@ describe('SpecdChoiceCard', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/ChoiceCard --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/ChoiceCard --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/ChoiceCard/SpecdChoiceCard.types.ts`
@@ -7221,7 +7221,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/ChoiceCard --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/ChoiceCard --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/ChoiceCard/SpecdChoiceCard.stories.ts`
@@ -7346,7 +7346,7 @@ describe('SpecdSparkline', () => {
 
 - [ ] **Step 2:** Run failing test
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Sparkline --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Sparkline --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Create `src/components/Sparkline/SpecdSparkline.types.ts`
@@ -7466,7 +7466,7 @@ declare global {
 
 - [ ] **Step 5:** Run test again — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run src/components/Sparkline --reporter=verbose 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npx vitest run src/components/Sparkline --reporter=verbose 2>&1 | tail -20
 ```
 
 - [ ] **Step 6:** Create `src/components/Sparkline/SpecdSparkline.stories.ts`
@@ -7580,12 +7580,12 @@ export const Sparkline = createComponent({
 
 - [ ] **Step 3:** Run all unit tests — must pass
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | grep -E "PASS|FAIL|Tests"
 ```
 
 - [ ] **Step 4:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add src/components/IssueCard src/components/ChoiceCard src/components/Sparkline src/index.ts src/react.ts
 git commit -m "feat(ds): add SpecdIssueCard, SpecdChoiceCard, SpecdSparkline compound and data-viz components"
 ```
@@ -8052,17 +8052,17 @@ export const Sparkline = createComponent({
 
 - [ ] **Step 1:** Run full test suite
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx vitest run --reporter=verbose 2>&1 | tail -30
+cd /Users/home/Desktop/code/specd-ds && npx vitest run --reporter=verbose 2>&1 | tail -30
 ```
 
 - [ ] **Step 2:** Run npm build
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npm run build 2>&1 | tail -20
+cd /Users/home/Desktop/code/specd-ds && npm run build 2>&1 | tail -20
 ```
 
 - [ ] **Step 3:** Verify no TypeScript errors
 ```bash
-cd /Users/home/Desktop/code/admiral-ds && npx tsc --noEmit 2>&1 | head -40
+cd /Users/home/Desktop/code/specd-ds && npx tsc --noEmit 2>&1 | head -40
 ```
 
 ---
@@ -8071,7 +8071,7 @@ cd /Users/home/Desktop/code/admiral-ds && npx tsc --noEmit 2>&1 | head -40
 
 - [ ] **Step 1:** Stage all new component directories and updated barrel files
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git add \
   src/components/TabBar \
   src/components/AppHeader \
@@ -8102,7 +8102,7 @@ git add \
 
 - [ ] **Step 2:** Commit
 ```bash
-cd /Users/home/Desktop/code/admiral-ds
+cd /Users/home/Desktop/code/specd-ds
 git commit -m "feat: add all remaining Specd DS components (35 total)
 
 Navigation & Shell: SpecdTabBar, SpecdAppHeader, SpecdSegmented
