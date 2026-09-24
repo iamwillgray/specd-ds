@@ -251,6 +251,22 @@ Figma plugin UI is a bounded floating window with **no true OS-level fullscreen*
 
 **`.show()`, not `.showModal()`.** A `showModal()` dialog is promoted to the browser's top layer, which — by design, so it always renders above everything — ignores the positioning above entirely. Use `.show()` and reimplement the backdrop (a plain click-to-close div) and Escape-to-close by hand; full focus-trapping is knowingly not reimplemented here and should be revisited before a drawer like this ships in a production plugin.
 
+## Consumer-Validated Patterns
+
+Patterns and component-reuse claims confirmed against a real, external `specd-ds` consumer rather than just designed in the abstract — recorded here once a plugin actually proves them out, per this document's own "show your work" standard applied to itself. First entries below come from Branch (a release-notes plugin), the first consumer whose entire UI is one linear step-through flow and the first non-Pulse-fix-flow use of `SpecdDiffRow`.
+
+### Linear wizard pattern: `SpecdAppHeader` + `SpecdStepper` vs. `SpecdWizardShell`
+
+`SpecdWizardShell` (see Full-screen Drawer, above) is for a flow launched **as an overlay on top of another screen it needs to close back to** — the Quick-Fix and Bulk-Fix wizards it was built for both interrupt an existing Issues/Components view, and its `specd-close` event exists specifically to return the user to that screen. It renders a full `.qf-wizard` overlay, complete with its own top bar (close button, brand mark, title, mode toggle), on top of whatever was already on screen.
+
+Branch's release-notes flow — pick a range, review the diff, write notes, publish — is a different shape: there is no parent screen to close back to, because the wizard *is* the entire plugin. For this shape, compose `SpecdAppHeader` (the persistent branding/name/actions bar) with `SpecdStepper` (the step-progress indicator) and render each step's own content in the plugin's normal document flow beneath them, instead of reaching for `SpecdWizardShell`.
+
+**The distinguishing question: does this flow have a parent screen to return to?** Yes → `SpecdWizardShell`. No, the flow *is* the whole plugin → `SpecdAppHeader` + `SpecdStepper`. Branch is the first consumer to need the second shape; every stepper-shaped flow in the suite before it had a parent screen to close back to.
+
+### `SpecdDiffRow` generalizes beyond fix-flow comparisons
+
+`SpecdDiffRow` was designed for Component Detail's "current vs. proposed fix" use case (see Auditable Field Patterns, above). Branch's diff preview reuses it, unmodified, for a structurally different comparison — a baseline value vs. a branch's proposed value, with nothing being "applied" in the audit sense at all — and it holds up with zero component changes needed. Treat this as confirmed, not as an assumption to re-derive: `SpecdDiffRow` is a generic before/after field comparison, not a fix-flow-specific component, and any future consumer doing a two-sided value comparison should reach for it directly.
+
 ## Surfaces
 
 ### Light
@@ -380,6 +396,33 @@ These aren't visual decisions — they're correctness traps specific to this cod
 **`<slot>` does nothing outside a real Shadow DOM tree.** Since every component in this system renders to light DOM (`createRenderRoot() { return this; }`), a `<slot>` / `<slot name="x">` in a component's template is inert — it doesn't project anything. If a component needs to accept and place child content (like `SpecdDrawer`'s body/footer), capture the real children in `connectedCallback()`, detach them immediately so they don't leak into the page while closed, and re-parent them into the rendered template by hand whenever the component opens. Write a regression test for both "children don't leak while closed" and "children appear in the right place while open" — the bug is otherwise easy to ship silently, since a quick visual check with short placeholder content can look correct by coincidence.
 
 **A `<dialog>` element is not always simpler than a styled `<div>`.** It looks like the "correct" semantic choice for anything modal-shaped, but `showModal()`'s top-layer promotion breaks any layout trick that confines a drawer to less than the full real viewport (see Full-screen Drawer, above), and even plain `.show()` was observed, once, to render every descendant offset by its own width regardless of the descendant's own `position` value — root cause was eventually traced to an unrelated stuck CSS animation, not `<dialog>` itself, but the detour cost real debugging time before that was confirmed. If a drawer/modal doesn't need `<dialog>`'s native focus-trap and `::backdrop` (both already sacrificed the moment `showModal()` is dropped in favor of `.show()`), a plain `<div role="dialog" aria-modal="true">` is one less variable to rule out when something positions unexpectedly.
+
+**A *consumer* doing `element.appendChild(...)` on a light-DOM component hits the same inert-`<slot>` problem from the outside.** The `<slot>` note above covers what a component *author* must do internally; the failure mode is just as real for a consumer who never opens the component's source and reasonably expects normal Web Component slotting to just work. `SpecdModal` and `SpecdCard` both declare `createRenderRoot() { return this; }` and render a bare `<slot>` / `<slot name="footer">` with no capture-and-reparent logic — unlike `SpecdDrawer` (described above) or `SpecdAppHeader`, which both do the capture/reparent themselves in `connectedCallback()`/`updated()`. A consumer who appends content to `<specd-modal>` or `<specd-card>` expecting it to land inside the rendered `.modal-body`/`.card-inner` instead gets an **inert sibling** of the component's own internal structure — the content still renders *somewhere* on screen, so a quick visual check can look correct by coincidence, but it isn't actually nested inside the card or modal and won't inherit their layout, padding, or scroll behavior.
+
+*How to tell if a component needs this:* before assuming `appendChild`/slotting works normally, check whether the component declares `createRenderRoot() { return this; }` (light DOM). If it does, its `<slot>`s are decorative only unless the component's own source shows it doing manual reparenting.
+
+*The fix, on the consumer side* (a workaround for the consumer to apply, not a `specd-ds` change):
+```js
+const modal = document.querySelector('specd-modal');
+modal.open = true;
+await modal.updateComplete;                        // wait for Lit's own render to land
+const body = modal.querySelector('.modal-body');    // the real container, not <slot>
+body.appendChild(myContent);
+// footer content: modal.querySelector('.modal-footer')
+// SpecdCard: modal.querySelector('.card-inner') (or '.card' itself if inner="false")
+```
+
+*Forward-looking suggestion, not a mandate:* light DOM is a suite-wide, deliberate choice here — `docs/implementation-plan.md` and this codebase's own component comments (e.g. `SpecdWizardShell`, `SpecdButton`) give the reason as letting global CSS reach into every component's internals and keeping Figma's plugin event-delegation model from being broken by a shadow boundary — so switching `SpecdModal`/`SpecdCard` alone to a real shadow root would be inconsistent with every other component in the suite, even though it would make their `<slot>`s work as consumers expect. Within that constraint, a documented content-container method or property (e.g. `modal.appendToBody(node)`) would let a consumer target the right element without discovering and depending on an internal class name that could change later — worth weighing against the cost of adding that API to every content-accepting component.
+
+**`SpecdInput` doesn't forward the native `input` event or keep its own `.value` live — read through the inner `<input>`.** `SpecdInput` re-dispatches a *synthetic* `input`/`change` `Event` from the custom element itself (`this.dispatchEvent(new Event('input', { bubbles: true }))`) rather than forwarding the native event object from its inner `<input>`, and nothing in the component syncs live keystrokes back onto its own `.value` property — the inner `<input>`'s value is bound one-way, from `this.value` down (`.value=${this.value}`). A consumer listening for `input` on a `<specd-input>` and reading `event.target.value` gets `this.value`, which never changes as the user types, so it reads as permanently stale. Read the live value through the inner element instead:
+
+```js
+specdInputEl.addEventListener('input', () => {
+  const liveValue = specdInputEl.querySelector('input').value; // not specdInputEl.value
+});
+```
+
+*(A narrower, related trap worth a quick general reminder rather than its own subsection: a Lit `@property` can reflect to a different HTML attribute than its property name — `SpecdStageBar`'s `applyLabel` property reflects to the kebab-case `apply-label` attribute, standard `@property({ attribute: '...' })` behavior, easy to miss if you guess the attribute name from the property name instead of checking the component's real source.)*
 
 ## Agent Prompt Guide
 
