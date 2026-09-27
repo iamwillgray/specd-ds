@@ -1,0 +1,42 @@
+/* Specd DS — Marketing Extension tokens (PROPOSED 2026-09-27, see DESIGN.md
+ * "Marketing Extension"). For the marketing site and docs only: plugins and
+ * the web app never load this file, so the product scale is unchanged.
+ * Requires tokens.css (colors, typography, motion) to be loaded first.
+ */
+:root {
+  /* Display type — Geist */
+  --mk-type-hero:        clamp(48px, 7.5vw, 96px);
+  --mk-type-display-xl:  clamp(40px, 5.5vw, 72px);
+  --mk-type-display:     clamp(32px, 4vw, 56px);
+  --mk-type-headline:    clamp(24px, 2.6vw, 40px);
+  --mk-type-lede:        clamp(19px, 1.6vw, 24px);
+  --mk-type-body:        17px;
+  --mk-type-eyebrow:     12px;
+
+  --mk-tracking-hero:     -0.045em;
+  --mk-tracking-display:  -0.035em;
+  --mk-tracking-headline: -0.03em;
+  --mk-tracking-eyebrow:  0.05em;
+
+  /* Space and containers */
+  --mk-space-section: clamp(80px, 12vw, 160px);
+  --mk-space-chapter: clamp(48px, 8vw, 120px);
+  --mk-gutter:        max(16px, 4vw);
+  --mk-w-text:        680px;
+  --mk-w-content:     980px;
+  --mk-w-wide:        1200px;
+
+  /* Navigation */
+  --mk-nav-height:       48px;
+  --mk-local-nav-height: 52px;
+
+  /* Motion */
+  --mk-duration-reveal: 480ms;
+
+  /* Accessibility: input/focus boundary that meets 3:1 (hairline does not) */
+  --mk-color-outline: rgba(18, 20, 43, 0.48);
+}
+
+[data-theme="dark"] {
+  --mk-color-outline: rgba(255, 255, 255, 0.40);
+}

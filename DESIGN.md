@@ -2,9 +2,9 @@
 > a diagnostic instrument's calm precision — violet pulse against navy void.
 
 **Theme:** dual (light + dark, first-class from day one)
-**Status:** approved (2026-09-19) — not yet implemented in `specd-ds` tokens or any plugin. This document is now the target spec for that implementation work.
+**Status:** approved (2026-09-19). Tokens are implemented on this branch (`src/tokens/*.css`); plugins are migrating tab by tab (see Consumer-Validated Patterns). The Marketing Extension section (2026-09-27) is a **proposal** awaiting product-owner review, not yet approved.
 
-Specd is a suite of design-system audit tools (Pulse, Specced, Mapped, Shipped, Shift, Released) — software that inspects other people's design systems for token coverage, documentation, and health. The identity should read as a precision instrument, not a marketing product: near-monochrome ink-on-canvas surfaces, one electric-violet accent reserved exclusively for action, and status color (green/amber/red) kept strictly semantic — it reports on health, it never decorates with it. Typography is one confident, technical single family — Geist — carrying body copy, nav, and display numerals alike through weight and size alone, plus a monospace face (JetBrains Mono) reserved for the token IDs, percentages, and coordinates that are the actual content of an audit tool. Depth comes from surface-tint steps and hairline borders, never drop-shadows. Two intentional gradients — a conic sweep on the score ring and a whisper-thin wash behind the app header — are the only chromatic decoration in the entire system.
+Specd is a suite of design-system audit tools (Pulse, Specced, Mapped, Shipped, Shift, Released) — software that inspects other people's design systems for token coverage, documentation, and health. The identity should read as a precision instrument, not a marketing product: near-monochrome ink-on-canvas surfaces, one electric-violet accent reserved exclusively for action, and status color (green/amber/red) kept strictly semantic — it reports on health, it never decorates with it. Typography is one confident, technical single family — Geist — carrying body copy, nav, and display numerals alike through weight and size alone, plus a monospace face (JetBrains Mono) reserved for the token IDs, percentages, and coordinates that are the actual content of an audit tool. Depth comes from surface-tint steps and hairline borders, never drop-shadows. Three intentional gradients — a conic sweep on the score ring, a whisper-thin wash behind the app header, and the tier-tinted Landing Page Hero wash — are the only chromatic decoration in the entire system (see Gradients).
 
 ## Design Philosophy — the why behind the tokens
 
@@ -47,8 +47,8 @@ Never place violet text directly on the navy `--color-ink` surface — contrast 
 | Ink | `#12142B` | `--color-ink` | Primary text, headings — near-black with the navy undertone that is Specd's inherited identity color |
 | Ink Soft | `#40415C` | `--color-ink-soft` | Secondary text, nav labels at rest |
 | Muted | `#6B6D85` | `--color-muted` | Tertiary text, helper copy, placeholder text, inactive icons |
-| Faint | `#9799AC` | `--color-faint` | Disabled text, the lightest legible gray |
-| Hairline | `rgba(18,20,43,0.08)` | `--color-hairline` | Card borders, dividers, input outlines — the only structural edge in the system |
+| Faint | `#9799AC` | `--color-faint` | Disabled text only — 2.7:1 on canvas, below the 4.5:1 WCAG AA minimum, which is acceptable only because disabled controls are exempt |
+| Hairline | `rgba(18,20,43,0.10)` | `--color-hairline` | Card borders and dividers — the only structural edge in the system. Too faint (below 3:1) to be the only visible edge of a text input or focus state; inputs need a stronger outline (see Marketing Extension → Accessibility) |
 | Canvas | `#FAFAFB` | `--color-canvas` | Page/panel background |
 | Paper | `#FFFFFF` | `--color-paper` | Card surfaces, popovers, modals |
 
@@ -58,8 +58,8 @@ Never place violet text directly on the navy `--color-ink` surface — contrast 
 |------|-------|-------|------|
 | Paper Dark | `#F4F4F8` | `--color-paper-dark` | Primary text on dark surfaces |
 | Mist Dark | `#B8B9CC` | `--color-mist-dark` | Secondary text |
-| Muted Dark | `#7B7D93` | `--color-muted-dark` | Tertiary text, helper copy |
-| Hairline Dark | `rgba(255,255,255,0.08)` | `--color-hairline-dark` | Borders, dividers on dark surfaces |
+| Muted Dark | `#7B7D93` | `--color-muted-dark` | Tertiary text, helper copy. 4.85:1 on void but **4.49:1 on carbon** — just under AA for small text; use Mist Dark for helper copy that sits on cards |
+| Hairline Dark | `rgba(255,255,255,0.10)` | `--color-hairline-dark` | Borders, dividers on dark surfaces |
 | Void | `#0A0B14` | `--color-void` | Page/panel canvas — near-black with a whisper of navy, not pure black |
 | Carbon | `#14151F` | `--color-carbon` | Card surfaces, one step up from void |
 | Obsidian | `#1B1C2B` | `--color-obsidian` | Elevated surfaces — modals, popovers, nested panels |
@@ -111,17 +111,21 @@ Token percentages, variable IDs, hex/RGBA values, coordinates, keyboard-shortcut
 **Base unit:** 4px · **Density:** compact (plugin panels are 360–660px — this is instrument density, not marketing density)
 
 ### Spacing Scale
-| Name | Value | Token |
+
+The spacing tokens in code are `--space-N` (index-based, not pixel-named). **Known conflict:** two files define the same names with different values, and because `index.css` imports `spacing.css` after `colors.css`, the `spacing.css` values win everywhere the full token set is loaded:
+
+| Token | `spacing.css` (wins) | `colors.css` (shadowed) |
 |------|-------|-------|
-| 4 | 4px | `--spacing-4` |
-| 8 | 8px | `--spacing-8` |
-| 12 | 12px | `--spacing-12` |
-| 16 | 16px | `--spacing-16` |
-| 20 | 20px | `--spacing-20` |
-| 24 | 24px | `--spacing-24` |
-| 32 | 32px | `--spacing-32` |
-| 40 | 40px | `--spacing-40` |
-| 48 | 48px | `--spacing-48` |
+| `--space-1` | 2px | 4px |
+| `--space-2` | 4px | 8px |
+| `--space-3` | 6px | 12px |
+| `--space-4` | 8px | 16px |
+| `--space-5` | 12px | 20px |
+| `--space-6` | 16px | 24px |
+| `--space-8` | 24px | 32px |
+| `--space-7`, `--space-9`…`--space-12` | 20, 32, 40, 48, 64px | — |
+
+A consumer that loads only `colors.css` gets the other scale. **Decision needed:** keep the `spacing.css` scale (it's what every plugin renders today) and delete the duplicates from `colors.css`. Until then, new work should use raw multiples of the 4px base unit via the `spacing.css` names.
 
 ### Border Radius — nested & concentric (Apple-inspired)
 
@@ -147,6 +151,8 @@ Two separate ideas are easy to conflate here, and it's worth being precise about
 | surface-lg | 24px | `--radius-surface-lg` | large sheets/modals (reserved for future modal migration) |
 | pill | 9999px | `--radius-pill` | buttons, badges, tags, chips — categorically capsule, never part of concentric nesting |
 
+**Legacy radius names — known conflict.** `--radius-sm/md/lg/xl` are defined in both `colors.css` (6/10/14/20px) and `spacing.css` (4/6/8/12px); `spacing.css` loads later and wins. 1,600+ existing `var()` references depend on these names, so they are kept, but new work should use the named tiers in the table above. **Decision needed:** delete the `colors.css` copies so there is one definition.
+
 **Worked examples from the actual codebase:**
 - `.is2-card` is 20px, its content sits at 14px vertical inset (`.is2-card-top { padding: 14px 16px }`) → the nested icon tile should be `20 − 14 = 6px`, expressed as `--radius-tile: calc(var(--radius-surface) - 14px)`. It was hardcoded at 10px before this pass — nearly double the concentric value, which is why the icon tile's corner looked slightly "off" against the card's corner even though both were technically "rounded."
 - `.cx2-row` is 16px, its content sits at 12px vertical inset (`padding: 12px 14px`) → nested tile should be `16 − 12 = 4px`, expressed as `--radius-tile-sm: calc(var(--radius-surface-sm) - 12px)`. It was hardcoded at 9px before this pass.
@@ -154,7 +160,7 @@ Two separate ideas are easy to conflate here, and it's worth being precise about
 Deriving with `calc()` instead of hardcoding the result means these stay correct automatically if the surface radius or its padding is ever retuned — the same reasoning behind Apple shipping `ConcentricRectangle` as an API instead of a design-file convention.
 
 ### Shadows — none by default
-No box-shadow on cards, buttons, or panels. Depth comes from the surface-tint stack below and 1px hairline borders. The one exception: a soft ambient glow (not a directional shadow) behind the score ring — see Gradients. (Apple's own Health app cards actually do use a soft shadow for elevation — noted as a deliberate point of departure, not an oversight: Specd's hairline+tint system was chosen to match Stripe/Linear's flatter instrument feel, and mixing elevation systems within one app reads as inconsistent faster than it reads as "borrowed from a good reference.")
+No box-shadow on cards, buttons, or panels. Depth comes from the surface-tint stack below and 1px hairline borders. The one exception: a soft ambient glow (not a directional shadow) behind the score ring, drawn from the same violet as gradient #1. (Apple's own Health app cards actually do use a soft shadow for elevation — noted as a deliberate point of departure, not an oversight: Specd's hairline+tint system was chosen to match Stripe/Linear's flatter instrument feel, and mixing elevation systems within one app reads as inconsistent faster than it reads as "borrowed from a good reference.")
 
 ## List & Card Patterns — grouped, not divided
 
@@ -292,7 +298,7 @@ Pulse is the first consumer to migrate its UI onto `specd-ds` **gradually** — 
 | 0 | Void | `#0A0B14` | Panel background |
 | 1 | Carbon | `#14151F` | Cards, rows, popovers |
 | 2 | Obsidian | `#1B1C2B` | Modals, nested/elevated panels |
-| 3 | Violet Glow | `rgba(110,86,245,0.18)` | Selected/active row, focus states |
+| 3 | Violet Tint (dark) | `rgba(139,118,255,0.16)` — `--color-violet-tint` | Selected/active row, focus states |
 
 ## Gradients (three, each argued for)
 
@@ -340,10 +346,10 @@ Reference: Apple's Settings app. Every row — Wi-Fi, Notifications, Siri, Scree
 | **Pulse** | Violet | `#5B3DF0` | Concentric diamond rings (existing mark) — scanning/signal |
 | **Specced** | Blue | `#2563EB` | Document with text lines — documentation |
 | **Mapped** | Teal | `#0D9488` | Connected nodes — variable/alias mapping |
-| **Shipped** | Orange | `#EA580C` | Arrow crossing a boundary — handoff |
+| **Shipped** | Orange | `#EA580C` | Arrow crossing a boundary — handoff. Now also the working name for the AI code-review product (pull-request checks against the design system) |
 | **Shift** | Slate | `#475569` | Archive box — safe deprecation |
-| **Released** | Green | `#16A34A` | Tag — release notes/changelog |
-| **Library Asset Auditor** | Cyan | `#0891B2` | Checkmark within brackets (existing mark) — scan boundary + verification |
+| **Released** (was Branch Release Notes) | Green | `#16A34A` | Tag — release notes/changelog |
+| **Checked** (was Library Asset Auditor) | Cyan | `#0891B2` | Checkmark within brackets (existing mark) — scan boundary + verification |
 
 Pulse keeps the signal-violet accent for its icon specifically because it's both the flagship product and the one that established the existing diamond mark — its icon color and its in-product accent are the same value, which is a coincidence of it being the reference plugin, not a rule the other five need to follow (their icons use dedicated colors distinct from the shared violet accent). Library Asset Auditor sits outside the core six-plugin Specd Tools suite (it predates the suite's formal naming) but adopts the same shared visual language and icon system — cyan was picked because it reads as "scanning/detection," is distinct from every in-product severity colour (red/green/amber are all reserved for compliance status itself, so the icon can't borrow any of them), and isn't already claimed by another plugin.
 
@@ -376,7 +382,7 @@ Bumped ~25-30% across the board from an earlier, snappier ladder (was 100/160/20
 - Use the theme-correct violet value — `#5B3DF0` on light surfaces, `#8B76FF` on dark — never the other theme's value on the wrong canvas; that's how the contrast guarantee breaks.
 - Keep green/amber/red confined to status badges, icons, and inline text — never a button fill, never a section background.
 - Tighten letter-spacing as Geist scales up: -0.01em at 16–20px through -0.03em at 32px+.
-- Use hairline borders (`rgba(_,_,_,0.08)`) and the surface-tint stack (canvas → paper → tint, or void → carbon → obsidian) for all depth — never a box-shadow.
+- Use hairline borders (`--color-hairline`, 10% ink) and the surface-tint stack (canvas → paper → tint, or void → carbon → obsidian) for all depth — never a box-shadow.
 - Reserve JetBrains Mono strictly for machine-readable values: hex codes, percentages, variable IDs, keyboard shortcuts. If a human wrote the sentence, it's Geist.
 - Keep the three gradients (score ring, header wash, Overview hero card) as the only chromatic decoration in the system.
 - Build both light and dark themes from the same token names — a component should never need theme-specific markup, only theme-specific token values.
@@ -396,7 +402,77 @@ Bumped ~25-30% across the board from an earlier, snappier ladder (was 100/160/20
 
 ## Layout
 
-Specd's primary surface is a compact Figma plugin panel (360–660px wide per plugin, per `CLAUDE.md`), not a marketing page — so layout principles differ from the reference brands' full-bleed sites: information density is higher, section gaps are 16–24px rather than 64–96px, and there is no hero/imagery layer at all. Where a marketing site or docs surface does exist (specd.tools, Storybook docs), it inherits the same tokens at the "marketing" end of the type scale but keeps the same hairline-border, no-shadow, one-accent discipline — the instrument aesthetic should feel identical whether you're looking at the plugin or the website.
+Specd's **product surfaces** — plugin panels (360–660px wide) and the web app — use instrument density: section gaps are 16–24px rather than 64–96px, and there is no hero/imagery layer. The marketing site (specd.tools) and docs follow the **Marketing Extension** below: larger type, generous section spacing, and heroes built only from live product UI. Both keep the same hairline-border, no-shadow, one-accent discipline — the instrument aesthetic should feel identical whether you're looking at the plugin, the app, or the website.
+
+## Marketing Extension (proposed 2026-09-27 — awaiting review)
+
+Everything above was written for 360–660px plugin panels. The marketing site (specd.tools) borrows the *structure* of Apple's product pages — big type, generous space, a sticky product nav, one idea per section, a "compare" grid — while keeping every rule above. Nothing here changes the product scale; plugins and the web app never load these tokens. They live in `src/tokens/marketing.css`, published as `@specd/specd-ds/marketing.css`, and are not part of `index.css`.
+
+### Where Apple's patterns meet this document
+
+| Apple pattern | Rule it would break | Resolution |
+|---|---|---|
+| 56–96px headlines | Type scale stops at 40px | Separate marketing type scale (below) |
+| Full-width bands, 120px+ section gaps | Product density, no hero layer | Section spacing tokens; heroes are **live product UI only**, never photography or illustration |
+| Device shadows, glossy renders | No shadows | Flat **panel frame**: hairline border, `--radius-surface-lg`, tint step behind, small title bar |
+| Product-coloured pages | Signature colours are icon-layer only | Signature colour in exactly three places on a product page: the squircle icon, a 2px underline under the product name in the local nav, and the eyebrow glyph. Never text, bands, buttons or gradients |
+| Gradient glows, gradient headlines | Only three named gradients | Heroes use gradient #1 (the live score ring). The header wash (#2) may sit behind the global nav. A new gradient needs its own argued case |
+| Alternating black and white sections | Violet differs per theme | Scope dark sections with `data-theme="dark"` so every token flips; never hard-code light-theme violet on void |
+| "Compare models" grid with coloured dots | Green/amber/red mean health only | Plan inclusion uses a neutral check or dash **plus text** |
+| Landing Page Hero wash as decoration | Tier must come from a real metric | Only inside a framed product render whose demo data computes that tier |
+
+### Display type (Geist)
+
+| Token | Size | Weight | Line height | Tracking |
+|---|---|---|---|---|
+| `--mk-type-hero` | `clamp(48px, 7.5vw, 96px)` | 800 | 1.02 | −0.045em |
+| `--mk-type-display-xl` | `clamp(40px, 5.5vw, 72px)` | 800 | 1.05 | −0.04em |
+| `--mk-type-display` | `clamp(32px, 4vw, 56px)` | 700 | 1.08 | −0.035em |
+| `--mk-type-headline` | `clamp(24px, 2.6vw, 40px)` | 700 | 1.12 | −0.03em |
+| `--mk-type-lede` | `clamp(19px, 1.6vw, 24px)` | 500 | 1.35 | −0.01em |
+| `--mk-type-body` | 17px | 400 | 1.5 | normal |
+| `--mk-type-eyebrow` | 12px JetBrains Mono, uppercase | 500 | 1.3 | 0.05em |
+
+Stat callouts ("3,412 components") use `display-xl` with `font-variant-numeric: tabular-nums`. Headlines use `text-wrap: balance` and never truncate.
+
+### Space and grid
+
+- Section rhythm: `--mk-space-section: clamp(80px, 12vw, 160px)`; within a section, `--mk-space-chapter: clamp(48px, 8vw, 120px)`.
+- Containers: `--mk-w-text: 680px` (reading), `--mk-w-content: 980px` (standard), `--mk-w-wide: 1200px` (renders, compare table).
+- Side gutter: `max(16px, 4vw)`. 12-column grid, 24px gutters, collapsing to one column below 734px.
+
+### Navigation
+
+- **Global nav**: 48px, canvas at 80% opacity with `backdrop-filter: saturate(180%) blur(20px)` (solid canvas fallback where unsupported), hairline bottom edge, optional header wash. Products ▾ · AI Guardrails · Pricing · Docs · Sign in · **Get started** (the one filled button).
+- **Local nav** (product pages): 52px, sticks below the global nav once the hero scrolls away. Left: 24px squircle and product name at 21px/700 with the 2px signature underline. Right: section anchors at 12px/500 with `aria-current`, and a small `btn-pill-primary`. Collapses to a disclosure menu on phones. Anchored sections set `scroll-margin-top` so the sticky bars never cover a focused heading.
+
+### Page patterns
+
+- **Chapter**: eyebrow → headline (max 2 lines) → lede (max 3 lines) → framed live render → 2–3 short "show your work" footnotes explaining the claim. One audit question per chapter.
+- **Panel frame**: `--color-paper` or `--color-carbon`, 1px hairline, `--radius-surface-lg`, inner radius concentric (`24px − inset`), 12px faux title bar with three 6px neutral dots. Renders are `inert` with a visually hidden text summary unless explicitly labelled as an interactive demo. Demo data is deterministic and marked as an example.
+- **Dark bands**: at most one every 2–3 chapters (e.g. AI Guardrails, the GitHub check). Light is the default.
+- **Coming soon**: greyed squircle, neutral "Coming soon" tag, waitlist form. No invented screenshots.
+
+### Motion
+
+- Scroll-driven reveals (`animation-timeline: view()`, IntersectionObserver fallback) may animate only opacity, an 8–24px translate, and the score-ring fill. Each plays once.
+- Proposed token `--mk-duration-reveal: 480ms` with `--easing-standard`; spring stays reserved for the score-ring completion.
+- No scroll-jacking and no pinned section longer than one viewport.
+- Content is readable at rest: nothing waits at `opacity: 0` for an observer that might not fire.
+- `prefers-reduced-motion`: show the final state immediately — no translate, no parallax, no autoplay. Any loop longer than 5 seconds (the hero ripple, a ring replay) gets a pause control.
+
+### Accessibility (WCAG 2.2 AA)
+
+- Text inputs and focus states need a boundary of at least 3:1, so `--mk-color-outline: rgba(18,20,43,0.48)` (light, 3.2:1 on canvas) / `rgba(255,255,255,0.40)` (dark, 3.8:1 on carbon) is proposed for input edges. Focus ring: 2px `--color-signal-violet`, 2px offset.
+- One `h1` per page; `nav` landmarks labelled "Global" and "<Product>"; a skip link; `lang` set.
+- Compare table: real `<table>` with `<caption>`, `th scope`, a sticky header that still works at 400% zoom, and text (not just icons) in every cell.
+- Charts get a data-table alternative; score tiers always show the number and label, never colour alone.
+- Touch targets at least 24×24px; the panel-density chips and `.btn-sm` need extra padding on the web.
+- Check contrast in both themes in CI (axe + Playwright).
+
+### Superseded files
+
+`pulse/design/*.html` (brand guidelines v3, design system, website v2, Pulse redesign v3) predate this document: DM Sans / Bricolage / IBM Plex Mono, navy `#0C1F3F` + lime `#C8FF00`, drop shadows, 13 gradients, the "Specd_" underscore wordmark (now dropped), and "no backend / free forever" copy. They are not canonical and should be archived.
 
 ## Implementation Notes for Component Authors
 
@@ -527,10 +603,13 @@ specdInputEl.addEventListener('input', () => {
   --radius-tile: calc(var(--radius-surface) - 14px);
   --radius-tile-sm: calc(var(--radius-surface-sm) - 12px);
 
-  /* Motion */
-  --duration-fast: 120ms;
-  --duration-base: 200ms;
-  --duration-slow: 320ms;
+  /* Motion — mirrors src/tokens/motion.css */
+  --duration-instant: 120ms;
+  --duration-fast: 200ms;
+  --duration-base: 260ms;
+  --duration-slow: 340ms;
+  --duration-modal: 280ms;
+  --duration-exit: 180ms;
   --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }

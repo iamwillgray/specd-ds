@@ -25,5 +25,10 @@ writeFileSync(join(distDir, 'tokens.css'), tokensCss);
 const componentsCss = readFileSync(join(tokensDir, 'components.css'), 'utf8');
 writeFileSync(join(distDir, 'components.css'), componentsCss);
 
+// marketing.css = Marketing Extension tokens (specd.tools only; never bundled into plugins)
+const marketingCss = readFileSync(join(tokensDir, 'marketing.css'), 'utf8');
+writeFileSync(join(distDir, 'marketing.css'), marketingCss);
+
 console.log(`✓ dist/tokens.css       (${(tokensCss.length / 1024).toFixed(1)} kB)`);
 console.log(`✓ dist/components.css   (${(componentsCss.length / 1024).toFixed(1)} kB)`);
+console.log(`✓ dist/marketing.css    (${(marketingCss.length / 1024).toFixed(1)} kB)`);

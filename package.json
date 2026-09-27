@@ -19,7 +19,8 @@
       "require": "./dist/core/index.cjs.js"
     },
     "./tokens.css": "./dist/tokens.css",
-    "./components.css": "./dist/components.css"
+    "./components.css": "./dist/components.css",
+    "./marketing.css": "./dist/marketing.css"
   },
   "types": "./dist/web-components/index.d.ts",
   "files": [
