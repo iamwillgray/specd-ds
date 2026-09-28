@@ -137,14 +137,8 @@
   --btn-primary-bg: var(--color-signal-violet);
   --btn-primary-fg: var(--white);
 
-  /* Radii — legacy scale kept for existing components; new DESIGN.md-named
-     tokens added below for new work. See spacing.css for the full radius set. */
-  --radius-sm: 6px;  --radius-md: 10px;
-  --radius-lg: 14px; --radius-xl: 20px;  --radius-pill: 100px;
-
-  /* Spacing */
-  --space-1: 4px;  --space-2: 8px;   --space-3: 12px;
-  --space-4: 16px; --space-5: 20px;  --space-6: 24px;  --space-8: 32px;
+  /* Radii and spacing live only in spacing.css (decided 2026-09-28: one
+     definition per token; spacing.css values are what every plugin renders). */
 
   /* Shadows — kept for legacy components that still use elevation; new
      Specd components should avoid shadows entirely per DESIGN.md. */

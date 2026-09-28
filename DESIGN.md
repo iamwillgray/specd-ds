@@ -112,20 +112,24 @@ Token percentages, variable IDs, hex/RGBA values, coordinates, keyboard-shortcut
 
 ### Spacing Scale
 
-The spacing tokens in code are `--space-N` (index-based, not pixel-named). **Known conflict:** two files define the same names with different values, and because `index.css` imports `spacing.css` after `colors.css`, the `spacing.css` values win everywhere the full token set is loaded:
+The spacing tokens are `--space-N` (index-based, not pixel-named), defined once in `src/tokens/spacing.css`:
 
-| Token | `spacing.css` (wins) | `colors.css` (shadowed) |
-|------|-------|-------|
-| `--space-1` | 2px | 4px |
-| `--space-2` | 4px | 8px |
-| `--space-3` | 6px | 12px |
-| `--space-4` | 8px | 16px |
-| `--space-5` | 12px | 20px |
-| `--space-6` | 16px | 24px |
-| `--space-8` | 24px | 32px |
-| `--space-7`, `--space-9`…`--space-12` | 20, 32, 40, 48, 64px | — |
+| Token | Value |
+|------|-------|
+| `--space-1` | 2px |
+| `--space-2` | 4px |
+| `--space-3` | 6px |
+| `--space-4` | 8px |
+| `--space-5` | 12px |
+| `--space-6` | 16px |
+| `--space-7` | 20px |
+| `--space-8` | 24px |
+| `--space-9` | 32px |
+| `--space-10` | 40px |
+| `--space-11` | 48px |
+| `--space-12` | 64px |
 
-A consumer that loads only `colors.css` gets the other scale. **Decision needed:** keep the `spacing.css` scale (it's what every plugin renders today) and delete the duplicates from `colors.css`. Until then, new work should use raw multiples of the 4px base unit via the `spacing.css` names.
+`colors.css` used to define a second, different `--space-*` scale that `spacing.css` overrode by import order. It was removed on 2026-09-28 (the `spacing.css` values were already what every plugin rendered, so nothing visibly changed).
 
 ### Border Radius — nested & concentric (Apple-inspired)
 
@@ -151,7 +155,7 @@ Two separate ideas are easy to conflate here, and it's worth being precise about
 | surface-lg | 24px | `--radius-surface-lg` | large sheets/modals (reserved for future modal migration) |
 | pill | 9999px | `--radius-pill` | buttons, badges, tags, chips — categorically capsule, never part of concentric nesting |
 
-**Legacy radius names — known conflict.** `--radius-sm/md/lg/xl` are defined in both `colors.css` (6/10/14/20px) and `spacing.css` (4/6/8/12px); `spacing.css` loads later and wins. 1,600+ existing `var()` references depend on these names, so they are kept, but new work should use the named tiers in the table above. **Decision needed:** delete the `colors.css` copies so there is one definition.
+**Legacy radius names.** `--radius-sm/md/lg/xl/full` (4/6/8/12/9999px) are defined once, in `spacing.css`, and 1,600+ existing `var()` references use them. New work should prefer the named tiers above. A duplicate, conflicting definition in `colors.css` was removed on 2026-09-28 with no visible change.
 
 **Worked examples from the actual codebase:**
 - `.is2-card` is 20px, its content sits at 14px vertical inset (`.is2-card-top { padding: 14px 16px }`) → the nested icon tile should be `20 − 14 = 6px`, expressed as `--radius-tile: calc(var(--radius-surface) - 14px)`. It was hardcoded at 10px before this pass — nearly double the concentric value, which is why the icon tile's corner looked slightly "off" against the card's corner even though both were technically "rounded."
